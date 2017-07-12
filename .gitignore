@@ -40,7 +40,6 @@ ui_*.h
 .qmake.cache
 *.vcproj.*.user
 *.vcxproj.user
-*.dll
 *.exe
 *.txt
 *.opensdf

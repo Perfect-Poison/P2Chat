@@ -6,12 +6,12 @@
 
 **数据库**：MySQL 5.7.16(x64)
 
-**ODBC**: mysql-connector-odbc-5.3.8-win32
+**MySql Connector**: mysql-connector-c-6.1.10-win32
 
 **GUI**: Qt
 
-## 二. 外部库使用
+## 二. 开源库使用
 
 **Crypto++**：加密解密文件
 
-**OTL**: 数据库访问层
+**MySql++**: 数据库访问层
