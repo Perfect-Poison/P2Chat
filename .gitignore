@@ -4,9 +4,6 @@ syntax: glob
 *.moc
 *.prl
 
-debug/
-release/
-qtc-gdbmacros/
 *.rej
 *.orig
 *.obj
@@ -28,6 +25,7 @@ qtc-gdbmacros/
 *.tlh
 *.res
 .svn/
+.vs/
 
 Thumbs.db
 moc_*.cpp
@@ -46,3 +44,5 @@ ui_*.h
 *.log
 *.VC.opendb
 *.VC.db
+Release/
+Debug/

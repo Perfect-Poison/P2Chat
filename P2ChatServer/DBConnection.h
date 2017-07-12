@@ -9,9 +9,13 @@
  */
 
 #include "Common/common.h"
-
+#include "mysqlpp/mysql++.h"
+#include "mysqlpp/ssqls.h"
+using namespace mysqlpp;
 
 P2_NAMESPACE_BEG
+
+
 
 // class DBConnection
 // {
