@@ -16,15 +16,15 @@
 
 P2_NAMESPACE_BEG
 
-#ifndef _SS
-#define _SS
-sql_create_4(encrypt_repo,
-    1, 4,
-    sql_varchar, algorithm_name,
-    sql_tinyint, is_key_pair,
-    sql_blob, public_key,
-    sql_blob, private_key)
-#endif
+// #ifndef _SS
+// #define _SS
+// sql_create_4(encrypt_repo,
+//     1, 4,
+//     sql_varchar, algorithm_name,
+//     sql_tinyint, is_key_pair,
+//     sql_blob, public_key,
+//     sql_blob, private_key)
+// #endif
 
 class ConnectionPool : public mysqlpp::ConnectionPool
 {
