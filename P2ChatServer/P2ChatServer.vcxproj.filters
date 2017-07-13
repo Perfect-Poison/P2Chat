@@ -18,12 +18,12 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="DBConnection.cpp">
+    <ClCompile Include="ConnectionPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DBConnection.h">
+    <ClInclude Include="ConnectionPool.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

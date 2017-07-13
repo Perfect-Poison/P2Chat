@@ -1,14 +1,8 @@
 #include "Common/common.h"
 #include "mysqlpp/mysql++.h"
-#include "DBConnection.h"
+#include "ConnectionPool.h"
 using namespace mysqlpp;
 
-sql_create_4(encrypt_repo,
-    1, 4,
-    sql_varchar, algorithm_name,
-    sql_tinyint, is_key_pair,
-    sql_blob_null, public_key,
-    sql_blob_null, private_key)
 
 int main()
 {
@@ -16,14 +10,13 @@ int main()
     if (conn.connect("p2chatdb", "localhost", "root", "123123", 3306)) 
     {
         Query query = conn.query();
-        encrypt_repo a("RSA", 1, null, null);
+        p2::encrypt_repo a("RSA", 1, sql_blob("abc"), sql_blob("abcd"));
 //         a.algorithm_name = "RSA";
 //         a.is_key_pair = true;
-        query << "insert into encrypt_repo (%0:field1,%1:field2) values (%2:field3,%3:field4)";
-        query.parse();
-        query.store("algorithm_name", "is_key_pair", "RSA", sql_tinyint_unsigned(1));
-        query.exec();
+        //query << "insert into encrypt_repo ('algorithm_name','is_key_pair','public_key','private_key') values ('" + a.algorithm_name + "',1,'abc','abcd')";
+        query.insert(a);
         cout << "Query: " << query << endl;
+        query.exec();
 //         if (res) 
 //         {
 //             for (size_t i = 0; i < res.num_fields(); i++) 
