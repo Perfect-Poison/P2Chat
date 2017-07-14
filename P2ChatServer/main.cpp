@@ -74,10 +74,10 @@
 
 #include <WinSock2.h>
 
+
 static const char MESSAGE[] = "Hello, World!\n";
 
 static const int PORT = 9995;
-
 
 static void conn_writecb(struct bufferevent *bev, void *user_data)
 {
@@ -135,6 +135,23 @@ static void listener_cb(struct evconnlistener *listener, evutil_socket_t fd,
     bufferevent_write(bev, MESSAGE, strlen(MESSAGE));
 }
 
+void cb(int sock, short what, void *arg)
+{
+    struct event_base *base = (event_base*)arg;
+    event_base_loopbreak(base);
+}
+
+void main_loop(struct event_base *base, evutil_socket_t watchdog_fd)
+{
+    struct event *watchdog_event;
+
+    watchdog_event = event_new(base, watchdog_fd, EV_READ, cb, base);
+
+    event_add(watchdog_event, NULL);
+
+    event_base_dispatch(base);
+}
+
 int main(int argc, char **argv)
 {
     struct event_base *base;
@@ -142,7 +159,6 @@ int main(int argc, char **argv)
     struct event *signal_event;
 
     struct sockaddr_in sin;
-
 #ifdef WIN32
     WSADATA wsa_data;
     WSAStartup(0x0201, &wsa_data);
