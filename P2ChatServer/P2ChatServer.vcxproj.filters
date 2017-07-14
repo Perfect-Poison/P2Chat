@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{bf92d077-ed93-4d87-8396-1dd40e3dc669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,10 +24,40 @@
     <ClCompile Include="ConnectionPool.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\Include\Common\Address.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Common\common.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Common\CommonSocket.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Common\TCP.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Common\udp.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionPool.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Common\Address.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Common\common.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Common\CommonSocket.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Common\TCP.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Include\Common\UDP.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

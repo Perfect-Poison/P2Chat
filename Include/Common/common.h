@@ -12,6 +12,8 @@
 // 标准头文件 区
 //-------------------------------
 #include <iostream>
+#include <intsafe.h>
+#include <winsock2.h>
 using namespace std;
 
 #ifndef P2_NAMESPACE_BEG
@@ -26,6 +28,7 @@ using namespace std;
 
 P2_NAMESPACE_BEG
 
+
 //-------------------------------
 // 宏定义 区
 //-------------------------------
@@ -38,12 +41,18 @@ P2_NAMESPACE_BEG
 //-------------------------------
 // 枚举 区
 //-------------------------------
-
+enum IOType
+{
+    Blocking = 0,
+    NonBlocking = 1
+};
 
 //-------------------------------
 // 常量 区
 //-------------------------------
-
+const UINT32 RECV_BUF_SIZE = 10 * 1024u;
+const UINT32 SEND_BUF_SIZE = 10 * 1024u;
+const INT32 MAX_CONNECTION_NUM = 32;
 
 //-------------------------------
 // 全局 区
