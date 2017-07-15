@@ -14,6 +14,9 @@
 #include <iostream>
 #include <intsafe.h>
 #include <winsock2.h>
+#include <process.h>
+#include <string>
+#include <functional>
 using namespace std;
 
 #ifndef P2_NAMESPACE_BEG
@@ -29,9 +32,20 @@ using namespace std;
 P2_NAMESPACE_BEG
 
 
+
 //-------------------------------
 // 宏定义 区
 //-------------------------------
+constexpr size_t kAssertBuffSize = 512;
+
+#define Assert(condition)    {                              \
+                                                                \
+        if (!(condition))                                       \
+        {                                                       \
+            char s[kAssertBuffSize];                            \
+            s[kAssertBuffSize -1] = 0;                          \
+            _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
+        }   }
 
 //-------------------------------
 // 类型定义 区
@@ -57,6 +71,8 @@ const INT32 MAX_CONNECTION_NUM = 32;
 //-------------------------------
 // 全局 区
 //-------------------------------
-
+unsigned int atomic_add(unsigned int *area, int val);
+unsigned int atomic_or(unsigned int *area, unsigned int val);
+unsigned int atomic_sub(unsigned int *area, int val);
 
 P2_NAMESPACE_END

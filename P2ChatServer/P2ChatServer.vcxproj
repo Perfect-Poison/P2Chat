@@ -158,18 +158,26 @@
     <ClCompile Include="..\Include\Common\Address.cpp" />
     <ClCompile Include="..\Include\Common\common.cpp" />
     <ClCompile Include="..\Include\Common\CommonSocket.cpp" />
+    <ClCompile Include="..\Include\Common\Mutex.cpp" />
     <ClCompile Include="..\Include\Common\TCP.cpp" />
+    <ClCompile Include="..\Include\Common\Thread.cpp" />
     <ClCompile Include="..\Include\Common\udp.cpp" />
     <ClCompile Include="ConnectionPool.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ServerInterface.cpp" />
+    <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Common\Address.h" />
     <ClInclude Include="..\Include\Common\common.h" />
     <ClInclude Include="..\Include\Common\CommonSocket.h" />
+    <ClInclude Include="..\Include\Common\Mutex.h" />
     <ClInclude Include="..\Include\Common\TCP.h" />
+    <ClInclude Include="..\Include\Common\Thread.h" />
     <ClInclude Include="..\Include\Common\UDP.h" />
     <ClInclude Include="ConnectionPool.h" />
+    <ClInclude Include="ServerInterface.h" />
+    <ClInclude Include="Task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
