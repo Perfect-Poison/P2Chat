@@ -4,52 +4,23 @@
 #include "Common/UDP.h"
 using namespace mysqlpp;
 
+LRESULT CALLBACK select_wndproc(HWND inWIndow, UINT inMsg, WPARAM inParam, LPARAM inOtherParam);
 
 int main()
 {
-    p2::UDP udpServer;
-    udpServer.listen_on_port(6000);
-//     Connection conn(false);
-//     if (conn.connect("p2chatdb", "localhost", "root", "123123", 3306)) 
-//     {
-//         Query query = conn.query();
-//         p2::encrypt_repo a("RSA", 1, sql_blob("abc"), sql_blob("abcd"));
-// //         a.algorithm_name = "RSA";
-// //         a.is_key_pair = true;
-//         //query << "insert into encrypt_repo ('algorithm_name','is_key_pair','public_key','private_key') values ('" + a.algorithm_name + "',1,'abc','abcd')";
-//         query.insert(a);
-//         cout << "Query: " << query << endl;
-//         query.exec();
-// //         if (res) 
-// //         {
-// //             for (size_t i = 0; i < res.num_fields(); i++) 
-// //             {
-// //                 cout << res.field_name(i) << "\t";
-// //             }
-// //             cout << endl;
-// //             for (size_t i = 0; i < res.num_rows(); i++)
-// //             {
-// //                 cout << res[i]["f1"] << "\t" << res[i]["f2"] << endl;
-// //             }
-// //             cout << "We have:" << endl;
-// //             StoreQueryResult::const_iterator it;
-// //             for (it = res.begin(); it != res.end(); it++) 
-// //             {
-// //                 Row row = *it;
-// //                 cout << '\t' << row[0] << endl;
-// //             }
-// //         }
-// //         else 
-// //         {
-// //             cerr << "Failed to get item list: " << query.error() << endl;
-// //             return 1;
-// //         }
-//         return 0;
-//     }
-//     else 
-//     {
-//         cerr << "DB connection failed: " << conn.error() << endl;
-//         return 1;
-//     }
+    WNDCLASSEX theWndClass;
+    theWndClass.cbSize = sizeof(theWndClass);
+    theWndClass.style = 0;
+    theWndClass.lpfnWndProc = &select_wndproc;
+    theWndClass.cbClsExtra = 0;
+    theWndClass.cbWndExtra = 0;
+    theWndClass.hInstance = NULL;
+    theWndClass.hIcon = NULL;
+    theWndClass.hCursor = NULL;
+    theWndClass.hbrBackground = NULL;
+    theWndClass.lpszMenuName = NULL;
+    theWndClass.lpszClassName = "DarwinStreamingServerWindow";
+    theWndClass.hIconSm = NULL;
+
     return 0;
 }
