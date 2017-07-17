@@ -12,21 +12,29 @@ Message::Message()
     fMessage.attrs = nullptr;
 }
 
-Message::Message(MESSAGE *msg)
+Message::Message(MESSAGE *msg, bool networkByteOrder/* = true*/)
 {
-    fMessage.code = msg->code;
-    fMessage.flags = msg->flags;
-    fMessage.size = msg->size;
-    fMessage.msgID = msg->msgID;
-    fMessage.attrNum = msg->attrNum;
+    fMessage.code = ntohs(msg->code);
+    fMessage.flags = ntohs(msg->flags);
+    fMessage.size = ntohl(msg->size);
+    fMessage.msgID = ntohl(msg->msgID);
+    fMessage.attrNum = ntohl(msg->attrNum);
     if (msg->flags & mf_binary) 
     {
         fMessage.attrs = malloc(msg->size);
-        memcpy(fMessage.attrs, msg->attrs, msg->size);
+        memcpy(fMessage.attrs, msg->attrs, fMessage.size);
     }
-    else 
+    else
     {
-        CalculateTotalAttrSize(msg);
+        uint32 totalAttrSize = CalculateTotalAttrSize(msg);
+        fMessage.attrs = malloc(totalAttrSize);
+        BYTE *p = (BYTE*)fMessage.attrs;
+        for (int attr_i = 0; attr_i < fMessage.size; attr_i++) 
+        {
+            MESSAGE_ATTR *attrPtr = (MESSAGE_ATTR*)p;
+            p += CalculateAttrSize(attrPtr);
+
+        }
     }
 }
 

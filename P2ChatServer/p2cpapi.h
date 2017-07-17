@@ -153,7 +153,7 @@ class Message
 {
 public:
     Message();
-    Message(MESSAGE *msg);
+    Message(MESSAGE *msg, bool networkByteOrder = true);
     ~Message();
     MESSAGE *CreateMessage();
     msg_code GetCode() const { return fMessage.code; }
