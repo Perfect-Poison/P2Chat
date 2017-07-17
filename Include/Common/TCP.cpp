@@ -31,7 +31,7 @@ void TCP::listen_on_port( const USHORT& inPort )
 		CommonSocket::bind_to_port(inPort);
 	}
 
-	if (::listen(this->m_socketID, MAX_CONNECTION_NUM) != 0)
+	if (::listen(this->m_socketID, kListenQueueLength) != 0)
 	{
 		printf("[TCP] listen_on_port error!\n");
 		return;
@@ -98,14 +98,14 @@ INT32 TCP::send( const char* inContent, const size_t& inSize )
 	if (!this->m_opened)
 		this->open();
 
-	if (inSize > SEND_BUF_SIZE)
-	{
-		printf("Send buffer overflow!\n");
-		return -1;
-	}
+// 	if (inSize > kMaxSendBufSize)
+// 	{
+// 		printf("Send buffer overflow!\n");
+// 		return -1;
+// 	}
 
 	INT32 sentBytes = ::send(this->m_socketID, inContent, inSize, 0);
-	if (sentBytes == -1)
+	if (sentBytes == SOCKET_ERROR)
 	{
 		printf("[send] with %s:%u cannot finish!\n", this->m_address.getIP().c_str(), this->m_address.getPort());
 	}

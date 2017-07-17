@@ -63,13 +63,13 @@ public:
 
 
     /** 
-     * \brief 设置最大空闲时间，当一个连接超过该时间未使用时，则自动进行destroyed
+     * \brief 设置最大空闲时间(second)，当一个连接超过该时间未使用时，则自动进行destroyed
      *
      * \date 2017/07/14
      *
      * \author BrianYi
      **/
-    void set_max_idle_time(unsigned int maxIdleTime);
+    void set_max_idle_time(unsigned int maxIdleTime = 1);
 private:
     ConnectionPool();
     mysqlpp::Connection *create();

@@ -36,14 +36,14 @@ INT32 UDP::send(const Address& inAddress, const char* inContent, const size_t& i
 	if (!this->m_opened)
 		this->open();
 
-	if (inSize > SEND_BUF_SIZE)
-	{
-		printf("Send buffer overflow!\n");
-		return -1;
-	}
+// 	if (inSize > kMaxSendBufSize)
+// 	{
+// 		printf("Send buffer overflow!\n");
+// 		return -1;
+// 	}
 
 	INT32 sentBytes = ::sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
-	if (sentBytes == -1)
+	if (sentBytes == SOCKET_ERROR)
 	{
 		printf("[send] with %s:%u cannot finish!\n", inAddress.getIP().c_str(), inAddress.getPort());
 	}
@@ -55,15 +55,15 @@ INT32 UDP::send(const std::string& inIP, const USHORT& inPort, const char* inCon
     if (!this->m_opened)
         this->open();
 
-    if (inSize > SEND_BUF_SIZE)
-    {
-        printf("Send buffer overflow!\n");
-        return -1;
-    }
+//     if (inSize > kMaxSendBufSize)
+//     {
+//         printf("Send buffer overflow!\n");
+//         return -1;
+//     }
 
     Address address(inIP, inPort);
     INT32 sentBytes = ::sendto(this->m_socketID, inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
-    if (sentBytes == -1)
+    if (sentBytes == SOCKET_ERROR)
     {
         printf("[send] with %s:%u cannot finish!\n", inIP.c_str(), inPort);
     }

@@ -33,9 +33,8 @@ P2_NAMESPACE_BEG
 
 
 
-//-------------------------------
+//*******************************
 // 宏定义 区
-//-------------------------------
 constexpr size_t kAssertBuffSize = 512;
 
 #define Assert(condition)    {                              \
@@ -47,30 +46,20 @@ constexpr size_t kAssertBuffSize = 512;
             _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
         }   }
 
-//-------------------------------
+//*******************************
 // 类型定义 区
-//-------------------------------
 
 
-//-------------------------------
+//*******************************
 // 枚举 区
-//-------------------------------
-enum IOType
-{
-    Blocking = 0,
-    NonBlocking = 1
-};
 
-//-------------------------------
+
+
+//*******************************
 // 常量 区
-//-------------------------------
-const UINT32 RECV_BUF_SIZE = 10 * 1024u;
-const UINT32 SEND_BUF_SIZE = 10 * 1024u;
-const INT32 MAX_CONNECTION_NUM = 32;
 
-//-------------------------------
+//*******************************
 // 全局 区
-//-------------------------------
 unsigned int atomic_add(unsigned int *area, int val);
 unsigned int atomic_or(unsigned int *area, unsigned int val);
 unsigned int atomic_sub(unsigned int *area, int val);

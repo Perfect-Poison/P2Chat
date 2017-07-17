@@ -14,7 +14,25 @@ P2_NAMESPACE_BEG
 class CommonSocket
 {
 public:
-    CommonSocket(INT32 inSocketType, INT32 inProtocol, IOType inIOType = Blocking);
+    enum
+    {
+        kBlocking = 0,
+        kNonBlocking = 1,
+    };
+    typedef INT32 IOType;
+
+    enum
+    {
+        kMaxSendBufSize = 96u * 1024u,
+        kMaxRecvBufSize = 96u * 1024u
+    };
+
+    enum
+    {
+        kListenQueueLength = 128u
+    };
+public:
+    CommonSocket(INT32 inSocketType, INT32 inProtocol, IOType inIOType = kBlocking);
     ~CommonSocket();
 	void setIOType(IOType inIOType);
     void reuse_addr();
