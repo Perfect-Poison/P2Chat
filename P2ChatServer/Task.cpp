@@ -92,7 +92,7 @@ p2::TaskThreadPool::~TaskThreadPool()
 {
 }
 
-p2::TaskThread* p2::TaskThreadPool::GetThread(UINT32 index)
+p2::TaskThread* p2::TaskThreadPool::GetThread(uint32 index)
 {
     MutexLocker locker(&sMutex);
     Assert(!sTaskThreadArray.empty());

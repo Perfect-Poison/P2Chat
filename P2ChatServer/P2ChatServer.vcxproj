@@ -166,6 +166,7 @@
     <ClCompile Include="..\Include\Common\udp.cpp" />
     <ClCompile Include="ConnectionPool.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="message.cpp" />
     <ClCompile Include="ServerInterface.cpp" />
     <ClCompile Include="Task.cpp" />
   </ItemGroup>

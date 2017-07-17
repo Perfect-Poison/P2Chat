@@ -34,7 +34,7 @@ public:
     Task();
     virtual ~Task();
 
-    virtual INT64 Run() = 0;
+    virtual int64 Run() = 0;
 
     void Signal(EventFlags eventFlags);
     void GlobalUnlock();
@@ -46,7 +46,7 @@ public:
 protected:
     EventFlags GetEvents();
     void ForceSameThread();
-    INT64 CallLocked();
+    int64 CallLocked();
 private:
     enum
     {
@@ -76,7 +76,7 @@ private:
     virtual void Entry();
     Task* WaitForTask();
 private:
-    priority_queue<INT32, vector<Task*>, greater<INT32>> fPrioriTaskQueue;
+    priority_queue<int32, vector<Task*>, greater<int32>> fPrioriTaskQueue;
     Mutex fMutex;
 };
 
@@ -85,13 +85,13 @@ class TaskThreadPool
 public:
     TaskThreadPool();
     virtual ~TaskThreadPool();
-    static BOOL AddThreads(UINT32 numToAdd);
+    static BOOL AddThreads(uint32 numToAdd);
     static void RemoveThreads();
-    static TaskThread* GetThread(UINT32 index);
-    static UINT32 GetNumThreads();
+    static TaskThread* GetThread(uint32 index);
+    static uint32 GetNumThreads();
     static Mutex& GetMutex();
 private:
-    static UINT32 sNumTaskThreads;
+    static uint32 sNumTaskThreads;
     static Mutex sMutexRW;
     static vector<TaskThread*> sTaskThreadArray;
     static Mutex sMutex;

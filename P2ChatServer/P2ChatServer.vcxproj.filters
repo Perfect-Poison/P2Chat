@@ -51,6 +51,9 @@
     <ClCompile Include="Task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="message.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionPool.h">

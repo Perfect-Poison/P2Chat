@@ -18,7 +18,7 @@ private:
     BOOL RecursiveTryLock();
 private:
 	CRITICAL_SECTION fMutex;
-	UINT32 fHolderCount;
+	uint32 fHolderCount;
 	DWORD fHolder;
 };
 

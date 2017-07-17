@@ -38,7 +38,7 @@ void TCP::listen_on_port( const USHORT& inPort )
 	}
 }
 
-INT32 TCP::connect_to( const Address& inAddress )
+int32 TCP::connect_to( const Address& inAddress )
 {
 	if (this->m_binded)
 	{
@@ -48,7 +48,7 @@ INT32 TCP::connect_to( const Address& inAddress )
 	if (!this->m_opened)
 		this->open();
 
-	INT32 ret = ::connect(this->m_socketID, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
+	int32 ret = ::connect(this->m_socketID, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
 	if (ret == 0)
 	{
 		this->m_address = inAddress;
@@ -57,7 +57,7 @@ INT32 TCP::connect_to( const Address& inAddress )
 	return ret;
 }
 
-INT32 TCP::connect_to( const std::string& inIP, const USHORT& inPort )
+int32 TCP::connect_to( const std::string& inIP, const USHORT& inPort )
 {
 	if (this->m_binded)
 	{
@@ -68,7 +68,7 @@ INT32 TCP::connect_to( const std::string& inIP, const USHORT& inPort )
 		this->open();
 
     Address address(inIP, inPort);
-	INT32 ret = ::connect(this->m_socketID, (const sockaddr*)&address, sizeof(struct sockaddr));
+	int32 ret = ::connect(this->m_socketID, (const sockaddr*)&address, sizeof(struct sockaddr));
 	if (ret == 0)
 	{
         this->m_address = address;
@@ -82,7 +82,7 @@ TCP TCP::accept_client(IOType inIOType)
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-	INT32 size = sizeof(struct sockaddr);
+	int32 size = sizeof(struct sockaddr);
 	Address address;
 	SOCKET socketID = ::accept(this->m_socketID, (struct sockaddr*)&address, &size);
 	TCP client;
@@ -93,7 +93,7 @@ TCP TCP::accept_client(IOType inIOType)
 	return client;
 }
 
-INT32 TCP::send( const char* inContent, const size_t& inSize )
+int32 TCP::send( const char* inContent, const size_t& inSize )
 {
 	if (!this->m_opened)
 		this->open();
@@ -104,7 +104,7 @@ INT32 TCP::send( const char* inContent, const size_t& inSize )
 // 		return -1;
 // 	}
 
-	INT32 sentBytes = ::send(this->m_socketID, inContent, inSize, 0);
+	int32 sentBytes = ::send(this->m_socketID, inContent, inSize, 0);
 	if (sentBytes == SOCKET_ERROR)
 	{
 		printf("[send] with %s:%u cannot finish!\n", this->m_address.getIP().c_str(), this->m_address.getPort());
@@ -112,7 +112,7 @@ INT32 TCP::send( const char* inContent, const size_t& inSize )
 	return sentBytes;
 }
 
-INT32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
+int32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
 {
 	if (!this->m_opened)
 		this->open();
@@ -125,7 +125,7 @@ INT32 TCP::receive( char* outContent, const size_t& inSize, IOType inIOType)
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-	INT32 receivedBytes = ::recv(this->m_socketID, outContent, inSize, 0);
+	int32 receivedBytes = ::recv(this->m_socketID, outContent, inSize, 0);
 	return receivedBytes;
 }
 

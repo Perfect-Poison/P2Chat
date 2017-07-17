@@ -6,6 +6,6 @@ class ServerInterface
 public:
     ServerInterface();
     virtual ~ServerInterface();
-    static UINT32 GetNumProcessors();
+    static uint32 GetNumProcessors();
 };
 

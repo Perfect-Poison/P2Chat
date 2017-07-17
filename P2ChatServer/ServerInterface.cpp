@@ -11,7 +11,7 @@ ServerInterface::~ServerInterface()
 {
 }
 
-UINT32 ServerInterface::GetNumProcessors()
+uint32 ServerInterface::GetNumProcessors()
 {
     SYSTEM_INFO theSystemInfo;
     ::GetSystemInfo(&theSystemInfo);

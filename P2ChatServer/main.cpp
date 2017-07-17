@@ -4,7 +4,7 @@
 #include "Common/UDP.h"
 using namespace mysqlpp;
 
-LRESULT CALLBACK select_wndproc(HWND inWIndow, UINT inMsg, WPARAM inParam, LPARAM inOtherParam);
+LRESULT CALLBACK select_wndproc(HWND inWIndow, uint inMsg, WPARAM inParam, LPARAM inOtherParam);
 
 int main()
 {

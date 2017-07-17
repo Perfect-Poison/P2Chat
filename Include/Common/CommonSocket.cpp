@@ -2,7 +2,7 @@
 
 P2_NAMESPACE_BEG
 
-UINT32 CommonSocket::s_num_sockets = 0;
+uint32 CommonSocket::s_num_sockets = 0;
 
 // CommonSocket::CommonSocket()
 // {
@@ -26,7 +26,7 @@ UINT32 CommonSocket::s_num_sockets = 0;
 // }
 
 
-CommonSocket::CommonSocket(INT32 inSocketType, INT32 inProtocol, IOType inIOType)
+CommonSocket::CommonSocket(int32 inSocketType, int32 inProtocol, IOType inIOType)
 {
     this->s_num_sockets++;
     if (this->s_num_sockets == 1)
@@ -43,8 +43,8 @@ CommonSocket::CommonSocket(INT32 inSocketType, INT32 inProtocol, IOType inIOType
     this->m_ioType = inIOType;
     this->open();
     this->setIOType(this->m_ioType);
-    UINT32 maxSendBufSize = kMaxSendBufSize;
-    UINT32 maxRecvBufSize = kMaxRecvBufSize;
+    uint32 maxSendBufSize = kMaxSendBufSize;
+    uint32 maxRecvBufSize = kMaxRecvBufSize;
     ::setsockopt(this->m_socketID, SOL_SOCKET, SO_SNDBUF, (char*)&maxSendBufSize, sizeof(int));
     ::setsockopt(this->m_socketID, SOL_SOCKET, SO_RCVBUF, (char*)&maxRecvBufSize, sizeof(int));
 }
@@ -166,7 +166,7 @@ void CommonSocket::keep_alive()
     return;
 }
 
-void CommonSocket::set_socket_sndbuf_size(UINT32 inNewSize)
+void CommonSocket::set_socket_sndbuf_size(uint32 inNewSize)
 {
     int bufSize = inNewSize;
     if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_SNDBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
@@ -177,7 +177,7 @@ void CommonSocket::set_socket_sndbuf_size(UINT32 inNewSize)
     return;
 }
 
-void CommonSocket::set_socket_rcvbuf_size(UINT32 inNewSize)
+void CommonSocket::set_socket_rcvbuf_size(uint32 inNewSize)
 {
     int bufSize = inNewSize;
     if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_RCVBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)

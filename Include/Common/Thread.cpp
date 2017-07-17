@@ -37,7 +37,7 @@ unsigned int WINAPI p2::Thread::_Entry(LPVOID inThread)
     return NULL;
 }
 
-void p2::Thread::Sleep(UINT32 inMsec)
+void p2::Thread::Sleep(uint32 inMsec)
 {
     ::Sleep(inMsec);
 }

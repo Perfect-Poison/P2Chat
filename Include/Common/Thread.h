@@ -11,7 +11,7 @@ public:
     virtual ~Thread();
     virtual void Entry() = 0;
     void Start();
-    static void Sleep(UINT32 inMsec);
+    static void Sleep(uint32 inMsec);
     void Join();
     void SendStopRequest();
     BOOL IsStopRequested();
