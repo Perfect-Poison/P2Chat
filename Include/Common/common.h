@@ -17,6 +17,7 @@
 #include <process.h>
 #include <string>
 #include <functional>
+#include <time.h>
 using namespace std;
 
 #ifndef P2_NAMESPACE_BEG
@@ -46,6 +47,8 @@ constexpr size_t kAssertBuffSize = 512;
             _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
         }   }
 
+#define safe_free(x)    { if (x) { free(x); x = nullptr; } }
+
 //*******************************
 // 类型定义 区
 typedef unsigned char   uint8;
@@ -69,6 +72,8 @@ typedef double          float64;
 
 //*******************************
 // 全局 区
+void *memdup(const void *data, size_t size);
+
 unsigned int atomic_add(unsigned int *area, int val);
 unsigned int atomic_or(unsigned int *area, unsigned int val);
 unsigned int atomic_sub(unsigned int *area, int val);

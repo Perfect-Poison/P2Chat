@@ -82,7 +82,7 @@ TCP TCP::accept_client(IOType inIOType)
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-	int32 size = sizeof(struct sockaddr);
+	int size = sizeof(struct sockaddr);
 	Address address;
 	SOCKET socketID = ::accept(this->m_socketID, (struct sockaddr*)&address, &size);
 	TCP client;

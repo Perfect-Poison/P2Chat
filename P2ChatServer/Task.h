@@ -2,7 +2,7 @@
 
 #include "Common/common.h"
 #include "Common/Mutex.h"
-#include "TaskThread.h"
+#include "Task.h"
 #include <queue>
 #include <vector>
 
@@ -10,6 +10,8 @@ P2_NAMESPACE_BEG
 
 #define TASK_DEBUG 1
 
+class TaskThread;
+class TaskThreadPool;
 class Task
 {
 public:
@@ -37,7 +39,6 @@ public:
     virtual int64 Run() = 0;
 
     void Signal(EventFlags eventFlags);
-    void GlobalUnlock();
     void SetTaskName(const string& name);
     string GetTaskName();
     void SetDefaultThread(TaskThread *defaultThread);
@@ -45,7 +46,6 @@ public:
     PriorityLevel GetPriorityLevel();
 protected:
     EventFlags GetEvents();
-    void ForceSameThread();
     int64 CallLocked();
 private:
     enum
@@ -58,9 +58,9 @@ private:
 private:
     string fTaskName;
     EventFlags fEventFlags;
-    TaskThread *fUseThisThread;
+    //TaskThread *fUseThisThread;
     TaskThread *fDefaultThread;
-    BOOL fWriteLock;
+    //BOOL fWriteLock;
     PriorityLevel fPriorityLevel;
     static unsigned int sTaskThreadPicker;
 };

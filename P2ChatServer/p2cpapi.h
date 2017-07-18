@@ -9,6 +9,7 @@
  */
 
 #include "Common/common.h"
+#include "Common/uthash.h"
 #include <map>
 
 P2_NAMESPACE_BEG
@@ -128,7 +129,7 @@ typedef struct
         struct  
         {
             uint32 size;
-            TCHAR* data;
+            WORD* data; // string类型全为宽字符，占2字节
         }str;
     };
 }MESSAGE_ATTR;
@@ -147,27 +148,38 @@ typedef struct
 }MESSAGE;
 
 /**
+*	Attribute hash map entry
+*/
+typedef struct
+{
+    UT_hash_handle hh;
+    attr_code code; // key
+    size_t size;    // message attr size
+    MESSAGE_ATTR data;
+}MessageAttr;
+
+/**
  *	消息处理类
  */
 class Message
 {
 public:
     Message();
-    Message(MESSAGE *msg, bool networkByteOrder = true);
+    Message(MESSAGE *msg);
     ~Message();
     MESSAGE *CreateMessage();
-    msg_code GetCode() const { return fMessage.code; }
-    void SetCode(msg_code msgCode) { fMessage.code = msgCode; }
-    msg_flags GetFlags() const { return fMessage.flags;  }
-    void SetFlags(msg_flags msgFlags) { fMessage.flags = msgFlags; }
+    msg_code GetCode() const { return fCode; }
+    void SetCode(msg_code msgCode) { fCode = msgCode; }
+    msg_flags GetFlags() const { return fFlags;  }
+    void SetFlags(msg_flags msgFlags) { fFlags = msgFlags; }
     
-    bool IsBinary() const { return fMessage.flags & mf_binary; }
-    bool IsEndOfFile() const { return fMessage.flags & mf_end_of_file; }
-    const BYTE *GetBinaryData() const { return IsBinary() ? (BYTE*)fMessage.attrs : nullptr; }
-    msg_size GetBinaryDataSize() const { return IsBinary() ? fMessage.attrNum : 0; }
+    bool IsBinary() const { return (fFlags & mf_binary) ? true : false; }
+    bool IsEndOfFile() const { return (fFlags & mf_end_of_file) ? true : false; }
+    const BYTE *GetBinaryData() const { return IsBinary() ? fData : nullptr; }
+    msg_size GetBinaryDataSize() const { return IsBinary() ? fAttrNum : 0; }
     
     bool IsAttrExist(attr_code attrCode) { return findAttr(attrCode) ? true : false; }
-    attr_datatype GetAttrDataType(attr_code attrCode) { return findAttr(attrCode)->dataType; }
+    attr_datatype GetAttrDataType(attr_code attrCode) { return findAttr(attrCode)->data.dataType; }
 
     void SetAttr(attr_code attrCode, int16 value) { set(attrCode, dt_int16, &value, af_signed); }
     void SetAttr(attr_code attrCode, uint16 value) { set(attrCode, dt_int16, &value, af_unsigned); }
@@ -180,24 +192,31 @@ public:
     void SetAttr(attr_code attrCode, const BYTE* value, uint32 size) { set(attrCode, dt_binary, &value, af_none, size); }
     void SetAttr(attr_code attrCode, const TCHAR* value, uint32 size) { set(attrCode, dt_string, &value, af_none, size); }
 
-    int16 GetAttrAsInt16(attr_code attrCode) const { return *(int16*)get(attrCode, dt_int16, af_signed); }
-    uint16 GetAttrAsUInt16(attr_code attrCode) const { return *(uint16*)get(attrCode, dt_int16, af_unsigned); }
-    int32 GetAttrAsInt32(attr_code attrCode) const { return *(int32*)get(attrCode, dt_int32, af_signed); };
-    uint32 GetAttrAsUInt32(attr_code attrCode) const { return *(uint32*)get(attrCode, dt_int32, af_unsigned); }
-    int64 GetAttrAsInt64(attr_code attrCode) const { return *(int64*)get(attrCode, dt_int64, af_signed); }
-    uint64 GetAttrAsUInt64(attr_code attrCode) const { return *(uint64*)get(attrCode, dt_int64, af_unsigned); }
-    float32 GetAttrAsFloat32(attr_code attrCode) const { return *(float32*)get(attrCode, dt_float32); }
-    float64 GetAttrAsFloat64(attr_code attrCode) const { return *(float64*)get(attrCode, dt_float64); }
-    uint32 GetAttrAsBinary(attr_code attrCode, BYTE* buffer, uint32 bufferSize) const { return *(uint32*)get(attrCode, dt_binary, af_none, buffer, bufferSize); }
-    uint32 GetAttrAsString(attr_code attrCode, TCHAR* buffer, uint32 bufferSize) const { return *(uint32*)get(attrCode, dt_string, af_none, buffer, bufferSize); }
-    static uint32 CalculateAttrSize(MESSAGE_ATTR *attr, bool networkByteOrder = true);
-    static uint32 CalculateTotalAttrSize(MESSAGE *msg, bool networkByteOrder = true);
+    int16 GetAttrAsInt16(attr_code attrCode) const { return *((int16*)get(attrCode, dt_int16)); }
+    uint16 GetAttrAsUInt16(attr_code attrCode) const { return *((uint16*)get(attrCode, dt_int16)); }
+    int32 GetAttrAsInt32(attr_code attrCode) const { return *((int32*)get(attrCode, dt_int32)); };
+    uint32 GetAttrAsUInt32(attr_code attrCode) const { return *((uint32*)get(attrCode, dt_int32)); }
+    int64 GetAttrAsInt64(attr_code attrCode) const { return *((int64*)get(attrCode, dt_int64)); }
+    uint64 GetAttrAsUInt64(attr_code attrCode) const { return *((uint64*)get(attrCode, dt_int64)); }
+    float32 GetAttrAsFloat32(attr_code attrCode) const { return *((float32*)get(attrCode, dt_float32)); }
+    float64 GetAttrAsFloat64(attr_code attrCode) const { return *((float64*)get(attrCode, dt_float64)); }
+    uint32 GetAttrAsBinary(attr_code attrCode, BYTE* buffer, uint32 bufferSize) const { return *((uint32*)get(attrCode, dt_binary, buffer, bufferSize)); }
+    WCHAR* GetAttrAsString(attr_code attrCode, WCHAR* strBufferW = nullptr, uint32 strBufferLenW = 0) const { return (WCHAR*)get(attrCode, dt_string, strBufferW, strBufferLenW); }
+    static uint32 CalculateAttrSize(MESSAGE_ATTR *attr, bool networkByteOrder);
+    static uint32 CalculateTotalAttrSize(MESSAGE *msg, bool networkByteOrder);
+    static uint32 CalculateTotalAttrSize(MessageAttr *attrs, bool networkByteOrder);
 private:
     void set(attr_code attrCode, attr_datatype dataType, const void *value, attr_flags flags = af_none, uint32 size = 0);
-    void *get(attr_code attrCode, attr_datatype dataType, attr_flags flags = af_none, void *buffer = nullptr, uint32 bufferSize = 0) const;
-    MESSAGE_ATTR *findAttr(attr_code attrCode) const { return fAttrMap.find(attrCode)->second; }
-    MESSAGE fMessage;
-    map<attr_code, MESSAGE_ATTR*> fAttrMap;
+    void *get(attr_code attrCode, attr_datatype dataType, void *buffer = nullptr, uint32 bufferSize = 0) const;
+    MessageAttr *findAttr(attr_code attrCode) const;
+private:
+    msg_code fCode;          // 2 byte
+    msg_flags fFlags;        // 2 byte
+    msg_size fSize;          // 4 byte
+    msg_id fMsgID;           // 4 byte
+    msg_attrnum fAttrNum;    // 4 byte
+    MessageAttr *fAttrs;
+    BYTE *fData;
 };
 
 P2_NAMESPACE_END

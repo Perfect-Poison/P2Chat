@@ -1,5 +1,5 @@
 #include "ServerInterface.h"
-
+P2_NAMESPACE_USE;
 
 
 ServerInterface::ServerInterface()

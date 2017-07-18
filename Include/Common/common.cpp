@@ -3,6 +3,13 @@
 
 static p2::Mutex sAtomicMutex;
 
+void * p2::memdup(const void *data, size_t size)
+{
+    void *p = malloc(size);
+    memcpy(p, data, size);
+    return p;
+}
+
 unsigned int p2::atomic_add(unsigned int *area, int val)
 {
     MutexLocker locker(&sAtomicMutex);

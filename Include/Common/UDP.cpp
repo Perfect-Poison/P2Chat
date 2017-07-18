@@ -101,7 +101,7 @@ int32 UDP::receive(char* outContent, const size_t& inSize, Address& outAddress, 
     if (this->m_ioType != inIOType)
         this->setIOType(inIOType);
 
-    int32 size = sizeof(struct sockaddr);
+    int size = sizeof(struct sockaddr);
     int32 receivedBytes = ::recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&outAddress, &size);
     return receivedBytes;
 }
@@ -120,7 +120,7 @@ int32 UDP::receive(char* outContent, const size_t& inSize, std::string& outIP, U
         this->setIOType(inIOType);
 
     Address address;
-    int32 size = sizeof(struct sockaddr);
+    int size = sizeof(struct sockaddr);
     int32 receivedBytes = ::recvfrom(this->m_socketID, outContent, inSize, 0, (struct sockaddr*)&address, &size);
     outIP = address.getIP();
     outPort = address.getPort();

@@ -54,6 +54,9 @@
     <ClCompile Include="message.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Cond.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionPool.h">
@@ -87,6 +90,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="p2cpapi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Cond.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

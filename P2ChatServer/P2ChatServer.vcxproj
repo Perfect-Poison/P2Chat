@@ -164,6 +164,7 @@
     <ClCompile Include="..\Include\Common\TCP.cpp" />
     <ClCompile Include="..\Include\Common\Thread.cpp" />
     <ClCompile Include="..\Include\Common\udp.cpp" />
+    <ClCompile Include="Cond.cpp" />
     <ClCompile Include="ConnectionPool.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="message.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="..\Include\Common\TCP.h" />
     <ClInclude Include="..\Include\Common\Thread.h" />
     <ClInclude Include="..\Include\Common\UDP.h" />
+    <ClInclude Include="Cond.h" />
     <ClInclude Include="ConnectionPool.h" />
     <ClInclude Include="p2cpapi.h" />
     <ClInclude Include="ServerInterface.h" />

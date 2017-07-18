@@ -34,19 +34,10 @@ void p2::Task::Signal(EventFlags eventFlags)
             if (TASK_DEBUG)
             {
                 printf("Task::Signal enque TaskName=%s using Task::GetNumThreads(), task range=[0-%lu] thread index =%u\n",
-                    fTaskName, TaskThreadPool::GetNumThreads() - 1, theThreadIndex);
+                    fTaskName.c_str(), TaskThreadPool::GetNumThreads() - 1, theThreadIndex);
             }
             TaskThreadPool::GetThread(theThreadIndex)->AddTask(this);
         }
-
-    }
-}
-
-void p2::Task::GlobalUnlock()
-{
-    if (fWriteLock) 
-    {
-        fWriteLock = false;
 
     }
 }
@@ -62,7 +53,32 @@ p2::TaskThread::~TaskThread()
 
 void p2::TaskThread::Entry()
 {
+    Task* theTask = nullptr;
 
+    while (true) 
+    {
+        theTask = WaitForTask();
+
+        if (theTask == nullptr)
+            return;
+
+        BOOL doneProcessingEvent = false;
+        while (!doneProcessingEvent) 
+        {
+            int64 theTimeout = 0;
+            MutexLocker locker(&TaskThreadPool::GetMutex());
+            if (TASK_DEBUG)
+                printf("TaskThread::Entry run global locked TaskName=%s CurTime=%I64d ThreadID=%d\n", theTask->GetTaskName(), time(0), Thread::GetCurrentThreadID());
+            
+            theTimeout = theTask->Run();
+            if (theTimeout < 0) 
+            {
+                if (TASK_DEBUG)
+                    printf("TaskThread::Entry delete TaskName=%s CurTime=%I64d ThreadID=%d\n", theTask->GetTaskName(), time(0), Thread::GetCurrentThreadID());
+
+            }
+        }
+    }
 }
 
 p2::Task* p2::TaskThread::WaitForTask()
