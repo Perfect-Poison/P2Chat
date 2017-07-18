@@ -18,6 +18,7 @@
 #include <string>
 #include <functional>
 #include <time.h>
+#include <stdio.h>
 using namespace std;
 
 #ifndef P2_NAMESPACE_BEG
