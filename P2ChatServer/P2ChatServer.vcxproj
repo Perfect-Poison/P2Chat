@@ -166,10 +166,15 @@
     <ClCompile Include="..\Include\Common\udp.cpp" />
     <ClCompile Include="Cond.cpp" />
     <ClCompile Include="ConnectionPool.cpp" />
+    <ClCompile Include="EventContext.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="message.cpp" />
     <ClCompile Include="ServerInterface.cpp" />
     <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TCPListenerSocket.cpp" />
+    <ClCompile Include="TCPSession.cpp" />
+    <ClCompile Include="TCPSocket.cpp" />
+    <ClCompile Include="UDPSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Common\Address.h" />
@@ -181,9 +186,14 @@
     <ClInclude Include="..\Include\Common\UDP.h" />
     <ClInclude Include="Cond.h" />
     <ClInclude Include="ConnectionPool.h" />
+    <ClInclude Include="EventContext.h" />
     <ClInclude Include="p2cpapi.h" />
     <ClInclude Include="ServerInterface.h" />
     <ClInclude Include="Task.h" />
+    <ClInclude Include="TCPListenerSocket.h" />
+    <ClInclude Include="TCPSession.h" />
+    <ClInclude Include="TCPSocket.h" />
+    <ClInclude Include="UDPSocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

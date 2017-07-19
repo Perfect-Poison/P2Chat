@@ -1,6 +1,5 @@
 #pragma once
-#include "common.h"
-#include <string>
+#include "Common/common.h"
 
 P2_NAMESPACE_BEG
 
@@ -12,12 +11,12 @@ public:
     Address(const std::string& inIP, const USHORT& inPort);
     Address(struct sockaddr_in inSockAddr);
     ~Address();
-    std::string getIP() const;
-    void setIP(const std::string& inIP);
-    USHORT getPort() const;
-    void setPort(const USHORT& inPort);
+    string GetIP() const;
+    void SetIP(const std::string& inIP);
+    USHORT GetPort() const;
+    void SetPort(const USHORT& inPort);
 private:
-    void _address(const std::string& inIP, const USHORT& inPort);
+    void _Address(const std::string& inIP, const USHORT& inPort);
 };
 
 P2_NAMESPACE_END

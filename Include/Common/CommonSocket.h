@@ -34,26 +34,26 @@ public:
 public:
     CommonSocket(int32 inSocketType, int32 inProtocol, IOType inIOType = kBlocking);
     ~CommonSocket();
-	void setIOType(IOType inIOType);
-    void reuse_addr();
-    void no_delay();
-    void keep_alive();
-    void set_socket_sndbuf_size(uint32 inNewSize);
-    void set_socket_rcvbuf_size(uint32 inNewSize);
+	void SetIOType(IOType inIOType);
+    void ReuseAddr();
+    void NoDelay();
+    void KeepAlive();
+    void SetSocketSendBufferSize(uint32 inNewSize);
+    void SetSocketRecvBufferSize(uint32 inNewSize);
 protected:
-    void open();
-    void close();
-    void bind_to_port(const USHORT& inPort);
+    void Open();
+    void Close();
+    void Bind(const USHORT& inPort);
 protected:
-    SOCKET m_socketID;
-    int32 m_socketType;
-    int32 m_protocol;
-    BOOL m_opened;
-    BOOL m_binded;
-    IOType m_ioType;
+    SOCKET fSocketID;
+    int32 fSocketType;
+    int32 fProtocol;
+    BOOL fOpened;
+    BOOL fBinded;
+    IOType fIOType;
 private:
     CommonSocket();
-    static uint32 s_num_sockets;
+    static uint32 sNumSockets;
 };
 
 P2_NAMESPACE_END

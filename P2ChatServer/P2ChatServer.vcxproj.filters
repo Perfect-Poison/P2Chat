@@ -57,6 +57,21 @@
     <ClCompile Include="Cond.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="EventContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPListenerSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSession.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionPool.h">
@@ -93,6 +108,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Cond.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="EventContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPListenerSocket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPSession.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

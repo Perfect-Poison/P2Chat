@@ -48,6 +48,15 @@ constexpr size_t kAssertBuffSize = 512;
             _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
         }   }
 
+#define AssertV(condition,errNo)    {                                   \
+        if (!(condition))                                                   \
+        {                                                                   \
+            char s[kAssertBuffSize];                                        \
+            s[kAssertBuffSize -1] = 0;                                      \
+            qtss_snprintf( s,kAssertBuffSize -1, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
+            MyAssert(s);                                                    \
+        }   }
+
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
 
 //*******************************
@@ -63,9 +72,25 @@ typedef ULONGLONG       uint64;
 typedef float           float32;
 typedef double          float64;
 
+/**
+ *	事件结构体
+ */
+struct eventreq 
+{
+    int          er_handle;
+    unsigned int er_eventid;
+    int          er_eventbits;
+};
+
 //*******************************
 // 枚举 区
-
+enum
+{
+    EV_RE = 1,
+    EV_WR = 2,
+    EV_EX = 4,
+    EV_RM = 8
+};
 
 
 //*******************************
@@ -73,10 +98,26 @@ typedef double          float64;
 
 //*******************************
 // 全局 区
+
+/**
+ *	内存操作相关函数
+ */
 void *memdup(const void *data, size_t size);
 
+/**
+*	原子操作相关函数
+*/
 unsigned int atomic_add(unsigned int *area, int val);
 unsigned int atomic_or(unsigned int *area, unsigned int val);
 unsigned int atomic_sub(unsigned int *area, int val);
+
+unsigned int compare_and_store(unsigned int oval, unsigned int nval, unsigned int *area);
+
+/**
+*	事件操作相关函数
+*/
+int select_watchevent(struct eventreq *req, int which);
+int select_modwatch(struct eventreq *req, int which);
+int select_waitevent(struct eventreq *req);
 
 P2_NAMESPACE_END

@@ -18,44 +18,34 @@ class Task
 public:
     enum
     {
-        KillEvent = 0x1 << 0x0,
-        IdleEvent = 0x1 << 0x1,
-        StartEvent = 0x1 << 0x2,
-        TimeoutEvent = 0x1 << 0x3,
+        kKillEvent = 0x1 << 0x0,
+        kIdleEvent = 0x1 << 0x1,
+        kStartEvent = 0x1 << 0x2,
+        kTimeoutEvent = 0x1 << 0x3,
 
-        ReadEvent = 0x1 << 0x4,
-        WriteEvent = 0x1 << 0x5,
+        kReadEvent = 0x1 << 0x4,
+        kWriteEvent = 0x1 << 0x5,
 
-        UpdateEvent = 0x1 << 0x6,
+        kUpdateEvent = 0x1 << 0x6,
 
-        Alive = 0x80000000,
-        AliveOff = 0x7fffffff
+        kAlive = 0x80000000,
+        kAliveOff = 0x7fffffff
     };
     typedef unsigned int EventFlags;
-    enum
-    {
-        Urgent
-    };
-    typedef uint32 PriorityLevel;
     Task();
     virtual ~Task();
     virtual int64 Run() = 0;
     void Signal(EventFlags eventFlags);
     void SetTaskName(const string& name) { fTaskName = name; }
     string GetTaskName() const { return fTaskName; }
-    void SetPriorityLevel(PriorityLevel priorityLevel) { fPriorityLevel = priorityLevel; }
-    PriorityLevel GetPriorityLevel() const { return fPriorityLevel; }
-    BOOL IsAlive() const { return fEventFlags & Alive; }
-    void SetAlive() { fEventFlags |= Alive; }
-    void SetDead() { fEventFlags &= AliveOff; }
-    EventFlags GetEvents() const { return fEventFlags & AliveOff; }
-protected:
-    int64 CallLocked();
+    BOOL IsAlive() const { return fEventFlags & kAlive; }
+    void SetAlive() { fEventFlags |= kAlive; }
+    void SetDead() { fEventFlags &= kAliveOff; }
+    EventFlags GetEvents() const { return fEventFlags & kAliveOff; }
 private:
     string fTaskName;
     EventFlags fEventFlags;
-    PriorityLevel fPriorityLevel;
-    static unsigned int sTaskThreadPicker;
+    static uint32 sTaskThreadPicker;
 };
 
 class TaskThread : public Thread
@@ -71,7 +61,7 @@ private:
     Task* DeQueueBlocking(int32 inTimeoutInMilSecs);
     uint32 GetQueueLength();
 private:
-    priority_queue<int32, vector<Task*>, greater<int32>> fPrioriTaskQueue;
+    queue<Task*> fTaskQueue;
     Mutex fQueueMutex;
     Cond fQueueCond;
 };

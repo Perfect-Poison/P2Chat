@@ -2,126 +2,126 @@
 
 P2_NAMESPACE_BEG
 
-uint32 CommonSocket::s_num_sockets = 0;
+uint32 CommonSocket::sNumSockets = 0;
 
 // CommonSocket::CommonSocket()
 // {
-//     this->s_num_sockets++;
-//     if (this->s_num_sockets == 1)
+//     this->sNumSockets++;
+//     if (this->sNumSockets == 1)
 //     {
 //         WSADATA wsaData;
 //         if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 //             printf("WSAStartup error!\n");
 //     }
 // 
-//     this->m_socketType = SOCK_STREAM;
-//     this->m_protocol = IPPROTO_TCP;
-//     this->m_opened = FALSE;
-//     this->m_binded = FALSE;
-//     this->m_ioType = Blocking;
+//     this->fSocketType = SOCK_STREAM;
+//     this->fProtocol = IPPROTO_TCP;
+//     this->fOpened = FALSE;
+//     this->fBinded = FALSE;
+//     this->fIOType = Blocking;
 //     this->open();
-//     this->setIOType(this->m_ioType);
-//     ::setsockopt(this->m_socketID, SOL_SOCKET, SO_SNDBUF, (char*)&SEND_BUF_SIZE, sizeof(int));
-//     ::setsockopt(this->m_socketID, SOL_SOCKET, SO_RCVBUF, (char*)&RECV_BUF_SIZE, sizeof(int));
+//     this->setIOType(this->fIOType);
+//     ::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&SEND_BUF_SIZE, sizeof(int));
+//     ::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&RECV_BUF_SIZE, sizeof(int));
 // }
 
 
 CommonSocket::CommonSocket(int32 inSocketType, int32 inProtocol, IOType inIOType)
 {
-    this->s_num_sockets++;
-    if (this->s_num_sockets == 1)
+    this->sNumSockets++;
+    if (this->sNumSockets == 1)
     {
         WSADATA wsaData;
         if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
             printf("WSAStartup error!\n");
     }
 
-    this->m_socketType = inSocketType;
-    this->m_protocol = inProtocol;
-    this->m_opened = FALSE;
-    this->m_binded = FALSE;
-    this->m_ioType = inIOType;
-    this->open();
-    this->setIOType(this->m_ioType);
+    this->fSocketType = inSocketType;
+    this->fProtocol = inProtocol;
+    this->fOpened = FALSE;
+    this->fBinded = FALSE;
+    this->fIOType = inIOType;
+    this->Open();
+    this->SetIOType(this->fIOType);
     uint32 maxSendBufSize = kMaxSendBufSize;
     uint32 maxRecvBufSize = kMaxRecvBufSize;
-    ::setsockopt(this->m_socketID, SOL_SOCKET, SO_SNDBUF, (char*)&maxSendBufSize, sizeof(int));
-    ::setsockopt(this->m_socketID, SOL_SOCKET, SO_RCVBUF, (char*)&maxRecvBufSize, sizeof(int));
+    ::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&maxSendBufSize, sizeof(int));
+    ::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&maxRecvBufSize, sizeof(int));
 }
 
 CommonSocket::~CommonSocket()
 {
-    this->s_num_sockets--;
-    if (this->s_num_sockets == 0)
+    this->sNumSockets--;
+    if (this->sNumSockets == 0)
     {
         WSACleanup();
         printf("clean up all sockets!\n");
     }
 }
 
-void CommonSocket::open()
+void CommonSocket::Open()
 {
-    if (this->m_opened)
+    if (this->fOpened)
     {
         printf("Already opened!\n");
         return;
     }
     
-    if ((this->m_socketID = ::socket(AF_INET, this->m_socketType, this->m_protocol)) == SOCKET_ERROR)
+    if ((this->fSocketID = ::socket(AF_INET, this->fSocketType, this->fProtocol)) == SOCKET_ERROR)
     {
         printf("Create socket error!\n");
         return;
     }
-    this->m_opened = TRUE;
+    this->fOpened = TRUE;
 }
 
-void CommonSocket::close()
+void CommonSocket::Close()
 {
-    if (this->m_opened)
+    if (this->fOpened)
     {
-        ::closesocket(this->m_socketID);
-        this->m_opened = FALSE;
-        this->m_binded = FALSE;
+        ::closesocket(this->fSocketID);
+        this->fOpened = FALSE;
+        this->fBinded = FALSE;
     }
 }
 
-void CommonSocket::bind_to_port(const USHORT& inPort)
+void CommonSocket::Bind(const USHORT& inPort)
 {
-    if (!this->m_opened)
+    if (!this->fOpened)
         this->open();
     else
     {
-        if (this->m_binded)
+        if (this->fBinded)
         {
-            printf("Socket %u already binded!\n", this->m_socketID);
+            printf("Socket %u already binded!\n", this->fSocketID);
             return;
         }
 
         Address address(inPort);
-        if (::bind(this->m_socketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
+        if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
         {
             printf("Binded socket error!\n");
             return;
         }
-        this->m_binded = TRUE;
+        this->fBinded = TRUE;
     }
 }
 
-void CommonSocket::setIOType(IOType inIOType)
+void CommonSocket::SetIOType(IOType inIOType)
 {
     ULONG iMode = 0;
     switch (inIOType)
     {
     case kBlocking:
         iMode = 0;
-        if (::ioctlsocket(this->m_socketID, FIONBIO, &iMode) == SOCKET_ERROR)
+        if (::ioctlsocket(this->fSocketID, FIONBIO, &iMode) == SOCKET_ERROR)
         {
             printf("Blocking: ioctlsocket failed!\n");
         }
         break;
     case kNonBlocking:
         iMode = 1;
-        if (::ioctlsocket(this->m_socketID, FIONBIO, &iMode) == SOCKET_ERROR)
+        if (::ioctlsocket(this->fSocketID, FIONBIO, &iMode) == SOCKET_ERROR)
         {
             printf("Non-Blocking: ioctlsocket failed!\n");
         }
@@ -130,13 +130,13 @@ void CommonSocket::setIOType(IOType inIOType)
         printf("ERROR: No such IO type!\n");
         break;
     }
-    this->m_ioType = inIOType;
+    this->fIOType = inIOType;
 }
 
-void CommonSocket::reuse_addr()
+void CommonSocket::ReuseAddr()
 {
     int one = 1;
-    if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(int)) == SOCKET_ERROR)
+    if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         printf("[reuse_addr] error!\n");
         return;
@@ -144,10 +144,10 @@ void CommonSocket::reuse_addr()
     return;
 }
 
-void CommonSocket::no_delay()
+void CommonSocket::NoDelay()
 {
     int one = 1;
-    if (::setsockopt(this->m_socketID, IPPROTO_TCP, TCP_NODELAY, (char*)&one, sizeof(int)) == SOCKET_ERROR)
+    if (::setsockopt(this->fSocketID, IPPROTO_TCP, TCP_NODELAY, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         printf("[no_delay] error!\n");
         return;
@@ -155,10 +155,10 @@ void CommonSocket::no_delay()
     return;
 }
 
-void CommonSocket::keep_alive()
+void CommonSocket::KeepAlive()
 {
     int one = 1;
-    if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_KEEPALIVE, (char*)&one, sizeof(int)) == SOCKET_ERROR)
+    if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_KEEPALIVE, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         printf("[keep_alive] error!\n");
         return;
@@ -166,10 +166,10 @@ void CommonSocket::keep_alive()
     return;
 }
 
-void CommonSocket::set_socket_sndbuf_size(uint32 inNewSize)
+void CommonSocket::SetSocketSendBufferSize(uint32 inNewSize)
 {
     int bufSize = inNewSize;
-    if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_SNDBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
+    if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
     {
         printf("[set_socket_sndbuf_size] error!\n");
         return;
@@ -177,10 +177,10 @@ void CommonSocket::set_socket_sndbuf_size(uint32 inNewSize)
     return;
 }
 
-void CommonSocket::set_socket_rcvbuf_size(uint32 inNewSize)
+void CommonSocket::SetSocketRecvBufferSize(uint32 inNewSize)
 {
     int bufSize = inNewSize;
-    if (::setsockopt(this->m_socketID, SOL_SOCKET, SO_RCVBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
+    if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
     {
         printf("[set_socket_rcvbuf_size] error!\n");
         return;

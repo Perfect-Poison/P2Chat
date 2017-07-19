@@ -1,9 +1,11 @@
 #include "Common/Thread.h"
 
-DWORD p2::Thread::sThreadStorageIndex = 0;
-void* p2::Thread::sMainThreadData = nullptr;
+P2_NAMESPACE_BEG
 
-p2::Thread::Thread(): 
+DWORD Thread::sThreadStorageIndex = 0;
+void* Thread::sMainThreadData = nullptr;
+
+Thread::Thread(): 
     fStopRequested(false),
     fJoined(false),
     fThreadData(nullptr)
@@ -16,19 +18,44 @@ p2::Thread::Thread():
 }
 
 
-p2::Thread::~Thread()
+Thread::~Thread()
 {
     this->StopAndWaitForThread();
 }
 
-void p2::Thread::Start()
+void Thread::Start()
 {
     unsigned int theId = 0;
     fThreadID = (HANDLE)_beginthreadex(NULL, 0, _Entry, (void*)this, 0, &theId);
     Assert(fThreadID != nullptr);
 }
 
-unsigned int WINAPI p2::Thread::_Entry(LPVOID inThread)
+int Thread::GetErrno()
+{
+    int winErr = ::GetLastError();
+    switch (winErr)
+    {
+
+    case ERROR_FILE_NOT_FOUND: return ENOENT;
+    case ERROR_PATH_NOT_FOUND: return ENOENT;
+
+    case WSAEINTR:      return EINTR;
+    case WSAENETRESET:  return EPIPE;
+    case WSAENOTCONN:   return ENOTCONN;
+    case WSAEWOULDBLOCK:return EAGAIN;
+    case WSAECONNRESET: return EPIPE;
+    case WSAEADDRINUSE: return EADDRINUSE;
+    case WSAEMFILE:     return EMFILE;
+    case WSAEINPROGRESS:return EINPROGRESS;
+    case WSAEADDRNOTAVAIL: return EADDRNOTAVAIL;
+    case WSAECONNABORTED: return EPIPE;
+    case 0:             return 0;
+
+    default:            return ENOTCONN;
+    }
+}
+
+unsigned int WINAPI Thread::_Entry(LPVOID inThread)
 {
     Thread *theThread = (Thread*)inThread;
     BOOL theErr = ::TlsSetValue(sThreadStorageIndex, theThread);
@@ -37,12 +64,12 @@ unsigned int WINAPI p2::Thread::_Entry(LPVOID inThread)
     return NULL;
 }
 
-void p2::Thread::Sleep(uint32 inMsec)
+void Thread::Sleep(uint32 inMsec)
 {
     ::Sleep(inMsec);
 }
 
-void p2::Thread::Join()
+void Thread::Join()
 {
     Assert(!fJoined);
     fJoined = true;
@@ -52,41 +79,42 @@ void p2::Thread::Join()
     Assert(theErr == WAIT_OBJECT_0);
 }
 
-void p2::Thread::SendStopRequest()
+void Thread::SendStopRequest()
 {
     fStopRequested = true;
 }
 
-BOOL p2::Thread::IsStopRequested()
+BOOL Thread::IsStopRequested()
 {
     return fStopRequested;
 }
 
-void p2::Thread::StopAndWaitForThread()
+void Thread::StopAndWaitForThread()
 {
     fStopRequested = true;
     if (!fJoined) 
         Join();
 }
 
-void* p2::Thread::GetThreadData()
+void* Thread::GetThreadData()
 {
     return fThreadData;
 }
 
-void p2::Thread::SetThreadData(void* inThreadData)
+void Thread::SetThreadData(void* inThreadData)
 {
     fThreadData = inThreadData;
 }
 
-DWORD p2::Thread::GetCurrentThreadID()
+DWORD Thread::GetCurrentThreadID()
 {
     return ::GetCurrentThreadId();
 }
 
-p2::Thread* p2::Thread::GetCurrent()
+Thread* Thread::GetCurrent()
 {
     return (Thread*)::TlsGetValue(sThreadStorageIndex);
 }
 
 
+P2_NAMESPACE_END

@@ -20,6 +20,7 @@ public:
     void SetThreadData(void* inThreadData);
     static DWORD GetCurrentThreadID();
     static Thread* GetCurrent();
+    static int          GetErrno();
 private:
     static unsigned int WINAPI _Entry(LPVOID inThread);
 private:

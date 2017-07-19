@@ -2,9 +2,10 @@
 
 P2_NAMESPACE_BEG
 
+uint32 Task::sTaskThreadPicker = 0;
+
 Task::Task():
-    fEventFlags(0),
-    fPriorityLevel(Urgent)
+    fEventFlags(0)
 {
     SetTaskName("unknown");
 }
@@ -16,9 +17,9 @@ Task::~Task()
 
 void Task::Signal(EventFlags eventFlags)
 {
-    eventFlags |= Alive;
+    eventFlags |= kAlive;
     EventFlags oldEventFlags = atomic_or(&fEventFlags, eventFlags);
-    if ((!(oldEventFlags & Alive)) && (TaskThreadPool::GetNumThreads() > 0))
+    if ((!(oldEventFlags & kAlive)) && (TaskThreadPool::GetNumThreads() > 0))
     {
         unsigned int theThreadIndex = atomic_add((unsigned int *)sTaskThreadPicker, 1);
         theThreadIndex %= TaskThreadPool::GetNumThreads();
@@ -42,6 +43,9 @@ void TaskThread::Entry()
 
     while (true) 
     {
+        /**
+         *	获取一个Alive的task
+         */
         theTask = WaitForTask();
 
         if (theTask == nullptr)
@@ -105,29 +109,31 @@ Task* TaskThread::WaitForTask()
 Task* TaskThread::DeQueueBlocking(int32 inTimeoutInMilSecs)
 {
     MutexLocker locker(&fQueueMutex);
-    if (fPrioriTaskQueue.empty())
+    if (fTaskQueue.empty())
         fQueueCond.Wait(&fQueueMutex, inTimeoutInMilSecs);
-    Task *task = fPrioriTaskQueue.top();
-    fPrioriTaskQueue.pop();
+    Task *task = fTaskQueue.front();
+    fTaskQueue.pop();
     return task;
 }
 
 uint32 TaskThread::GetQueueLength()
 {
     MutexLocker locker(&fQueueMutex);
-    return fPrioriTaskQueue.size();
+    return fTaskQueue.size();
 }
 
 void TaskThread::EnQueue(Task *task)
 {
     {
         MutexLocker locker(&fQueueMutex);
-        fPrioriTaskQueue.push(task);
+        fTaskQueue.push(task);
     }
     fQueueCond.Signal();
 }
 
+vector<TaskThread*> TaskThreadPool::sTaskThreadArray;
 uint32 TaskThreadPool::sNumTaskThreads = 0;
+Mutex TaskThreadPool::sMutex;
 
 BOOL TaskThreadPool::AddThreads(uint32 numToAdd)
 {
