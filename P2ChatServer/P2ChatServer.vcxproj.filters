@@ -33,12 +33,6 @@
     <ClCompile Include="..\Include\Common\CommonSocket.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\TCP.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Include\Common\udp.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Include\Common\Thread.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -84,12 +78,6 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Common\CommonSocket.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\TCP.h">
-      <Filter>Common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\UDP.h">
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="..\Include\Common\Thread.h">

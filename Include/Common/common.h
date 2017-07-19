@@ -46,6 +46,7 @@ constexpr size_t kAssertBuffSize = 512;
             char s[kAssertBuffSize];                            \
             s[kAssertBuffSize -1] = 0;                          \
             _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
+            printf("%s\n", s); \
         }   }
 
 #define AssertV(condition,errNo)    {                                   \
@@ -53,8 +54,8 @@ constexpr size_t kAssertBuffSize = 512;
         {                                                                   \
             char s[kAssertBuffSize];                                        \
             s[kAssertBuffSize -1] = 0;                                      \
-            qtss_snprintf( s,kAssertBuffSize -1, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
-            MyAssert(s);                                                    \
+            _snprintf_s ( s,kAssertBuffSize -1, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
+            printf("%s\n", s); \
         }   }
 
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
@@ -95,6 +96,9 @@ enum
 
 //*******************************
 // 常量 区
+const uint16 SERVER_PORT_FOR_TCP = 6501;
+const uint16 SERVER_PORT_FOR_UDP = 6551;
+
 
 //*******************************
 // 全局 区

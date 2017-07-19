@@ -3,6 +3,7 @@
 P2_NAMESPACE_BEG
 
 static Mutex sAtomicMutex;
+static HWND sMsgWindow = nullptr;
 
 void * memdup(const void *data, size_t size)
 {
@@ -47,15 +48,6 @@ unsigned int compare_and_store(unsigned int oval, unsigned int nval, unsigned in
     return rv;
 }
 
-
-static HWND sMsgWindow = nullptr;
-LRESULT CALLBACK select_wndproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    if (message == WM_NCCREATE)
-        return TRUE;
-    return 0;
-}
-
 int select_watchevent(struct eventreq *req, int which)
 {
     return select_modwatch(req, which);
@@ -73,11 +65,19 @@ int select_modwatch(struct eventreq *req, int which)
     if (which & EV_WR)
         theEvent |= FD_WRITE | FD_CONNECT;
 
-    unsigned int message = (unsigned int)(req->er_data);
+    unsigned int message = req->er_eventid;
 
     // 开始监听socket发生的事件
     return ::WSAAsyncSelect(req->er_handle, sMsgWindow, message, theEvent);
 }
+
+LRESULT CALLBACK select_wndproc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    if (message == WM_NCCREATE)
+        return TRUE;
+    return 0;
+}
+
 int select_waitevent(struct eventreq *req)
 {
     if (sMsgWindow == nullptr)
@@ -122,10 +122,11 @@ int select_waitevent(struct eventreq *req)
 
         req->er_handle = msg.wParam;            // 存储socket
         req->er_eventbits = EV_RE;          
-        req->er_data = (void*)(msg.message);    // 存储message id(本项目中为事件独有的UniqueID)
+        req->er_eventid = msg.message;    // 存储message id(本项目中为事件独有的UniqueID)
 
         // 使该socket不再获取事件
         ::WSAAsyncSelect(req->er_handle, sMsgWindow, 0, 0);
+        return 0;
     }
     else 
     {

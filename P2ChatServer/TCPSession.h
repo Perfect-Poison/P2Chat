@@ -2,11 +2,13 @@
 #include "Common/common.h"
 #include "Task.h"
 #include "Common/CommonSocket.h"
+#include "TCPSocket.h"
+#include "EventContext.h"
 
 P2_NAMESPACE_BEG
 
 class TCPSession :
-    public Task, public TCPSocket
+    public Task
 {
 public:
     TCPSession(TCPSocket *tcpSocket);

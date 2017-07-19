@@ -2,29 +2,24 @@
 #include "Common/common.h"
 #include "Task.h"
 #include "Common/Thread.h"
+#include "Common/CommonSocket.h"
 #include <map>
 
 P2_NAMESPACE_BEG
 
-class EventContext
+class EventContext : public CommonSocket
 {
 public:
-    EventContext(int inFileDesc, Task *notifyTask);
+    EventContext(int inSocketID, Task *notifyTask);
     virtual ~EventContext();
     virtual void RequestEvent(int theMask);
     void SetTask(Task *task) { fTask = task; };
-    virtual void ProcessEvent(int /*eventBits*/)
+    virtual void ProcessEvent(int eventBits)
     {
         if (fTask != nullptr)
-            fTask->Signal(Task::kReadEvent);
+            fTask->Signal(eventBits);
     }
-    enum
-    {
-        kInvalidFileDesc = -1
-    };
 protected:
-    int fFileDesc;
-private:
     Task *fTask;
     unsigned int fEventID;
     BOOL fWatchEventCalled;

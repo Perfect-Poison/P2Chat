@@ -12,6 +12,7 @@ class TCPListenerSocket :
 public:
     TCPListenerSocket();
     virtual ~TCPListenerSocket();
+    void Initialize(const Address& inAddress);
     virtual int64 Run();
 private:
     virtual void ProcessEvent(int eventBits);

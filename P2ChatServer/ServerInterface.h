@@ -9,6 +9,14 @@ public:
     ServerInterface();
     virtual ~ServerInterface();
     static uint32 GetNumProcessors();
+protected:
+private:
+    enum
+    {
+        kMaxServerHeaderLen = 1000
+    };
+
+
 };
 
 P2_NAMESPACE_END

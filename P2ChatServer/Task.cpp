@@ -2,7 +2,7 @@
 
 P2_NAMESPACE_BEG
 
-uint32 Task::sTaskThreadPicker = 0;
+unsigned int Task::sTaskThreadPicker = 0;
 
 Task::Task():
     fEventFlags(0)
@@ -21,7 +21,7 @@ void Task::Signal(EventFlags eventFlags)
     EventFlags oldEventFlags = atomic_or(&fEventFlags, eventFlags);
     if ((!(oldEventFlags & kAlive)) && (TaskThreadPool::GetNumThreads() > 0))
     {
-        unsigned int theThreadIndex = atomic_add((unsigned int *)sTaskThreadPicker, 1);
+        unsigned int theThreadIndex = atomic_add(&sTaskThreadPicker, 1);
         theThreadIndex %= TaskThreadPool::GetNumThreads();
         if (TASK_DEBUG)
         {
@@ -66,6 +66,7 @@ void TaskThread::Entry()
                     printf("TaskThread::Entry delete TaskName=%s CurTime=%I64d ThreadID=%d\n", theTask->GetTaskName().c_str(), time(0), Thread::GetCurrentThreadID());
                 theTask->SetTaskName(theTask->GetTaskName() + " deleted");
                 theTask->SetDead();
+                delete theTask;
                 doneProcessingEvent = TRUE;
             }
             else // theTimeout >= 0
@@ -82,7 +83,7 @@ Task* TaskThread::WaitForTask()
 {
     while (true)
     {
-        int32 theTimeout = 10;
+        int32 theTimeout = 0;
         Task * task = DeQueueBlocking(theTimeout);
         if (task != nullptr)
         {

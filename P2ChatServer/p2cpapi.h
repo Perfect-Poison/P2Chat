@@ -19,8 +19,6 @@ typedef uint32 msg_size;
 typedef uint32 msg_id;
 typedef uint32 msg_attrnum;
 
-const uint16 SERVER_PORT_FOR_TCP = 6501;
-const uint16 SERVER_PORT_FOR_UDP = 6551;
 const uint16 MESSAGE_HEADER_SIZE = 16;
 const uint16 ATTR_HEADER_SIZE = 6;
 

@@ -20,19 +20,21 @@ public:
         kNonBlocking = 1,
     };
     typedef int32 IOType;
-
     enum
     {
         kMaxSendBufSize = 96u * 1024u,
         kMaxRecvBufSize = 96u * 1024u
     };
-
     enum
     {
         kListenQueueLength = 128u
     };
+    enum
+    {
+        kInvalidSocketID = -1
+    };
 public:
-    CommonSocket(int32 inSocketType, int32 inProtocol, IOType inIOType = kBlocking);
+    CommonSocket(int inSocketID);
     ~CommonSocket();
 	void SetIOType(IOType inIOType);
     void ReuseAddr();
@@ -41,18 +43,15 @@ public:
     void SetSocketSendBufferSize(uint32 inNewSize);
     void SetSocketRecvBufferSize(uint32 inNewSize);
 protected:
-    void Open();
+    void Open(int32 inSocketType, int32 inProtocol);
     void Close();
-    void Bind(const USHORT& inPort);
+    void _Bind(const USHORT& inPort);
 protected:
     SOCKET fSocketID;
-    int32 fSocketType;
-    int32 fProtocol;
-    BOOL fOpened;
-    BOOL fBinded;
-    IOType fIOType;
+//     int32 fSocketType;
+//     int32 fProtocol;
+//     IOType fIOType;
 private:
-    CommonSocket();
     static uint32 sNumSockets;
 };
 

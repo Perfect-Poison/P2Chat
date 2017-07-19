@@ -4,49 +4,9 @@ P2_NAMESPACE_BEG
 
 uint32 CommonSocket::sNumSockets = 0;
 
-// CommonSocket::CommonSocket()
-// {
-//     this->sNumSockets++;
-//     if (this->sNumSockets == 1)
-//     {
-//         WSADATA wsaData;
-//         if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-//             printf("WSAStartup error!\n");
-//     }
-// 
-//     this->fSocketType = SOCK_STREAM;
-//     this->fProtocol = IPPROTO_TCP;
-//     this->fOpened = FALSE;
-//     this->fBinded = FALSE;
-//     this->fIOType = Blocking;
-//     this->open();
-//     this->setIOType(this->fIOType);
-//     ::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&SEND_BUF_SIZE, sizeof(int));
-//     ::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&RECV_BUF_SIZE, sizeof(int));
-// }
-
-
-CommonSocket::CommonSocket(int32 inSocketType, int32 inProtocol, IOType inIOType)
+CommonSocket::CommonSocket(int inSocketID):
+    fSocketID(inSocketID)
 {
-    this->sNumSockets++;
-    if (this->sNumSockets == 1)
-    {
-        WSADATA wsaData;
-        if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-            printf("WSAStartup error!\n");
-    }
-
-    this->fSocketType = inSocketType;
-    this->fProtocol = inProtocol;
-    this->fOpened = FALSE;
-    this->fBinded = FALSE;
-    this->fIOType = inIOType;
-    this->Open();
-    this->SetIOType(this->fIOType);
-    uint32 maxSendBufSize = kMaxSendBufSize;
-    uint32 maxRecvBufSize = kMaxRecvBufSize;
-    ::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&maxSendBufSize, sizeof(int));
-    ::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&maxRecvBufSize, sizeof(int));
 }
 
 CommonSocket::~CommonSocket()
@@ -59,43 +19,32 @@ CommonSocket::~CommonSocket()
     }
 }
 
-void CommonSocket::Open()
+void CommonSocket::Open(int32 inSocketType, int32 inProtocol)
 {
-    if (this->fOpened)
+    this->sNumSockets++;
+    if (this->sNumSockets == 1)
     {
-        printf("Already opened!\n");
-        return;
+        WSADATA wsaData;
+        if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+            printf("WSAStartup error!\n");
     }
+
     
-    if ((this->fSocketID = ::socket(AF_INET, this->fSocketType, this->fProtocol)) == SOCKET_ERROR)
+    if ((this->fSocketID = ::socket(AF_INET, inSocketType, inProtocol)) == SOCKET_ERROR)
     {
         printf("Create socket error!\n");
         return;
     }
-    this->fOpened = TRUE;
 }
 
 void CommonSocket::Close()
 {
-    if (this->fOpened)
-    {
+    if (this->fSocketID != kInvalidSocketID)
         ::closesocket(this->fSocketID);
-        this->fOpened = FALSE;
-        this->fBinded = FALSE;
-    }
 }
 
-void CommonSocket::Bind(const USHORT& inPort)
+void CommonSocket::_Bind(const USHORT& inPort)
 {
-    if (!this->fOpened)
-        this->open();
-    else
-    {
-        if (this->fBinded)
-        {
-            printf("Socket %u already binded!\n", this->fSocketID);
-            return;
-        }
 
         Address address(inPort);
         if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
@@ -103,8 +52,6 @@ void CommonSocket::Bind(const USHORT& inPort)
             printf("Binded socket error!\n");
             return;
         }
-        this->fBinded = TRUE;
-    }
 }
 
 void CommonSocket::SetIOType(IOType inIOType)
@@ -130,7 +77,6 @@ void CommonSocket::SetIOType(IOType inIOType)
         printf("ERROR: No such IO type!\n");
         break;
     }
-    this->fIOType = inIOType;
 }
 
 void CommonSocket::ReuseAddr()

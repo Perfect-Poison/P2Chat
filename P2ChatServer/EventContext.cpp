@@ -3,9 +3,10 @@
 P2_NAMESPACE_BEG
 
 unsigned int EventContext::sEventID = WM_USER;
+EventThread* EventThread::Instance = nullptr;
 
-EventContext::EventContext(int inFileDesc, Task *notifyTask):
-    fFileDesc(inFileDesc),
+EventContext::EventContext(int inSocketID, Task *notifyTask):
+    CommonSocket(inSocketID),
     fTask(notifyTask),
     fEventID(0),
     fWatchEventCalled(FALSE)
@@ -24,7 +25,7 @@ void EventContext::RequestEvent(int theMask/* = EV_RE*/)
     {
         fEventReq.er_eventbits = theMask;
         if (select_modwatch(&fEventReq, theMask) != 0)
-            AssertV(false, Thread::GetError());
+            AssertV(false, Thread::GetErrno());
     }
     else
     {
@@ -37,7 +38,7 @@ void EventContext::RequestEvent(int theMask/* = EV_RE*/)
             printf("EventContext::RequestEvent error, event id %d is already there\n", fEventID);
 
         ::memset(&fEventReq, 0, sizeof(fEventReq));
-        fEventReq.er_handle = fFileDesc;
+        fEventReq.er_handle = fSocketID;
         fEventReq.er_eventbits = theMask;
         fEventReq.er_eventid = fEventID;
 
@@ -73,6 +74,7 @@ void EventThread::Entry()
             {
                 EventContext* theEvent = fEventTable.at(theCurrentEvent.er_eventid);
                 theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
+                fEventTable.erase(theCurrentEvent.er_eventid);
             }
         }
     }

@@ -45,7 +45,7 @@ public:
 private:
     string fTaskName;
     EventFlags fEventFlags;
-    static uint32 sTaskThreadPicker;
+    static unsigned int sTaskThreadPicker;
 };
 
 class TaskThread : public Thread
