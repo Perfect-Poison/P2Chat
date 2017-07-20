@@ -121,7 +121,7 @@ int select_waitevent(struct eventreq *req)
         uint32 theEvent = WSAGETSELECTEVENT(msg.lParam);
 
         req->er_handle = msg.wParam;            // 存储socket
-        req->er_eventbits = EV_RE;          
+        req->er_eventbits = theEvent;
         req->er_eventid = msg.message;    // 存储message id(本项目中为事件独有的UniqueID)
 
         // 使该socket不再获取事件

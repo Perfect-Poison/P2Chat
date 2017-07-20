@@ -18,16 +18,19 @@ class Task
 public:
     enum
     {
-        kKillEvent = 0x1 << 0x0,
-        kIdleEvent = 0x1 << 0x1,
-        kStartEvent = 0x1 << 0x2,
-        kTimeoutEvent = 0x1 << 0x3,
+        /**
+         *	以下为事件驱动的任务
+         */
+        kReadEvent = FD_READ,
+        kWriteEvent = FD_WRITE,
+        kAcceptEvent = FD_ACCEPT,
+        kConnectEvent = FD_CONNECT,
+        kCloseEvent = FD_CLOSE,
 
-        kReadEvent = 0x1 << 0x4,
-        kWriteEvent = 0x1 << 0x5,
-
-        kUpdateEvent = 0x1 << 0x6,
-
+        /**
+         *	以下为自定义的任务
+         */
+        kKillEvent = 0x00000040,
         kAlive = 0x80000000,
         kAliveOff = 0x7fffffff
     };

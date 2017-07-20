@@ -48,11 +48,6 @@ protected:
     void _Bind(const USHORT& inPort);
 protected:
     SOCKET fSocketID;
-//     int32 fSocketType;
-//     int32 fProtocol;
-//     IOType fIOType;
-private:
-    static uint32 sNumSockets;
 };
 
 P2_NAMESPACE_END

@@ -51,9 +51,9 @@ TCPSocket* TCPSocket::AcceptClient()
     return tcpSocket;
 }
 
-int32 TCPSocket::Send(const char* inContent, const size_t& inSize)
+int32 TCPSocket::Send(const char* inData, const size_t inSize)
 {
-    int32 sentBytes = ::send(this->fSocketID, inContent, inSize, 0);
+    int32 sentBytes = ::send(this->fSocketID, inData, inSize, 0);
     if (sentBytes == SOCKET_ERROR)
     {
         printf("[send] with %s:%u cannot finish!\n", this->fRemoteAddress.GetIP().c_str(), this->fRemoteAddress.GetPort());
@@ -61,19 +61,13 @@ int32 TCPSocket::Send(const char* inContent, const size_t& inSize)
     return sentBytes;
 }
 
-int32 TCPSocket::Recv(char* outContent, const size_t& inSize)
+int32 TCPSocket::Recv(char* buffer, const size_t inSize)
 {
-    int32 receivedBytes = ::recv(this->fSocketID, outContent, inSize, 0);
+    int32 receivedBytes = ::recv(this->fSocketID, buffer, inSize, 0);
     return receivedBytes;
 }
 
-void TCPSocket::ProcessEvent(int eventBits)
-{
-    if (fTask != nullptr)
-        fTask->Signal(eventBits);
-
-    this->RequestEvent(EV_RE);
-}
 
 P2_NAMESPACE_END
+
 

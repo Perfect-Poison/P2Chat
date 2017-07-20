@@ -7,6 +7,8 @@
 
 P2_NAMESPACE_BEG
 
+#define TCPSESSION_DEBUG 1
+
 class TCPSession :
     public Task
 {

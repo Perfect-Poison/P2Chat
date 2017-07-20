@@ -87,10 +87,8 @@ struct eventreq
 // Ã¶¾Ù Çø
 enum
 {
-    EV_RE = 1,
-    EV_WR = 2,
-    EV_EX = 4,
-    EV_RM = 8
+    EV_RE = FD_READ | FD_ACCEPT | FD_CLOSE,
+    EV_WR = FD_WRITE | FD_CONNECT
 };
 
 

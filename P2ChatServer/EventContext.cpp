@@ -35,7 +35,7 @@ void EventContext::RequestEvent(int theMask/* = EV_RE*/)
             fEventID = WM_USER;
 
         if (!EventThread::GetInstance()->RegisterEvent(fEventID, this))
-            printf("EventContext::RequestEvent error, event id %d is already there\n", fEventID);
+            printf("EventContext::RequestEvent ´íÎó, EventID %d ÒÑ¾­´æÔÚ\n", fEventID);
 
         ::memset(&fEventReq, 0, sizeof(fEventReq));
         fEventReq.er_handle = fSocketID;
@@ -47,6 +47,12 @@ void EventContext::RequestEvent(int theMask/* = EV_RE*/)
         if (select_watchevent(&fEventReq, theMask) != 0)
             AssertV(false, Thread::GetErrno());
     }
+}
+
+void EventContext::ProcessEvent(int eventBits)
+{
+    if (fTask != nullptr)
+        fTask->Signal(eventBits);
 }
 
 void EventThread::Entry()
@@ -74,7 +80,7 @@ void EventThread::Entry()
             {
                 EventContext* theEvent = fEventTable.at(theCurrentEvent.er_eventid);
                 theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
-                fEventTable.erase(theCurrentEvent.er_eventid);
+                //fEventTable.erase(theCurrentEvent.er_eventid);
             }
         }
     }
@@ -99,7 +105,7 @@ BOOL EventThread::UnRegisterEvent(uint32 eventID)
     {
         EventContext *event = fEventTable[eventID];
         fEventTable.erase(eventID);
-        delete event;
+        //delete event;
         return TRUE;
     }
     else 

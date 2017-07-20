@@ -14,11 +14,7 @@ public:
     virtual ~EventContext();
     virtual void RequestEvent(int theMask);
     void SetTask(Task *task) { fTask = task; };
-    virtual void ProcessEvent(int eventBits)
-    {
-        if (fTask != nullptr)
-            fTask->Signal(eventBits);
-    }
+    virtual void ProcessEvent(int eventBits);
 protected:
     Task *fTask;
     unsigned int fEventID;

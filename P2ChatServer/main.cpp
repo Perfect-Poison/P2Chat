@@ -10,6 +10,10 @@ P2_NAMESPACE_USE
 
 int main()
 {
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
+        printf("WSAStartup error!\n");
+
     EventThread *eventThread = EventThread::GetInstance();
     TCPListenerSocket *tcpListenerSocket = new TCPListenerSocket;
     tcpListenerSocket->Initialize(SERVER_PORT_FOR_TCP);
@@ -20,5 +24,8 @@ int main()
     {
         Sleep(1000);
     }
+
+    WSACleanup();
+    printf("clean up all sockets!\n");
     return 0;
 }

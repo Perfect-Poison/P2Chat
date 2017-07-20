@@ -6,6 +6,8 @@
 
 P2_NAMESPACE_BEG
 
+#define TCPLISTENERSOCKET_DEBUG 1
+
 class TCPListenerSocket :
     public TCPSocket, public Task
 {

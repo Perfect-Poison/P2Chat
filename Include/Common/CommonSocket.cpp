@@ -2,8 +2,6 @@
 
 P2_NAMESPACE_BEG
 
-uint32 CommonSocket::sNumSockets = 0;
-
 CommonSocket::CommonSocket(int inSocketID):
     fSocketID(inSocketID)
 {
@@ -11,25 +9,10 @@ CommonSocket::CommonSocket(int inSocketID):
 
 CommonSocket::~CommonSocket()
 {
-    this->sNumSockets--;
-    if (this->sNumSockets == 0)
-    {
-        WSACleanup();
-        printf("clean up all sockets!\n");
-    }
 }
 
 void CommonSocket::Open(int32 inSocketType, int32 inProtocol)
 {
-    this->sNumSockets++;
-    if (this->sNumSockets == 1)
-    {
-        WSADATA wsaData;
-        if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-            printf("WSAStartup error!\n");
-    }
-
-    
     if ((this->fSocketID = ::socket(AF_INET, inSocketType, inProtocol)) == SOCKET_ERROR)
     {
         printf("Create socket error!\n");
@@ -45,13 +28,12 @@ void CommonSocket::Close()
 
 void CommonSocket::_Bind(const USHORT& inPort)
 {
-
-        Address address(inPort);
-        if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
-        {
-            printf("Binded socket error!\n");
-            return;
-        }
+    Address address(inPort);
+    if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
+    {
+        printf("Binded socket error!\n");
+        return;
+    }
 }
 
 void CommonSocket::SetIOType(IOType inIOType)
