@@ -2,7 +2,7 @@
 #include "EventContext.h"
 #include "Common/common.h"
 #include "Common/CommonSocket.h"
-
+#include "TCPTask.h"
 P2_NAMESPACE_BEG
 
 #define TCPSOCKET_DEBUG 1
@@ -25,6 +25,7 @@ public:
     std::string GetRemoteIP(void) { return fRemoteAddress.GetIP(); }
     USHORT GetRemotePort(void) { return fRemoteAddress.GetPort(); }
 private:
+    virtual void ProcessEvent(int eventBits);
     TCPSocket(const TCPSocket& inTCPSocket);    // ½ûÖ¹¸´ÖÆ
     Address fRemoteAddress;
 };

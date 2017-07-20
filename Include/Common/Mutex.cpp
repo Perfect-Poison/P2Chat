@@ -34,14 +34,14 @@ void p2::Mutex::RecursiveLock()
 	}
 	::EnterCriticalSection(&fMutex);
     Assert(fHolder == 0);
-	fHolder = Thread::GetCurrentThreadID();
+	fHolder = GetCurrentThreadId();
 	fHolderCount++;
     Assert(fHolderCount == 1);
 }
 
 void p2::Mutex::RecursiveUnlock()
 {
-    if (Thread::GetCurrentThreadID() != fHolder)
+    if (GetCurrentThreadId() != fHolder)
         return;
 
     Assert(fHolderCount > 0);
@@ -55,7 +55,7 @@ void p2::Mutex::RecursiveUnlock()
 
 BOOL p2::Mutex::RecursiveTryLock()
 {
-    if (Thread::GetCurrentThreadID() == fHolder) 
+    if (GetCurrentThreadId() == fHolder) 
     {
         fHolderCount++;
         return true;
@@ -66,7 +66,7 @@ BOOL p2::Mutex::RecursiveTryLock()
         return theErr;
 
     Assert(fHolder == 0);
-    fHolder = Thread::GetCurrentThreadID();
+    fHolder = GetCurrentThreadId();
     fHolderCount++;
     Assert(fHolderCount == 1);
     return true;

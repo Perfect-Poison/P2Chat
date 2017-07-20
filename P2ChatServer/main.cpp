@@ -21,11 +21,10 @@ int main()
     UDPSocket *udpSocket = new UDPSocket;
     udpSocket->Open();
     udpSocket->Bind(SERVER_PORT_FOR_UDP);
-    udpSocket->RequestEvent(EV_RE);
-
     TaskThreadPool::AddThreads(4);
     eventThread->Start();
     tcpListenerSocket->RequestEvent(EV_RE);
+    udpSocket->RequestEvent(EV_RE);
     while (true)
     {
         Sleep(1000);

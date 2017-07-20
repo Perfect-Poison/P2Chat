@@ -1,10 +1,12 @@
 #include "UDPTask.h"
+#include "UDPSocket.h"
 
 P2_NAMESPACE_BEG
 
 UDPTask::UDPTask(UDPSocket *udpSocket):
     fUDPSocket(udpSocket)
 {
+    this->SetTaskName("UDPTask");
 }
 
 UDPTask::~UDPTask()
@@ -33,9 +35,11 @@ int64 UDPTask::Run()
             }
         }
 
-        UDPTask *task = new UDPTask(fUDPSocket);
-        fUDPSocket->SetTask(task);
+//         UDPTask *task = new UDPTask(fUDPSocket);
+//         fUDPSocket->SetTask(task);
+        fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
+        return -1;
     }
     else
     {

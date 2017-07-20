@@ -140,10 +140,10 @@ MESSAGE* Message::CreateMessage()
                 attrDest->i64 = htonll(attrDest->i64);
                 break;
             case dt_float32:
-                attrDest->f32 = htonf(*((uint32*)&attrDest->f32));
+                attrDest->f32 = htonf(attrDest->f32);
                 break;
             case dt_float64:
-                attrDest->f64 = htond(*((uint64*)&attrDest->f64));
+                attrDest->f64 = htond(attrDest->f64);
                 break;
             case dt_binary:
                 attrDest->bin.size = htonl(attrDest->bin.size);

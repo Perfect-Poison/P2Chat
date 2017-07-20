@@ -106,9 +106,9 @@ void Thread::SetThreadData(void* inThreadData)
     fThreadData = inThreadData;
 }
 
-DWORD Thread::GetCurrentThreadID()
+DWORD Thread::GetThreadID()
 {
-    return ::GetCurrentThreadId();
+    return (DWORD)fThreadID;
 }
 
 Thread* Thread::GetCurrent()

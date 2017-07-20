@@ -18,7 +18,7 @@ public:
     void StopAndWaitForThread();
     void* GetThreadData();
     void SetThreadData(void* inThreadData);
-    static DWORD GetCurrentThreadID();
+    DWORD GetThreadID();
     static Thread* GetCurrent();
     static int          GetErrno();
 private:

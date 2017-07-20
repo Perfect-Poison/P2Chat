@@ -19,7 +19,7 @@ EventContext::~EventContext()
     EventThread::GetInstance()->UnRegisterEvent(fEventID);
 }
 
-void EventContext::RequestEvent(int theMask/* = EV_RE*/)
+void EventContext::RequestEvent(int theMask)
 {
     if (fWatchEventCalled)
     {

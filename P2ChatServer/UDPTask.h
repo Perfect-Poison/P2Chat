@@ -1,10 +1,11 @@
 #pragma once
+#include "Common/common.h"
 #include "Task.h"
-#include "UDPSocket.h"
 P2_NAMESPACE_BEG
 
 #define UDPTASK_DEBUG 1
 
+class UDPSocket;
 class UDPTask :
     public Task
 {

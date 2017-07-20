@@ -1,5 +1,6 @@
 #include "TCPSocket.h"
 
+
 P2_NAMESPACE_BEG
 
 TCPSocket::TCPSocket(int inSocketID, Task *notifytask):
@@ -78,6 +79,12 @@ int32 TCPSocket::Recv(char* buffer, const size_t inSize)
     return receivedBytes;
 }
 
+void TCPSocket::ProcessEvent(int eventBits)
+{
+    TCPTask *task = new TCPTask(this);
+    this->SetTask(task);
+    task->Signal(eventBits);
+}
 
 P2_NAMESPACE_END
 

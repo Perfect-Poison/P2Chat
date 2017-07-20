@@ -23,12 +23,12 @@ void Task::Signal(EventFlags eventFlags)
     {
         unsigned int theThreadIndex = atomic_add(&sTaskThreadPicker, 1);
         theThreadIndex %= TaskThreadPool::GetNumThreads();
+        TaskThread *taskThread = TaskThreadPool::GetThread(theThreadIndex);
+        taskThread->EnQueue(this);
         if (TASK_DEBUG)
         {
-            printf("Task::Signal enque TaskName=%s using Task::GetNumThreads(), task range=[0-%lu] thread index =%u\n",
-                fTaskName.c_str(), TaskThreadPool::GetNumThreads() - 1, theThreadIndex);
+            printf("Task::Signal 被激活(alive)的任务TaskName=%s, 已加入任务线程(Thread ID:%u)的任务队列\n", fTaskName.c_str(), taskThread->GetThreadID());
         }
-        TaskThreadPool::GetThread(theThreadIndex)->EnQueue(this);
     }
     else 
     {
@@ -57,13 +57,13 @@ void TaskThread::Entry()
             int64 theTimeout = 0;
             MutexLocker locker(&TaskThreadPool::GetMutex());
             if (TASK_DEBUG)
-                printf("TaskThread::Entry run global locked TaskName=%s CurTime=%I64d ThreadID=%d\n", theTask->GetTaskName().c_str(), time(0), Thread::GetCurrentThreadID());
+                printf("[任务线程%u]TaskThread::Entry 使用全局锁，当前TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
             
             theTimeout = theTask->Run();
             if (theTimeout < 0) 
             {
                 if (TASK_DEBUG)
-                    printf("TaskThread::Entry delete TaskName=%s CurTime=%I64d ThreadID=%d\n", theTask->GetTaskName().c_str(), time(0), Thread::GetCurrentThreadID());
+                    printf("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
                 theTask->SetTaskName(theTask->GetTaskName() + " deleted");
                 theTask->SetDead();
                 delete theTask;
@@ -71,7 +71,9 @@ void TaskThread::Entry()
             }
             else // theTimeout >= 0
             {
-                theTask->SetTaskName(theTask->GetTaskName() + " reagain");
+                //theTask->SetTaskName(theTask->GetTaskName() + " reagain");
+                if (TASK_DEBUG)
+                    printf("[任务线程%u]TaskThread::Entry 重复任务 TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
                 EnQueue(theTask);
                 doneProcessingEvent = TRUE;
             }
@@ -90,13 +92,13 @@ Task* TaskThread::WaitForTask()
             if (task->IsAlive())
             {
                 if (TASK_DEBUG)
-                    printf("TaskThread::WaitForTask found alive signal-task=%s, threadID=%d, queue length=%d\n", task->GetTaskName().c_str(), GetCurrentThreadID(), GetQueueLength());
+                    printf("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), task->GetTaskName().c_str(), GetQueueLength());
                 return task;
             }
             else
             {
                 if (TASK_DEBUG)
-                    printf("TaskThread::WaitForTask found dead task=%s, threadID=%d, queue length=%d\n", task->GetTaskName().c_str(), GetCurrentThreadID(), GetQueueLength());
+                    printf("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), task->GetTaskName().c_str(), GetQueueLength());
                 delete task;
             }
         }
@@ -172,3 +174,4 @@ TaskThread* TaskThreadPool::GetThread(uint32 index)
 }
 
 P2_NAMESPACE_END
+

@@ -1,4 +1,5 @@
 #include "TCPTask.h"
+#include "TCPSocket.h"
 
 P2_NAMESPACE_BEG
 
@@ -40,10 +41,9 @@ int64 TCPTask::Run()
                 fTCPSocket->Send(reply, strlen(reply));
             }
         }
-
-        TCPTask *task = new TCPTask(fTCPSocket);
-        fTCPSocket->SetTask(task);
+        fTCPSocket->SetTask(nullptr);
         fTCPSocket->RequestEvent(EV_RE);
+        return -1;
     }
     else 
     {

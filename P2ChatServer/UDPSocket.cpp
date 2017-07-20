@@ -76,8 +76,15 @@ int32 UDPSocket::RecvFrom(char* outContent, const size_t& inSize, string& outIP,
 
 void UDPSocket::ProcessEvent(int eventBits)
 {
-    UDPTask *udpTask = new UDPTask(this);
+    if (UDPSOCKET_DEBUG)
+    {
+        if (this->fTask != nullptr)
+            printf("[error]: UDPSocket::ProcessEvent 已经有task了\n");
+    }
 
+    UDPTask *udpTask = new UDPTask(this);
+    this->SetTask(udpTask);
+    udpTask->Signal(eventBits);
 }
 
 P2_NAMESPACE_END
