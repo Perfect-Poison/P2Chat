@@ -6,7 +6,11 @@
 
 P2_NAMESPACE_BEG
 
+#if P2CHAT_DEBUG
 #define TCPLISTENERSOCKET_DEBUG 1
+#else
+#define TCPLISTENERSOCKET_DEBUG 0
+#endif
 
 class TCPListenerSocket :
     public TCPSocket, public Task

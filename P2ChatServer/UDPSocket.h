@@ -6,7 +6,11 @@
 
 P2_NAMESPACE_BEG
 
+#if P2CHAT_DEBUG
 #define UDPSOCKET_DEBUG 1
+#else
+#define UDPSOCKET_DEBUG 0
+#endif
 
 class UDPSocket :
     public EventContext

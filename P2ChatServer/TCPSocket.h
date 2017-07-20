@@ -5,7 +5,12 @@
 #include "TCPTask.h"
 P2_NAMESPACE_BEG
 
+#if P2CHAT_DEBUG
 #define TCPSOCKET_DEBUG 1
+#else
+#define TCPSOCKET_DEBUG 0
+#endif
+
 
 class TCPSocket :
     public EventContext

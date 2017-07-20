@@ -1,9 +1,14 @@
 #pragma once
 #include "Common/common.h"
 #include "Task.h"
+
 P2_NAMESPACE_BEG
 
+#if P2CHAT_DEBUG
 #define UDPTASK_DEBUG 1
+#else
+#define UDPTASK_DEBUG 0
+#endif
 
 class UDPSocket;
 class UDPTask :

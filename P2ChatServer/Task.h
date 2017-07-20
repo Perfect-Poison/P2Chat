@@ -9,7 +9,12 @@
 
 P2_NAMESPACE_BEG
 
+#if P2CHAT_DEBUG
 #define TASK_DEBUG 1
+#else
+#define TASK_DEBUG 0
+#endif
+
 
 class TaskThread;
 class TaskThreadPool;

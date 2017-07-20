@@ -37,6 +37,10 @@ P2_NAMESPACE_BEG
 
 //*******************************
 // 宏定义 区
+
+#define P2CHAT_DEBUG 0
+
+
 constexpr size_t kAssertBuffSize = 512;
 
 #define Assert(condition)    {                              \
@@ -94,8 +98,8 @@ enum
 
 //*******************************
 // 常量 区
-const uint16 SERVER_PORT_FOR_TCP = 6501;
-const uint16 SERVER_PORT_FOR_UDP = 6551;
+const uint16 SERVER_PORT_FOR_TCP = 6001;
+const uint16 SERVER_PORT_FOR_UDP = 6051;
 
 
 //*******************************
