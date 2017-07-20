@@ -7,14 +7,14 @@
 
 P2_NAMESPACE_BEG
 
-#define TCPSESSION_DEBUG 1
+#define TCPTASK_DEBUG 1
 
-class TCPSession :
+class TCPTask :
     public Task
 {
 public:
-    TCPSession(TCPSocket *tcpSocket);
-    virtual ~TCPSession();
+    TCPTask(TCPSocket *tcpSocket);
+    virtual ~TCPTask();
     virtual int64 Run();
 private:
     TCPSocket *fTCPSocket;

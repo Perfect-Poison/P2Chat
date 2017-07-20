@@ -170,9 +170,10 @@
     <ClCompile Include="ServerInterface.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TCPListenerSocket.cpp" />
-    <ClCompile Include="TCPSession.cpp" />
+    <ClCompile Include="TCPTask.cpp" />
     <ClCompile Include="TCPSocket.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
+    <ClCompile Include="UDPTask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Include\Common\Address.h" />
@@ -187,9 +188,10 @@
     <ClInclude Include="ServerInterface.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TCPListenerSocket.h" />
-    <ClInclude Include="TCPSession.h" />
+    <ClInclude Include="TCPTask.h" />
     <ClInclude Include="TCPSocket.h" />
     <ClInclude Include="UDPSocket.h" />
+    <ClInclude Include="UDPTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

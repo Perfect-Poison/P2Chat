@@ -14,7 +14,7 @@ TCPListenerSocket::~TCPListenerSocket()
 
 void TCPListenerSocket::Initialize(const Address& inAddress)
 {
-    this->Open(SOCK_STREAM, IPPROTO_TCP);
+    this->Open();
     this->SetSocketRecvBufferSize(kMaxRecvBufSize);
     this->Listen(inAddress.GetPort());
 }
@@ -40,8 +40,8 @@ void TCPListenerSocket::ProcessEvent(int eventBits)
     theTCPClient->KeepAlive();
     theTCPClient->SetSocketSendBufferSize(kMaxSendBufSize);
 
-    TCPSession *theTCPSession = new TCPSession(theTCPClient);
-    theTCPClient->SetTask(theTCPSession);
+    TCPTask *theTCPTask = new TCPTask(theTCPClient);
+    theTCPClient->SetTask(theTCPTask);
     theTCPClient->RequestEvent(EV_RE);
 
     this->RequestEvent(EV_RE);

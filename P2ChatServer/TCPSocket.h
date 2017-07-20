@@ -5,12 +5,15 @@
 
 P2_NAMESPACE_BEG
 
+#define TCPSOCKET_DEBUG 1
+
 class TCPSocket :
     public EventContext
 {
 public:
     TCPSocket(int inSocketID = kInvalidSocketID, Task *notifytask = nullptr);
     virtual ~TCPSocket();
+    void Open();
     void Listen(const USHORT& inPort);
     int32 Connect(const Address& inAddress);
     int32 Connect(const std::string& inIP, const USHORT& inPort);

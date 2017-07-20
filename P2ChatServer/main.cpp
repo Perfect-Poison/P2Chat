@@ -4,6 +4,7 @@
 #include "EventContext.h"
 #include "TCPListenerSocket.h"
 #include "Task.h"
+#include "UDPSocket.h"
 using namespace mysqlpp;
 
 P2_NAMESPACE_USE
@@ -17,7 +18,12 @@ int main()
     EventThread *eventThread = EventThread::GetInstance();
     TCPListenerSocket *tcpListenerSocket = new TCPListenerSocket;
     tcpListenerSocket->Initialize(SERVER_PORT_FOR_TCP);
-    TaskThreadPool::AddThreads(1);
+    UDPSocket *udpSocket = new UDPSocket;
+    udpSocket->Open();
+    udpSocket->Bind(SERVER_PORT_FOR_UDP);
+    udpSocket->RequestEvent(EV_RE);
+
+    TaskThreadPool::AddThreads(4);
     eventThread->Start();
     tcpListenerSocket->RequestEvent(EV_RE);
     while (true)

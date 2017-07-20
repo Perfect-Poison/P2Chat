@@ -12,6 +12,17 @@ TCPSocket::~TCPSocket()
     Close();
 }
 
+void TCPSocket::Open()
+{
+    if (TCPSOCKET_DEBUG)
+    {
+        if (fSocketID != kInvalidSocketID)
+            printf("TCPSocket::Open ÒÑ¾­ÓÐsocket %u\n", fSocketID);
+    }
+
+    CommonSocket::Open(SOCK_STREAM, IPPROTO_TCP);
+}
+
 void TCPSocket::Listen(const USHORT& inPort)
 {
 

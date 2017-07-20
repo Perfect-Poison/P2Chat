@@ -1,27 +1,27 @@
-#include "TCPSession.h"
+#include "TCPTask.h"
 
 P2_NAMESPACE_BEG
 
-TCPSession::TCPSession(TCPSocket *tcpSocket):
+TCPTask::TCPTask(TCPSocket *tcpSocket):
     fTCPSocket(tcpSocket)
 {
-    this->SetTaskName("TCPSession");
+    this->SetTaskName("TCPTask");
 }
 
 
-TCPSession::~TCPSession()
+TCPTask::~TCPTask()
 {
 }
 
-int64 TCPSession::Run()
+int64 TCPTask::Run()
 {
     Task::EventFlags eventbits = this->GetEvents();
     if (eventbits & kKillEvent)
         return -1;
     else if (eventbits & kCloseEvent)
     {
-        if (TCPSESSION_DEBUG)
-            printf("TCPSession::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
+        if (TCPTASK_DEBUG)
+            printf("TCPTask::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
         delete fTCPSocket;
         return -1;
     }
@@ -41,14 +41,14 @@ int64 TCPSession::Run()
             }
         }
 
-        TCPSession *task = new TCPSession(fTCPSocket);
+        TCPTask *task = new TCPTask(fTCPSocket);
         fTCPSocket->SetTask(task);
         fTCPSocket->RequestEvent(EV_RE);
     }
     else 
     {
-        if (TCPSESSION_DEBUG)
-            printf("TCPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
+        if (TCPTASK_DEBUG)
+            printf("TCPTask::Run 未处理的事件类型(0x%x)\n", eventbits);
         return -1;
     }
     return -1;

@@ -13,6 +13,17 @@ UDPSocket::~UDPSocket()
     Close();
 }
 
+void UDPSocket::Open()
+{
+    if (UDPSOCKET_DEBUG)
+    {
+        if (fSocketID != kInvalidSocketID)
+            printf("UDPSocket::Open ÒÑ¾­ÓÐsocket %u\n", fSocketID);
+    }
+
+    CommonSocket::Open(SOCK_DGRAM, IPPROTO_UDP);
+}
+
 void UDPSocket::Bind(const USHORT& inPort)
 {
     _Bind(inPort);
@@ -61,6 +72,12 @@ int32 UDPSocket::RecvFrom(char* outContent, const size_t& inSize, string& outIP,
     outIP = address.GetIP();
     outPort = address.GetPort();
     return receivedBytes;
+}
+
+void UDPSocket::ProcessEvent(int eventBits)
+{
+    UDPTask *udpTask = new UDPTask(this);
+
 }
 
 P2_NAMESPACE_END
