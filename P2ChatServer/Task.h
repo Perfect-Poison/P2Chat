@@ -16,6 +16,7 @@ P2_NAMESPACE_BEG
 #endif
 
 
+class EventContext;
 class TaskThread;
 class TaskThreadPool;
 class Task
@@ -40,7 +41,7 @@ public:
         kAliveOff = 0x7fffffff
     };
     typedef unsigned int EventFlags;
-    Task();
+    Task(EventContext *event);
     virtual ~Task();
     virtual int64 Run() = 0;
     void Signal(EventFlags eventFlags);
@@ -49,11 +50,16 @@ public:
     BOOL IsAlive() const { return fEventFlags & kAlive; }
     void SetAlive() { fEventFlags |= kAlive; }
     void SetDead() { fEventFlags &= kAliveOff; }
-    EventFlags GetEvents() const { return fEventFlags & kAliveOff; }
+    EventFlags GetEventFlags() const { return fEventFlags & kAliveOff; }
+    void SetDeleteEventWhenAllRefTasksFinished(BOOL deleteEvent) { fDeleteEvent = deleteEvent; }
+    BOOL IsDeleteEventWhenAllRefTasksFinished() { return fDeleteEvent; }
 private:
     string fTaskName;
     EventFlags fEventFlags;
     static unsigned int sTaskThreadPicker;
+    BOOL fDeleteEvent;
+    EventContext *fEvent;
+    Mutex fMutex;
 };
 
 class TaskThread : public Thread

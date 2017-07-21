@@ -4,6 +4,7 @@
 P2_NAMESPACE_BEG
 
 UDPTask::UDPTask(UDPSocket *udpSocket):
+    Task(udpSocket),
     fUDPSocket(udpSocket)
 {
     this->SetTaskName("UDPTask");
@@ -15,7 +16,7 @@ UDPTask::~UDPTask()
 
 int64 UDPTask::Run()
 {
-    Task::EventFlags eventbits = this->GetEvents();
+    Task::EventFlags eventbits = this->GetEventFlags();
     if (eventbits & kKillEvent)
         return -1;
     else if (eventbits & kReadEvent)
@@ -35,9 +36,7 @@ int64 UDPTask::Run()
             }
         }
 
-//         UDPTask *task = new UDPTask(fUDPSocket);
-//         fUDPSocket->SetTask(task);
-        fUDPSocket->SetTask(nullptr);
+        //fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
         return -1;
     }

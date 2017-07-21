@@ -5,9 +5,9 @@ P2_NAMESPACE_BEG
 unsigned int EventContext::sEventID = WM_USER;
 EventThread* EventThread::Instance = nullptr;
 
-EventContext::EventContext(int inSocketID, Task *notifyTask):
+EventContext::EventContext(int inSocketID):
     CommonSocket(inSocketID),
-    fTask(notifyTask),
+    //fTask(notifyTask),
     fEventID(0),
     fWatchEventCalled(FALSE)
 {
@@ -21,7 +21,7 @@ EventContext::~EventContext()
 
 void EventContext::RequestEvent(int theMask)
 {
-    MutexLocker locker(&fEventMutext);
+    MutexLocker locker(&fEventMutex);
     if (fWatchEventCalled)
     {
         fEventReq.er_eventbits = theMask;
@@ -30,7 +30,7 @@ void EventContext::RequestEvent(int theMask)
     }
     else
     {
-        if (!compare_and_store(8192, WM_USER, &sEventID))
+        if (!compare_and_store(0x7FFF, WM_USER, &sEventID))
             fEventID = atomic_add(&sEventID, 1);
         else
             fEventID = WM_USER;
@@ -50,11 +50,39 @@ void EventContext::RequestEvent(int theMask)
     }
 }
 
-void EventContext::ProcessEvent(int eventBits)
+void EventContext::AddRefTask(Task *task)
 {
-    if (fTask != nullptr)
-        fTask->Signal(eventBits);
+    MutexLocker locker(&fTaskSetMutex); 
+    if (fTaskSet.count(task))
+    {
+        printf("[error]EventContext::AddInRelatedTask 引用任务已经存在\n");
+        throw;
+    }
+    fTaskSet.insert(task);
 }
+
+void EventContext::RemoveRefTask(Task *task)
+{
+    MutexLocker locker(&fTaskSetMutex);
+    if (!fTaskSet.count(task))
+    {
+        printf("[error]EventContext::RemoveOutRelatedTask 引用任务不存在\n");
+        throw;
+    }
+    fTaskSet.erase(task);
+}
+
+uint32 EventContext::RefTaskCount()
+{
+    MutexLocker locker(&fTaskSetMutex);
+    return fTaskSet.size();
+}
+
+// void EventContext::ProcessEvent(int eventBits)
+// {
+//     if (fTask != nullptr)
+//         fTask->Signal(eventBits);
+// }
 
 void EventThread::Entry()
 {
@@ -77,12 +105,17 @@ void EventThread::Entry()
 
         if (theCurrentEvent.er_eventid != 0) 
         {
-            if (fEventTable.count(theCurrentEvent.er_eventid))
+            EventContext* theEvent = nullptr;
             {
-                EventContext* theEvent = fEventTable.at(theCurrentEvent.er_eventid);
-                theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
-                //fEventTable.erase(theCurrentEvent.er_eventid);
+                MutexLocker locker(&fEventTableMutex);
+                if (fEventTable.count(theCurrentEvent.er_eventid))
+                {
+                    theEvent = fEventTable[theCurrentEvent.er_eventid];
+                    //fEventTable.erase(theCurrentEvent.er_eventid);
+                }
             }
+            if (theEvent != nullptr)
+                theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
         }
     }
 }

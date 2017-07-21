@@ -1,18 +1,34 @@
 #include "Task.h"
+#include "EventContext.h"
 
 P2_NAMESPACE_BEG
 
 unsigned int Task::sTaskThreadPicker = 0;
+vector<TaskThread*> TaskThreadPool::sTaskThreadArray;
+uint32 TaskThreadPool::sNumTaskThreads = 0;
+Mutex TaskThreadPool::sMutex;
 
-Task::Task():
-    fEventFlags(0)
+
+Task::Task(EventContext *event):
+    fEventFlags(0),
+    fEvent(event),
+    fDeleteEvent(false)
 {
     SetTaskName("unknown");
+    
+    if (fEvent != nullptr)
+        fEvent->AddRefTask(this);
 }
 
 
 Task::~Task()
 {
+    MutexLocker locker(&fMutex);
+    if (fEvent != nullptr)
+        fEvent->RemoveRefTask(this);
+
+    if (fEvent->RefTaskCount() == 0 && fDeleteEvent)
+        delete fEvent;
 }
 
 void Task::Signal(EventFlags eventFlags)
@@ -67,6 +83,7 @@ void TaskThread::Entry()
                 theTask->SetTaskName(theTask->GetTaskName() + " deleted");
                 theTask->SetDead();
                 delete theTask;
+
                 doneProcessingEvent = TRUE;
             }
             else // theTimeout >= 0
@@ -138,10 +155,6 @@ void TaskThread::EnQueue(Task *task)
     }
     fQueueCond.Signal();
 }
-
-vector<TaskThread*> TaskThreadPool::sTaskThreadArray;
-uint32 TaskThreadPool::sNumTaskThreads = 0;
-Mutex TaskThreadPool::sMutex;
 
 BOOL TaskThreadPool::AddThreads(uint32 numToAdd)
 {

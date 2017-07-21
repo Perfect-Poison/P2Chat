@@ -3,8 +3,9 @@
 
 P2_NAMESPACE_BEG
 
-TCPSocket::TCPSocket(int inSocketID, Task *notifytask):
-    EventContext(inSocketID, notifytask)
+TCPSocket::TCPSocket(int inSocketID):
+    EventContext(inSocketID),
+    fConnClosed(false)
 {
 }
 
@@ -79,10 +80,22 @@ int32 TCPSocket::Recv(char* buffer, const size_t inSize)
     return receivedBytes;
 }
 
+BOOL TCPSocket::IsConnectionClosed()
+{
+    MutexLocker locker(&fMutex);
+    return fConnClosed;
+}
+
+void TCPSocket::SetConnectionClose()
+{
+    MutexLocker locker(&fMutex);
+    fConnClosed = TRUE;
+}
+
 void TCPSocket::ProcessEvent(int eventBits)
 {
     TCPTask *task = new TCPTask(this);
-    this->SetTask(task);
+    //this->SetTask(task);
     task->Signal(eventBits);
 }
 

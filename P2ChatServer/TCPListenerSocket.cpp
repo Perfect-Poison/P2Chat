@@ -2,7 +2,8 @@
 
 P2_NAMESPACE_BEG
 
-TCPListenerSocket::TCPListenerSocket()
+TCPListenerSocket::TCPListenerSocket():
+    Task(this)
 {
     this->SetTaskName("TCPListenerSocket");
 }
@@ -21,7 +22,7 @@ void TCPListenerSocket::Initialize(const Address& inAddress)
 
 int64 TCPListenerSocket::Run()
 {
-    EventFlags events = this->GetEvents();
+    EventFlags events = this->GetEventFlags();
 
     if (events & Task::kKillEvent)
         return -1;

@@ -23,7 +23,10 @@ void CommonSocket::Open(int32 inSocketType, int32 inProtocol)
 void CommonSocket::Close()
 {
     if (this->fSocketID != kInvalidSocketID)
+    {
         ::closesocket(this->fSocketID);
+        this->fSocketID = kInvalidSocketID;
+    }
 }
 
 void CommonSocket::_Bind(const USHORT& inPort)

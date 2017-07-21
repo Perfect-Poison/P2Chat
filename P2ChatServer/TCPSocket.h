@@ -16,7 +16,7 @@ class TCPSocket :
     public EventContext
 {
 public:
-    TCPSocket(int inSocketID = kInvalidSocketID, Task *notifytask = nullptr);
+    TCPSocket(int inSocketID = kInvalidSocketID);
     virtual ~TCPSocket();
     void Open();
     void Listen(const USHORT& inPort);
@@ -29,10 +29,14 @@ public:
     Address GetRemoteAddress(void) { return fRemoteAddress; }
     std::string GetRemoteIP(void) { return fRemoteAddress.GetIP(); }
     USHORT GetRemotePort(void) { return fRemoteAddress.GetPort(); }
+    BOOL IsConnectionClosed();
+    void SetConnectionClose();
 private:
     virtual void ProcessEvent(int eventBits);
     TCPSocket(const TCPSocket& inTCPSocket);    // ½ûÖ¹¸´ÖÆ
     Address fRemoteAddress;
+    BOOL fConnClosed;
+    Mutex fMutex;
 };
 
 P2_NAMESPACE_END

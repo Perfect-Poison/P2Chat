@@ -16,7 +16,7 @@ class UDPSocket :
     public EventContext
 {
 public:
-    UDPSocket(int inSocketID = kInvalidSocketID, Task *notifytask = nullptr);
+    UDPSocket(int inSocketID = kInvalidSocketID);
     virtual ~UDPSocket();
     void Open();
     void Bind(const USHORT& inPort);
@@ -27,7 +27,6 @@ public:
     int32 RecvFrom(char* outContent, const size_t& inSize, string& outIP, USHORT& outPort);
 private:
     virtual void ProcessEvent(int eventBits);
-private:
     UDPSocket(const UDPSocket& inUDP);
 };
 
