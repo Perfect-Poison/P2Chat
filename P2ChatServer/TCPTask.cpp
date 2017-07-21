@@ -23,20 +23,21 @@ int64 TCPTask::Run()
     {
         if (TCPTASK_DEBUG)
             printf("TCPTask::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
-        delete fTCPSocket;
+        //delete fTCPSocket;
         return -1;
     }
     else if (eventbits & kReadEvent)
     {
         char buffer[1024], reply[1124];
         int32 recvSize = 0;
+        Address remoteAddress = fTCPSocket->GetRemoteAddress();
         while (recvSize != -1)
         {
             ::memset(buffer, 0, sizeof(buffer));
             recvSize = fTCPSocket->Recv(buffer, 1500);
             if (recvSize != -1)
             {
-                printf("recv: [%dB] %s\n", recvSize, buffer);
+                printf("收到来自%s:%u的数据: [%dB] %s\n", remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
                 sprintf_s(reply, "Hello, received data: %s\n", buffer);
                 fTCPSocket->Send(reply, strlen(reply));
             }

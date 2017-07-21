@@ -21,6 +21,7 @@ EventContext::~EventContext()
 
 void EventContext::RequestEvent(int theMask)
 {
+    MutexLocker locker(&fEventMutext);
     if (fWatchEventCalled)
     {
         fEventReq.er_eventbits = theMask;

@@ -85,7 +85,7 @@ Task* TaskThread::WaitForTask()
 {
     while (true)
     {
-        int32 theTimeout = 0;
+        int32 theTimeout = 10;
         Task * task = DeQueueBlocking(theTimeout);
         if (task != nullptr)
         {
@@ -114,9 +114,14 @@ Task* TaskThread::DeQueueBlocking(int32 inTimeoutInMilSecs)
     MutexLocker locker(&fQueueMutex);
     if (fTaskQueue.empty())
         fQueueCond.Wait(&fQueueMutex, inTimeoutInMilSecs);
-    Task *task = fTaskQueue.front();
-    fTaskQueue.pop();
-    return task;
+    if (fTaskQueue.empty())
+        return nullptr;
+    else 
+    {
+        Task *task = fTaskQueue.front();
+        fTaskQueue.pop();
+        return task;
+    }
 }
 
 uint32 TaskThread::GetQueueLength()

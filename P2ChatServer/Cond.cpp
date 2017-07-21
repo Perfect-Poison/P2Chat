@@ -2,7 +2,8 @@
 
 P2_NAMESPACE_BEG
 
-Cond::Cond()
+Cond::Cond():
+    fWaitCount(0)
 {
     fCondition = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
 }

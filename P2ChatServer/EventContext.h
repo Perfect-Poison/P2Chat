@@ -21,6 +21,8 @@ protected:
     BOOL fWatchEventCalled;
     struct eventreq fEventReq;
     static unsigned int sEventID;
+private:
+    Mutex fEventMutext;
 };
 
 class EventThread :public Thread

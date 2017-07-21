@@ -29,7 +29,7 @@ int64 UDPTask::Run()
             recvSize = fUDPSocket->RecvFrom(buffer, 1500, remoteAddress);
             if (recvSize != -1)
             {
-                printf("recv: [%dB] %s\n", recvSize, buffer);
+                printf("收到来自%s:%u的数据: [%dB] %s\n", remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
                 sprintf_s(reply, "Hello, received data: %s\n", buffer);
                 fUDPSocket->SendTo(remoteAddress, reply, strlen(reply));
             }
