@@ -59,7 +59,6 @@ private:
     static unsigned int sTaskThreadPicker;
     BOOL fDeleteEvent;
     EventContext *fEvent;
-    Mutex fMutex;
 };
 
 class TaskThread : public Thread

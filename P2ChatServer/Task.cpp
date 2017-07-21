@@ -23,7 +23,6 @@ Task::Task(EventContext *event):
 
 Task::~Task()
 {
-    MutexLocker locker(&fMutex);
     if (fEvent != nullptr)
         fEvent->RemoveRefTask(this);
 
