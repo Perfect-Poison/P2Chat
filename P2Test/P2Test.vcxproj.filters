@@ -50,6 +50,9 @@
     <ClCompile Include="GeneratedFiles\qrc_p2test.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="common.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="p2test.h">
@@ -65,6 +68,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_p2test.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>Form Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

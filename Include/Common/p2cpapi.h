@@ -40,8 +40,7 @@ enum
     MSG_USER_ONLINE,
     MSG_USER_OFFLINE,
     MSG_REQUEST_SUCCEED,
-    MSG_REQUEST_FAILED,
-    MSG_NUM
+    MSG_REQUEST_FAILED
 };
 typedef uint16 msg_code;
 
@@ -61,9 +60,7 @@ enum
     ATTR_GROUP_ID,
     ATTR_GROUP_NAME,
 
-    ATTR_MSG_PACKET,
-
-    ATTR_NUM
+    ATTR_MSG_PACKET
 };
 typedef uint32 attr_code;
 
@@ -78,8 +75,7 @@ enum
     dt_float32,
     dt_float64,
     dt_binary,
-    dt_string,
-    dt_num
+    dt_string
 };
 typedef uint8 attr_datatype;
 
