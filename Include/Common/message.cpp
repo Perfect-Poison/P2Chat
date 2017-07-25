@@ -103,8 +103,8 @@ Message::~Message()
 
 MESSAGE* Message::CreateMessage()
 {
-    size_t messageSize = MESSAGE_HEADER_SIZE + CalculateTotalAttrSize(fAttrs, false);
-    MESSAGE *msg = (MESSAGE *)malloc(messageSize);
+    fSize = MESSAGE_HEADER_SIZE + CalculateTotalAttrSize(fAttrs, false);
+    MESSAGE *msg = (MESSAGE *)malloc(fSize);
     msg->code = htons(fCode);
     msg->flags = htons(fFlags);
     msg->size = htonl(fSize);

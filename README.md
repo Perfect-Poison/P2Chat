@@ -6,7 +6,7 @@
 
 **数据库**：MySQL 5.7.16(x64)
 
-**GUI**: Qt
+**GUI**: Qt5.8.0(x86)
 
 Package文件夹下有，可以直接安装：
 **MySql Connector**: mysql-connector-c-6.1.10-win32

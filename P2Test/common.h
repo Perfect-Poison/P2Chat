@@ -1,4 +1,6 @@
 #pragma once
+#pragma execution_character_set("utf-8")
+
 #include "Common/p2cpapi.h"
 P2_NAMESPACE_USE;
 
