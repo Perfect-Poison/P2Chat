@@ -12,6 +12,8 @@
 #include "Common/uthash.h"
 #include <map>
 
+#pragma comment(lib,"ws2_32.lib")
+
 P2_NAMESPACE_BEG
 
 typedef void* attr_data;

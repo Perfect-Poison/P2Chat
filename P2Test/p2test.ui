@@ -146,12 +146,15 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="attrNumLineEdit">
+             <widget class="QLabel" name="attrNumLabel">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>1</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="text">
+               <string>0</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

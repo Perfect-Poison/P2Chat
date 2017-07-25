@@ -2,6 +2,8 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QTableWidget>
 
+P2_NAMESPACE_USE
+
 void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     if (index.column() == 0 || index.column() == 1 || index.column() == 2)
@@ -115,9 +117,9 @@ void P2Test::init()
     for (size_t i = 0; i < MSG_FLAGS_NUM; i++)
         ui.msgFlagsCombo->addItem(sMsgFlagsParam[i].strVal, sMsgFlagsParam[i].enumVal);
 
+    ui.msgSizeLabel->setText("16");
     ui.msgIDLineEdit->setText("0");
-
-    ui.attrNumLineEdit->setText("0");
+    ui.attrNumLabel->setText("0");
 
     /**
      *	ÏûÏ¢ÔØºÉ
@@ -127,7 +129,7 @@ void P2Test::init()
     fDelAction = new QAction(tr("É¾³ý"), this);
     fContextMenu->addAction(fAddAction);
     fContextMenu->addAction(fDelAction);
-    ui.attrsTable->setItemDelegate(new AttrsTableDelegate(ui.attrsTable));
+    ui.attrsTable->setItemDelegate(new AttrsTableDelegate(this));
 
 
     /**
@@ -142,13 +144,19 @@ void P2Test::init()
     connect(ui.attrsTable, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)));
     connect(fAddAction, SIGNAL(triggered()), this, SLOT(addOneRow()));
     connect(fDelAction, SIGNAL(triggered()), this, SLOT(delOneRow()));
+    connect(ui.msgCodeCombo, SIGNAL(currentIndexChanged(int index)), this, SLOT(msgDataUpdate()));
+    connect(ui.msgFlagsCombo, SIGNAL(currentIndexChanged(int index)), this, SLOT(msgDataUpdate()));
+    connect(ui.msgIDLineEdit, SIGNAL(editingFinished()), this, SLOT(msgDataUpdate()));
+
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
 {
-    QList<QAction*> actions = fContextMenu->actions();
-    foreach(QAction* action, actions)
-        action->setEnabled(true);
+    fAddAction->setEnabled(true);
+    if (ui.attrsTable->rowCount() <= 0)
+        fDelAction->setEnabled(false);
+    else
+        fDelAction->setEnabled(true);
 
     fContextMenu->exec(QCursor::pos());
 }
@@ -157,7 +165,8 @@ void P2Test::addOneRow()
 {
     int totalRow = ui.attrsTable->rowCount();
     ui.attrsTable->insertRow(totalRow);
-
+    ui.attrNumLabel->setText(QString::number(totalRow + 1));
+    msgDataUpdate();
 //     QComboBox *itmAttrCode = new QComboBox;
 //     for (size_t i = 0; i < ATTR_CODE_NUM; i++)
 //         itmAttrCode->addItem(sAttrCodeParam[i].strVal, sAttrCodeParam[i].enumVal);
@@ -184,7 +193,21 @@ void P2Test::addOneRow()
 
 void P2Test::delOneRow()
 {
+    int totalRow = ui.attrsTable->rowCount();
     int curRow = ui.attrsTable->currentRow();
     ui.attrsTable->removeRow(curRow);
+    ui.attrNumLabel->setText(QString::number(totalRow - 1));
+    msgDataUpdate();
+}
+
+void P2Test::msgDataUpdate()
+{
+    if (fMessage)
+        safe_free(fMessage);
+    fMessage = new Message;
+
+
+
+    return;
 }
 

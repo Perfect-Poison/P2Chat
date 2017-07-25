@@ -1,6 +1,6 @@
 #include "p2cpapi.h"
 
-P2_NAMESPACE_BEG;
+P2_NAMESPACE_BEG
 
 /**
  *	Create new hash entry with given attribute size

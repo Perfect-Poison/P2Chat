@@ -39,9 +39,6 @@
     <ClCompile Include="..\Include\Common\EventContext.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\message.cpp">
-      <Filter>Common</Filter>
-    </ClCompile>
     <ClCompile Include="..\Include\Common\Mutex.cpp">
       <Filter>Common</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="ServerInterface.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Include\Common\p2cpapi.cpp">
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

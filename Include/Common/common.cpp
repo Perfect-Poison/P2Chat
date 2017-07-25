@@ -93,13 +93,13 @@ int select_waitevent(struct eventreq *req)
         theWndClass.hCursor = nullptr;
         theWndClass.hbrBackground = nullptr;
         theWndClass.lpszMenuName = nullptr;
-        theWndClass.lpszClassName = "P2Chat";
+        theWndClass.lpszClassName = TEXT("P2Chat");
         theWndClass.hIconSm = nullptr;
 
         ::RegisterClassEx(&theWndClass);
 
-        sMsgWindow = ::CreateWindow("P2Chat",
-            "P2Chat",
+        sMsgWindow = ::CreateWindow(TEXT("P2Chat"),
+            TEXT("P2Chat"),
             WS_POPUP,
             0,
             0,
