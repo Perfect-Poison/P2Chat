@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2ChatServer", "P2ChatServer\P2ChatServer.vcxproj", "{C38AEB7F-D50A-42E4-A011-2B54BD7364FB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2ChatClient", "P2ChatClient\P2ChatClient.vcxproj", "{7628C813-B7AC-4DA4-8F47-16001D1F5015}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2Test", "P2Test\P2Test.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonLib", "CommonLib\CommonLib.vcxproj", "{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.Build.0 = Release|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Debug|x64.ActiveCfg = Debug|x64
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Debug|x64.Build.0 = Debug|x64
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Debug|x86.ActiveCfg = Debug|Win32
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Debug|x86.Build.0 = Debug|Win32
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x64.ActiveCfg = Release|x64
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x64.Build.0 = Release|x64
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x86.ActiveCfg = Release|Win32
+		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

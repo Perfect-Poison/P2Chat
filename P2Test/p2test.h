@@ -5,7 +5,7 @@
 #include <QtNetwork/QUdpSocket>
 #include <QtWidgets/QItemDelegate>
 #include "ui_p2test.h"
-#include "publicDef.h"
+#include "common.h"
 
 
 class QMenu;

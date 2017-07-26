@@ -1,6 +1,7 @@
 #include "p2test.h"
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QTableWidget>
+#include <QtCore/QByteArray>
 
 P2_NAMESPACE_USE
 
@@ -16,7 +17,7 @@ void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
             text = find_attr_flags_param_by_enum(enumVal).strVal;
         else if (index.column() == 2)
             text = find_attr_datatype_param_by_enum(enumVal).strVal;
-
+        text += "(" + QString::number(enumVal) + ")";
         QStyleOptionViewItem myOption = option;
         myOption.displayAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
 
@@ -35,17 +36,29 @@ QWidget * AttrsTableDelegate::createEditor(QWidget *parent, const QStyleOptionVi
     if (index.column() == 0)
     {
         for (size_t i = 0; i < ATTR_CODE_NUM; i++)
-            editor->addItem(sAttrCodeParam[i].strVal, sAttrCodeParam[i].enumVal);
+        {
+            QString text = sAttrCodeParam[i].strVal;
+            text += "(" + QString::number(sAttrCodeParam[i].enumVal) + ")";
+            editor->addItem(text, sAttrCodeParam[i].enumVal);
+        }
     }
     else if (index.column() == 1)
     {
         for (size_t i = 0; i < ATTR_FLAGS_NUM; i++)
-            editor->addItem(sAttrFlagsParam[i].strVal, sAttrFlagsParam[i].enumVal);
+        {
+            QString text = sAttrFlagsParam[i].strVal;
+            text += "(" + QString::number(sAttrFlagsParam[i].enumVal) + ")";
+            editor->addItem(text, sAttrFlagsParam[i].enumVal);
+        }
     }
     else if (index.column() == 2)
     {
         for (size_t i = 0; i < ATTR_DATA_TYPE_NUM; i++)
-            editor->addItem(sAttrDataTypeParam[i].strVal, sAttrDataTypeParam[i].enumVal);
+        {
+            QString text = sAttrDataTypeParam[i].strVal;
+            text += "(" + QString::number(sAttrDataTypeParam[i].enumVal) + ")";
+            editor->addItem(text, sAttrDataTypeParam[i].enumVal);
+        }
     }
     else
         return QItemDelegate::createEditor(parent, option, index);
@@ -64,6 +77,7 @@ void AttrsTableDelegate::setEditorData(QWidget *editor, const QModelIndex &index
             text = find_attr_flags_param_by_enum(enumVal).strVal;
         else if (index.column() == 2)
             text = find_attr_datatype_param_by_enum(enumVal).strVal;
+        text += "(" + QString::number(enumVal) + ")";
         QComboBox *comboBox = qobject_cast<QComboBox*>(editor);
         comboBox->setCurrentIndex(comboBox->findText(text));
     }
@@ -79,6 +93,7 @@ void AttrsTableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model
     {
         QComboBox *comboBox = qobject_cast<QComboBox*>(editor);
         QString text = comboBox->currentText();
+        text = text.left(text.lastIndexOf(QChar('(')));
         int enumVal = 0;
         if (index.column() == 0)
             enumVal = find_attr_code_param_by_str(text.toLatin1().data()).enumVal;
@@ -111,11 +126,19 @@ void P2Test::init()
     /**
      *	消息头
      */
-    for (size_t i = 0; i < MSG_CODE_NUM; i++) 
-        ui.msgCodeCombo->addItem(sMsgCodeParam[i].strVal, sMsgCodeParam[i].enumVal);
+    for (size_t i = 0; i < MSG_CODE_NUM; i++)
+    {
+        QString text = sMsgCodeParam[i].strVal;
+        text += "(" + QString::number(sMsgCodeParam[i].enumVal) + ")";
+        ui.msgCodeCombo->addItem(text, sMsgCodeParam[i].enumVal);
+    }
 
     for (size_t i = 0; i < MSG_FLAGS_NUM; i++)
-        ui.msgFlagsCombo->addItem(sMsgFlagsParam[i].strVal, sMsgFlagsParam[i].enumVal);
+    {
+        QString text = sMsgFlagsParam[i].strVal;
+        text += "(" + QString::number(sMsgFlagsParam[i].enumVal) + ")";
+        ui.msgFlagsCombo->addItem(text, sMsgFlagsParam[i].enumVal);
+    }
 
     ui.msgSizeLabel->setText("16");
     ui.msgIDLineEdit->setText("0");
@@ -124,13 +147,15 @@ void P2Test::init()
     /**
      *	消息载荷
      */
+    fUdpSocket = new QUdpSocket(this);
     fContextMenu = new QMenu(this);
     fAddAction = new QAction(tr("增加"), this);
     fDelAction = new QAction(tr("删除"), this);
+    fMessage = nullptr;
     fContextMenu->addAction(fAddAction);
     fContextMenu->addAction(fDelAction);
     ui.attrsTable->setItemDelegate(new AttrsTableDelegate(this));
-
+    ui.tickLabel->setText("\t      00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F");
 
     /**
      *	Server
@@ -144,9 +169,7 @@ void P2Test::init()
     connect(ui.attrsTable, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)));
     connect(fAddAction, SIGNAL(triggered()), this, SLOT(addOneRow()));
     connect(fDelAction, SIGNAL(triggered()), this, SLOT(delOneRow()));
-    connect(ui.msgCodeCombo, SIGNAL(currentIndexChanged(int index)), this, SLOT(msgDataUpdate()));
-    connect(ui.msgFlagsCombo, SIGNAL(currentIndexChanged(int index)), this, SLOT(msgDataUpdate()));
-    connect(ui.msgIDLineEdit, SIGNAL(editingFinished()), this, SLOT(msgDataUpdate()));
+    connect(ui.refreshButton, SIGNAL(clicked()), this, SLOT(msgDataUpdate()));
 
 }
 
@@ -165,30 +188,7 @@ void P2Test::addOneRow()
 {
     int totalRow = ui.attrsTable->rowCount();
     ui.attrsTable->insertRow(totalRow);
-    ui.attrNumLabel->setText(QString::number(totalRow + 1));
-    msgDataUpdate();
-//     QComboBox *itmAttrCode = new QComboBox;
-//     for (size_t i = 0; i < ATTR_CODE_NUM; i++)
-//         itmAttrCode->addItem(sAttrCodeParam[i].strVal, sAttrCodeParam[i].enumVal);
-// 
-//     QComboBox *itmAttrFlags = new QComboBox;
-//     for (size_t i = 0; i < ATTR_FLAGS_NUM; i++)
-//         itmAttrFlags->addItem(sAttrFlagsParam[i].strVal, sAttrFlagsParam[i].enumVal);
-// 
-//     QComboBox *itmAttrDataType = new QComboBox;
-//     for (size_t i = 0; i < ATTR_DATA_TYPE_NUM; i++)
-//         itmAttrDataType->addItem(sAttrDataTypeParam[i].strVal, sAttrDataTypeParam[i].enumVal);
-// 
-//     QTextEdit *itmAttrData = new QTextEdit;
-//     
-// 
-//     ui.attrsTable->setCellWidget(totalRow, 0, itmAttrCode);
-//     ui.attrsTable->setCellWidget(totalRow, 1, itmAttrFlags);
-//     ui.attrsTable->setCellWidget(totalRow, 2, itmAttrDataType);
-//     ui.attrsTable->setCellWidget(totalRow, 3, itmAttrData);
-// 
-//     ui.attrsTable->resizeColumnsToContents();
-    
+    ui.attrNumLabel->setText(QString::number(totalRow + 1));    
 }
 
 void P2Test::delOneRow()
@@ -197,7 +197,6 @@ void P2Test::delOneRow()
     int curRow = ui.attrsTable->currentRow();
     ui.attrsTable->removeRow(curRow);
     ui.attrNumLabel->setText(QString::number(totalRow - 1));
-    msgDataUpdate();
 }
 
 void P2Test::msgDataUpdate()
@@ -205,9 +204,75 @@ void P2Test::msgDataUpdate()
     if (fMessage)
         safe_free(fMessage);
     fMessage = new Message;
+    fMessage->SetCode(ui.msgCodeCombo->currentData(Qt::UserRole).toUInt());
+    fMessage->SetFlags(ui.msgFlagsCombo->currentData(Qt::UserRole).toUInt());
+    fMessage->SetID(ui.msgIDLineEdit->text().toUInt());
 
+    size_t rowNum = ui.attrsTable->rowCount();
+    QAbstractItemModel *model = ui.attrsTable->model();
+    for (size_t i = 0; i < rowNum; i++)
+    {
+        attr_code attrCode = model->index(i, 0).data(Qt::DisplayRole).toUInt();
+        attr_flags attrFlags = model->index(i, 1).data(Qt::DisplayRole).toUInt();
+        attr_datatype attrDataType = model->index(i, 2).data(Qt::DisplayRole).toUInt();
+        QString attrDataStr = ui.attrsTable->item(i, 3)->text();
+        switch (attrDataType) 
+        {
+        case dt_int16:
+            if (attrFlags & af_unsigned)
+                fMessage->SetAttr(attrCode, (uint16)attrDataStr.toUShort());
+            else
+                fMessage->SetAttr(attrCode, (int16)attrDataStr.toShort());
+            break;
+        case dt_int32:
+            if (attrFlags & af_unsigned)
+                fMessage->SetAttr(attrCode, (uint32)attrDataStr.toUInt());
+            else
+                fMessage->SetAttr(attrCode, (int32)attrDataStr.toInt());
+            break;
+        case dt_int64:
+            if (attrFlags & af_unsigned)
+                fMessage->SetAttr(attrCode, (uint64)attrDataStr.toULongLong());
+            else
+                fMessage->SetAttr(attrCode, (int64)attrDataStr.toLongLong());
+            break;
+        case dt_float32:
+            fMessage->SetAttr(attrCode, attrDataStr.toFloat());
+            break;
+        case dt_float64:
+            fMessage->SetAttr(attrCode, attrDataStr.toDouble());
+            break;
+        case dt_binary:
+            fMessage->SetAttr(attrCode, (BYTE*)attrDataStr.data(), attrDataStr.size());
+            break;
+        case dt_string:
+            fMessage->SetAttr(attrCode, attrDataStr.toStdWString().c_str(), attrDataStr.toStdWString().length());
+            break;
+        default:
+            printf("Message::Message no such data type!\n");
+            break;
+        }
+    }
 
-
-    return;
+    MESSAGE *msg = fMessage->CreateMessage();
+    int msgSize = ntohl(msg->size);
+    QByteArray byteData((char*)msg, msgSize);
+    QString hexDataStr = byteData.toHex().data();
+    hexDataStr = hexDataStr.toUpper();
+    QString hexDataTrimed;
+    rowNum = ceil(msgSize / 16.0);
+    for (int i = 0, c = 0; i < rowNum; i++)
+    {
+        int t = ntohl(i);
+        hexDataTrimed += tr("0x") + QByteArray((char*)&t, sizeof(i)).toHex().data();
+        hexDataTrimed += QChar('\t');
+        for (int j = 0; j < 32 && c < hexDataStr.length(); j += 2, c += 2)
+        {
+            hexDataTrimed += hexDataStr.mid(c, 2);
+            hexDataTrimed += " ";
+        }
+        hexDataTrimed += QChar('\n');
+    }
+    ui.msgDataTextEdit->setText(hexDataTrimed);
 }
 

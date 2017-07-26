@@ -113,11 +113,12 @@ MESSAGE* Message::CreateMessage()
 
     if (fFlags & mf_binary)
     {
-        memcpy(msg->attrs, fData, fAttrNum);
+        if (fAttrNum != 0)
+            memcpy(&msg->attrs, fData, fAttrNum);
     }
     else
     {
-        BYTE *pDest = (BYTE *)msg->attrs;
+        BYTE *pDest = (BYTE *)&msg->attrs;
         size_t attrSize = 0;
         MessageAttr *entry, *tmp;
         HASH_ITER(hh, fAttrs, entry, tmp)
@@ -217,10 +218,12 @@ void Message::set(attr_code attrCode, attr_datatype dataType, const void *value,
 
     // add or replace attribute
     MessageAttr *curr = findAttr(attrCode);
+    fAttrNum++;
     if (curr) 
     {
         HASH_DEL(fAttrs, curr);
         safe_free(curr);
+        fAttrNum--;
     }
     HASH_ADD_INT(fAttrs, code, entry);
 }

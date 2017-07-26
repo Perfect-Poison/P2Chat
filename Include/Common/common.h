@@ -21,6 +21,9 @@
 #include <stdio.h>
 using namespace std;
 
+#pragma comment(lib,"ws2_32.lib")
+#pragma pack(1)
+
 #ifndef P2_NAMESPACE_BEG
 #define P2_NAMESPACE_BEG    namespace p2 {
 #endif

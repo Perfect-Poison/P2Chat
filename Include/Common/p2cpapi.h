@@ -12,8 +12,6 @@
 #include "Common/uthash.h"
 #include <map>
 
-#pragma comment(lib,"ws2_32.lib")
-
 P2_NAMESPACE_BEG
 
 typedef void* attr_data;
@@ -86,6 +84,7 @@ typedef uint8 attr_datatype;
  */
 enum 
 {
+    mf_none = 0x0000,
     mf_binary = 0x0001,
     mf_end_of_file = 0x0002,
 };
@@ -130,6 +129,7 @@ typedef struct
     };
 }MESSAGE_ATTR;
 
+
 /**
  *	Message Structure
  */
@@ -168,7 +168,8 @@ public:
     void SetCode(msg_code msgCode) { fCode = msgCode; }
     msg_flags GetFlags() const { return fFlags;  }
     void SetFlags(msg_flags msgFlags) { fFlags = msgFlags; }
-    
+    msg_id GetID() const { return fMsgID; }
+    void SetID(msg_id msgID) { fMsgID = msgID; }
     bool IsBinary() const { return (fFlags & mf_binary) ? true : false; }
     bool IsEndOfFile() const { return (fFlags & mf_end_of_file) ? true : false; }
     const BYTE *GetBinaryData() const { return IsBinary() ? fData : nullptr; }
@@ -186,7 +187,7 @@ public:
     void SetAttr(attr_code attrCode, float32 value) { set(attrCode, dt_float32, &value); }
     void SetAttr(attr_code attrCode, float64 value) { set(attrCode, dt_float64, &value); }
     void SetAttr(attr_code attrCode, const BYTE* value, uint32 size) { set(attrCode, dt_binary, &value, af_none, size); }
-    void SetAttr(attr_code attrCode, const TCHAR* value, uint32 size) { set(attrCode, dt_string, &value, af_none, size); }
+    void SetAttr(attr_code attrCode, const WCHAR* value, uint32 length) { set(attrCode, dt_string, &value, af_none, length); }
 
     int16 GetAttrAsInt16(attr_code attrCode) const { return *((int16*)get(attrCode, dt_int16)); }
     uint16 GetAttrAsUInt16(attr_code attrCode) const { return *((uint16*)get(attrCode, dt_int16)); }

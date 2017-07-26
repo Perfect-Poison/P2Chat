@@ -25,7 +25,7 @@ attr_flags_param sAttrFlagsParam[];
 constexpr int MSG_CODE_NUM = 14;
 constexpr int ATTR_CODE_NUM = 8;
 constexpr int ATTR_DATA_TYPE_NUM = 7;
-constexpr int MSG_FLAGS_NUM = 2;
+constexpr int MSG_FLAGS_NUM = 3;
 constexpr int ATTR_FLAGS_NUM = 3;
 
 

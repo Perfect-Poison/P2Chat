@@ -1,4 +1,4 @@
-#include "publicDef.h"
+#include "common.h"
 
 
 param not_found_param = { 0, nullptr };
@@ -50,6 +50,7 @@ extern attr_datatype_param sAttrDataTypeParam[] =
 
 extern msg_flags_param sMsgFlagsParam[] =
 {
+    mf_none,        "mf_none",
     mf_binary,      "mf_binary",
     mf_end_of_file, "mf_end_of_file"
 };

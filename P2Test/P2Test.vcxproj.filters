@@ -50,10 +50,7 @@
     <ClCompile Include="GeneratedFiles\qrc_p2test.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\p2cpapi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="publicDef.cpp">
+    <ClCompile Include="common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,7 +69,7 @@
     <ClInclude Include="GeneratedFiles\ui_p2test.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="publicDef.h">
+    <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

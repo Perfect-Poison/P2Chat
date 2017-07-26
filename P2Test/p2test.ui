@@ -223,33 +223,86 @@
           <string>消息数据(网络字节序)</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>数据：</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QTextEdit" name="msgDataTextEdit">
-            <property name="readOnly">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>长度：</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="msgLengthLabel">
-            <property name="text">
-             <string>0B</string>
-            </property>
-           </widget>
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>数据：</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_2">
+                <item>
+                 <widget class="QTextEdit" name="msgDataTextEdit">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                   <widget class="QLabel" name="tickLabel">
+                    <property name="text">
+                     <string>00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="refreshButton">
+                    <property name="text">
+                     <string>刷新</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>长度：</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="msgLengthLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>1</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>0B</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -305,7 +358,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="sendMsgPushButton">
+        <widget class="QPushButton" name="sendMsgButton">
          <property name="text">
           <string>发送消息数据</string>
          </property>
