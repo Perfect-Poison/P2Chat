@@ -297,9 +297,9 @@ void* Message::get(attr_code attrCode, attr_datatype dataType, void *buffer/* = 
     case dt_binary:
     case dt_string:
         if (networkByteOrder)
-            attrSize = ATTR_HEADER_SIZE + ntohl(attr->bin.size);
+            attrSize = ATTR_HEADER_SIZE + 4 + ntohl(attr->bin.size);
         else
-            attrSize = ATTR_HEADER_SIZE + attr->bin.size;
+            attrSize = ATTR_HEADER_SIZE + 4 + attr->bin.size;
         break;
     default:
         attrSize = ATTR_HEADER_SIZE;

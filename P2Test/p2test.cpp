@@ -3,7 +3,7 @@
 #include <QtWidgets/QTableWidget>
 #include <QtCore/QByteArray>
 
-P2_NAMESPACE_USE
+
 
 void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -162,6 +162,7 @@ void P2Test::init()
      */
     ui.ipLineEdit->setText("127.0.0.1");
     ui.portLineEdit->setText(QString::number(SERVER_PORT_FOR_UDP));
+    fUdpSocket->bind(QHostAddress::LocalHost, BIND_PORT_FOR_UDP);
 
     /**
      *	ÐÅºÅ²Û
@@ -170,7 +171,8 @@ void P2Test::init()
     connect(fAddAction, SIGNAL(triggered()), this, SLOT(addOneRow()));
     connect(fDelAction, SIGNAL(triggered()), this, SLOT(delOneRow()));
     connect(ui.refreshButton, SIGNAL(clicked()), this, SLOT(msgDataUpdate()));
-
+    connect(fUdpSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+    connect(ui.sendMsgButton, SIGNAL(clicked()), this, SLOT(sendDatagrams()));
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
@@ -215,7 +217,9 @@ void P2Test::msgDataUpdate()
         attr_code attrCode = model->index(i, 0).data(Qt::DisplayRole).toUInt();
         attr_flags attrFlags = model->index(i, 1).data(Qt::DisplayRole).toUInt();
         attr_datatype attrDataType = model->index(i, 2).data(Qt::DisplayRole).toUInt();
-        QString attrDataStr = ui.attrsTable->item(i, 3)->text();
+        QString attrDataStr;
+        if (ui.attrsTable->item(i, 3) != nullptr)
+            attrDataStr = ui.attrsTable->item(i, 3)->text();
         switch (attrDataType) 
         {
         case dt_int16:
@@ -274,5 +278,40 @@ void P2Test::msgDataUpdate()
         hexDataTrimed += QChar('\n');
     }
     ui.msgDataTextEdit->setText(hexDataTrimed);
+    ui.msgLengthLabel->setText(QString::number(msgSize));
+    safe_free(msg);
+}
+
+void P2Test::readPendingDatagrams()
+{
+    char buff[96 * 1024];
+    while (fUdpSocket->hasPendingDatagrams() && fUdpSocket->pendingDatagramSize())
+    {
+        memset(buff, 0, sizeof(buff));
+        qint64 recvSize = fUdpSocket->pendingDatagramSize();
+        QNetworkDatagram datagram = fUdpSocket->receiveDatagram();
+        QString remoteHost = datagram.senderAddress().toString();
+        quint16 remotePort = datagram.senderPort();
+        QString hexData = datagram.data().toHex().data();
+        hexData = hexData.toUpper();
+        ui.logTextEdit->append(QString("[RecvFr(%1:%2):%3B]S->C:%4").arg(remoteHost).arg(remotePort).arg(recvSize).arg(hexData));
+    }
+
+}
+
+void P2Test::sendDatagrams()
+{
+    MESSAGE *msg = fMessage->CreateMessage();
+    int msgSize = ntohl(msg->size);
+    char *data = (char *)msg;
+    QHostAddress remoteHost(ui.ipLineEdit->text());
+    quint16 remotePort = ui.portLineEdit->text().toUShort();
+    int ret = fUdpSocket->writeDatagram(data, msgSize, remoteHost, remotePort);
+    assert(ret != -1);
+    QByteArray byteData((char*)msg, msgSize);
+    QString hexData = byteData.toHex().data();
+    hexData = hexData.toUpper();
+    ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
+    safe_free(msg);
 }
 

@@ -27,20 +27,20 @@ const uint16 ATTR_HEADER_SIZE = 6;
  */
 enum
 {
-    MSG_SERVER_GET_INFO,
-    MSG_SERVER_SET_INFO,
-    MSG_USER_GET_INFO,
-    MSG_USER_SET_INFO,
-    MSG_GROUP_GET_INFO,
-    MSG_GROUP_SET_INFO,
-    MSG_LOGIN,
-    MSG_LOGOUT,
-    MSG_USER_MSG_PACKET,
-    MSG_GROUP_MSG_PACKET,
-    MSG_USER_ONLINE,
-    MSG_USER_OFFLINE,
-    MSG_REQUEST_SUCCEED,
-    MSG_REQUEST_FAILED
+    MSG_SERVER_GET_INFO,    // 获取服务端信息
+    MSG_SERVER_SET_INFO,    // 设置服务端信息
+    MSG_USER_GET_INFO,      // 获取用户信息
+    MSG_USER_SET_INFO,      // 设置用户信息
+    MSG_GROUP_GET_INFO,     // 获取群组信息
+    MSG_GROUP_SET_INFO,     // 设置群组信息
+    MSG_LOGIN,              // 用户登录消息
+    MSG_LOGOUT,             // 用户退出消息
+    MSG_USER_MSG_PACKET,    // 用户消息包
+    MSG_GROUP_MSG_PACKET,   // 群组消息包
+    MSG_USER_ONLINE,        // 用户在线消息
+    MSG_USER_OFFLINE,       // 用户离线消息
+    MSG_REQUEST_SUCCEED,    // 请求成功消息
+    MSG_REQUEST_FAILED      // 请求失败消息
 };
 typedef uint16 msg_code;
 
@@ -49,18 +49,18 @@ typedef uint16 msg_code;
  */
 enum
 {
-    ATTR_SERVER_INFO,
+    ATTR_SERVER_INFO,       // 服务端信息属性
 
-    ATTR_SESSION_ID,
+    ATTR_SESSION_ID,        // 会话ID
 
-    ATTR_USER_ID,
-    ATTR_USER_NAME,
-    ATTR_USER_PASSWORD,
+    ATTR_USER_ID,           // 用户ID
+    ATTR_USER_NAME,         // 用户名
+    ATTR_USER_PASSWORD,     // 用户密码
 
-    ATTR_GROUP_ID,
-    ATTR_GROUP_NAME,
+    ATTR_GROUP_ID,          // 群组ID
+    ATTR_GROUP_NAME,        // 群组名
 
-    ATTR_MSG_PACKET
+    ATTR_MSG_PACKET         // 消息包
 };
 typedef uint32 attr_code;
 
@@ -69,13 +69,13 @@ typedef uint32 attr_code;
  */
 enum
 {
-    dt_int16,
-    dt_int32,
-    dt_int64,
-    dt_float32,
-    dt_float64,
-    dt_binary,
-    dt_string
+    dt_int16,       // 16位(signed/unsigned)整型
+    dt_int32,       // 32位(signed/unsigned)整型
+    dt_int64,       // 64位(signed/unsigned)整型
+    dt_float32,     // 32位浮点型
+    dt_float64,     // 64位浮点型
+    dt_binary,      // 二进制类型
+    dt_string       // 宽字符串类型
 };
 typedef uint8 attr_datatype;
 
@@ -84,9 +84,9 @@ typedef uint8 attr_datatype;
  */
 enum 
 {
-    mf_none = 0x0000,
-    mf_binary = 0x0001,
-    mf_end_of_file = 0x0002,
+    mf_none = 0x0000,           // 
+    mf_binary = 0x0001,         // 属性域存储二进制
+    mf_end_of_file = 0x0002,    // 文件结尾
 };
 typedef uint16 msg_flags;
 
@@ -95,9 +95,9 @@ typedef uint16 msg_flags;
  */
 enum
 {
-    af_none = 0x00,
-    af_signed = 0x01,
-    af_unsigned = 0x02,
+    af_none = 0x00,         // 对于整型，表示signed，其他类型无含义
+    af_signed = 0x01,       // signed
+    af_unsigned = 0x02,     // unsigned
 };
 typedef uint8 attr_flags;
 
@@ -119,12 +119,12 @@ typedef struct
         struct
         {
             uint32 size;
-            BYTE* data;
+            BYTE data[1];
         }bin;
         struct  
         {
             uint32 size;
-            WORD* data; // string类型全为宽字符，占2字节
+            WORD data[1]; // string类型全为宽字符，占2字节
         }str;
     };
 }MESSAGE_ATTR;
@@ -186,8 +186,8 @@ public:
     void SetAttr(attr_code attrCode, uint64 value) { set(attrCode, dt_int64, &value, af_unsigned); }
     void SetAttr(attr_code attrCode, float32 value) { set(attrCode, dt_float32, &value); }
     void SetAttr(attr_code attrCode, float64 value) { set(attrCode, dt_float64, &value); }
-    void SetAttr(attr_code attrCode, const BYTE* value, uint32 size) { set(attrCode, dt_binary, &value, af_none, size); }
-    void SetAttr(attr_code attrCode, const WCHAR* value, uint32 length) { set(attrCode, dt_string, &value, af_none, length); }
+    void SetAttr(attr_code attrCode, const BYTE* value, uint32 size) { set(attrCode, dt_binary, value, af_none, size); }
+    void SetAttr(attr_code attrCode, const WCHAR* value, uint32 length) { set(attrCode, dt_string, value, af_none, length); }
 
     int16 GetAttrAsInt16(attr_code attrCode) const { return *((int16*)get(attrCode, dt_int16)); }
     uint16 GetAttrAsUInt16(attr_code attrCode) const { return *((uint16*)get(attrCode, dt_int16)); }

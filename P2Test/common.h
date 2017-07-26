@@ -2,7 +2,10 @@
 #pragma execution_character_set("utf-8")
 
 #include "Common/p2cpapi.h"
-P2_NAMESPACE_USE;
+#include <assert.h>
+P2_NAMESPACE_USE
+
+const int BIND_PORT_FOR_UDP = 5566;
 
 typedef struct
 {

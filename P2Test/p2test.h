@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include <QtNetwork/QUdpSocket>
+#include <QtNetwork/QNetworkDatagram>
 #include <QtWidgets/QItemDelegate>
 #include "ui_p2test.h"
 #include "common.h"
@@ -14,13 +15,11 @@ class AttrsTableDelegate : public QItemDelegate
 {
     Q_OBJECT
 public:
-    AttrsTableDelegate(QObject *parent = nullptr) :QItemDelegate(parent), fP2Test(qobject_cast<P2Test*>(parent)) {}
+    AttrsTableDelegate(QObject *parent = nullptr) :QItemDelegate(parent) {}
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
     void setEditorData(QWidget *editor, const QModelIndex &index) const;
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
-private:
-    P2Test *fP2Test;
 };
 
 class P2Test : public QMainWindow
@@ -31,11 +30,13 @@ public:
 	P2Test(QWidget *parent = 0);
 	~P2Test();
     void init();
-public slots:
+private slots:
     void showContextMenu(const QPoint&);
     void addOneRow();
     void delOneRow();
     void msgDataUpdate();
+    void readPendingDatagrams();
+    void sendDatagrams();
 private:
 	Ui::P2TestClass ui;
     QUdpSocket *fUdpSocket;
