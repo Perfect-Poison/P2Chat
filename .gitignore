@@ -46,4 +46,4 @@ ui_*.h
 *.VC.db
 Release/
 Debug/
-LibServer/CommonLib/
+LibServer/
