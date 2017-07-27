@@ -2,7 +2,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QTableWidget>
 #include <QtCore/QByteArray>
-
+#include <QtGui/QTextBlock>
 
 
 void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -173,6 +173,7 @@ void P2Test::init()
     connect(ui.refreshButton, SIGNAL(clicked()), this, SLOT(msgDataUpdate()));
     connect(fUdpSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
     connect(ui.sendMsgButton, SIGNAL(clicked()), this, SLOT(sendDatagrams()));
+    connect(ui.logTextEdit, SIGNAL(cursorPositionChanged()), this, SLOT(selectionChanged()));
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
@@ -313,5 +314,15 @@ void P2Test::sendDatagrams()
     hexData = hexData.toUpper();
     ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
     safe_free(msg);
+}
+
+void P2Test::selectionChanged()
+{
+    QTextCursor cur = ui.logTextEdit->textCursor();
+//     if (cur.hasSelection())
+//     {
+        cur.select(QTextCursor::LineUnderCursor);
+        ui.logTextEdit->setTextCursor(cur);
+    //}
 }
 

@@ -37,6 +37,7 @@ private slots:
     void msgDataUpdate();
     void readPendingDatagrams();
     void sendDatagrams();
+    void selectionChanged();
 private:
 	Ui::P2TestClass ui;
     QUdpSocket *fUdpSocket;

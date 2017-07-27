@@ -41,7 +41,7 @@ P2_NAMESPACE_BEG
 //*******************************
 // ºê¶¨Òå Çø
 
-#define P2CHAT_DEBUG 0
+#define P2CHAT_DEBUG 1
 
 
 constexpr size_t kAssertBuffSize = 512;
