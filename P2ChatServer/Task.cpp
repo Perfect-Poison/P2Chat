@@ -1,5 +1,5 @@
 #include "Task.h"
-#include "EventContext.h"
+#include "Event.h"
 
 P2_NAMESPACE_BEG
 
@@ -9,7 +9,7 @@ uint32 TaskThreadPool::sNumTaskThreads = 0;
 Mutex TaskThreadPool::sMutex;
 
 
-Task::Task(EventContext *event):
+Task::Task(Event *event):
     fEventFlags(0),
     fEvent(event),
     fDeleteEvent(false)
@@ -71,13 +71,13 @@ void TaskThread::Entry()
         {
             int64 theTimeout = 0;
             MutexLocker locker(&TaskThreadPool::GetMutex());
-            if (TASK_DEBUG)
+            if (TASKTHREAD_DEBUG)
                 printf("[任务线程%u]TaskThread::Entry 使用全局锁，当前TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
             
             theTimeout = theTask->Run();
             if (theTimeout < 0) 
             {
-                if (TASK_DEBUG)
+                if (TASKTHREAD_DEBUG)
                     printf("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
                 theTask->SetTaskName(theTask->GetTaskName() + " deleted");
                 theTask->SetDead();
@@ -88,7 +88,7 @@ void TaskThread::Entry()
             else // theTimeout >= 0
             {
                 //theTask->SetTaskName(theTask->GetTaskName() + " reagain");
-                if (TASK_DEBUG)
+                if (TASKTHREAD_DEBUG)
                     printf("[任务线程%u]TaskThread::Entry 重复任务 TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
                 EnQueue(theTask);
                 doneProcessingEvent = TRUE;
@@ -107,13 +107,13 @@ Task* TaskThread::WaitForTask()
         {
             if (task->IsAlive())
             {
-                if (TASK_DEBUG)
+                if (TASKTHREAD_DEBUG)
                     printf("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), task->GetTaskName().c_str(), GetQueueLength());
                 return task;
             }
             else
             {
-                if (TASK_DEBUG)
+                if (TASKTHREAD_DEBUG)
                     printf("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), task->GetTaskName().c_str(), GetQueueLength());
                 delete task;
             }

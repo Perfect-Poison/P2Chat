@@ -3,7 +3,7 @@
 #include <QtWidgets/QTableWidget>
 #include <QtCore/QByteArray>
 #include <QtGui/QTextBlock>
-
+#include "../P2ChatServer/p2server_common.h"
 
 void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -173,7 +173,14 @@ void P2Test::init()
     connect(ui.refreshButton, SIGNAL(clicked()), this, SLOT(msgDataUpdate()));
     connect(fUdpSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
     connect(ui.sendMsgButton, SIGNAL(clicked()), this, SLOT(sendDatagrams()));
-    connect(ui.logTextEdit, SIGNAL(cursorPositionChanged()), this, SLOT(selectionChanged()));
+    connect(ui.logTextEdit, SIGNAL(msgUpdate(const QByteArray&)), this, SLOT(msgUpdate(const QByteArray&)));
+}
+
+void P2Test::msgUpdate(const QByteArray& rawMsg)
+{
+    if (fMessage)
+        safe_free(fMessage);
+    fMessage = new Message((MESSAGE *)rawMsg.data());
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
@@ -302,6 +309,8 @@ void P2Test::readPendingDatagrams()
 
 void P2Test::sendDatagrams()
 {
+    if (fMessage == nullptr)
+        return;
     MESSAGE *msg = fMessage->CreateMessage();
     int msgSize = ntohl(msg->size);
     char *data = (char *)msg;
@@ -314,15 +323,5 @@ void P2Test::sendDatagrams()
     hexData = hexData.toUpper();
     ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
     safe_free(msg);
-}
-
-void P2Test::selectionChanged()
-{
-    QTextCursor cur = ui.logTextEdit->textCursor();
-//     if (cur.hasSelection())
-//     {
-        cur.select(QTextCursor::LineUnderCursor);
-        ui.logTextEdit->setTextCursor(cur);
-    //}
 }
 

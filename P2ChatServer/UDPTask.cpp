@@ -21,13 +21,13 @@ int64 UDPTask::Run()
         return -1;
     else if (eventbits & kReadEvent)
     {
-        char buffer[1024], reply[1124];
+        char buffer[UDPSocket::kMaxUDPPacket], reply[UDPSocket::kMaxUDPPacket];
         int32 recvSize = 0;
         while (recvSize != -1)
         {
             ::memset(buffer, 0, sizeof(buffer));
             Address remoteAddress;
-            recvSize = fUDPSocket->RecvFrom(buffer, 1500, remoteAddress);
+            recvSize = fUDPSocket->RecvFrom(buffer, UDPSocket::kMaxUDPPacket, remoteAddress);
             if (recvSize != -1)
             {
                 printf("收到来自%s:%u的数据: [%dB] %s\n", remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);

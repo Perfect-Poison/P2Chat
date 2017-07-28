@@ -6,7 +6,7 @@
 #include <QtNetwork/QNetworkDatagram>
 #include <QtWidgets/QItemDelegate>
 #include "ui_p2test.h"
-#include "common.h"
+#include "p2test_common.h"
 
 
 class QMenu;
@@ -30,14 +30,15 @@ public:
 	P2Test(QWidget *parent = 0);
 	~P2Test();
     void init();
-private slots:
+    public slots:
+    void msgUpdate(const QByteArray&);
+    private slots:
     void showContextMenu(const QPoint&);
     void addOneRow();
     void delOneRow();
     void msgDataUpdate();
     void readPendingDatagrams();
     void sendDatagrams();
-    void selectionChanged();
 private:
 	Ui::P2TestClass ui;
     QUdpSocket *fUdpSocket;

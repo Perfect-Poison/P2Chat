@@ -6,18 +6,12 @@ TCPListenerSocket::TCPListenerSocket():
     Task(this)
 {
     this->SetTaskName("TCPListenerSocket");
+    this->SetEventName("TCPListenerSocket");
 }
 
 
 TCPListenerSocket::~TCPListenerSocket()
 {
-}
-
-void TCPListenerSocket::Initialize(const Address& inAddress)
-{
-    this->Open();
-    this->SetSocketRecvBufferSize(kMaxRecvBufSize);
-    this->Listen(inAddress.GetPort());
 }
 
 int64 TCPListenerSocket::Run()

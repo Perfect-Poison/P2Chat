@@ -93,7 +93,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\include;..\Include;</AdditionalIncludeDirectories>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
     </ClCompile>
@@ -125,7 +125,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\include;..\Include;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
@@ -157,27 +157,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Socket.cpp" />
+    <ClCompile Include="ConnectionPool.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ServerInterface.cpp" />
+    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="TCPListenerSocket.cpp" />
+    <ClCompile Include="TCPSocket.cpp" />
+    <ClCompile Include="TCPTask.cpp" />
+    <ClCompile Include="UDPSocket.cpp" />
+    <ClCompile Include="UDPTask.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Include\Common\Address.h" />
-    <ClInclude Include="..\Include\Common\common.h" />
-    <ClInclude Include="..\Include\Common\CommonSocket.h" />
-    <ClInclude Include="..\Include\Common\Cond.h" />
-    <ClInclude Include="..\Include\Common\ConnectionPool.h" />
-    <ClInclude Include="..\Include\Common\EventContext.h" />
-    <ClInclude Include="..\Include\Common\Mutex.h" />
-    <ClInclude Include="..\Include\Common\p2cpapi.h" />
-    <ClInclude Include="..\Include\Common\Task.h" />
-    <ClInclude Include="..\Include\Common\TCPListenerSocket.h" />
-    <ClInclude Include="..\Include\Common\TCPSocket.h" />
-    <ClInclude Include="..\Include\Common\TCPTask.h" />
-    <ClInclude Include="..\Include\Common\Thread.h" />
-    <ClInclude Include="..\Include\Common\UDPSocket.h" />
-    <ClInclude Include="..\Include\Common\UDPTask.h" />
-    <ClInclude Include="..\Include\Common\uthash.h" />
+    <ClInclude Include="Address.h" />
+    <ClInclude Include="Socket.h" />
+    <ClInclude Include="ConnectionPool.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="p2server_common.h" />
     <ClInclude Include="ServerInterface.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TCPListenerSocket.h" />
+    <ClInclude Include="TCPSocket.h" />
+    <ClInclude Include="TCPTask.h" />
+    <ClInclude Include="UDPSocket.h" />
+    <ClInclude Include="UDPTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

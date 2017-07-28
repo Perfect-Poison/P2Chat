@@ -1,7 +1,15 @@
 #pragma once
+/*!
+ * \file	Mutex.h
+ *
+ * \author	BrianYi
+ * \date	2017/07/28
+ *
+ * \brief	ª•≥‚À¯¿‡
+ */
+
 #include "Common/common.h"
 #include "Common/Thread.h"
-
 P2_NAMESPACE_BEG
 
 class Mutex

@@ -1,7 +1,6 @@
 #pragma once
-#include "EventContext.h"
-#include "Common/common.h"
-#include "Common/CommonSocket.h"
+#include "Event.h"
+#include "Socket.h"
 #include "TCPTask.h"
 P2_NAMESPACE_BEG
 
@@ -11,11 +10,14 @@ P2_NAMESPACE_BEG
 #define TCPSOCKET_DEBUG 0
 #endif
 
-
 class TCPSocket :
-    public EventContext
+    public Event
 {
 public:
+    enum
+    {
+        kMaxTCPPacket = 1500
+    };
     TCPSocket(int inSocketID = kInvalidSocketID);
     virtual ~TCPSocket();
     void Open();

@@ -141,39 +141,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Include\Common\Address.cpp" />
-    <ClCompile Include="..\Include\Common\common.cpp" />
-    <ClCompile Include="..\Include\Common\CommonSocket.cpp" />
-    <ClCompile Include="..\Include\Common\Cond.cpp" />
-    <ClCompile Include="..\Include\Common\ConnectionPool.cpp" />
-    <ClCompile Include="..\Include\Common\EventContext.cpp" />
-    <ClCompile Include="..\Include\Common\Mutex.cpp" />
-    <ClCompile Include="..\Include\Common\p2cpapi.cpp" />
-    <ClCompile Include="..\Include\Common\Task.cpp" />
-    <ClCompile Include="..\Include\Common\TCPListenerSocket.cpp" />
-    <ClCompile Include="..\Include\Common\TCPSocket.cpp" />
-    <ClCompile Include="..\Include\Common\TCPTask.cpp" />
-    <ClCompile Include="..\Include\Common\Thread.cpp" />
-    <ClCompile Include="..\Include\Common\UDPSocket.cpp" />
-    <ClCompile Include="..\Include\Common\UDPTask.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Include\Common\Address.h" />
     <ClInclude Include="..\Include\Common\common.h" />
-    <ClInclude Include="..\Include\Common\CommonSocket.h" />
     <ClInclude Include="..\Include\Common\Cond.h" />
-    <ClInclude Include="..\Include\Common\ConnectionPool.h" />
-    <ClInclude Include="..\Include\Common\EventContext.h" />
     <ClInclude Include="..\Include\Common\Mutex.h" />
     <ClInclude Include="..\Include\Common\p2cpapi.h" />
-    <ClInclude Include="..\Include\Common\Task.h" />
-    <ClInclude Include="..\Include\Common\TCPListenerSocket.h" />
-    <ClInclude Include="..\Include\Common\TCPSocket.h" />
-    <ClInclude Include="..\Include\Common\TCPTask.h" />
     <ClInclude Include="..\Include\Common\Thread.h" />
-    <ClInclude Include="..\Include\Common\UDPSocket.h" />
-    <ClInclude Include="..\Include\Common\UDPTask.h" />
     <ClInclude Include="..\Include\Common\uthash.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Include\Common\common.cpp" />
+    <ClCompile Include="..\Include\Common\Cond.cpp" />
+    <ClCompile Include="..\Include\Common\Mutex.cpp" />
+    <ClCompile Include="..\Include\Common\p2cpapi.cpp" />
+    <ClCompile Include="..\Include\Common\Thread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

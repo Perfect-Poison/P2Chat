@@ -6,6 +6,7 @@ DWORD Thread::sThreadStorageIndex = 0;
 void* Thread::sMainThreadData = nullptr;
 
 Thread::Thread(): 
+    fThreadID(nullptr),
     fStopRequested(false),
     fJoined(false),
     fThreadData(nullptr)

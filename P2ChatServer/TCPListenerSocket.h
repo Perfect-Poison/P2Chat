@@ -1,8 +1,5 @@
 #pragma once
-#include "Common/common.h"
 #include "TCPSocket.h"
-#include "Task.h"
-#include "TCPTask.h"
 
 P2_NAMESPACE_BEG
 
@@ -18,7 +15,6 @@ class TCPListenerSocket :
 public:
     TCPListenerSocket();
     virtual ~TCPListenerSocket();
-    void Initialize(const Address& inAddress);
     virtual int64 Run();
 private:
     virtual void ProcessEvent(int eventBits);

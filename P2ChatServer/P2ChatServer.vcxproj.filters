@@ -21,57 +21,72 @@
     <ClCompile Include="ServerInterface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Address.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionPool.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPListenerSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPTask.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPSocket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPTask.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Address.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="ServerInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Address.h">
+    <ClInclude Include="Task.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\common.h">
+    <ClInclude Include="TCPListenerSocket.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\CommonSocket.h">
+    <ClInclude Include="TCPSocket.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Cond.h">
+    <ClInclude Include="TCPTask.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\ConnectionPool.h">
+    <ClInclude Include="UDPSocket.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\EventContext.h">
+    <ClInclude Include="UDPTask.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Mutex.h">
+    <ClInclude Include="p2server_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\p2cpapi.h">
+    <ClInclude Include="Socket.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Task.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\TCPListenerSocket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\TCPSocket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\TCPTask.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\Thread.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\UDPSocket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\UDPTask.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Include\Common\uthash.h">
+    <ClInclude Include="Event.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,14 @@
 #pragma once
+/*!
+ * \file	Thread.h
+ *
+ * \author	BrianYi
+ * \date	2017/07/28
+ *
+ * \brief	œﬂ≥Ã¿‡
+ */
 
 #include "Common/common.h"
-
 P2_NAMESPACE_BEG
 
 class Thread

@@ -8,7 +8,7 @@
  * \brief	数据库访问类
  */
 
-#include "Common/common.h"
+#include "p2server_common.h"
 #include "mysqlpp/mysql++.h"
 #include "mysqlpp/ssqls.h"
 #include <mutex>

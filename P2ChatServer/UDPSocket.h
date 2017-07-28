@@ -1,7 +1,6 @@
 #pragma once
-#include "EventContext.h"
-#include "Common/common.h"
-#include "Common/CommonSocket.h"
+#include "Event.h"
+#include "Socket.h"
 #include "UDPTask.h"
 
 P2_NAMESPACE_BEG
@@ -13,9 +12,13 @@ P2_NAMESPACE_BEG
 #endif
 
 class UDPSocket :
-    public EventContext
+    public Event
 {
 public:
+    enum
+    {
+        kMaxUDPPacket = 1500
+    };
     UDPSocket(int inSocketID = kInvalidSocketID);
     virtual ~UDPSocket();
     void Open();

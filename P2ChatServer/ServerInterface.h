@@ -1,5 +1,5 @@
 #pragma once
-#include "Common/common.h"
+#include "p2server_common.h"
 
 P2_NAMESPACE_BEG
 

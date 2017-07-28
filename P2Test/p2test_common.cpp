@@ -1,4 +1,4 @@
-#include "common.h"
+#include "p2test_common.h"
 
 
 param not_found_param = { 0, nullptr };

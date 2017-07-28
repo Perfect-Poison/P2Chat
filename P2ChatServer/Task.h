@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Common/common.h"
 #include "Common/Mutex.h"
-#include "Task.h"
-#include "Cond.h"
+#include "Common/Cond.h"
+#include "p2server_common.h"
 #include <queue>
 #include <vector>
 
@@ -15,8 +14,19 @@ P2_NAMESPACE_BEG
 #define TASK_DEBUG 0
 #endif
 
+#if P2CHAT_DEBUG
+#define TASKTHREAD_DEBUG 1
+#else
+#define TASKTHREAD_DEBUG 0
+#endif
 
-class EventContext;
+#if P2CHAT_DEBUG
+#define TASKTHREADPOOL_DEBUG 1
+#else
+#define TASKTHREADPOOL_DEBUG 0
+#endif
+
+class Event;
 class TaskThread;
 class TaskThreadPool;
 class Task
@@ -41,7 +51,7 @@ public:
         kAliveOff = 0x7fffffff
     };
     typedef unsigned int EventFlags;
-    Task(EventContext *event);
+    Task(Event *event);
     virtual ~Task();
     virtual int64 Run() = 0;
     void Signal(EventFlags eventFlags);
@@ -58,13 +68,17 @@ private:
     EventFlags fEventFlags;
     static unsigned int sTaskThreadPicker;
     BOOL fDeleteEvent;
-    EventContext *fEvent;
+    Event *fEvent;
 };
 
 class TaskThread : public Thread
 {
 public:
-    TaskThread() : Thread() {};
+    TaskThread() : Thread() 
+    {
+        if (TASKTHREAD_DEBUG)
+            printf("EventThread::EventThread 创建任务线程\n");
+    };
     virtual ~TaskThread() { this->StopAndWaitForThread(); };
     void EnQueue(Task *task);
     Cond* GetCond() { return &fQueueCond; }

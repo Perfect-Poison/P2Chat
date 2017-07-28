@@ -1,10 +1,10 @@
 #include "Common/common.h"
-#include "Common/ConnectionPool.h"
-#include "Common/EventContext.h"
-#include "Common/TCPListenerSocket.h"
-#include "Common/Task.h"
-#include "Common/UDPSocket.h"
 #include "mysqlpp/mysql++.h"
+#include "ConnectionPool.h"
+#include "Event.h"
+#include "TCPListenerSocket.h"
+#include "Task.h"
+#include "UDPSocket.h"
 using namespace mysqlpp;
 
 P2_NAMESPACE_USE
@@ -16,15 +16,23 @@ int main()
         printf("WSAStartup error!\n");
 
     EventThread *eventThread = EventThread::GetInstance();
+    
     TCPListenerSocket *tcpListenerSocket = new TCPListenerSocket;
-    tcpListenerSocket->Initialize(SERVER_PORT_FOR_TCP);
+    tcpListenerSocket->Open();
+    tcpListenerSocket->Listen(SERVER_PORT_FOR_TCP);
+    
     UDPSocket *udpSocket = new UDPSocket;
     udpSocket->Open();
     udpSocket->Bind(SERVER_PORT_FOR_UDP);
+    
     TaskThreadPool::AddThreads(4);
+    
     eventThread->Start();
+    
     tcpListenerSocket->RequestEvent(EV_RE);
+    
     udpSocket->RequestEvent(EV_RE);
+    
     while (true)
     {
         Sleep(1000);

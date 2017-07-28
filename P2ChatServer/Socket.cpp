@@ -1,17 +1,17 @@
-#include "CommonSocket.h"
+#include "Socket.h"
 
 P2_NAMESPACE_BEG
 
-CommonSocket::CommonSocket(int inSocketID):
+Socket::Socket(int inSocketID):
     fSocketID(inSocketID)
 {
 }
 
-CommonSocket::~CommonSocket()
+Socket::~Socket()
 {
 }
 
-void CommonSocket::Open(int32 inSocketType, int32 inProtocol)
+void Socket::Open(int32 inSocketType, int32 inProtocol)
 {
     if ((this->fSocketID = ::socket(AF_INET, inSocketType, inProtocol)) == SOCKET_ERROR)
     {
@@ -20,7 +20,7 @@ void CommonSocket::Open(int32 inSocketType, int32 inProtocol)
     }
 }
 
-void CommonSocket::Close()
+void Socket::Close()
 {
     if (this->fSocketID != kInvalidSocketID)
     {
@@ -29,7 +29,7 @@ void CommonSocket::Close()
     }
 }
 
-void CommonSocket::_Bind(const USHORT& inPort)
+void Socket::_Bind(const USHORT& inPort)
 {
     Address address(inPort);
     if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
@@ -39,7 +39,7 @@ void CommonSocket::_Bind(const USHORT& inPort)
     }
 }
 
-void CommonSocket::SetIOType(IOType inIOType)
+void Socket::SetIOType(IOType inIOType)
 {
     ULONG iMode = 0;
     switch (inIOType)
@@ -64,7 +64,7 @@ void CommonSocket::SetIOType(IOType inIOType)
     }
 }
 
-void CommonSocket::ReuseAddr()
+void Socket::ReuseAddr()
 {
     int one = 1;
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(int)) == SOCKET_ERROR)
@@ -75,7 +75,7 @@ void CommonSocket::ReuseAddr()
     return;
 }
 
-void CommonSocket::NoDelay()
+void Socket::NoDelay()
 {
     int one = 1;
     if (::setsockopt(this->fSocketID, IPPROTO_TCP, TCP_NODELAY, (char*)&one, sizeof(int)) == SOCKET_ERROR)
@@ -86,7 +86,7 @@ void CommonSocket::NoDelay()
     return;
 }
 
-void CommonSocket::KeepAlive()
+void Socket::KeepAlive()
 {
     int one = 1;
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_KEEPALIVE, (char*)&one, sizeof(int)) == SOCKET_ERROR)
@@ -97,7 +97,7 @@ void CommonSocket::KeepAlive()
     return;
 }
 
-void CommonSocket::SetSocketSendBufferSize(uint32 inNewSize)
+void Socket::SetSocketSendBufferSize(uint32 inNewSize)
 {
     int bufSize = inNewSize;
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
@@ -108,7 +108,7 @@ void CommonSocket::SetSocketSendBufferSize(uint32 inNewSize)
     return;
 }
 
-void CommonSocket::SetSocketRecvBufferSize(uint32 inNewSize)
+void Socket::SetSocketRecvBufferSize(uint32 inNewSize)
 {
     int bufSize = inNewSize;
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)

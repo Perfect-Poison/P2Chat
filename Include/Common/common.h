@@ -5,7 +5,7 @@
  * \author	BrianYi
  * \date	2017/07/11
  *
- * \brief	此文件为整个项目的公共文件
+ * \brief	此文件为整个项目的公共头文件
  */
 
 //-------------------------------
@@ -40,9 +40,6 @@ P2_NAMESPACE_BEG
 
 //*******************************
 // 宏定义 区
-
-#define P2CHAT_DEBUG 1
-
 
 constexpr size_t kAssertBuffSize = 512;
 
@@ -101,8 +98,7 @@ enum
 
 //*******************************
 // 常量 区
-const uint16 SERVER_PORT_FOR_TCP = 6001;
-const uint16 SERVER_PORT_FOR_UDP = 6051;
+
 
 
 //*******************************

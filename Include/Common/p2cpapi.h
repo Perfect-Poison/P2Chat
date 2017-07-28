@@ -11,7 +11,6 @@
 #include "Common/common.h"
 #include "Common/uthash.h"
 #include <map>
-
 P2_NAMESPACE_BEG
 
 typedef void* attr_data;

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1085</width>
-    <height>449</height>
+    <width>727</width>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -182,9 +182,6 @@
            <widget class="QTableWidget" name="attrsTable">
             <property name="contextMenuPolicy">
              <enum>Qt::CustomContextMenu</enum>
-            </property>
-            <property name="sizeAdjustPolicy">
-             <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
             </property>
             <property name="alternatingRowColors">
              <bool>true</bool>
@@ -372,7 +369,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
    <attribute name="dockWidgetArea">
-    <number>2</number>
+    <number>8</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QGridLayout" name="gridLayout_4">
@@ -389,7 +386,7 @@
        </property>
        <layout class="QGridLayout" name="gridLayout_9">
         <item row="0" column="0">
-         <widget class="QTextEdit" name="logTextEdit">
+         <widget class="LogTextEdit" name="logTextEdit">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -412,6 +409,13 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>LogTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>logtextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="p2test.qrc"/>
  </resources>

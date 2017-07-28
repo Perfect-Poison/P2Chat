@@ -3,8 +3,9 @@
 P2_NAMESPACE_BEG
 
 UDPSocket::UDPSocket(int inSocketID):
-    EventContext(inSocketID)
+    Event(inSocketID)
 {
+    SetEventName("UDPSocket");
 }
 
 
@@ -21,7 +22,7 @@ void UDPSocket::Open()
             printf("UDPSocket::Open ÒÑ¾­ÓÐsocket %u\n", fSocketID);
     }
 
-    CommonSocket::Open(SOCK_DGRAM, IPPROTO_UDP);
+    Socket::Open(SOCK_DGRAM, IPPROTO_UDP);
 }
 
 void UDPSocket::Bind(const USHORT& inPort)

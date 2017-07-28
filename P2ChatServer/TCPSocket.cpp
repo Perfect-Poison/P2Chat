@@ -4,9 +4,10 @@
 P2_NAMESPACE_BEG
 
 TCPSocket::TCPSocket(int inSocketID):
-    EventContext(inSocketID),
+    Event(inSocketID),
     fConnClosed(false)
 {
+    SetEventName("TCPSocket");
 }
 
 TCPSocket::~TCPSocket()
@@ -22,13 +23,13 @@ void TCPSocket::Open()
             printf("TCPSocket::Open ÒÑ¾­ÓÐsocket %u\n", fSocketID);
     }
 
-    CommonSocket::Open(SOCK_STREAM, IPPROTO_TCP);
+    Socket::Open(SOCK_STREAM, IPPROTO_TCP);
 }
 
 void TCPSocket::Listen(const USHORT& inPort)
 {
 
-    CommonSocket::_Bind(inPort);
+    Socket::_Bind(inPort);
 
     if (::listen(this->fSocketID, kListenQueueLength) != 0)
     {

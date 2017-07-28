@@ -1,17 +1,16 @@
 /********************************************************************
 	日期:	2016/12/14 11:06:05
-	文件名:	CommonSocket.h
+	文件名:	Socket.h
 	作者:	BrianYi
 	
-	用途:	TCP和UDP类的公共基类，用于封装socket处理
+	用途:	TCPSocket和UDPSocket类的公共基类，用于封装socket处理
 *********************************************************************/
 #pragma once
-#include "common.h"
 #include "Address.h"
 
 P2_NAMESPACE_BEG
 
-class CommonSocket
+class Socket
 {
 public:
     enum
@@ -34,8 +33,8 @@ public:
         kInvalidSocketID = -1
     };
 public:
-    CommonSocket(int inSocketID);
-    ~CommonSocket();
+    Socket(int inSocketID);
+    ~Socket();
 	void SetIOType(IOType inIOType);
     void ReuseAddr();
     void NoDelay();
