@@ -1,4 +1,5 @@
 #include "UDPSocket.h"
+#include "UDPSession.h"
 
 P2_NAMESPACE_BEG
 
@@ -83,9 +84,9 @@ void UDPSocket::ProcessEvent(int eventBits)
 //             printf("[error]: UDPSocket::ProcessEvent 已经有task了\n");
 //     }
 
-    UDPTask *udpTask = new UDPTask(this);
+    UDPSession *udpSession = new UDPSession(this);
 //    this->SetTask(udpTask);
-    udpTask->Signal(eventBits);
+    udpSession->Signal(eventBits);
 }
 
 P2_NAMESPACE_END

@@ -1,7 +1,6 @@
 #pragma once
 #include "Event.h"
 #include "Socket.h"
-#include "TCPTask.h"
 P2_NAMESPACE_BEG
 
 #if P2CHAT_DEBUG

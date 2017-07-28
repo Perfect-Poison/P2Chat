@@ -16,7 +16,7 @@ inline MessageAttr *CreateMessageAttr(size_t attrSize)
 Message::Message()
 {
     fCode = 0;
-    fFlags = 0;
+    fFlags = mf_none;
     fSize = 0;
     fMsgID = 0;
     fAttrNum = 0;
@@ -103,7 +103,7 @@ Message::~Message()
 
 MESSAGE* Message::CreateMessage()
 {
-    fSize = MESSAGE_HEADER_SIZE + CalculateTotalAttrSize(fAttrs, false);
+    fSize = GetSize();
     MESSAGE *msg = (MESSAGE *)malloc(fSize);
     msg->code = htons(fCode);
     msg->flags = htons(fFlags);

@@ -5,7 +5,42 @@ P2_NAMESPACE_BEG
 static Mutex sAtomicMutex;
 static HWND sMsgWindow = nullptr;
 
-void * memdup(const void *data, size_t size)
+char *bin_to_str(const BYTE* pData, size_t size, char *pStr, bool hasSeparator/* = true*/)
+{
+    size_t i;
+    char *pCurr;
+    const char* kHEXChars = { "0123456789ABCDEF" };
+    for (i = 0, pCurr = pStr; i < size; i++)
+    {
+        *pCurr++ = kHEXChars[pData[i] >> 4];
+        *pCurr++ = kHEXChars[pData[i] & 0xF];
+        if (hasSeparator)
+            *pCurr++ = ' ';
+    }
+    *pCurr = 0;
+    return pStr;
+}
+
+size_t str_to_bin(const char* pStr, BYTE *pData, size_t size)
+{
+    size_t i;
+    const char *pCurr;
+
+    memset(pData, 0, size);
+    for (i = 0, pCurr = pStr; (i < size) && (*pCurr != 0); i++)
+    {
+        pData[i] = hex2bin(*pCurr) << 4;
+        pCurr++;
+        if (*pCurr != 0)
+        {
+            pData[i] |= hex2bin(*pCurr);
+            pCurr++;
+        }
+    }
+    return i;
+}
+
+void *memdup(const void *data, size_t size)
 {
     void *p = malloc(size);
     memcpy(p, data, size);

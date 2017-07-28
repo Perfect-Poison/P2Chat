@@ -3,20 +3,20 @@
 
 P2_NAMESPACE_BEG
 
-//#if P2CHAT_DEBUG
-#define TCPTASK_DEBUG 1
-// #else
-// #define TCPTASK_DEBUG 0
-// #endif
+#if P2CHAT_DEBUG
+#define TCPSESSION_DEBUG 1
+#else
+#define TCPSESSION_DEBUG 0
+#endif
 
 
 class TCPSocket;
-class TCPTask :
+class TCPSession :
     public Task
 {
 public:
-    TCPTask(TCPSocket *tcpSocket);
-    virtual ~TCPTask();
+    TCPSession(TCPSocket *tcpSocket);
+    virtual ~TCPSession();
     virtual int64 Run();
 private:
     TCPSocket *fTCPSocket;

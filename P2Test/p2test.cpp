@@ -300,8 +300,12 @@ void P2Test::readPendingDatagrams()
         QNetworkDatagram datagram = fUdpSocket->receiveDatagram();
         QString remoteHost = datagram.senderAddress().toString();
         quint16 remotePort = datagram.senderPort();
-        QString hexData = datagram.data().toHex().data();
-        hexData = hexData.toUpper();
+        
+        char hexStr[1500 * 2 + 1];
+        ::memset(hexStr, 0, sizeof(hexStr));
+        bin_to_str((BYTE *)datagram.data().data(), datagram.data().size(), hexStr);
+        QString hexData = hexStr;
+
         ui.logTextEdit->append(QString("[RecvFr(%1:%2):%3B]S->C:%4").arg(remoteHost).arg(remotePort).arg(recvSize).arg(hexData));
     }
 
@@ -318,9 +322,12 @@ void P2Test::sendDatagrams()
     quint16 remotePort = ui.portLineEdit->text().toUShort();
     int ret = fUdpSocket->writeDatagram(data, msgSize, remoteHost, remotePort);
     assert(ret != -1);
-    QByteArray byteData((char*)msg, msgSize);
-    QString hexData = byteData.toHex().data();
-    hexData = hexData.toUpper();
+
+    char hexStr[1500 * 2 + 1];
+    ::memset(hexStr, 0, sizeof(hexStr));
+    bin_to_str((BYTE *)msg, msgSize, hexStr);
+    QString hexData = hexStr;
+
     ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
     safe_free(msg);
 }

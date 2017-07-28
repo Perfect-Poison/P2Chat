@@ -64,6 +64,8 @@ constexpr size_t kAssertBuffSize = 512;
 
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
 
+#define hex2bin(x)  ((((x) >= '0') && ((x) <= '9')) ? ((x) - '0') : (((toupper(x) >= 'A') && (toupper(x) <= 'F')) ? (toupper(x) - 'A' + 10) : 0))
+
 //*******************************
 // 类型定义 区
 typedef unsigned char   uint8;
@@ -103,6 +105,12 @@ enum
 
 //*******************************
 // 全局 区
+/**
+ *	字符串操作相关函数
+ */
+char *bin_to_str(const BYTE* pData, size_t size, char *pStr, bool hasSeparator = true);
+size_t str_to_bin(const char* pStr, BYTE *pData, size_t size);
+
 
 /**
  *	内存操作相关函数

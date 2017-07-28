@@ -167,6 +167,7 @@ public:
     void SetCode(msg_code msgCode) { fCode = msgCode; }
     msg_flags GetFlags() const { return fFlags;  }
     void SetFlags(msg_flags msgFlags) { fFlags = msgFlags; }
+    msg_size GetSize() { fSize = MESSAGE_HEADER_SIZE + CalculateTotalAttrSize(fAttrs, false); return fSize; }
     msg_id GetID() const { return fMsgID; }
     void SetID(msg_id msgID) { fMsgID = msgID; }
     bool IsBinary() const { return (fFlags & mf_binary) ? true : false; }

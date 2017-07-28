@@ -34,9 +34,6 @@ void TCPListenerSocket::ProcessEvent(int eventBits)
     theTCPClient->NoDelay();
     theTCPClient->KeepAlive();
     theTCPClient->SetSocketSendBufferSize(kMaxSendBufSize);
-
-//     TCPTask *theTCPTask = new TCPTask(theTCPClient);
-//     theTCPClient->SetTask(theTCPTask);
     theTCPClient->RequestEvent(EV_RE);
 
     this->RequestEvent(EV_RE);

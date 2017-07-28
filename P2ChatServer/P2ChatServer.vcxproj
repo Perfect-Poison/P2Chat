@@ -166,9 +166,9 @@
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TCPListenerSocket.cpp" />
     <ClCompile Include="TCPSocket.cpp" />
-    <ClCompile Include="TCPTask.cpp" />
+    <ClCompile Include="TCPSession.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
-    <ClCompile Include="UDPTask.cpp" />
+    <ClCompile Include="UDPSession.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
@@ -181,9 +181,9 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TCPListenerSocket.h" />
     <ClInclude Include="TCPSocket.h" />
-    <ClInclude Include="TCPTask.h" />
+    <ClInclude Include="TCPSession.h" />
     <ClInclude Include="UDPSocket.h" />
-    <ClInclude Include="UDPTask.h" />
+    <ClInclude Include="UDPSession.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

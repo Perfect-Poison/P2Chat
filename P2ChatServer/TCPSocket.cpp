@@ -1,5 +1,5 @@
 #include "TCPSocket.h"
-
+#include "TCPSession.h"
 
 P2_NAMESPACE_BEG
 
@@ -95,9 +95,9 @@ void TCPSocket::SetConnectionClose()
 
 void TCPSocket::ProcessEvent(int eventBits)
 {
-    TCPTask *task = new TCPTask(this);
+    TCPSession *tcpSession = new TCPSession(this);
     //this->SetTask(task);
-    task->Signal(eventBits);
+    tcpSession->Signal(eventBits);
 }
 
 P2_NAMESPACE_END
