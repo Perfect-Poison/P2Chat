@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
+    <ClInclude Include="p2server_version.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="ConnectionPool.h" />
     <ClInclude Include="Event.h" />

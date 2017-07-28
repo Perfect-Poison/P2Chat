@@ -1,0 +1,7 @@
+#pragma once
+
+
+#define P2CHAT_SERVER_VERSION_MAJOR     0
+#define P2CHAT_SERVER_VERSION_MINOR     0
+#define P2CHAT_SERVER_VERSION_STRING    _T("0.0.1")
+

@@ -89,5 +89,8 @@
     <ClInclude Include="Event.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="p2server_version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
