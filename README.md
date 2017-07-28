@@ -22,13 +22,13 @@
 **至此，编译环境就搭好了**
 
 **常用的git命令：**<br>
-**git pull origin master:** 更新本地代码<br>
-**git branch xxx:** 新建分支xxx<br>
-**git checkout xxx:** 切换到xxx分支<br>
-**git push origin xxx:** 将分支xxx的代码提交到远程仓库<br>
-**git status:** 查看当前有变化的文件<br>
-**git add .:** 将本地所有文件加入到索引列表(以后只要修改或者删除这些文件都会有记录)<br>
-**git commit -m "此次修改的内容":** 将修改的内容提交到本地仓库<br>
+**git pull origin master :** 更新本地代码<br>
+**git branch xxx :** 新建分支xxx<br>
+**git checkout xxx :** 切换到xxx分支<br>
+**git push origin xxx :** 将分支xxx的代码提交到远程仓库<br>
+**git status :** 查看当前有变化的文件<br>
+**git add . :** 将本地所有文件加入到索引列表(以后只要修改或者删除这些文件都会有记录)<br>
+**git commit -m "此次修改的内容" :** 将修改的内容提交到本地仓库<br>
 大概流程：**获取远程代码(git pull origin master) -> 修改本地代码 -> 提交到本地仓库(git commit) -> 提交到远程仓库(git push)** <br>
 git还有很多命令，但工作中最常用到的只有这些命令，如果对于git内部运行机制或者命令感兴趣的话，可以看看**Pro Git:** http://git.oschina.net/progit/ <br>
 
