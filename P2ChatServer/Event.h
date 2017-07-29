@@ -8,13 +8,9 @@ P2_NAMESPACE_BEG
 
 #if P2CHAT_DEBUG
 #define EVENT_DEBUG 1
-#else
-#define EVENT_DEBUG 0
-#endif
-
-#if P2CHAT_DEBUG
 #define EVENTTHREAD_DEBUG 1
 #else
+#define EVENT_DEBUG 0
 #define EVENTTHREAD_DEBUG 0
 #endif
 

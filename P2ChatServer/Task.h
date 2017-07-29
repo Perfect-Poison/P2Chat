@@ -10,19 +10,11 @@ P2_NAMESPACE_BEG
 
 #if P2CHAT_DEBUG
 #define TASK_DEBUG 1
-#else
-#define TASK_DEBUG 0
-#endif
-
-#if P2CHAT_DEBUG
 #define TASKTHREAD_DEBUG 1
-#else
-#define TASKTHREAD_DEBUG 0
-#endif
-
-#if P2CHAT_DEBUG
 #define TASKTHREADPOOL_DEBUG 1
 #else
+#define TASK_DEBUG 0
+#define TASKTHREAD_DEBUG 0
 #define TASKTHREADPOOL_DEBUG 0
 #endif
 

@@ -22,11 +22,11 @@ int64 UDPSession::Run()
     else if (eventbits & kReadEvent)
     {
         Message *message = ReadMessage();
-        switch (message->GetCode()) 
+        Message *responseMsg = new Message;
+        switch (message->GetCode())
         {
         case MSG_SERVER_GET_INFO:
         {
-            Message *responseMsg = new Message;
             responseMsg->SetCode(MSG_REQUEST_SUCCEED);
             responseMsg->SetFlags(mf_none);
             responseMsg->SetID(message->GetID());
@@ -34,13 +34,17 @@ int64 UDPSession::Run()
             break;
         }
         case MSG_LOGIN:
+        {
+
             break;
+        }
         case MSG_USER_GET_INFO:
             break;
         default:
             break;
         }
-
+        safe_free(responseMsg);
+        safe_free(message);
         //fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
         return -1;
