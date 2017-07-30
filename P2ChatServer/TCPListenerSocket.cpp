@@ -27,7 +27,6 @@ int64 TCPListenerSocket::Run()
 
 void TCPListenerSocket::ProcessEvent(int eventBits)
 {
-    Task *theTask = nullptr;
     TCPSocket *theTCPClient = AcceptClient();
     if (TCPLISTENERSOCKET_DEBUG)
         printf("TCPListenerSocket::ProcessEvent 收到来自地址%s:%d的TCP连接\n", theTCPClient->GetRemoteIP().c_str(), theTCPClient->GetRemotePort());
@@ -36,7 +35,7 @@ void TCPListenerSocket::ProcessEvent(int eventBits)
     theTCPClient->SetSocketSendBufferSize(kMaxSendBufSize);
     theTCPClient->RequestEvent(EV_RE);
 
-    this->RequestEvent(EV_RE);
+    this->RequestEvent(eventBits);
 }
 
 P2_NAMESPACE_END

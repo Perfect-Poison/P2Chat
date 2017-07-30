@@ -3,7 +3,7 @@
 P2_NAMESPACE_BEG
 
 unsigned int Event::sEventID = WM_USER;
-EventThread* EventThread::Instance = nullptr;
+EventThread* EventThread::sInstance = nullptr;
 
 Event::Event(int inSocketID):
     Socket(inSocketID),
@@ -57,7 +57,7 @@ void Event::AddRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex); 
     if (fTaskSet.count(task))
     {
-        printf("[error]Event::AddInRelatedTask 引用任务已经存在\n");
+        printf("[error]Event::AddInRelatedTask 引用任务0x%x已经存在\n", task);
         throw;
     }
     fTaskSet.insert(task);
@@ -68,7 +68,7 @@ void Event::RemoveRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex);
     if (!fTaskSet.count(task))
     {
-        printf("[error]Event::RemoveOutRelatedTask 引用任务不存在\n");
+        printf("[error]Event::RemoveOutRelatedTask 引用任务0x%x不存在\n", task);
         throw;
     }
     fTaskSet.erase(task);

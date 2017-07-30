@@ -1,5 +1,5 @@
-#include "Common/common.h"
-#include "Common/Mutex.h"
+#include "p2_util.h"
+#include "Mutex.h"
 P2_NAMESPACE_BEG
 
 static Mutex sAtomicMutex;

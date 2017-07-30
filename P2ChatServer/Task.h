@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Common/Mutex.h"
-#include "Common/Cond.h"
 #include "p2server_common.h"
-#include <queue>
+#include "Cond.h"
+#include "Mutex.h"
+#include "Queue.h"
 #include <vector>
 
 P2_NAMESPACE_BEG
@@ -55,12 +55,14 @@ public:
     EventFlags GetEventFlags() const { return fEventFlags & kAliveOff; }
     void SetDeleteEventWhenAllRefTasksFinished(BOOL deleteEvent) { fDeleteEvent = deleteEvent; }
     BOOL IsDeleteEventWhenAllRefTasksFinished() { return fDeleteEvent; }
+    QueueElem* GetQueueElem() { return &fTaskQueueElem; }
 private:
     string fTaskName;
     EventFlags fEventFlags;
     static unsigned int sTaskThreadPicker;
     BOOL fDeleteEvent;
     Event *fEvent;
+    QueueElem fTaskQueueElem;
 };
 
 class TaskThread : public Thread
@@ -72,17 +74,12 @@ public:
             printf("EventThread::EventThread 创建任务线程\n");
     };
     virtual ~TaskThread() { this->StopAndWaitForThread(); };
-    void EnQueue(Task *task);
-    Cond* GetCond() { return &fQueueCond; }
+    QueueBlocking* GetQueue() { return &fTaskQueueB; }
 private:
     virtual void Entry();
     Task* WaitForTask();
-    Task* DeQueueBlocking(int32 inTimeoutInMilSecs);
-    uint32 GetQueueLength();
 private:
-    queue<Task*> fTaskQueue;
-    Mutex fQueueMutex;
-    Cond fQueueCond;
+    QueueBlocking fTaskQueueB;
 };
 
 class TaskThreadPool
@@ -95,7 +92,6 @@ public:
     static Mutex& GetMutex() { return sMutex; };
 private:
     static uint32 sNumTaskThreads;
-/*    static Mutex sMutexRW;*/
     static vector<TaskThread*> sTaskThreadArray;
     static Mutex sMutex;
 };

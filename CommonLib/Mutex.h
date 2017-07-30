@@ -8,8 +8,8 @@
  * \brief	ª•≥‚À¯¿‡
  */
 
-#include "Common/common.h"
-#include "Common/Thread.h"
+#include "p2_common.h"
+#include "Thread.h"
 P2_NAMESPACE_BEG
 
 class Mutex

@@ -72,6 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>$(ProjectName)_d</TargetName>
     <OutDir>..\LibServer\CommonLib\</OutDir>
+    <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\LibServer\CommonLib</OutDir>
@@ -141,19 +142,22 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Include\Common\common.h" />
-    <ClInclude Include="..\Include\Common\Cond.h" />
-    <ClInclude Include="..\Include\Common\Mutex.h" />
-    <ClInclude Include="..\Include\Common\p2cpapi.h" />
-    <ClInclude Include="..\Include\Common\Thread.h" />
-    <ClInclude Include="..\Include\Common\uthash.h" />
+    <ClInclude Include="Cond.h" />
+    <ClInclude Include="Mutex.h" />
+    <ClInclude Include="p2cpapi.h" />
+    <ClInclude Include="p2_common.h" />
+    <ClInclude Include="p2_util.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="Thread.h" />
+    <ClInclude Include="uthash.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Include\Common\common.cpp" />
-    <ClCompile Include="..\Include\Common\Cond.cpp" />
-    <ClCompile Include="..\Include\Common\Mutex.cpp" />
-    <ClCompile Include="..\Include\Common\p2cpapi.cpp" />
-    <ClCompile Include="..\Include\Common\Thread.cpp" />
+    <ClCompile Include="p2_util.cpp" />
+    <ClCompile Include="Cond.cpp" />
+    <ClCompile Include="Mutex.cpp" />
+    <ClCompile Include="p2cpapi.cpp" />
+    <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="Thread.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

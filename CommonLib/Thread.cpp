@@ -1,4 +1,4 @@
-#include "Common/Thread.h"
+#include "Thread.h"
 
 P2_NAMESPACE_BEG
 

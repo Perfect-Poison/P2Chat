@@ -18,39 +18,48 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Include\Common\common.h">
+    <ClInclude Include="Cond.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Cond.h">
+    <ClInclude Include="Mutex.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Mutex.h">
+    <ClInclude Include="p2_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\p2cpapi.h">
+    <ClInclude Include="p2_util.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\Thread.h">
+    <ClInclude Include="p2cpapi.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\Include\Common\uthash.h">
+    <ClInclude Include="Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="uthash.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Include\Common\common.cpp">
+    <ClCompile Include="Cond.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\Cond.cpp">
+    <ClCompile Include="Mutex.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\Mutex.cpp">
+    <ClCompile Include="p2cpapi.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\p2cpapi.cpp">
+    <ClCompile Include="Thread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\Include\Common\Thread.cpp">
+    <ClCompile Include="p2_util.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

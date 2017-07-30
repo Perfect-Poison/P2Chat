@@ -8,8 +8,8 @@
  * \brief	条件变量类
  */
 
-#include "Common/common.h"
-#include "Common/Mutex.h"
+#include "p2_common.h"
+#include "Mutex.h"
 P2_NAMESPACE_BEG
 
 class Cond

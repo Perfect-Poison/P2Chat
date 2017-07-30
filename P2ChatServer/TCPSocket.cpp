@@ -96,7 +96,6 @@ void TCPSocket::SetConnectionClose()
 void TCPSocket::ProcessEvent(int eventBits)
 {
     TCPSession *tcpSession = new TCPSession(this);
-    //this->SetTask(task);
     tcpSession->Signal(eventBits);
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Task.h"
 #include "Address.h"
-#include "Common/p2cpapi.h"
+#include "p2cpapi.h"
 
 P2_NAMESPACE_BEG
 

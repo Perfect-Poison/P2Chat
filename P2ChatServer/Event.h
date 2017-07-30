@@ -1,5 +1,5 @@
 #pragma once
-#include "Common/Thread.h"
+#include "Thread.h"
 #include "Socket.h"
 #include "Task.h"
 #include <map>
@@ -53,9 +53,9 @@ class EventThread :public Thread
 public:
     static EventThread* GetInstance()
     {
-        if (Instance == nullptr)
-            Instance = new EventThread;
-        return Instance;
+        if (sInstance == nullptr)
+            sInstance = new EventThread;
+        return sInstance;
     }
     virtual ~EventThread() {}
     BOOL RegisterEvent(uint32 eventID, Event *event);
@@ -69,7 +69,7 @@ private:
     virtual void Entry();
     map<uint32, Event*> fEventTable;
     Mutex fEventTableMutex;
-    static EventThread *Instance;
+    static EventThread *sInstance;
 };
 
 P2_NAMESPACE_END

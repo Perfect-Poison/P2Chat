@@ -8,8 +8,8 @@
  * \brief	传输协议相关的API和定义
  */
 
-#include "Common/common.h"
-#include "Common/uthash.h"
+#include "p2_util.h"
+#include "uthash.h"
 #include <map>
 P2_NAMESPACE_BEG
 

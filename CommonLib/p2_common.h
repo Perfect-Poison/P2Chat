@@ -1,6 +1,6 @@
 #pragma once
 /*!
- * \file	common.h
+ * \file	p2_common.h
  *
  * \author	BrianYi
  * \date	2017/07/11
@@ -41,30 +41,29 @@ P2_NAMESPACE_BEG
 //*******************************
 // 宏定义 区
 
-constexpr size_t kAssertBuffSize = 512;
-
 #define Assert(condition)    {                              \
                                                                 \
         if (!(condition))                                       \
         {                                                       \
-            char s[kAssertBuffSize];                            \
-            s[kAssertBuffSize -1] = 0;                          \
-            _snprintf_s (s,kAssertBuffSize -1, "_Assert: %s, %d",__FILE__, __LINE__ ); \
+            char s[512];                            \
+            s[512 -1] = 0;                          \
+            _snprintf_s (s,511, "_Assert: %s, %d",__FILE__, __LINE__ ); \
             printf("%s\n", s); \
         }   }
 
 #define AssertV(condition,errNo)    {                                   \
         if (!(condition))                                                   \
         {                                                                   \
-            char s[kAssertBuffSize];                                        \
-            s[kAssertBuffSize -1] = 0;                                      \
-            _snprintf_s ( s,kAssertBuffSize -1, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
+            char s[512];                                        \
+            s[511] = 0;                                      \
+            _snprintf_s ( s,511, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
             printf("%s\n", s); \
         }   }
 
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
 
 #define hex2bin(x)  ((((x) >= '0') && ((x) <= '9')) ? ((x) - '0') : (((toupper(x) >= 'A') && (toupper(x) <= 'F')) ? (toupper(x) - 'A' + 10) : 0))
+#define bin2hex(x)  ((x) < 10 ? ((x) + '0') : ((x) + ('A' - 10)))
 
 //*******************************
 // 类型定义 区
@@ -105,32 +104,6 @@ enum
 
 //*******************************
 // 全局 区
-/**
- *	字符串操作相关函数
- */
-char *bin_to_str(const BYTE* pData, size_t size, char *pStr, bool hasSeparator = true);
-size_t str_to_bin(const char* pStr, BYTE *pData, size_t size);
 
-
-/**
- *	内存操作相关函数
- */
-void *memdup(const void *data, size_t size);
-
-/**
-*	原子操作相关函数
-*/
-unsigned int atomic_add(unsigned int *area, int val);
-unsigned int atomic_or(unsigned int *area, unsigned int val);
-unsigned int atomic_sub(unsigned int *area, int val);
-
-unsigned int compare_and_store(unsigned int oval, unsigned int nval, unsigned int *area);
-
-/**
-*	事件操作相关函数
-*/
-int select_watchevent(struct eventreq *req, int which);
-int select_modwatch(struct eventreq *req, int which);
-int select_waitevent(struct eventreq *req);
 
 P2_NAMESPACE_END

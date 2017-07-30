@@ -8,7 +8,7 @@
  * \brief	œﬂ≥Ã¿‡
  */
 
-#include "Common/common.h"
+#include "p2_common.h"
 P2_NAMESPACE_BEG
 
 class Thread
