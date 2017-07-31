@@ -59,7 +59,7 @@ public:
     QueueElem* GetTail() { if (fLength > 0) return fSentinel.fNext; return nullptr; }
     uint32 GetLength() { return fLength; }
     void Remove(QueueElem* elem);
-    Iterator<QueueElem*>* iterator() { return new Iterator<QueueElem*>(new QueueIterator(this)); }
+    Iterator<QueueElem>* iterator() { return new Iterator<QueueElem>(new QueueIterator(this)); }
 protected:
     QueueElem   fSentinel;
     uint32      fLength;
