@@ -43,12 +43,12 @@ public:
     int32 Size() const;
 protected:
     HashMapBase(uint32 keyLength):fHashData(nullptr), fKeyLength(keyLength) {}
-    void* _Get(const void* key) const;
-    void _Set(const void* key, void* value);
-    void _Remove(const void* key);
-    bool _Contains(const void* key) const;
+    void* Get(const void* key) const;
+    void Set(const void* key, void* value);
+    void Remove(const void* key);
+    bool Contains(const void* key) const;
 private:
-    HashMapEntry *_Find(const void *key) const;
+    HashMapEntry *Find(const void *key) const;
     HashMapEntry *fHashData;
     uint32 fKeyLength;
     friend class HashMapIterator;
@@ -60,10 +60,10 @@ class HashMap : public HashMapBase
 public:
     HashMap() : HashMapBase(sizeof(K)) {};
     virtual ~HashMap() {};
-    V* Get(const K& key) { return (V *)_Get(&key); }
-    void Set(const K& key, V* value) { _Set(&key, (void *)value); }
-    void Remove(const K& key) { _Remove(&key); }
-    bool Contains(const K& key) { return _Contains(&key); }
+    V* Get(const K& key) { return (V *)HashMapBase::Get(&key); }
+    void Set(const K& key, V* value) { HashMapBase::Set(&key, (void *)value); }
+    void Remove(const K& key) { HashMapBase::Remove(&key); }
+    bool Contains(const K& key) { return HashMapBase::Contains(&key); }
     Iterator<Pair<K, V>>* iterator() { return new Iterator<Pair<K, V>>(new HashMapIterator(this)); }
 };
 

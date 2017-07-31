@@ -5,6 +5,9 @@ P2_NAMESPACE_BEG
 static Mutex sAtomicMutex;
 static HWND sMsgWindow = nullptr;
 
+#define EPOCHFILETIME (116444736000000000i64)
+
+
 char *bin_to_str(const BYTE* pData, size_t size, char *pStr, bool hasSeparator/* = true*/)
 {
     size_t i;
@@ -170,5 +173,47 @@ int select_waitevent(struct eventreq *req)
     }
 }
 
+inline int64 GetCurrentTimeMicroS()
+{
+    FILETIME ft;
+    LARGE_INTEGER li;
+    __int64 t;
+
+    ::GetSystemTimeAsFileTime(&ft);
+    li.LowPart = ft.dwLowDateTime;
+    li.HighPart = ft.dwHighDateTime;
+    t = li.QuadPart;
+    t -= EPOCHFILETIME;
+    t /= 10;
+    return t;
+}
+
+inline int64 GetCurrentTimeMilliS()
+{
+    return GetCurrentTimeMicroS() / 1000;
+}
+
+inline int64 GetCurrentTimeS()
+{
+    return GetCurrentTimeMilliS() / 1000;
+}
+
+char* FormatCalendarTime(char *buffer)
+{
+    time_t now = GetCurrentTimeS();
+    struct tm *loc = localtime(&now);
+    strftime(buffer, 32, "%d-%b-%Y %H:%M:%S", loc);
+    return buffer;
+}
+
+char* FormatLogCalendarTime(char *buffer)
+{
+    int64 now = GetCurrentTimeMilliS();
+    time_t t = now / 1000;
+    struct tm *loc = localtime(&t);
+    strftime(buffer, 32, "[%d-%b-%Y %H:%M:%S", loc);
+    snprintf(&buffer[21], 8, ".%03d]", (int)(now % 1000));
+    return buffer;
+}
 
 P2_NAMESPACE_END

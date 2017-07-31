@@ -39,6 +39,13 @@ int select_watchevent(struct eventreq *req, int which);
 int select_modwatch(struct eventreq *req, int which);
 int select_waitevent(struct eventreq *req);
 
-
+/**
+ *	时间相关
+ */
+int64 GetCurrentTimeMicroS();   // 微妙级
+int64 GetCurrentTimeMilliS();   // 毫秒级
+int64 GetCurrentTimeS();        // 秒级
+char* FormatCalendarTime(char *buffer);
+char* FormatLogCalendarTime(char *buffer);
 
 P2_NAMESPACE_END

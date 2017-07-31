@@ -18,19 +18,19 @@ int32 HashMapBase::Size() const
     return HASH_COUNT(fHashData);
 }
 
-void* HashMapBase::_Get(const void* key) const
+void* HashMapBase::Get(const void* key) const
 {
     HashMapEntry* entry;
     HASH_FIND(hh, fHashData, key, fKeyLength, entry);
     return entry ? entry->pair.second : nullptr;
 }
 
-void HashMapBase::_Set(const void* key, void* value)
+void HashMapBase::Set(const void* key, void* value)
 {
     if (key == nullptr)
         return;
 
-    HashMapEntry* entry = _Find(key);
+    HashMapEntry* entry = Find(key);
     if (entry != nullptr)
         entry->pair.second = value;
     else
@@ -50,7 +50,7 @@ void HashMapBase::_Set(const void* key, void* value)
     }
 }
 
-void HashMapBase::_Remove(const void* key)
+void HashMapBase::Remove(const void* key)
 {
     HashMapEntry* entry;
     HASH_FIND(hh, fHashData, key, fKeyLength, entry);
@@ -63,12 +63,12 @@ void HashMapBase::_Remove(const void* key)
     }
 }
 
-bool HashMapBase::_Contains(const void* key) const
+bool HashMapBase::Contains(const void* key) const
 {
-    return _Find(key) != nullptr;
+    return Find(key) != nullptr;
 }
 
-HashMapEntry* HashMapBase::_Find(const void *key) const
+HashMapEntry* HashMapBase::Find(const void *key) const
 {
     if (key == nullptr)
         return nullptr;
