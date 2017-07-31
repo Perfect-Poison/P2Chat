@@ -143,6 +143,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cond.h" />
+    <ClInclude Include="HashMap.h" />
+    <ClInclude Include="Iterator.h" />
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="p2cpapi.h" />
     <ClInclude Include="p2_common.h" />
@@ -152,6 +154,8 @@
     <ClInclude Include="uthash.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HashMap.cpp" />
+    <ClCompile Include="Iterator.cpp" />
     <ClCompile Include="p2_util.cpp" />
     <ClCompile Include="Cond.cpp" />
     <ClCompile Include="Mutex.cpp" />

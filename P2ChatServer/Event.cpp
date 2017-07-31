@@ -57,7 +57,7 @@ void Event::AddRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex); 
     if (fTaskSet.count(task))
     {
-        printf("[error]Event::AddInRelatedTask 引用任务0x%x已经存在\n", task);
+        printf("[error]Event::AddInRelatedTask 引用任务0x%x已经存在\n", (uint32)task);
         throw;
     }
     fTaskSet.insert(task);
@@ -68,7 +68,7 @@ void Event::RemoveRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex);
     if (!fTaskSet.count(task))
     {
-        printf("[error]Event::RemoveOutRelatedTask 引用任务0x%x不存在\n", task);
+        printf("[error]Event::RemoveOutRelatedTask 引用任务0x%x不存在\n", (uint32)task);
         throw;
     }
     fTaskSet.erase(task);

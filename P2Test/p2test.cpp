@@ -179,7 +179,7 @@ void P2Test::init()
 void P2Test::msgUpdate(const QByteArray& rawMsg)
 {
     if (fMessage)
-        safe_free(fMessage);
+        safe_delete(fMessage);
     fMessage = new Message((MESSAGE *)rawMsg.data());
 }
 
@@ -212,7 +212,7 @@ void P2Test::delOneRow()
 void P2Test::msgDataUpdate()
 {
     if (fMessage)
-        safe_free(fMessage);
+        safe_delete(fMessage);
     fMessage = new Message;
     fMessage->SetCode(ui.msgCodeCombo->currentData(Qt::UserRole).toUInt());
     fMessage->SetFlags(ui.msgFlagsCombo->currentData(Qt::UserRole).toUInt());
@@ -287,7 +287,7 @@ void P2Test::msgDataUpdate()
     }
     ui.msgDataTextEdit->setText(hexDataTrimed);
     ui.msgLengthLabel->setText(QString::number(msgSize));
-    safe_free(msg);
+    safe_delete(msg);
 }
 
 void P2Test::readPendingDatagrams()
@@ -329,6 +329,6 @@ void P2Test::sendDatagrams()
     QString hexData = hexStr;
 
     ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
-    safe_free(msg);
+    safe_delete(msg);
 }
 

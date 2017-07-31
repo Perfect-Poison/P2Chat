@@ -61,6 +61,7 @@ P2_NAMESPACE_BEG
         }   }
 
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
+#define safe_delete(x)  { if (x) { delete x; x = nullptr; } }
 
 #define hex2bin(x)  ((((x) >= '0') && ((x) <= '9')) ? ((x) - '0') : (((toupper(x) >= 'A') && (toupper(x) <= 'F')) ? (toupper(x) - 'A' + 10) : 0))
 #define bin2hex(x)  ((x) < 10 ? ((x) + '0') : ((x) + ('A' - 10)))

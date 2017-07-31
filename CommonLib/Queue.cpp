@@ -56,17 +56,17 @@ QueueElem* QueueBlocking::DeQueueBlocing(int32 inTimeoutMilSecs)
 {
     MutexLocker locker(&fMutex);
     
-    if (fQueue.GetLength() == 0)
+    if (fLength == 0)
         fCond.Wait(&fMutex, inTimeoutMilSecs);
 
-    QueueElem* elem = fQueue.DeQueue();
+    QueueElem* elem = Queue::DeQueue();
     return elem;
 }
 
 QueueElem* QueueBlocking::DeQueue()
 {
     MutexLocker locker(&fMutex);
-    QueueElem* elem = fQueue.DeQueue();
+    QueueElem* elem = Queue::DeQueue();
     return elem;
 }
 
@@ -74,7 +74,7 @@ void QueueBlocking::EnQueue(QueueElem* elem)
 {
     {
         MutexLocker locker(&fMutex);
-        fQueue.EnQueue(elem);
+        Queue::EnQueue(elem);
     }
     fCond.Signal();
 }

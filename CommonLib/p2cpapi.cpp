@@ -97,7 +97,7 @@ Message::~Message()
     HASH_ITER(hh, fAttrs, entry, tmp)
     {
         HASH_DEL(fAttrs, entry);
-        safe_free(entry);
+        safe_delete(entry);
     }
 }
 
@@ -222,7 +222,7 @@ void Message::set(attr_code attrCode, attr_datatype dataType, const void *value,
     if (curr) 
     {
         HASH_DEL(fAttrs, curr);
-        safe_free(curr);
+        safe_delete(curr);
         fAttrNum--;
     }
     HASH_ADD_INT(fAttrs, code, entry);

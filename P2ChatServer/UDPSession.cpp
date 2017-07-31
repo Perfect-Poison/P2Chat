@@ -43,8 +43,8 @@ int64 UDPSession::Run()
         default:
             break;
         }
-        safe_free(responseMsg);
-        safe_free(message);
+        safe_delete(responseMsg);
+        safe_delete(message);
         //fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
         return -1;
@@ -100,7 +100,7 @@ void UDPSession::SendMessage(Message *message)
             printf("[error]UDPSession::SendMessage ·¢ËÍÏûÏ¢Ê§°Ü\n");
     }
 
-    safe_free(rawMsg);
+    safe_delete(rawMsg);
 }
 
 P2_NAMESPACE_END

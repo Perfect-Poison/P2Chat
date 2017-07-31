@@ -1,6 +1,7 @@
 #pragma once
 #include "p2_common.h"
 #include "Cond.h"
+#include "Iterator.h"
 P2_NAMESPACE_BEG
 
 class Queue;
@@ -58,6 +59,7 @@ public:
     QueueElem* GetTail() { if (fLength > 0) return fSentinel.fNext; return nullptr; }
     uint32 GetLength() { return fLength; }
     void Remove(QueueElem* elem);
+    Iterator<QueueElem*>* iterator() { return new Iterator<QueueElem*>(new QueueIterator(this)); }
 protected:
     QueueElem   fSentinel;
     uint32      fLength;
@@ -71,7 +73,7 @@ protected:
  * \author	BrianYi
  * \date 	2017/07/30
 */
-class QueueBlocking
+class QueueBlocking : public Queue
 {
 public:
     QueueBlocking() {}
@@ -82,49 +84,47 @@ public:
     void EnQueue(QueueElem* elem);
 
     Cond*   GetCond() { return &fCond; }
-    Queue*  GetQueue() { return &fQueue; }
 private:
     Cond    fCond;
     Mutex   fMutex;
-    Queue   fQueue;
 };
 
-/*!
- * \class	QueueIter
- *
- * \brief	迭代器类，用于遍历Queue中的元素
- *
- * \author	BrianYi
- * \date 	2017/07/30
-*/
-class QueueIter
-{
-public:
-    QueueIter(Queue* inQueue) : fQueueP(inQueue), fCurrentElemP(inQueue->GetHead()) {}
-    QueueIter(Queue* inQueue, QueueElem* startElemP) : fQueueP(inQueue)
-    {
-        if (startElemP)
-        {
-            Assert(startElemP->IsMemberOf(*inQueue));
-            fCurrentElemP = startElemP;
-        }
-        else
-            fCurrentElemP = nullptr;
-    }
-    ~QueueIter() {}
-
-    void Reset() { fCurrentElemP = fQueueP->GetHead(); }
-    QueueElem* GetCurrent() { return fCurrentElemP; }
-    void Next()
-    {
-        if (fCurrentElemP == fQueueP->GetTail())
-            fCurrentElemP = nullptr;
-        else
-            fCurrentElemP = fCurrentElemP->Prev();
-    }
-    BOOL IsDone() { return fCurrentElemP == nullptr; }
-private:
-    Queue*      fQueueP;
-    QueueElem*  fCurrentElemP;
-};
+// /*!
+//  * \class	QueueIter
+//  *
+//  * \brief	迭代器类，用于遍历Queue中的元素
+//  *
+//  * \author	BrianYi
+//  * \date 	2017/07/30
+// */
+// class QueueIter
+// {
+// public:
+//     QueueIter(Queue* inQueue) : fQueueP(inQueue), fCurrentElemP(inQueue->GetHead()) {}
+//     QueueIter(Queue* inQueue, QueueElem* startElemP) : fQueueP(inQueue)
+//     {
+//         if (startElemP)
+//         {
+//             Assert(startElemP->IsMemberOf(*inQueue));
+//             fCurrentElemP = startElemP;
+//         }
+//         else
+//             fCurrentElemP = nullptr;
+//     }
+//     ~QueueIter() {}
+// 
+//     void Reset() { fCurrentElemP = fQueueP->GetHead(); }
+//     QueueElem* GetCurrent() { return fCurrentElemP; }
+//     void Next()
+//     {
+//         if (fCurrentElemP == fQueueP->GetTail())
+//             fCurrentElemP = nullptr;
+//         else
+//             fCurrentElemP = fCurrentElemP->Prev();
+//     }
+//     BOOL IsDone() { return fCurrentElemP == nullptr; }
+// private:
+//     Queue*      fQueueP;
+//     QueueElem*  fCurrentElemP;
+// };
 P2_NAMESPACE_END

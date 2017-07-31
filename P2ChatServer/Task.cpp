@@ -30,7 +30,7 @@ Task::~Task()
         fEvent->RemoveRefTask(this);
 
     if (fEvent->RefTaskCount() == 0 && fDeleteEvent)
-        safe_free(fEvent);
+        safe_delete(fEvent);
 }
 
 void Task::Signal(EventFlags eventFlags)
@@ -84,7 +84,7 @@ void TaskThread::Entry()
                     printf("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n", GetThreadID(), theTask->GetTaskName().c_str(), time(0));
                 theTask->SetTaskName(theTask->GetTaskName() + " deleted");
                 theTask->SetDead();
-                safe_free(theTask);
+                safe_delete(theTask);
 
                 doneProcessingEvent = TRUE;
             }
@@ -112,14 +112,14 @@ Task* TaskThread::WaitForTask()
             if (theTask->IsAlive())
             {
                 if (TASKTHREAD_DEBUG)
-                    printf("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetQueue()->GetLength());
+                    printf("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetLength());
                 return theTask;
             }
             else
             {
                 if (TASKTHREAD_DEBUG)
-                    printf("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetQueue()->GetLength());
-                safe_free(theTask);
+                    printf("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n", GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetLength());
+                safe_delete(theTask);
             }
         }
 
