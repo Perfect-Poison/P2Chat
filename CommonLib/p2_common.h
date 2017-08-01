@@ -37,10 +37,6 @@ using namespace std;
 P2_NAMESPACE_BEG
 
 
-
-//*******************************
-// 宏定义 区
-
 #define Assert(condition)    {                              \
                                                                 \
         if (!(condition))                                       \
@@ -66,8 +62,7 @@ P2_NAMESPACE_BEG
 #define hex2bin(x)  ((((x) >= '0') && ((x) <= '9')) ? ((x) - '0') : (((toupper(x) >= 'A') && (toupper(x) <= 'F')) ? (toupper(x) - 'A' + 10) : 0))
 #define bin2hex(x)  ((x) < 10 ? ((x) + '0') : ((x) + ('A' - 10)))
 
-//*******************************
-// 类型定义 区
+
 typedef unsigned char   uint8;
 typedef signed char     int8;
 typedef unsigned short  uint16;
@@ -89,22 +84,47 @@ struct eventreq
     int          er_eventbits;
 };
 
-//*******************************
-// 枚举 区
+
 enum
 {
     EV_RE = FD_READ | FD_ACCEPT | FD_CLOSE,
     EV_WR = FD_WRITE | FD_CONNECT
 };
 
+/**
+*	log flags
+*/
+enum
+{
+    LOG_PRINT_TO_CONSOLE    = (uint32)0x00000001,
+    LOG_IS_OPEN             = (uint32)0x80000000
+};
+typedef uint32 log_flags;
 
-//*******************************
-// 常量 区
+/**
+*	log types
+*/
+enum
+{
+    LOG_DEBUG   = (WORD)0x0001,
+    LOG_INFO    = (WORD)0x0002,
+    LOG_WARNING = (WORD)0x0003,
+    LOG_ERROR   = (WORD)0x0004
+};
+typedef WORD log_type;
+
+/**
+*	log rotation policy
+*/
+enum
+{
+    LOG_ROTATION_DISABLED   = (WORD)0x0000,
+    LOG_ROTATION_DAILY      = (WORD)0x0001,
+    LOG_ROTATION_BY_SIZE    = (WORD)0x0002
+};
+typedef WORD log_rotation_policy;
 
 
-
-//*******************************
-// 全局 区
-
+#define MAX_LOG_HISTORY_SIZE 128
 
 P2_NAMESPACE_END

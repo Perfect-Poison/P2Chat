@@ -71,7 +71,7 @@ public:
     TaskThread() : Thread() 
     {
         if (TASKTHREAD_DEBUG)
-            printf("EventThread::EventThread 创建任务线程\n");
+            log_debug("EventThread::EventThread 创建任务线程\n");
     };
     virtual ~TaskThread() { this->StopAndWaitForThread(); };
     QueueBlocking* GetQueue() { return &fTaskQueueB; }

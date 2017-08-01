@@ -48,4 +48,11 @@ int64 GetCurrentTimeS();        // 秒级
 char* FormatCalendarTime(char *buffer);
 char* FormatLogCalendarTime(char *buffer);
 
+
+/**
+ *	日志相关
+ */
+void log_write(log_type logType, const char *format, ...);
+void log_debug(const char *format, ...);
+
 P2_NAMESPACE_END

@@ -64,7 +64,7 @@ private:
     EventThread() : Thread()
     {
         if (EVENTTHREAD_DEBUG)
-            printf("EventThread::EventThread 创建事件(监听)线程\n");
+            log_debug("EventThread::EventThread 创建事件(监听)线程\n");
     }
     virtual void Entry();
     map<uint32, Event*> fEventTable;

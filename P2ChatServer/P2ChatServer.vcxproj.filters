@@ -51,9 +51,6 @@
     <ClCompile Include="TCPSession.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="LogThread.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h">
@@ -93,9 +90,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TCPSession.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="LogThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

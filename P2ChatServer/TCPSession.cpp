@@ -24,7 +24,7 @@ int64 TCPSession::Run()
     {
         fTCPSocket->SetConnectionClose();
         if (TCPSESSION_DEBUG)
-            printf("TCPSession::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
+            log_debug("TCPSession::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
 
         SetDeleteEventWhenAllRefTasksFinished(TRUE);
 
@@ -55,7 +55,7 @@ int64 TCPSession::Run()
     else 
     {
         if (TCPSESSION_DEBUG)
-            printf("TCPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
+            log_debug("TCPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
         return -1;
     }
     return -1;

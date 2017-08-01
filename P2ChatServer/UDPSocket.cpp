@@ -20,7 +20,7 @@ void UDPSocket::Open()
     if (UDPSOCKET_DEBUG)
     {
         if (fSocketID != kInvalidSocketID)
-            printf("UDPSocket::Open 已经有socket %u\n", fSocketID);
+            log_debug("UDPSocket::Open 已经有socket %u\n", fSocketID);
     }
 
     Socket::Open(SOCK_DGRAM, IPPROTO_UDP);
@@ -36,7 +36,8 @@ int32 UDPSocket::SendTo(const Address& inAddress, const char* inContent, const s
     int32 sentBytes = ::sendto(this->fSocketID, inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
     if (sentBytes == SOCKET_ERROR)
     {
-        printf("[send] with %s:%u cannot finish!\n", inAddress.GetIP().c_str(), inAddress.GetPort());
+        if (UDPSOCKET_DEBUG)
+            log_debug("UDPSocket::SendTo send to %s:%u cannot finish!\n", inAddress.GetIP().c_str(), inAddress.GetPort());
     }
     return sentBytes;
 }
@@ -47,7 +48,8 @@ int32 UDPSocket::SendTo(const string& inIP, const USHORT& inPort, const char* in
     int32 sentBytes = ::sendto(this->fSocketID, inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
     if (sentBytes == SOCKET_ERROR)
     {
-        printf("[send] with %s:%u cannot finish!\n", inIP.c_str(), inPort);
+        if (UDPSOCKET_DEBUG)
+            log_debug("UDPSocket::SendTo send to %s:%u cannot finish!\n", inIP.c_str(), inPort);
     }
     return sentBytes;
 }

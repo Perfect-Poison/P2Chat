@@ -7,8 +7,13 @@
 *********************************************************************/
 #pragma once
 #include "Address.h"
-
 P2_NAMESPACE_BEG
+
+#if P2CHAT_DEBUG
+#define SOCKET_DEBUG 1
+#else
+#define SOCKET_DEBUG 0
+#endif
 
 class Socket
 {

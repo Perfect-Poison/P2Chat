@@ -20,7 +20,7 @@ void TCPSocket::Open()
     if (TCPSOCKET_DEBUG)
     {
         if (fSocketID != kInvalidSocketID)
-            printf("TCPSocket::Open 已经有socket %u\n", fSocketID);
+            log_debug("TCPSocket::Open 已经有socket %u\n", fSocketID);
     }
 
     Socket::Open(SOCK_STREAM, IPPROTO_TCP);
@@ -33,7 +33,8 @@ void TCPSocket::Listen(const USHORT& inPort)
 
     if (::listen(this->fSocketID, kListenQueueLength) != 0)
     {
-        printf("[TCP] listen_on_port error!\n");
+        if (TCPSOCKET_DEBUG)
+            log_debug("TCPSocket::Listen listen_on_port error!\n");
         return;
     }
 }
@@ -70,7 +71,8 @@ int32 TCPSocket::Send(const char* inData, const size_t inSize)
     int32 sentBytes = ::send(this->fSocketID, inData, inSize, 0);
     if (sentBytes == SOCKET_ERROR)
     {
-        printf("[send] with %s:%u cannot finish!\n", this->fRemoteAddress.GetIP().c_str(), this->fRemoteAddress.GetPort());
+        if (TCPSOCKET_DEBUG)
+            log_debug("TCPSocket::Send send to %s:%u cannot finish!\n", this->fRemoteAddress.GetIP().c_str(), this->fRemoteAddress.GetPort());
     }
     return sentBytes;
 }

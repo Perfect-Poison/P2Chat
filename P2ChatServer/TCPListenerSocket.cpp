@@ -29,7 +29,7 @@ void TCPListenerSocket::ProcessEvent(int eventBits)
 {
     TCPSocket *theTCPClient = AcceptClient();
     if (TCPLISTENERSOCKET_DEBUG)
-        printf("TCPListenerSocket::ProcessEvent 收到来自地址%s:%d的TCP连接\n", theTCPClient->GetRemoteIP().c_str(), theTCPClient->GetRemotePort());
+        log_debug("TCPListenerSocket::ProcessEvent 收到来自地址%s:%d的TCP连接\n", theTCPClient->GetRemoteIP().c_str(), theTCPClient->GetRemotePort());
     theTCPClient->NoDelay();
     theTCPClient->KeepAlive();
     theTCPClient->SetSocketSendBufferSize(kMaxSendBufSize);

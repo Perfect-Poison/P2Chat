@@ -80,7 +80,7 @@ Message::Message(MESSAGE *msg)
                     entry->data.str.data[i] = ntohs(entry->data.str.data[i]);
                 break;
             default:
-                printf("Message::Message no such data type!\n");
+                log_debug("Message::Message no such data type!\n");
                 break;
             }
             HASH_ADD_INT(fAttrs, code, entry);
@@ -155,7 +155,7 @@ MESSAGE* Message::CreateMessage()
                 attrDest->str.size = htonl(attrDest->str.size);
                 break;
             default:
-                printf("Message::CreateMessage no such data type!\n");
+                log_debug("Message::CreateMessage no such data type!\n");
                 break;
             }
             pDest += attrSize;
@@ -208,7 +208,7 @@ void Message::set(attr_code attrCode, attr_datatype dataType, const void *value,
             memcpy(entry->data.str.data, value, length * 2);
         break;
     default:
-        printf("Message::set no such data type!\n");
+        log_debug("Message::set no such data type!\n");
         break;
     }
     entry->code = attrCode;
@@ -272,7 +272,7 @@ void* Message::get(attr_code attrCode, attr_datatype dataType, void *buffer/* = 
         return (void*)wstr;
         break;
     default:
-        printf("Message::get no such data type!\n");
+        log_debug("Message::get no such data type!\n");
         break;
     }
     return nullptr;

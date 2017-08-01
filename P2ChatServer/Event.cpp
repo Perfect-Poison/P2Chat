@@ -22,7 +22,7 @@ Event::~Event()
 void Event::RequestEvent(int theMask)
 {
     if (EVENT_DEBUG)
-        printf("Event::RequestEvent 请求事件%s, EventName=%s CurTime=%I64d\n", theMask == EV_RE ? "EV_RE" : "EV_WR", GetEventName().c_str(), time(0));
+        log_debug("Event::RequestEvent 请求事件%s, EventName=%s CurTime=%I64d\n", theMask == EV_RE ? "EV_RE" : "EV_WR", GetEventName().c_str(), time(0));
     MutexLocker locker(&fEventMutex);
     if (fWatchEventCalled)
     {
@@ -38,7 +38,7 @@ void Event::RequestEvent(int theMask)
             fEventID = WM_USER;
 
         if (!EventThread::GetInstance()->RegisterEvent(fEventID, this))
-            printf("[error]Event::RequestEvent EventID %d 已经存在\n", fEventID);
+            log_debug("[error]Event::RequestEvent EventID %d 已经存在\n", fEventID);
 
         ::memset(&fEventReq, 0, sizeof(fEventReq));
         fEventReq.er_handle = fSocketID;
@@ -57,7 +57,7 @@ void Event::AddRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex); 
     if (fTaskSet.count(task))
     {
-        printf("[error]Event::AddInRelatedTask 引用任务0x%x已经存在\n", (uint32)task);
+        log_debug("[error]Event::AddInRelatedTask 引用任务0x%x已经存在\n", (uint32)task);
         throw;
     }
     fTaskSet.insert(task);
@@ -68,7 +68,7 @@ void Event::RemoveRefTask(Task *task)
     MutexLocker locker(&fTaskSetMutex);
     if (!fTaskSet.count(task))
     {
-        printf("[error]Event::RemoveOutRelatedTask 引用任务0x%x不存在\n", (uint32)task);
+        log_debug("[error]Event::RemoveOutRelatedTask 引用任务0x%x不存在\n", (uint32)task);
         throw;
     }
     fTaskSet.erase(task);
@@ -113,7 +113,7 @@ void EventThread::Entry()
             if (theEvent != nullptr)
             {
                 if (EVENTTHREAD_DEBUG)
-                    printf("[事件线程%u]EventThread::Entry 触发事件，EventName=%s EventID=%u CurTime=%I64d\n", GetThreadID(), theEvent->GetEventName().c_str(), theCurrentEvent.er_eventid, time(0));
+                    log_debug("[事件线程%u]EventThread::Entry 触发事件，EventName=%s EventID=%u CurTime=%I64d\n", GetThreadID(), theEvent->GetEventName().c_str(), theCurrentEvent.er_eventid, time(0));
                 theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
             }
         }
@@ -126,14 +126,14 @@ BOOL EventThread::RegisterEvent(uint32 eventID, Event *event)
     if (fEventTable.count(eventID))
     {
         if (EVENTTHREAD_DEBUG)
-            printf("[error][事件线程%u]EventThread::RegisterEvent 注册事件失败，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
+            log_debug("[error][事件线程%u]EventThread::RegisterEvent 注册事件失败，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
         return FALSE;
     }
     else
     {
         fEventTable[eventID] = event;
         if (EVENTTHREAD_DEBUG)
-            printf("[事件线程%u]EventThread::RegisterEvent 注册事件，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
+            log_debug("[事件线程%u]EventThread::RegisterEvent 注册事件，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
         return TRUE;
     }
 }
@@ -146,14 +146,14 @@ BOOL EventThread::UnRegisterEvent(uint32 eventID)
         Event *event = fEventTable[eventID];
         fEventTable.erase(eventID);
         if (EVENTTHREAD_DEBUG)
-            printf("[事件线程%u]EventThread::UnRegisterEvent 注销事件，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
+            log_debug("[事件线程%u]EventThread::UnRegisterEvent 注销事件，EventName=%s EventID=%u\n", GetThreadID(), event->GetEventName().c_str(), eventID);
         //delete event;
         return TRUE;
     }
     else
     {
         if (EVENTTHREAD_DEBUG)
-            printf("[error][事件线程%u]EventThread::RegisterEvent 注销事件失败，EventID=%u\n", GetThreadID(), eventID);
+            log_debug("[error][事件线程%u]EventThread::RegisterEvent 注销事件失败，EventID=%u\n", GetThreadID(), eventID);
         return FALSE;
     }
 }

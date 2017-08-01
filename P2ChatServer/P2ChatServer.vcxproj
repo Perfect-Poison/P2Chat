@@ -158,7 +158,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
-    <ClCompile Include="LogThread.cpp" />
     <ClCompile Include="Socket.cpp" />
     <ClCompile Include="ConnectionPool.cpp" />
     <ClCompile Include="Event.cpp" />
@@ -173,7 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h" />
-    <ClInclude Include="LogThread.h" />
     <ClInclude Include="p2server_version.h" />
     <ClInclude Include="Socket.h" />
     <ClInclude Include="ConnectionPool.h" />
