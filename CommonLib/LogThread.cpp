@@ -203,11 +203,11 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     FormatLogCalendarTime(buffer);
     if (fLogFileHandle != nullptr)
     {
-        fprintf(fLogFileHandle, "%s %s%s", buffer, logLevel, msg.c_str());
+        fprintf(fLogFileHandle, "%s %s %s", buffer, logLevel, msg.c_str());
         fflush(fLogFileHandle);
     }
     if (fFlags & LOG_PRINT_TO_CONSOLE)
-        printf("%s %s%s", buffer, logLevel, msg.c_str());
+        printf("%s %s %s", buffer, logLevel, msg.c_str());
 
     if ((fLogFileHandle != nullptr) && (fRotationPolicy == LOG_ROTATION_BY_SIZE) && (fMaxLogSize != 0))
     {
