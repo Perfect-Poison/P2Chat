@@ -75,7 +75,7 @@ void LogThread::SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLog
         //         case LOG_ROTATION_DISABLED:
         //             break;
     case LOG_ROTATION_DAILY:
-        if (dailySuffix != nullptr)
+        if ((dailySuffix != nullptr) && (dailySuffix[0] != 0))
             strncpy(fDailyLogSuffix, dailySuffix, strlen(dailySuffix) + 1);
         SetDayStart();
         break;
@@ -176,7 +176,7 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     char buffer[64];
     char logLevel[64];
     log_type logType = logRecord->GetType();
-    const char *message = logRecord->GetMessage().c_str();
+    string msg = logRecord->GetMessage();
     switch (logType)
     {
     case LOG_DEBUG:
@@ -203,11 +203,11 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     FormatLogCalendarTime(buffer);
     if (fLogFileHandle != nullptr)
     {
-        fprintf(fLogFileHandle, "%s %s%s", buffer, logLevel, message);
+        fprintf(fLogFileHandle, "%s %s%s", buffer, logLevel, msg.c_str());
         fflush(fLogFileHandle);
     }
     if (fFlags & LOG_PRINT_TO_CONSOLE)
-        printf("%s %s%s", buffer, logLevel, message);
+        printf("%s %s%s", buffer, logLevel, msg.c_str());
 
     if ((fLogFileHandle != nullptr) && (fRotationPolicy == LOG_ROTATION_BY_SIZE) && (fMaxLogSize != 0))
     {

@@ -239,12 +239,21 @@ void log_write(log_type logType, const char *format, ...)
 
 void log_debug(const char *format, ...)
 {
+    LogThread *logThread = LogThread::GetInstance();
+    log_flags flags = logThread->GetFlags();
+    if (!(flags & LOG_IS_OPEN))
+    {
+        printf("[error]log_write 未启动日志线程\n");
+        return;
+    }
+
     char buffer[4096];
     va_list args;
     va_start(args, format);
     vsprintf_s(buffer, sizeof(buffer), format, args);
+    LogRecord *logRecord = new LogRecord(buffer, LOG_DEBUG);
+    logThread->EnQueueLogRecord(logRecord);
     va_end(args);
-    log_write(LOG_DEBUG, "s", buffer);
 }
 
 P2_NAMESPACE_END

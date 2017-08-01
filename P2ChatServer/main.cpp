@@ -17,7 +17,7 @@ int main()
         printf("WSAStartup error!\n");
 
     LogThread *logThread = LogThread::GetInstance();
-    if (logThread->LogOpen("P2Chat", LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, ""))
+    if (logThread->LogOpen("p2log", LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, ""))
         logThread->Start();
     else
         printf("[error] 日志文件打开失败\n");
