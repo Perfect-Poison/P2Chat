@@ -99,6 +99,7 @@ Message::~Message()
         HASH_DEL(fAttrs, entry);
         safe_delete(entry);
     }
+    safe_free(fData);
 }
 
 MESSAGE* Message::CreateMessage()

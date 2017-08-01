@@ -150,7 +150,7 @@ void UDPSession::SendMessage(Message *message)
             log_debug("[error]UDPSession::SendMessage ·¢ËÍÏûÏ¢Ê§°Ü\n");
     }
 
-    safe_delete(rawMsg);
+    safe_free(rawMsg);
 }
 void  UDPSession::SuccessfulRespondMsg(Message *responseMsg, Message *message)
 {
