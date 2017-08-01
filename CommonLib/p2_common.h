@@ -36,6 +36,7 @@ using namespace std;
 
 P2_NAMESPACE_BEG
 
+#define P2CHAT_DEBUG 1
 
 #define Assert(condition)    {                              \
                                                                 \

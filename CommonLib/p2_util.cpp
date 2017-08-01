@@ -220,9 +220,6 @@ char* FormatLogCalendarTime(char *buffer)
 
 void log_write(log_type logType, const char *format, ...)
 {
-    va_list args;
-    char szBuffer[4096];
-
     LogThread *logThread = LogThread::GetInstance();
     log_flags flags = logThread->GetFlags();
     if (!(flags & LOG_IS_OPEN))
@@ -231,19 +228,21 @@ void log_write(log_type logType, const char *format, ...)
         return;
     }
 
+    char buffer[4096];
+    va_list args;
     va_start(args, format);
-    vsprintf_s(szBuffer, format, args);
-    va_end(args);
-    LogRecord *logRecord = new LogRecord(szBuffer, logType);
+    vsprintf_s(buffer, sizeof(buffer), format, args);
+    LogRecord *logRecord = new LogRecord(buffer, logType);
     logThread->EnQueueLogRecord(logRecord);
+    va_end(args);
 }
 
 void log_debug(const char *format, ...)
 {
+    char buffer[4096];
     va_list args;
     va_start(args, format);
-    char buffer[4096];
-    vsprintf_s(buffer, format, args);
+    vsprintf_s(buffer, sizeof(buffer), format, args);
     va_end(args);
     log_write(LOG_DEBUG, "s", buffer);
 }

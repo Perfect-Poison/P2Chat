@@ -21,7 +21,7 @@ int main()
         logThread->Start();
     else
         printf("[error] 日志文件打开失败\n");
-
+    Sleep(10);
 
     EventThread *eventThread = EventThread::GetInstance();
     

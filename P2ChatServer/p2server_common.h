@@ -11,8 +11,6 @@
 #include "p2_common.h"
 #include "p2_util.h"
 
-#define P2CHAT_DEBUG 0
-
 P2_NAMESPACE_BEG
 
 
