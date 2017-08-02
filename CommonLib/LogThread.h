@@ -54,6 +54,8 @@ public:
     int GetMaxLogSize() const { return fMaxLogSize; }
     char *GetDailySuffix() { return fDailyLogSuffix; }
     void EnQueueLogRecord(LogRecord *logRecord);
+    void SetDebugLevel(int debugLevel) { fDebugLevel = debugLevel; }
+    int GetDebugLevel() const { return fDebugLevel; }
 private:
     LogThread();
     virtual void Entry();
@@ -72,6 +74,7 @@ private:
     int fMaxLogSize;    // 只在LOG_ROTATION_BY_SIZE下有效
     time_t fCurrentDayStart;
     int fLogHistorySize;
+    int fDebugLevel;
 };
 
 P2_NAMESPACE_END

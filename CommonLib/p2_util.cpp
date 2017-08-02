@@ -218,6 +218,28 @@ char* FormatLogCalendarTime(char *buffer)
     return buffer;
 }
 
+bool log_open(const char *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix)
+{
+    LogThread *logThread = LogThread::GetInstance();
+    log_flags logFlags = logThread->GetFlags();
+    if (logFlags & LOG_IS_OPEN)
+    {
+        printf("日志文件已经打开，请先关闭\n");
+        return false;
+    }
+    if (logThread->LogOpen(logName, flags, rotationPolicy, maxLogSize, historySize, dailySuffix))
+        logThread->Start();
+    else
+        return false;
+    return true;
+}
+
+void log_close()
+{
+    LogThread *logThread = LogThread::GetInstance();
+    logThread->LogClose();
+}
+
 void log_write(log_type logType, const char *format, ...)
 {
     LogThread *logThread = LogThread::GetInstance();
@@ -237,9 +259,12 @@ void log_write(log_type logType, const char *format, ...)
     va_end(args);
 }
 
-void log_debug(const char *format, ...)
+void log_debug(int level, const char *format, ...)
 {
     LogThread *logThread = LogThread::GetInstance();
+    if (level < logThread->GetDebugLevel())
+        return;
+
     log_flags flags = logThread->GetFlags();
     if (!(flags & LOG_IS_OPEN))
     {
@@ -254,6 +279,17 @@ void log_debug(const char *format, ...)
     LogRecord *logRecord = new LogRecord(buffer, LOG_DEBUG);
     logThread->EnQueueLogRecord(logRecord);
     va_end(args);
+}
+
+void log_set_debug_level(int level)
+{
+    if ((level >= 0) && (level <= 9))
+        LogThread::GetInstance()->SetDebugLevel(level);
+}
+
+int log_get_debug_level()
+{
+    return LogThread::GetInstance()->GetDebugLevel();
 }
 
 P2_NAMESPACE_END

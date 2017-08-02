@@ -16,10 +16,8 @@ int main()
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
         printf("WSAStartup error!\n");
 
-    LogThread *logThread = LogThread::GetInstance();
-    if (logThread->LogOpen("p2log", LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, ""))
-        logThread->Start();
-    else
+    log_set_debug_level(1);
+    if (!log_open("p2log", LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, ""))
         printf("[error] 日志文件打开失败\n");
     Sleep(10);
 

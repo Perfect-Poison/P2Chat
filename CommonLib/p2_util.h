@@ -51,8 +51,15 @@ char* FormatLogCalendarTime(char *buffer);
 
 /**
  *	日志相关
+ *  debug level: 0~9
+ *  0~4 可以忽略的
+ *  5~6 一般错误
+ *  7~9 严重错误会导致系统运行不正常或崩溃
  */
+bool log_open(const char *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix);
+void log_close();
 void log_write(log_type logType, const char *format, ...);
-void log_debug(const char *format, ...);
-
+void log_debug(int level, const char *format, ...);
+void log_set_debug_level(int level);
+int log_get_debug_level();
 P2_NAMESPACE_END

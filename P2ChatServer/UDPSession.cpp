@@ -89,7 +89,7 @@ int64 UDPSession::Run()
 		{
 			UnSuccessfulRespondMsg(responseMsg, message);
             if (UDPSESSION_DEBUG)
-			    log_debug("UDPSession::Run 非法请求！");
+			    log_debug(7, "UDPSession::Run 非法请求！");
 			break;
 		}
        }
@@ -102,7 +102,7 @@ int64 UDPSession::Run()
     else
     {
         if (UDPSESSION_DEBUG)
-            log_debug("UDPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
+            log_debug(7, "UDPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
         return -1;
     }
     return -1;
@@ -122,7 +122,7 @@ Message* UDPSession::ReadMessage()
             char hexStr[UDPSocket::kMaxUDPPacket * 2 + 1];
             ::memset(hexStr, 0, sizeof(hexStr));
             bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
-            log_debug("UDPSession::ReadMessage 收到%s:%u发送的%uB消息[raw:%s]\n", fRemoteAddress.GetIP().c_str(), fRemoteAddress.GetPort(), recvSize, hexStr);
+            log_debug(0, "UDPSession::ReadMessage 收到%s:%u发送的%uB消息[raw:%s]\n", fRemoteAddress.GetIP().c_str(), fRemoteAddress.GetPort(), recvSize, hexStr);
         }
         Message *message = new Message(rawMsg);
         return message;
@@ -144,10 +144,10 @@ void UDPSession::SendMessage(Message *message)
             char hexStr[UDPSocket::kMaxUDPPacket * 2 + 1];
             ::memset(hexStr, 0, sizeof(hexStr));
             bin_to_str((BYTE *)rawMsg, sendSize, hexStr);
-            log_debug("UDPSession::SendMessage 已向%s:%u发送%uB消息[raw:%s]\n", fRemoteAddress.GetIP().c_str(), fRemoteAddress.GetPort(), sendSize, hexStr);
+            log_debug(0, "UDPSession::SendMessage 已向%s:%u发送%uB消息[raw:%s]\n", fRemoteAddress.GetIP().c_str(), fRemoteAddress.GetPort(), sendSize, hexStr);
         }
         else 
-            log_debug("[error]UDPSession::SendMessage 发送消息失败\n");
+            log_debug(7, "[error]UDPSession::SendMessage 发送消息失败\n");
     }
 
     safe_free(rawMsg);

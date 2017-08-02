@@ -16,6 +16,7 @@ LogThread::LogThread() : Thread()
     fMaxLogSize = 4096 * 1024;    // 只在LOG_ROTATION_BY_SIZE下有效
     fCurrentDayStart = 0;
     fLogHistorySize = 4;
+    fDebugLevel = 0;
 }
 
 void LogThread::Entry()
