@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 /*!
  * \file	p2cpapi.h
  *
  * \author	BrianYi
  * \date	2017/07/17
  *
- * \brief	´«ÊäĞ­ÒéÏà¹ØµÄAPIºÍ¶¨Òå
+ * \brief	ä¼ è¾“åè®®ç›¸å…³çš„APIå’Œå®šä¹‰
  */
 
 #include "p2_util.h"
@@ -26,20 +26,20 @@ const uint16 ATTR_HEADER_SIZE = 6;
  */
 enum
 {
-    MSG_SERVER_GET_INFO,    // »ñÈ¡·şÎñ¶ËĞÅÏ¢
-    MSG_SERVER_SET_INFO,    // ÉèÖÃ·şÎñ¶ËĞÅÏ¢
-    MSG_USER_GET_INFO,      // »ñÈ¡ÓÃ»§ĞÅÏ¢
-    MSG_USER_SET_INFO,      // ÉèÖÃÓÃ»§ĞÅÏ¢
-    MSG_GROUP_GET_INFO,     // »ñÈ¡Èº×éĞÅÏ¢
-    MSG_GROUP_SET_INFO,     // ÉèÖÃÈº×éĞÅÏ¢
-    MSG_LOGIN,              // ÓÃ»§µÇÂ¼ÏûÏ¢
-    MSG_LOGOUT,             // ÓÃ»§ÍË³öÏûÏ¢
-    MSG_USER_MSG_PACKET,    // ÓÃ»§ÏûÏ¢°ü
-    MSG_GROUP_MSG_PACKET,   // Èº×éÏûÏ¢°ü
-    MSG_USER_ONLINE,        // ÓÃ»§ÔÚÏßÏûÏ¢
-    MSG_USER_OFFLINE,       // ÓÃ»§ÀëÏßÏûÏ¢
-    MSG_REQUEST_SUCCEED,    // ÇëÇó³É¹¦ÏûÏ¢
-    MSG_REQUEST_FAILED      // ÇëÇóÊ§°ÜÏûÏ¢
+    MSG_SERVER_GET_INFO,    // è·å–æœåŠ¡ç«¯ä¿¡æ¯
+    MSG_SERVER_SET_INFO,    // è®¾ç½®æœåŠ¡ç«¯ä¿¡æ¯
+    MSG_USER_GET_INFO,      // è·å–ç”¨æˆ·ä¿¡æ¯
+    MSG_USER_SET_INFO,      // è®¾ç½®ç”¨æˆ·ä¿¡æ¯
+    MSG_GROUP_GET_INFO,     // è·å–ç¾¤ç»„ä¿¡æ¯
+    MSG_GROUP_SET_INFO,     // è®¾ç½®ç¾¤ç»„ä¿¡æ¯
+    MSG_LOGIN,              // ç”¨æˆ·ç™»å½•æ¶ˆæ¯
+    MSG_LOGOUT,             // ç”¨æˆ·é€€å‡ºæ¶ˆæ¯
+    MSG_USER_MSG_PACKET,    // ç”¨æˆ·æ¶ˆæ¯åŒ…
+    MSG_GROUP_MSG_PACKET,   // ç¾¤ç»„æ¶ˆæ¯åŒ…
+    MSG_USER_ONLINE,        // ç”¨æˆ·åœ¨çº¿æ¶ˆæ¯
+    MSG_USER_OFFLINE,       // ç”¨æˆ·ç¦»çº¿æ¶ˆæ¯
+    MSG_REQUEST_SUCCEED,    // è¯·æ±‚æˆåŠŸæ¶ˆæ¯
+    MSG_REQUEST_FAILED      // è¯·æ±‚å¤±è´¥æ¶ˆæ¯
 };
 typedef uint16 msg_code;
 
@@ -48,18 +48,18 @@ typedef uint16 msg_code;
  */
 enum
 {
-    ATTR_SERVER_INFO,       // ·şÎñ¶ËĞÅÏ¢ÊôĞÔ
+    ATTR_SERVER_INFO,       // æœåŠ¡ç«¯ä¿¡æ¯å±æ€§
 
-    ATTR_SESSION_ID,        // »á»°ID
+    ATTR_SESSION_ID,        // ä¼šè¯ID
 
-    ATTR_USER_ID,           // ÓÃ»§ID
-    ATTR_USER_NAME,         // ÓÃ»§Ãû
-    ATTR_USER_PASSWORD,     // ÓÃ»§ÃÜÂë
+    ATTR_USER_ID,           // ç”¨æˆ·ID
+    ATTR_USER_NAME,         // ç”¨æˆ·å
+    ATTR_USER_PASSWORD,     // ç”¨æˆ·å¯†ç 
 
-    ATTR_GROUP_ID,          // Èº×éID
-    ATTR_GROUP_NAME,        // Èº×éÃû
+    ATTR_GROUP_ID,          // ç¾¤ç»„ID
+    ATTR_GROUP_NAME,        // ç¾¤ç»„å
 
-    ATTR_MSG_PACKET         // ÏûÏ¢°ü
+    ATTR_MSG_PACKET         // æ¶ˆæ¯åŒ…
 };
 typedef uint32 attr_code;
 
@@ -68,13 +68,13 @@ typedef uint32 attr_code;
  */
 enum
 {
-    dt_int16,       // 16Î»(signed/unsigned)ÕûĞÍ
-    dt_int32,       // 32Î»(signed/unsigned)ÕûĞÍ
-    dt_int64,       // 64Î»(signed/unsigned)ÕûĞÍ
-    dt_float32,     // 32Î»¸¡µãĞÍ
-    dt_float64,     // 64Î»¸¡µãĞÍ
-    dt_binary,      // ¶ş½øÖÆÀàĞÍ
-    dt_string       // ¿í×Ö·û´®ÀàĞÍ
+    dt_int16,       // 16ä½(signed/unsigned)æ•´å‹
+    dt_int32,       // 32ä½(signed/unsigned)æ•´å‹
+    dt_int64,       // 64ä½(signed/unsigned)æ•´å‹
+    dt_float32,     // 32ä½æµ®ç‚¹å‹
+    dt_float64,     // 64ä½æµ®ç‚¹å‹
+    dt_binary,      // äºŒè¿›åˆ¶ç±»å‹
+    dt_string       // å®½å­—ç¬¦ä¸²ç±»å‹
 };
 typedef uint8 attr_datatype;
 
@@ -84,8 +84,8 @@ typedef uint8 attr_datatype;
 enum 
 {
     mf_none = 0x0000,           // 
-    mf_binary = 0x0001,         // ÊôĞÔÓò´æ´¢¶ş½øÖÆ
-    mf_end_of_file = 0x0002,    // ÎÄ¼ş½áÎ²
+    mf_binary = 0x0001,         // å±æ€§åŸŸå­˜å‚¨äºŒè¿›åˆ¶
+    mf_end_of_file = 0x0002,    // æ–‡ä»¶ç»“å°¾
 };
 typedef uint16 msg_flags;
 
@@ -94,7 +94,7 @@ typedef uint16 msg_flags;
  */
 enum
 {
-    af_none = 0x00,         // ¶ÔÓÚÕûĞÍ£¬±íÊ¾signed£¬ÆäËûÀàĞÍÎŞº¬Òå
+    af_none = 0x00,         // å¯¹äºæ•´å‹ï¼Œè¡¨ç¤ºsignedï¼Œå…¶ä»–ç±»å‹æ— å«ä¹‰
     af_signed = 0x01,       // signed
     af_unsigned = 0x02,     // unsigned
 };
@@ -123,7 +123,7 @@ typedef struct
         struct  
         {
             uint32 size;
-            WORD data[1]; // stringÀàĞÍÈ«Îª¿í×Ö·û£¬Õ¼2×Ö½Ú
+            WORD data[1]; // stringç±»å‹å…¨ä¸ºå®½å­—ç¬¦ï¼Œå 2å­—èŠ‚
         }str;
     };
 }MESSAGE_ATTR;
@@ -154,7 +154,7 @@ typedef struct
 }MessageAttr;
 
 /**
- *	ÏûÏ¢´¦ÀíÀà
+ *	æ¶ˆæ¯å¤„ç†ç±»
  */
 class Message
 {

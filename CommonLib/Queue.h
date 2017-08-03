@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "p2_common.h"
 #include "Cond.h"
 #include "Iterator.h"
@@ -9,7 +9,7 @@ class Queue;
 /*!
  * \class	QueueElem
  *
- * \brief	¶ÓÁĞÔªËØÀà
+ * \brief	é˜Ÿåˆ—å…ƒç´ ç±»
  *
  * \author	BrianYi
  * \date 	2017/07/30
@@ -41,7 +41,7 @@ private:
 /*!
  * \class	Queue
  *
- * \brief	¶ÓÁĞÀà
+ * \brief	é˜Ÿåˆ—ç±»
  *
  * \author	BrianYi
  * \date 	2017/07/30
@@ -68,7 +68,7 @@ protected:
 /*!
  * \class	QueueBlocking
  *
- * \brief	×èÈû¶ÓÁĞÀà
+ * \brief	é˜»å¡é˜Ÿåˆ—ç±»
  *
  * \author	BrianYi
  * \date 	2017/07/30
@@ -92,7 +92,7 @@ private:
 // /*!
 //  * \class	QueueIter
 //  *
-//  * \brief	µü´úÆ÷Àà£¬ÓÃÓÚ±éÀúQueueÖĞµÄÔªËØ
+//  * \brief	è¿­ä»£å™¨ç±»ï¼Œç”¨äºéå†Queueä¸­çš„å…ƒç´ 
 //  *
 //  * \author	BrianYi
 //  * \date 	2017/07/30

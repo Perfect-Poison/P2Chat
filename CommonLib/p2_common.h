@@ -1,15 +1,16 @@
-#pragma once
+ï»¿#pragma once
+
 /*!
  * \file	p2_common.h
  *
  * \author	BrianYi
  * \date	2017/07/11
  *
- * \brief	´ËÎÄ¼þÎªÕû¸öÏîÄ¿µÄ¹«¹²Í·ÎÄ¼þ
+ * \brief	æ­¤æ–‡ä»¶ä¸ºæ•´ä¸ªé¡¹ç›®çš„å…¬å…±å¤´æ–‡ä»¶
  */
 
 //-------------------------------
-// ±ê×¼Í·ÎÄ¼þ Çø
+// æ ‡å‡†å¤´æ–‡ä»¶ åŒº
 //-------------------------------
 #include <iostream>
 #include <intsafe.h>
@@ -76,7 +77,7 @@ typedef float           float32;
 typedef double          float64;
 
 /**
- *	ÊÂ¼þ½á¹¹Ìå
+ *	äº‹ä»¶ç»“æž„ä½“
  */
 struct eventreq 
 {

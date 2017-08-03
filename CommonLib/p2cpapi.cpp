@@ -1,4 +1,4 @@
-#include "p2cpapi.h"
+ï»¿#include "p2cpapi.h"
 
 P2_NAMESPACE_BEG
 
@@ -201,7 +201,7 @@ void Message::set(attr_code attrCode, attr_datatype dataType, const void *value,
             memcpy(entry->data.bin.data, value, size);
         break;
     case dt_string:
-        // stringÀàÐÍ¶¼¶¨ÒåÎª¿í×Ö·û
+        // stringç±»åž‹éƒ½å®šä¹‰ä¸ºå®½å­—ç¬¦
         length = size;
         entry = CreateMessageAttr(ATTR_HEADER_SIZE + 4 + length * 2);
         entry->data.str.size = length * 2;
