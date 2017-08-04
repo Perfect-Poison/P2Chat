@@ -11,7 +11,7 @@
 ## 二. 环境搭建
 
 1. 所有开发环境所需的软件安装完后，新建个文件夹用于放项目代码，双击进文件夹，然后右键**Git Bash Here**
-2. 键入命令：**git clone git@gitlab.com:Perfect-Poison/P2Chat.git**，将项目代码从远程提取到本地
+2. 键入命令：**git@github.com:Perfect-Poison/P2Chat.git**，将项目代码从远程提取到本地
 3. 安装**Package**文件夹内，**mysql-connector-c-6.1.10-win32**，请不要修改安装路径，默认安装即可。
 4. VS2015或以上版本的环境搭建，这里统称vs，vs下需要安装对应的插件来支持Qt开发：<br>
 	**vs2015:** http://download.qt.io/official_releases/vsaddin/qt-vs-tools-msvc2015-2.1.1.vsix <br>
