@@ -101,7 +101,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\lib;..\LibServer\mysql;..\LibServer\mysqlpp;..\LibServer\CommonLib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>CommonLib_d.lib;mysqlpp_d.lib;libmysql.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CommonLib_d.lib;libmysql.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -136,7 +136,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\lib;..\LibServer\mysql;..\LibServer\mysqlpp;..\LibServer\CommonLib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>CommonLib.lib;mysqlpp.lib;libmysql.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CommonLib.lib;libmysql.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -158,8 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Address.cpp" />
+    <ClCompile Include="Session.cpp" />
     <ClCompile Include="Socket.cpp" />
-    <ClCompile Include="ConnectionPool.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ServerInterface.cpp" />
@@ -173,8 +173,8 @@
   <ItemGroup>
     <ClInclude Include="Address.h" />
     <ClInclude Include="p2server_version.h" />
+    <ClInclude Include="Session.h" />
     <ClInclude Include="Socket.h" />
-    <ClInclude Include="ConnectionPool.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="p2server_common.h" />
     <ClInclude Include="ServerInterface.h" />

@@ -1,13 +1,9 @@
 #include "p2_common.h"
-#include "mysqlpp/mysql++.h"
-#include "ConnectionPool.h"
 #include "Event.h"
 #include "TCPListenerSocket.h"
 #include "Task.h"
 #include "UDPSocket.h"
 #include "LogThread.h"
-using namespace mysqlpp;
-
 P2_NAMESPACE_USE
 
 int main()

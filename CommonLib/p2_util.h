@@ -62,4 +62,16 @@ void log_write(log_type logType, const char *format, ...);
 void log_debug(int level, const char *format, ...);
 void log_set_debug_level(int level);
 int log_get_debug_level();
+
+/**
+ *	×Ö·û¼¯Ïà¹Ø
+ */
+size_t utf8_to_mb(const char *src, int srcLen, char *dst, int dstLen);
+size_t mb_to_utf8(const char *src, int srcLen, char *dst, int dstLen);
+
+WCHAR *wstr_from_mb(const char *pszString);
+WCHAR *wstr_from_utf8(const char *pszString);
+char *mb_from_wstr(const WCHAR *pwszString);
+char *utf8_from_wstr(const WCHAR *pwszString);
+
 P2_NAMESPACE_END

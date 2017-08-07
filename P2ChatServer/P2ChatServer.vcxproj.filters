@@ -24,9 +24,6 @@
     <ClCompile Include="Address.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectionPool.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -51,12 +48,12 @@
     <ClCompile Include="TCPSession.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Address.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ConnectionPool.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ServerInterface.h">
@@ -90,6 +87,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TCPSession.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

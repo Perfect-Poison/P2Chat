@@ -292,4 +292,58 @@ int log_get_debug_level()
     return LogThread::GetInstance()->GetDebugLevel();
 }
 
+size_t utf8_to_mb(const char *src, int srcLen, char *dst, int dstLen)
+{
+    int len = (int)strlen(src) + 1;
+    WCHAR *buffer = (len <= 32768) ? (WCHAR *)alloca(len) : (WCHAR *)malloc(len);
+    MultiByteToWideChar(CP_UTF8, 0, src, -1, buffer, len);
+    return WideCharToMultiByte(CP_ACP, WC_DEFAULTCHAR | WC_COMPOSITECHECK, buffer, -1, dst, dstLen, nullptr, nullptr);
+}
+
+size_t mb_to_utf8(const char *src, int srcLen, char *dst, int dstLen)
+{
+    int len = (int)strlen(src) + 1;
+    WCHAR *buffer = (len < 32768) ? (WCHAR *)alloca(len) : (WCHAR *)malloc(len);
+    MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, src, -1, buffer, len);
+    return WideCharToMultiByte(CP_UTF8, 0, buffer, -1, dst, dstLen, nullptr, nullptr);
+}
+
+WCHAR *wstr_from_mb(const char *pszString)
+{
+    if (pszString == nullptr)
+        return nullptr;
+    int nLen = (int)strlen(pszString) + 1;
+    WCHAR *pwszOut = (WCHAR *)malloc(nLen * sizeof(WCHAR));
+    MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, pszString, -1, pwszOut, nLen);
+    return pwszOut;
+}
+
+WCHAR *wstr_from_utf8(const char *pszString)
+{
+    if (pszString == nullptr)
+        return nullptr;
+    int nLen = (int)strlen(pszString) + 1;
+    WCHAR *pwszOut = (WCHAR *)malloc(nLen * sizeof(WCHAR));
+    MultiByteToWideChar(CP_UTF8, 0, pszString, -1, pwszOut, nLen);
+    return pwszOut;
+}
+
+char *mb_from_wstr(const WCHAR *pwszString)
+{
+    if (pwszString == nullptr)
+        return nullptr;
+    int nLen = (int)wcslen(pwszString) + 1;
+    char *pszOut = (char *)malloc(nLen);
+    WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_DEFAULTCHAR, pwszString, -1, pszOut, nLen, nullptr, nullptr);
+    return pszOut;
+}
+
+char *utf8_from_wstr(const WCHAR *pwszString)
+{
+    int nLen = WideCharToMultiByte(CP_UTF8, 0, pwszString, -1, nullptr, 0, nullptr, nullptr);
+    char *pszOut = (char *)malloc(nLen);
+    WideCharToMultiByte(CP_UTF8, 0, pwszString, -1, pszOut, nLen, nullptr, nullptr);
+    return pszOut;
+}
+
 P2_NAMESPACE_END
