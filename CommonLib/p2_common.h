@@ -129,6 +129,7 @@ typedef WORD log_rotation_policy;
 
 #define MAX_LOG_HISTORY_SIZE 128
 
+#define DBDRV_MAX_ERROR_TEXT        1024
 
 //
 // Error codes

@@ -51,6 +51,9 @@
     <ClInclude Include="LogThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="mysqldrv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cond.cpp">
@@ -78,6 +81,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="LogThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mysqldrv.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

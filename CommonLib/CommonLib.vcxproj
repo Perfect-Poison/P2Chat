@@ -147,6 +147,7 @@
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="LogThread.h" />
     <ClInclude Include="Mutex.h" />
+    <ClInclude Include="mysqldrv.h" />
     <ClInclude Include="p2cpapi.h" />
     <ClInclude Include="p2_common.h" />
     <ClInclude Include="p2_util.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="Iterator.cpp" />
     <ClCompile Include="LogThread.cpp" />
+    <ClCompile Include="mysqldrv.cpp" />
     <ClCompile Include="p2_util.cpp" />
     <ClCompile Include="Cond.cpp" />
     <ClCompile Include="Mutex.cpp" />
