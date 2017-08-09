@@ -10,7 +10,7 @@ const int BIND_PORT_FOR_UDP = 5566;
 typedef struct
 {
     int    enumVal;
-    char*  strVal;
+    TCHAR*  strVal;
 }param;
 
 typedef param msg_code_param;
@@ -33,12 +33,12 @@ constexpr int ATTR_FLAGS_NUM = 3;
 
 
 msg_code_param find_msg_code_param_by_enum(int enumVal);
-msg_code_param find_msg_code_param_by_str(char *strVal);
+msg_code_param find_msg_code_param_by_str(TCHAR *strVal);
 attr_code_param find_attr_code_param_by_enum(int enumVal);
-attr_code_param find_attr_code_param_by_str(char *strVal);
+attr_code_param find_attr_code_param_by_str(TCHAR *strVal);
 attr_datatype_param find_attr_datatype_param_by_enum(int enumVal);
-attr_datatype_param find_attr_datatype_param_by_str(char *strVal);
+attr_datatype_param find_attr_datatype_param_by_str(TCHAR *strVal);
 msg_flags_param find_msg_flags_param_by_enum(int enumVal);
-msg_flags_param find_msg_flags_param_by_str(char *strVal);
+msg_flags_param find_msg_flags_param_by_str(TCHAR *strVal);
 attr_flags_param find_attr_flags_param_by_enum(int enumVal); 
-attr_flags_param find_attr_flags_param_by_str(char *strVal);
+attr_flags_param find_attr_flags_param_by_str(TCHAR *strVal);

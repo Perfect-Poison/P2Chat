@@ -87,6 +87,7 @@
       <AdditionalIncludeDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\include;..\Include;</AdditionalIncludeDirectories>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -115,6 +116,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\MySQL\MySQL Connector C 6.1\include;..\Include;</AdditionalIncludeDirectories>
       <StructMemberAlignment>1Byte</StructMemberAlignment>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -143,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cond.h" />
+    <ClInclude Include="ConnectionPoolThread.h" />
     <ClInclude Include="HashMap.h" />
     <ClInclude Include="Iterator.h" />
     <ClInclude Include="LogThread.h" />
@@ -150,16 +153,19 @@
     <ClInclude Include="mysqldrv.h" />
     <ClInclude Include="p2cpapi.h" />
     <ClInclude Include="p2_common.h" />
+    <ClInclude Include="p2_dbapi.h" />
     <ClInclude Include="p2_util.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Thread.h" />
     <ClInclude Include="uthash.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConnectionPoolThread.cpp" />
     <ClCompile Include="HashMap.cpp" />
     <ClCompile Include="Iterator.cpp" />
     <ClCompile Include="LogThread.cpp" />
     <ClCompile Include="mysqldrv.cpp" />
+    <ClCompile Include="p2_dbapi.cpp" />
     <ClCompile Include="p2_util.cpp" />
     <ClCompile Include="Cond.cpp" />
     <ClCompile Include="Mutex.cpp" />

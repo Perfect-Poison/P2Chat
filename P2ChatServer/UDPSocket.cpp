@@ -31,9 +31,9 @@ void UDPSocket::Bind(const USHORT& inPort)
     _Bind(inPort);
 }
 
-int32 UDPSocket::SendTo(const Address& inAddress, const char* inContent, const size_t& inSize)
+int32 UDPSocket::SendTo(const Address& inAddress, const BYTE* inContent, const size_t& inSize)
 {
-    int32 sentBytes = ::sendto(this->fSocketID, inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
+    int32 sentBytes = ::sendto(this->fSocketID, (char *)inContent, inSize, 0, (const sockaddr*)&inAddress, sizeof(struct sockaddr));
     if (sentBytes == SOCKET_ERROR)
     {
         if (UDPSOCKET_DEBUG)
@@ -42,10 +42,10 @@ int32 UDPSocket::SendTo(const Address& inAddress, const char* inContent, const s
     return sentBytes;
 }
 
-int32 UDPSocket::SendTo(const string& inIP, const USHORT& inPort, const char* inContent, const size_t& inSize)
+int32 UDPSocket::SendTo(const string& inIP, const USHORT& inPort, const BYTE* inContent, const size_t& inSize)
 {
     Address address(inIP, inPort);
-    int32 sentBytes = ::sendto(this->fSocketID, inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
+    int32 sentBytes = ::sendto(this->fSocketID, (char *)inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
     if (sentBytes == SOCKET_ERROR)
     {
         if (UDPSOCKET_DEBUG)
@@ -54,25 +54,25 @@ int32 UDPSocket::SendTo(const string& inIP, const USHORT& inPort, const char* in
     return sentBytes;
 }
 
-int32 UDPSocket::RecvFrom(char* outContent, const size_t& inSize)
+int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize)
 {
     int32 size = sizeof(struct sockaddr);
-    int32 receivedBytes = ::recvfrom(this->fSocketID, outContent, inSize, 0, nullptr, nullptr);
+    int32 receivedBytes = ::recvfrom(this->fSocketID, (char *)outContent, inSize, 0, nullptr, nullptr);
     return receivedBytes;
 }
 
-int32 UDPSocket::RecvFrom(char* outContent, const size_t& inSize, Address& outAddress)
+int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize, Address& outAddress)
 {
     int size = sizeof(struct sockaddr);
-    int32 receivedBytes = ::recvfrom(this->fSocketID, outContent, inSize, 0, (struct sockaddr*)&outAddress, &size);
+    int32 receivedBytes = ::recvfrom(this->fSocketID, (char *)outContent, inSize, 0, (struct sockaddr*)&outAddress, &size);
     return receivedBytes;
 }
 
-int32 UDPSocket::RecvFrom(char* outContent, const size_t& inSize, string& outIP, USHORT& outPort)
+int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize, string& outIP, USHORT& outPort)
 {
     Address address;
     int size = sizeof(struct sockaddr);
-    int32 receivedBytes = ::recvfrom(this->fSocketID, outContent, inSize, 0, (struct sockaddr*)&address, &size);
+    int32 receivedBytes = ::recvfrom(this->fSocketID, (char *)outContent, inSize, 0, (struct sockaddr*)&address, &size);
     outIP = address.GetIP();
     outPort = address.GetPort();
     return receivedBytes;

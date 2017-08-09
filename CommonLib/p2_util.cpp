@@ -10,23 +10,33 @@ static Mutex sLogMutex;
 #define EPOCHFILETIME (116444736000000000i64)
 
 
-char *bin_to_str(const BYTE* pData, size_t size, char *pStr, bool hasSeparator/* = true*/)
+char *bin_to_strA(const BYTE* pData, size_t size, char *pStr)
 {
     size_t i;
     char *pCurr;
-    const char* kHEXChars = { "0123456789ABCDEF" };
+
     for (i = 0, pCurr = pStr; i < size; i++)
     {
-        *pCurr++ = kHEXChars[pData[i] >> 4];
-        *pCurr++ = kHEXChars[pData[i] & 0xF];
-        if (hasSeparator)
-            *pCurr++ = ' ';
+        *pCurr++ = bin2hex(pData[i] >> 4);
+        *pCurr++ = bin2hex(pData[i] & 15);
     }
     *pCurr = 0;
     return pStr;
 }
+WCHAR *bin_to_strW(const BYTE* pData, size_t size, WCHAR *pStr)
+{
+    size_t i;
+    WCHAR *pCurr;
 
-size_t str_to_bin(const char* pStr, BYTE *pData, size_t size)
+    for (i = 0, pCurr = pStr; i < size; i++)
+    {
+        *pCurr++ = bin2hex(pData[i] >> 4);
+        *pCurr++ = bin2hex(pData[i] & 15);
+    }
+    *pCurr = 0;
+    return pStr;
+}
+size_t str_to_binA(const char* pStr, BYTE *pData, size_t size)
 {
     size_t i;
     const char *pCurr;
@@ -43,6 +53,46 @@ size_t str_to_bin(const char* pStr, BYTE *pData, size_t size)
         }
     }
     return i;
+}
+size_t str_to_binW(const WCHAR* pStr, BYTE *pData, size_t size)
+{
+    size_t i;
+    const WCHAR *pCurr;
+
+    memset(pData, 0, size);
+    for (i = 0, pCurr = pStr; (i < size) && (*pCurr != 0); i++)
+    {
+        pData[i] = hex2bin(*pCurr) << 4;
+        pCurr++;
+        if (*pCurr != 0)
+        {
+            pData[i] |= hex2bin(*pCurr);
+            pCurr++;
+        }
+    }
+    return i;
+}
+
+void str_stripA(char *pszStr)
+{
+    int i;
+
+    for (i = 0; (str[i] != 0) && ((str[i] == ' ') || (str[i] == '\t')); i++);
+    if (i > 0)
+        memmove(str, &str[i], strlen(&str[i]) + 1);
+    for (i = (int)strlen(str) - 1; (i >= 0) && ((str[i] == ' ') || (str[i] == '\t')); i--);
+    str[i + 1] = 0;
+}
+
+void str_stripW(WCHAR *pszStr)
+{
+    int i;
+
+    for (i = 0; (str[i] != 0) && ((str[i] == L' ') || (str[i] == L'\t')); i++);
+    if (i > 0)
+        memmove(str, &str[i], (wcslen(&str[i]) + 1) * sizeof(WCHAR));
+    for (i = (int)wcslen(str) - 1; (i >= 0) && ((str[i] == L' ') || (str[i] == L'\t')); i--);
+    str[i + 1] = 0;
 }
 
 void *memdup(const void *data, size_t size)
@@ -200,31 +250,31 @@ inline int64 GetCurrentTimeS()
     return GetCurrentTimeMilliS() / 1000;
 }
 
-char* FormatCalendarTime(char *buffer)
+TCHAR* FormatCalendarTime(TCHAR *buffer)
 {
     time_t now = GetCurrentTimeS();
     struct tm *loc = localtime(&now);
-    strftime(buffer, 32, "%d-%b-%Y %H:%M:%S", loc);
+    _tcsftime(buffer, 32, _T("%d-%b-%Y %H:%M:%S"), loc);
     return buffer;
 }
 
-char* FormatLogCalendarTime(char *buffer)
+TCHAR* FormatLogCalendarTime(TCHAR *buffer)
 {
     int64 now = GetCurrentTimeMilliS();
     time_t t = now / 1000;
     struct tm *loc = localtime(&t);
-    strftime(buffer, 32, "[%d-%b-%Y %H:%M:%S", loc);
-    snprintf(&buffer[21], 8, ".%03d]", (int)(now % 1000));
+    _tcsftime(buffer, 32, _T("[%d-%b-%Y %H:%M:%S"), loc);
+    _sntprintf(&buffer[21], 8, _T(".%03d]"), (int)(now % 1000));
     return buffer;
 }
 
-bool log_open(const char *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix)
+bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix)
 {
     LogThread *logThread = LogThread::GetInstance();
     log_flags logFlags = logThread->GetFlags();
     if (logFlags & LOG_IS_OPEN)
     {
-        printf("日志文件已经打开，请先关闭\n");
+        _tprintf("日志文件已经打开，请先关闭\n");
         return false;
     }
     if (logThread->LogOpen(logName, flags, rotationPolicy, maxLogSize, historySize, dailySuffix))
@@ -240,26 +290,26 @@ void log_close()
     logThread->LogClose();
 }
 
-void log_write(log_type logType, const char *format, ...)
+void log_write(log_type logType, const TCHAR *format, ...)
 {
     LogThread *logThread = LogThread::GetInstance();
     log_flags flags = logThread->GetFlags();
     if (!(flags & LOG_IS_OPEN))
     {
-        printf("[error]log_write 未启动日志线程\n");
+        _tprintf(_T("[error]log_write 未启动日志线程\n"));
         return;
     }
 
-    char buffer[4096];
+    TCHAR buffer[4096];
     va_list args;
     va_start(args, format);
-    vsprintf_s(buffer, sizeof(buffer), format, args);
+    _vstprintf_s(buffer, sizeof(buffer), format, args);
     LogRecord *logRecord = new LogRecord(buffer, logType);
     logThread->EnQueueLogRecord(logRecord);
     va_end(args);
 }
 
-void log_debug(int level, const char *format, ...)
+void log_debug(int level, const TCHAR *format, ...)
 {
     LogThread *logThread = LogThread::GetInstance();
     if (level < logThread->GetDebugLevel())
@@ -268,14 +318,14 @@ void log_debug(int level, const char *format, ...)
     log_flags flags = logThread->GetFlags();
     if (!(flags & LOG_IS_OPEN))
     {
-        printf("[error]log_write 未启动日志线程\n");
+        _tprintf(_T("[error]log_write 未启动日志线程\n"));
         return;
     }
 
-    char buffer[4096];
+    TCHAR buffer[4096];
     va_list args;
     va_start(args, format);
-    vsprintf_s(buffer, sizeof(buffer), format, args);
+    _vstprintf_s(buffer, sizeof(buffer), format, args);
     LogRecord *logRecord = new LogRecord(buffer, LOG_DEBUG);
     logThread->EnQueueLogRecord(logRecord);
     va_end(args);
@@ -345,5 +395,6 @@ char *utf8_from_wstr(const WCHAR *pwszString)
     WideCharToMultiByte(CP_UTF8, 0, pwszString, -1, pszOut, nLen, nullptr, nullptr);
     return pszOut;
 }
+
 
 P2_NAMESPACE_END

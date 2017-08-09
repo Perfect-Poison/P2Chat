@@ -24,8 +24,8 @@ public:
     int32 Connect(const Address& inAddress);
     int32 Connect(const std::string& inIP, const USHORT& inPort);
     TCPSocket* AcceptClient();
-    int32 Send(const char* inData, const size_t inSize);
-    int32 Recv(char* buffer, const size_t inSize);
+    int32 Send(const BYTE* inData, const size_t inSize);
+    int32 Recv(BYTE* buffer, const size_t inSize);
     void SetRemoteAddress(const Address& inAddress) { fRemoteAddress = inAddress; }
     Address GetRemoteAddress(void) { return fRemoteAddress; }
     std::string GetRemoteIP(void) { return fRemoteAddress.GetIP(); }

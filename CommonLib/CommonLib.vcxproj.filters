@@ -54,6 +54,12 @@
     <ClInclude Include="mysqldrv.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="p2_dbapi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectionPoolThread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cond.cpp">
@@ -84,6 +90,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="mysqldrv.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="p2_dbapi.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectionPoolThread.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -20,17 +20,29 @@ P2_NAMESPACE_BEG
 class LogRecord
 {
 public:
+    
+    ~LogRecord() {}
+    void SetType(const log_type& logType) { fLogType = logType; }
+#ifdef UNICODE
+    LogRecord(wstring message, const log_type logType) :
+        fLogRecordQueueElem(this), fMessage(message), fLogType(logType) {}
+    void SetMessage(const wstring& message) { fMessage = message; }
+    wstring GetMessage() const { return fMessage; }
+#else
     LogRecord(string message, const log_type logType) :
         fLogRecordQueueElem(this), fMessage(message), fLogType(logType) {}
-    ~LogRecord() {}
     void SetMessage(const string& message) { fMessage = message; }
-    void SetType(const log_type& logType) { fLogType = logType; }
     string GetMessage() const { return fMessage; }
+#endif
     log_type GetType() const { return fLogType; }
     QueueElem *GetQueueElem() { return &fLogRecordQueueElem; }
 private:
     QueueElem fLogRecordQueueElem;
+#ifdef UNICODE
+    wstring fMessage;
+#else
     string fMessage;
+#endif
     log_type fLogType;
 };
 
@@ -46,13 +58,13 @@ public:
         return sInstance;
     }
     virtual ~LogThread() { LogClose(); }
-    bool LogOpen(const char *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix);
+    bool LogOpen(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix);
     void LogClose();
     log_flags GetFlags() const { return fFlags; }
-    void SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix);
+    void SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix);
     log_rotation_policy GetRotationPolicy() const { return fRotationPolicy; }
     int GetMaxLogSize() const { return fMaxLogSize; }
-    char *GetDailySuffix() { return fDailyLogSuffix; }
+    TCHAR *GetDailySuffix() { return fDailyLogSuffix; }
     void EnQueueLogRecord(LogRecord *logRecord);
     void SetDebugLevel(int debugLevel) { fDebugLevel = debugLevel; }
     int GetDebugLevel() const { return fDebugLevel; }
@@ -65,12 +77,12 @@ private:
 private:
     static LogThread* sInstance;
     QueueBlocking fQueueB;
-    char fLogFileName[MAX_PATH];
+    TCHAR fLogFileName[MAX_PATH];
     FILE *fLogFileHandle;
     Mutex fMutex;
     log_flags fFlags;
     log_rotation_policy fRotationPolicy;
-    char fDailyLogSuffix[64];   // 只在LOG_ROTATION_DAILY下有效
+    TCHAR fDailyLogSuffix[64];   // 只在LOG_ROTATION_DAILY下有效
     int fMaxLogSize;    // 只在LOG_ROTATION_BY_SIZE下有效
     time_t fCurrentDayStart;
     int fLogHistorySize;

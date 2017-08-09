@@ -34,18 +34,18 @@ int64 TCPSession::Run()
     {
         if (!fTCPSocket->IsConnectionClosed())
         {
-            char buffer[1024], reply[1124];
+            BYTE buffer[TCPSocket::kMaxTCPPacket];
             int32 recvSize = 0;
             Address remoteAddress = fTCPSocket->GetRemoteAddress();
             while (recvSize != -1)
             {
                 ::memset(buffer, 0, sizeof(buffer));
-                recvSize = fTCPSocket->Recv(buffer, 1500);
+                recvSize = fTCPSocket->Recv((BYTE *)buffer, sizeof(buffer));
                 if (recvSize != -1)
                 {
                     //printf("收到来自%s:%u的数据: [%dB] %s\n", remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
-                    sprintf_s(reply, "Hello, received data: %s\n", buffer);
-                    fTCPSocket->Send(reply, strlen(reply));
+                    //_stprintf(reply,  _T("Hello, received data: %s\n"), buffer);
+                    //fTCPSocket->Send((BYTE *)reply, _tcslen(reply) * sizeof(TCHAR));
                 }
             }
             fTCPSocket->RequestEvent(EV_RE);
@@ -55,7 +55,7 @@ int64 TCPSession::Run()
     else 
     {
         if (TCPSESSION_DEBUG)
-            log_debug(7, "TCPSession::Run 未处理的事件类型(0x%x)\n", eventbits);
+            log_debug(7, _T("TCPSession::Run 未处理的事件类型(0x%x)\n"), eventbits);
         return -1;
     }
     return -1;

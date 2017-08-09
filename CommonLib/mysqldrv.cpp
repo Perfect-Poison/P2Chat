@@ -45,6 +45,156 @@ void FormatErrorMessage(const char *source, WCHAR *errorText)
     }
 }
 
+/**
+* Update buffer length in DrvPrepareStringW
+*/
+#define UPDATE_LENGTH \
+				len++; \
+				if (len >= bufferSize - 1) \
+				{ \
+					bufferSize += 128; \
+					out = (WCHAR *)realloc(out, bufferSize * sizeof(WCHAR)); \
+				}
+
+/**
+* Prepare string for using in SQL query - enclose in quotes and escape as needed
+* (wide string version)
+*/
+WCHAR *DrvPrepareStringW(const WCHAR *str)
+{
+    int len = (int)wcslen(str) + 3;   // + two quotes and \0 at the end
+    int bufferSize = len + 128;
+    WCHAR *out = (WCHAR *)malloc(bufferSize * sizeof(WCHAR));
+    out[0] = _T('\'');
+
+    const WCHAR *src = str;
+    int outPos;
+    for (outPos = 1; *src != 0; src++)
+    {
+        switch (*src)
+        {
+        case L'\'':
+            out[outPos++] = L'\'';
+            out[outPos++] = L'\'';
+            UPDATE_LENGTH;
+            break;
+        case L'\r':
+            out[outPos++] = L'\\';
+            out[outPos++] = L'\r';
+            UPDATE_LENGTH;
+            break;
+        case L'\n':
+            out[outPos++] = L'\\';
+            out[outPos++] = L'\n';
+            UPDATE_LENGTH;
+            break;
+        case L'\b':
+            out[outPos++] = L'\\';
+            out[outPos++] = L'\b';
+            UPDATE_LENGTH;
+            break;
+        case L'\t':
+            out[outPos++] = L'\\';
+            out[outPos++] = L'\t';
+            UPDATE_LENGTH;
+            break;
+        case 26:
+            out[outPos++] = L'\\';
+            out[outPos++] = L'Z';
+            break;
+        case L'\\':
+            out[outPos++] = L'\\';
+            out[outPos++] = L'\\';
+            UPDATE_LENGTH;
+            break;
+        default:
+            out[outPos++] = *src;
+            break;
+        }
+    }
+    out[outPos++] = L'\'';
+    out[outPos++] = 0;
+
+    return out;
+}
+
+#undef UPDATE_LENGTH
+
+/**
+* Update buffer length in DrvPrepareStringA
+*/
+#define UPDATE_LENGTH \
+				len++; \
+				if (len >= bufferSize - 1) \
+				{ \
+					bufferSize += 128; \
+					out = (char *)realloc(out, bufferSize); \
+				}
+
+/**
+* Prepare string for using in SQL query - enclose in quotes and escape as needed
+* (multibyte string version)
+*/
+char *DrvPrepareStringA(const char *str)
+{
+    int len = (int)strlen(str) + 3;   // + two quotes and \0 at the end
+    int bufferSize = len + 128;
+    char *out = (char *)malloc(bufferSize);
+    out[0] = _T('\'');
+
+    const char *src = str;
+    int outPos;
+    for (outPos = 1; *src != 0; src++)
+    {
+        switch (*src)
+        {
+        case '\'':
+            out[outPos++] = '\'';
+            out[outPos++] = '\'';
+            UPDATE_LENGTH;
+            break;
+        case '\r':
+            out[outPos++] = '\\';
+            out[outPos++] = '\r';
+            UPDATE_LENGTH;
+            break;
+        case '\n':
+            out[outPos++] = '\\';
+            out[outPos++] = '\n';
+            UPDATE_LENGTH;
+            break;
+        case '\b':
+            out[outPos++] = '\\';
+            out[outPos++] = '\b';
+            UPDATE_LENGTH;
+            break;
+        case '\t':
+            out[outPos++] = '\\';
+            out[outPos++] = '\t';
+            UPDATE_LENGTH;
+            break;
+        case 26:
+            out[outPos++] = '\\';
+            out[outPos++] = 'Z';
+            break;
+        case '\\':
+            out[outPos++] = '\\';
+            out[outPos++] = '\\';
+            UPDATE_LENGTH;
+            break;
+        default:
+            out[outPos++] = *src;
+            break;
+        }
+    }
+    out[outPos++] = '\'';
+    out[outPos++] = 0;
+
+    return out;
+}
+
+#undef UPDATE_LENGTH
+
 bool DrvInit()
 {
     return mysql_library_init(0, nullptr, nullptr) == 0;
@@ -249,7 +399,14 @@ void DrvFreeStatement(MYSQL_STATEMENT *hStmt)
     hStmt->connection->mutexQueryLock.Lock();
     mysql_stmt_close(hStmt->statement);
     hStmt->connection->mutexQueryLock.Unlock();
-    delete hStmt->buffers;
+    if (hStmt->buffers)
+    {
+        for (auto it = hStmt->buffers->begin();
+            it != hStmt->buffers->end();
+            it++)
+            delete *it;
+        delete hStmt->buffers;
+    }
     safe_free(hStmt->bindings);
     safe_free(hStmt->lengthFields);
     free(hStmt);

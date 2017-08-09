@@ -41,16 +41,16 @@ void LogThread::Entry()
     }
 }
 
-bool LogThread::LogOpen(const char *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix)
+bool LogThread::LogOpen(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix)
 {
     fFlags = flags & 0x7FFFFFFF;
-    char buffer[32];
-    strncpy(fLogFileName, logName, MAX_PATH);
-    fLogFileHandle = fopen(logName, "a");
+    TCHAR buffer[32];
+    _tcsncpy(fLogFileName, logName, MAX_PATH);
+    fLogFileHandle = _tfopen(logName, _T("a"));
     if (fLogFileHandle != nullptr)
     {
         fFlags |= LOG_IS_OPEN;
-        fprintf(fLogFileHandle, "%s Log file opened\n", FormatLogCalendarTime(buffer));
+        _ftprintf(fLogFileHandle, _T("%s Log file opened\n"), FormatLogCalendarTime(buffer));
         fflush(fLogFileHandle);
 
         SetRotationPolicy(rotationPolicy, maxLogSize, historySize, dailySuffix);
@@ -68,7 +68,7 @@ void LogThread::LogClose()
     }
 }
 
-void LogThread::SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const char *dailySuffix)
+void LogThread::SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix)
 {
     fRotationPolicy = rotationPolicy;
     switch (rotationPolicy)
@@ -77,7 +77,7 @@ void LogThread::SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLog
         //             break;
     case LOG_ROTATION_DAILY:
         if ((dailySuffix != nullptr) && (dailySuffix[0] != 0))
-            strncpy(fDailyLogSuffix, dailySuffix, strlen(dailySuffix) + 1);
+            _tcsncpy(fDailyLogSuffix, dailySuffix, _tcsclen(dailySuffix) + 1);
         SetDayStart();
         break;
     case LOG_ROTATION_BY_SIZE:
@@ -105,7 +105,7 @@ void LogThread::EnQueueLogRecord(LogRecord *logRecord)
 bool LogThread::RotateLog()
 {
     int i;
-    char oldName[MAX_PATH], newName[MAX_PATH];
+    TCHAR oldName[MAX_PATH], newName[MAX_PATH];
 
     if ((fLogFileHandle != nullptr) && (fFlags & LOG_IS_OPEN))
     {
@@ -118,42 +118,42 @@ bool LogThread::RotateLog()
         // 删除旧文件
         for (i = MAX_LOG_HISTORY_SIZE; i >= fLogHistorySize; i--)
         {
-            snprintf(oldName, MAX_PATH, "%s.%d", fLogFileName, i);
-            _unlink(oldName);
+            _sntprintf(oldName, MAX_PATH, _T("%s.%d"), fLogFileName, i);
+            _tunlink(oldName);
         }
 
         // 所有日志文件名向后推移
         for (; i >= 0; i--) 
         {
-            snprintf(oldName, MAX_PATH, "%s.%d", fLogFileName, i);
-            snprintf(newName, MAX_PATH, "%s.%d", fLogFileName, i + 1);
-            rename(oldName, newName);
+            _sntprintf(oldName, MAX_PATH, _T("%s.%d"), fLogFileName, i);
+            _sntprintf(newName, MAX_PATH, _T("%s.%d"), fLogFileName, i + 1);
+            _trename(oldName, newName);
         }
 
         // 将当前日志命名为xxx.0
-        snprintf(newName, MAX_PATH, "%s.0", fLogFileName);
-        rename(fLogFileName, newName);
+        _sntprintf(newName, MAX_PATH, _T("%s.0"), fLogFileName);
+        _trename(fLogFileName, newName);
     }
     else if (fRotationPolicy == LOG_ROTATION_DAILY)
     {
         struct tm *loc = localtime(&fCurrentDayStart);
-        char buffer[64];
-        strftime(buffer, 64, fDailyLogSuffix, loc);
+        TCHAR buffer[64];
+        _tcsftime(buffer, 64, fDailyLogSuffix, loc);
 
         // 重命名当前日志文件为xxx.suffix
-        snprintf(newName, MAX_PATH, "%s.%s", fLogFileName, buffer);
-        rename(fLogFileName, newName);
+        _sntprintf(newName, MAX_PATH, _T("%s.%s"), fLogFileName, buffer);
+        _trename(fLogFileName, newName);
 
         SetDayStart();
     }
 
     // 重新打开日志文件
-    fLogFileHandle = fopen(fLogFileName, "w");
+    fLogFileHandle = _tfopen(fLogFileName, _T("w"));
     if (fLogFileHandle != nullptr)
     {
         fFlags |= LOG_IS_OPEN;
-        char buffer[32];
-        fprintf(fLogFileHandle, "%s Log file truncated.\n", FormatLogCalendarTime(buffer));
+        TCHAR buffer[32];
+        _ftprintf(fLogFileHandle, _T("%s Log file truncated.\n"), FormatLogCalendarTime(buffer));
         fflush(fLogFileHandle);
     }
 
@@ -174,26 +174,30 @@ void LogThread::SetDayStart()
 
 void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
 {
-    char buffer[64];
-    char logLevel[64];
+    TCHAR buffer[64];
+    TCHAR logLevel[64];
     log_type logType = logRecord->GetType();
+#ifdef UNICODE
+    wstring msg = logRecord->GetMessage();
+#else
     string msg = logRecord->GetMessage();
+#endif
     switch (logType)
     {
     case LOG_DEBUG:
-        snprintf(logLevel, 16, "[%s]", "DEBUG");
+        _sntprintf(logLevel, 16, _T("[%s]"), _T("DEBUG"));
         break;
     case LOG_INFO:
-        snprintf(logLevel, 16, "[%s]", "INFO ");
+        _sntprintf(logLevel, 16, _T("[%s]"), _T("INFO "));
         break;
     case LOG_WARNING:
-        snprintf(logLevel, 16, "[%s]", "WARN ");
+        _sntprintf(logLevel, 16, _T("[%s]"), _T("WARN "));
         break;
     case LOG_ERROR:
-        snprintf(logLevel, 16, "[%s]", "ERROR");
+        _sntprintf(logLevel, 16, _T("[%s]"), _T("ERROR"));
         break;
     default:
-        strncpy(logLevel, "", 1);
+        _tcsncpy(logLevel, _T(""), 1);
         break;
     }
 
@@ -204,11 +208,11 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     FormatLogCalendarTime(buffer);
     if (fLogFileHandle != nullptr)
     {
-        fprintf(fLogFileHandle, "%s %s %s", buffer, logLevel, msg.c_str());
+        _ftprintf(fLogFileHandle, _T("%s %s %s"), buffer, logLevel, msg.c_str());
         fflush(fLogFileHandle);
     }
     if (fFlags & LOG_PRINT_TO_CONSOLE)
-        printf("%s %s %s", buffer, logLevel, msg.c_str());
+        _tprintf(_T("%s %s %s"), buffer, logLevel, msg.c_str());
 
     if ((fLogFileHandle != nullptr) && (fRotationPolicy == LOG_ROTATION_BY_SIZE) && (fMaxLogSize != 0))
     {

@@ -110,10 +110,10 @@ int64 UDPSession::Run()
 
 Message* UDPSession::ReadMessage()
 {
-    char buffer[UDPSocket::kMaxUDPPacket];
+    BYTE buffer[UDPSocket::kMaxUDPPacket];
     int32 recvSize = 0;
     ::memset(buffer, 0, sizeof(buffer));
-    recvSize = fUDPSocket->RecvFrom(buffer, UDPSocket::kMaxUDPPacket, fRemoteAddress);
+    recvSize = fUDPSocket->RecvFrom(buffer, sizeof(buffer), fRemoteAddress);
     if (recvSize != -1)
     {
         MESSAGE *rawMsg = (MESSAGE *)buffer;
@@ -135,7 +135,7 @@ void UDPSession::SendMessage(Message *message)
     size_t sendSize = message->GetSize();
     MESSAGE *rawMsg = message->CreateMessage();
     Assert(sendSize == ntohl(rawMsg->size));
-    sendSize = fUDPSocket->SendTo(fRemoteAddress, (char *)rawMsg, sendSize);
+    sendSize = fUDPSocket->SendTo(fRemoteAddress, (BYTE *)rawMsg, sendSize);
 
     if (UDPSESSION_DEBUG)
     {

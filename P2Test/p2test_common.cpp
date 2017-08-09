@@ -72,11 +72,11 @@ msg_code_param find_msg_code_param_by_enum(int enumVal)
     return not_found_param;
 }
 
-msg_code_param find_msg_code_param_by_str(char *strVal)
+msg_code_param find_msg_code_param_by_str(TCHAR *strVal)
 {
     for (size_t i = 0; i < MSG_CODE_NUM; i++)
     {
-        if (strcmp(sMsgCodeParam[i].strVal, strVal) == 0)
+        if (_tcscmp(sMsgCodeParam[i].strVal, strVal) == 0)
             return sMsgCodeParam[i];
     }
     return not_found_param;
@@ -92,11 +92,11 @@ attr_code_param find_attr_code_param_by_enum(int enumVal)
     return not_found_param;
 }
 
-attr_code_param find_attr_code_param_by_str(char *strVal)
+attr_code_param find_attr_code_param_by_str(TCHAR *strVal)
 {
     for (size_t i = 0; i < ATTR_CODE_NUM; i++)
     {
-        if (strcmp(sAttrCodeParam[i].strVal, strVal) == 0)
+        if (_tcscmp(sAttrCodeParam[i].strVal, strVal) == 0)
             return sAttrCodeParam[i];
     }
     return not_found_param;
@@ -112,11 +112,11 @@ attr_datatype_param find_attr_datatype_param_by_enum(int enumVal)
     return not_found_param;
 }
 
-attr_datatype_param find_attr_datatype_param_by_str(char *strVal)
+attr_datatype_param find_attr_datatype_param_by_str(TCHAR *strVal)
 {
     for (size_t i = 0; i < ATTR_DATA_TYPE_NUM; i++)
     {
-        if (strcmp(sAttrDataTypeParam[i].strVal, strVal) == 0)
+        if (_tcscmp(sAttrDataTypeParam[i].strVal, strVal) == 0)
             return sAttrDataTypeParam[i];
     }
     return not_found_param;
@@ -132,11 +132,11 @@ msg_flags_param find_msg_flags_param_by_enum(int enumVal)
     return not_found_param;
 }
 
-msg_flags_param find_msg_flags_param_by_str(char *strVal)
+msg_flags_param find_msg_flags_param_by_str(TCHAR *strVal)
 {
     for (size_t i = 0; i < MSG_FLAGS_NUM; i++)
     {
-        if (strcmp(sMsgFlagsParam[i].strVal, strVal) == 0)
+        if (_tcscmp(sMsgFlagsParam[i].strVal, strVal) == 0)
             return sMsgFlagsParam[i];
     }
     return not_found_param;
@@ -152,11 +152,11 @@ attr_flags_param find_attr_flags_param_by_enum(int enumVal)
     return not_found_param;
 }
 
-attr_flags_param find_attr_flags_param_by_str(char *strVal)
+attr_flags_param find_attr_flags_param_by_str(TCHAR *strVal)
 {
     for (size_t i = 0; i < ATTR_FLAGS_NUM; i++)
     {
-        if (strcmp(sAttrFlagsParam[i].strVal, strVal) == 0)
+        if (_tcscmp(sAttrFlagsParam[i].strVal, strVal) == 0)
             return sAttrFlagsParam[i];
     }
     return not_found_param;

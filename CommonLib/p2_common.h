@@ -20,6 +20,8 @@
 #include <functional>
 #include <time.h>
 #include <stdio.h>
+#include <tchar.h>
+#include <algorithm>
 using namespace std;
 
 #pragma comment(lib,"ws2_32.lib")
@@ -43,19 +45,19 @@ P2_NAMESPACE_BEG
                                                                 \
         if (!(condition))                                       \
         {                                                       \
-            char s[512];                            \
-            s[512 -1] = 0;                          \
-            _snprintf_s (s,511, "_Assert: %s, %d",__FILE__, __LINE__ ); \
-            printf("%s\n", s); \
+            TCHAR s[512];                            \
+            s[511] = _T(0);                          \
+            _sntprintf (s,sizeof(s), _T("_Assert: %s, %d",__FILE__, __LINE__ )); \
+            _tprintf(_T("%s\n"), s); \
         }   }
 
 #define AssertV(condition,errNo)    {                                   \
         if (!(condition))                                                   \
         {                                                                   \
-            char s[512];                                        \
-            s[511] = 0;                                      \
-            _snprintf_s ( s,511, "_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo );    \
-            printf("%s\n", s); \
+            TCHAR s[512];                                        \
+            s[511] = _T(0);                                      \
+            _sntprintf ( s,sizeof(s), _T("_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo ));    \
+            _tprintf(_T("%s\n"), s); \
         }   }
 
 #define safe_free(x)    { if (x) { free(x); x = nullptr; } }
@@ -129,51 +131,4 @@ typedef WORD log_rotation_policy;
 
 #define MAX_LOG_HISTORY_SIZE 128
 
-#define DBDRV_MAX_ERROR_TEXT        1024
-
-//
-// Error codes
-//
-
-#define DBERR_SUCCESS               0
-#define DBERR_CONNECTION_LOST       1
-#define DBERR_INVALID_HANDLE        2
-#define DBERR_OTHER_ERROR           255
-
-
- //
- // DB binding buffer allocation types
- //
-
-#define DB_BIND_STATIC     0 // buffer is managed by caller and will be valid until after the query is executed
-#define DB_BIND_TRANSIENT  1 // buffer will be duplicated by DB driver in DBBind()
-#define DB_BIND_DYNAMIC    2 // DB Driver will call free() on buffer
-
-
- //
- // C and SQL types for parameter binding
- //
-
-#define DB_CTYPE_STRING    0
-#define DB_CTYPE_INT32     1
-#define DB_CTYPE_UINT32    2
-#define DB_CTYPE_INT64     3
-#define DB_CTYPE_UINT64    4
-#define DB_CTYPE_DOUBLE    5
-
-#define DB_SQLTYPE_VARCHAR 0
-#define DB_SQLTYPE_INTEGER 1
-#define DB_SQLTYPE_BIGINT  2
-#define DB_SQLTYPE_DOUBLE  3
-#define DB_SQLTYPE_TEXT    4
-
- /**
- * DBIsTableExist return codes
- */
-enum
-{
-    DBIsTableExist_Failure = -1,
-    DBIsTableExist_NotFound = 0,
-    DBIsTableExist_Found = 1
-};
 P2_NAMESPACE_END
