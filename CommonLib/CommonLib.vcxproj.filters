@@ -30,9 +30,6 @@
     <ClInclude Include="p2_util.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="p2cpapi.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Thread.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -60,15 +57,15 @@
     <ClInclude Include="ConnectionPoolThread.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="p2_cpapi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cond.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Mutex.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="p2cpapi.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Thread.cpp">
@@ -96,6 +93,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="ConnectionPoolThread.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="p2_cpapi.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

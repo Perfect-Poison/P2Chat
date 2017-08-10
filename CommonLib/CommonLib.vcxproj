@@ -151,7 +151,7 @@
     <ClInclude Include="LogThread.h" />
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="mysqldrv.h" />
-    <ClInclude Include="p2cpapi.h" />
+    <ClInclude Include="p2_cpapi.h" />
     <ClInclude Include="p2_common.h" />
     <ClInclude Include="p2_dbapi.h" />
     <ClInclude Include="p2_util.h" />
@@ -169,7 +169,7 @@
     <ClCompile Include="p2_util.cpp" />
     <ClCompile Include="Cond.cpp" />
     <ClCompile Include="Mutex.cpp" />
-    <ClCompile Include="p2cpapi.cpp" />
+    <ClCompile Include="p2_cpapi.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Thread.cpp" />
   </ItemGroup>
