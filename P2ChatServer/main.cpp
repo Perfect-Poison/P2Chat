@@ -24,7 +24,17 @@ int main()
     // 数据库连接池线程
     ConnectionPoolThread::Initialize(_T("localhost"), _T("p2chatdb"), _T("root"), _T("123123"), 10, 30, 300, 14400, true);
     ConnectionPoolThread *connectionPoolThread = ConnectionPoolThread::GetInstance();
-    DB_HANDLE dbHandle = connectionPoolThread->DBConnectionPoolAcquireConnection();
+    DB_HANDLE hConn = connectionPoolThread->DBConnectionPoolAcquireConnection();
+    DB_STATEMENT hStmt = DBPrepare(hConn, _T("INSERT INTO log_data (log_type_id,record_date,log_data) VALUES (?,?,?)"));
+    if (hStmt != nullptr)
+    {
+        DBBind(hStmt, 1, DB_SQLTYPE_INTEGER, 5);
+        DBBind(hStmt, 2, DB_SQLTYPE_VARCHAR, _T("2000-12-12 23:11:11"), DB_BIND_STATIC);
+        DBBind(hStmt, 3, DB_SQLTYPE_VARCHAR, _T("this is my first log"), DB_BIND_STATIC);
+        UINT32 rcc = DBExecute(hStmt);
+        connectionPoolThread->DBConnectionPoolReleaseConnection(hConn);
+        DBFreeStatement(hStmt);
+    }
     
     //-------------------------------
     // 事件监听线程

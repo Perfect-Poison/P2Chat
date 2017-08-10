@@ -47,8 +47,13 @@ public:
     virtual ~Task();
     virtual int64 Run() = 0;
     void Signal(EventFlags eventFlags);
+#ifdef UNICODE
+    void SetTaskName(const wstring& name) { fTaskName = name; }
+    wstring GetTaskName() const { return fTaskName; }
+#else 
     void SetTaskName(const string& name) { fTaskName = name; }
     string GetTaskName() const { return fTaskName; }
+#endif
     BOOL IsAlive() const { return fEventFlags & kAlive; }
     void SetAlive() { fEventFlags |= kAlive; }
     void SetDead() { fEventFlags &= kAliveOff; }
@@ -57,7 +62,11 @@ public:
     BOOL IsDeleteEventWhenAllRefTasksFinished() { return fDeleteEvent; }
     QueueElem* GetQueueElem() { return &fTaskQueueElem; }
 private:
+#ifdef UNICODE
+    wstring fTaskName;
+#else 
     string fTaskName;
+#endif
     EventFlags fEventFlags;
     static unsigned int sTaskThreadPicker;
     BOOL fDeleteEvent;

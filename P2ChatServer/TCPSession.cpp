@@ -7,7 +7,7 @@ TCPSession::TCPSession(TCPSocket *tcpSocket):
     Task(tcpSocket),
     fTCPSocket(tcpSocket)
 {
-    this->SetTaskName("TCPSession");
+    this->SetTaskName(_T("TCPSession"));
 }
 
 

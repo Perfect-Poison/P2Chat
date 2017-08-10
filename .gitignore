@@ -47,3 +47,4 @@ ui_*.h
 Release/
 Debug/
 LibServer/
+p2log*

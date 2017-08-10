@@ -10,7 +10,7 @@ Event::Event(int inSocketID):
     fEventID(0),
     fWatchEventCalled(FALSE)
 {
-    SetEventName("unknown");
+    SetEventName(_T("unknown"));
 }
 
 

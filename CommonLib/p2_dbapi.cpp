@@ -123,7 +123,7 @@ DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password,
     MYSQL_CONN *hDrvConn;
     DB_HANDLE hConn = NULL;
 
-    log_debug(8, _T("DBConnect: server=%s db=%s login=%s"), server, dbName, login);
+    log_debug(8, _T("DBConnect: server=%s db=%s login=%s\n"), server, dbName, login);
 #ifdef UNICODE
     char *mbServer = (server == NULL) ? NULL : mb_from_wstr(server);
     char *mbDatabase = (dbName == NULL) ? NULL : mb_from_wstr(dbName);
@@ -145,6 +145,8 @@ DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password,
             hConn->m_dumpSql = s_dumpSQL;
             hConn->m_reconnectEnabled = true;
             hConn->m_connection = hDrvConn;
+
+            hConn->m_mutexTransLock = new Mutex;
             hConn->m_transactionLevel = 0;
             hConn->m_preparedStatements = new vector<db_statement_t*>;
 #ifdef UNICODE
@@ -158,7 +160,7 @@ DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password,
             hConn->m_password = (password == NULL) ? NULL : _tcsdup(password);
             hConn->m_server = (server == NULL) ? NULL : _tcsdup(server);
 #endif
-            log_debug(4, _T("New DB connection opened: handle=%p"), hConn);
+            log_debug(4, _T("DBConnect: New DB connection opened: handle=%p\n"), hConn);
 
         }
         else
@@ -183,11 +185,12 @@ void DBDisconnect(DB_HANDLE hConn)
     if (hConn == NULL)
         return;
 
-    log_debug(4, _T("DB connection %p closed"), hConn);
+    log_debug(4, _T("DBDisconnect: DB connection %p closed\n"), hConn);
 
     InvalidatePreparedStatements(hConn);
 
     DrvDisconnect(hConn->m_connection);
+    safe_delete(hConn->m_mutexTransLock);
     safe_free(hConn->m_dbName);
     safe_free(hConn->m_login);
     safe_free(hConn->m_password);
@@ -212,7 +215,7 @@ static void DBReconnect(DB_HANDLE hConn)
     int nCount;
     WCHAR errorText[DBDRV_MAX_ERROR_TEXT];
 
-    log_debug(4, _T("DB reconnect: handle=%p"), hConn);
+    log_debug(4, _T("DBDisconnect: handle=%p\n"), hConn);
 
     InvalidatePreparedStatements(hConn);
     DrvDisconnect(hConn->m_connection);
@@ -242,7 +245,7 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     WCHAR wcErrorText[DBDRV_MAX_ERROR_TEXT] = L"";
 #endif
 
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
     INT64 ms = GetCurrentTimeMilliS();
 
     dwResult = DrvQuery(hConn->m_connection, pwszQuery, wcErrorText);
@@ -258,11 +261,11 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s sync query: \"%s\" [%d ms]"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
+        log_debug(9, _T("DBQueryEx: %s sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
     }
     if ((dwResult == DBERR_SUCCESS) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), szQuery, (int)ms);
+        log_debug(3, _T("DBQueryEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -312,7 +315,7 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     WCHAR wcErrorText[DBDRV_MAX_ERROR_TEXT] = L"";
 #endif
 
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
     INT64 ms = GetCurrentTimeMilliS();
 
     s_perfSelectQueries++;
@@ -328,11 +331,11 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s sync query: \"%s\" [%d ms]"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
+        log_debug(9, _T("DBSelectEx: %s sync query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), szQuery, (int)ms);
+        log_debug(3, _T("DBSelectEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -727,7 +730,7 @@ DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR
     WCHAR wcErrorText[DBDRV_MAX_ERROR_TEXT] = L"";
 #endif
 
-    hConn->m_mutexTransLock.Lock();
+    hConn->m_mutexTransLock->Lock();
     INT64 ms = GetCurrentTimeMilliS();
 
     s_perfSelectQueries++;
@@ -743,17 +746,17 @@ DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s unbuffered query: \"%s\" [%d ms]"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
+        log_debug(9, _T("DBSelectUnbufferedEx: %s unbuffered query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), szQuery, (int)ms);
+        log_debug(3, _T("DBSelectUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
     if (hResult == NULL)
     {
         s_perfFailedQueries++;
-        hConn->m_mutexTransLock.Unlock();
+        hConn->m_mutexTransLock->Unlock();
 
 #ifndef UNICODE
         WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_DEFAULTCHAR, wcErrorText, -1, errorText, DBDRV_MAX_ERROR_TEXT, NULL, NULL);
@@ -952,7 +955,7 @@ double DBGetFieldDouble(DB_UNBUFFERED_RESULT hResult, int iColumn)
 void DBFreeResult(DB_UNBUFFERED_RESULT hResult)
 {
     DrvFreeUnbufferedResult(hResult->m_data);
-    hResult->m_connection->m_mutexTransLock.Unlock();
+    hResult->m_connection->m_mutexTransLock->Unlock();
     free(hResult);
 }
 
@@ -972,7 +975,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
     WCHAR wcErrorText[DBDRV_MAX_ERROR_TEXT] = L"";
 #endif
 
-    hConn->m_mutexTransLock.Lock();
+    hConn->m_mutexTransLock->Lock();
 
     if (hConn->m_dumpSql)
         ms = GetCurrentTimeMilliS();
@@ -984,7 +987,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
         DBReconnect(hConn);
         stmt = DrvPrepare(hConn->m_connection, pwszQuery, &errorCode, wcErrorText);
     }
-    hConn->m_mutexTransLock.Unlock();
+    hConn->m_mutexTransLock->Unlock();
 
     if (stmt != NULL)
     {
@@ -1007,7 +1010,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
     if (hConn->m_dumpSql)
     {
         ms = GetCurrentTimeMilliS() - ms;
-        log_debug(9, _T("{%p} %s prepare: \"%s\" [%d ms]"), result, (result != NULL) ? _T("Successful") : _T("Failed"), query, ms);
+        log_debug(9, _T("DBPrepareEx: {%p} %s prepare: \"%s\" [%d ms]\n"), result, (result != NULL) ? _T("Successful") : _T("Failed"), query, ms);
     }
 
 #ifndef UNICODE
@@ -1073,7 +1076,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, i
     {
         if (cType == DB_CTYPE_STRING)
         {
-            log_debug(9, _T("{%p} bind at pos %d: \"%s\""), hStmt, pos, buffer);
+            log_debug(9, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, buffer);
         }
         else
         {
@@ -1096,7 +1099,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, i
                 _sntprintf(text, 64, _T("%f"), *((double *)buffer));
                 break;
             }
-            log_debug(9, _T("{%p} bind at pos %d: \"%s\""), hStmt, pos, text);
+            log_debug(9, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, text);
         }
     }
 
@@ -1236,7 +1239,7 @@ bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText)
 #endif
 
     DB_HANDLE hConn = hStmt->m_connection;
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
     UINT64 ms = GetCurrentTimeMilliS();
 
     s_perfNonSelectQueries++;
@@ -1246,11 +1249,11 @@ bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s prepared sync query: \"%s\" [%d ms]"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
+        log_debug(9, _T("DBExecuteEx: %s prepared sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((dwResult == DBERR_SUCCESS) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), hStmt->m_query, (int)ms);
+        log_debug(3, _T("DBExecuteEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1302,7 +1305,7 @@ DB_RESULT DBSelectPreparedEx(DB_STATEMENT hStmt, TCHAR *errorText)
 #endif
 
     DB_HANDLE hConn = hStmt->m_connection;
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
 
     s_perfSelectQueries++;
     s_perfTotalQueries++;
@@ -1314,12 +1317,12 @@ DB_RESULT DBSelectPreparedEx(DB_STATEMENT hStmt, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s prepared sync query: \"%s\" [%d ms]"),
+        log_debug(9, _T("DBSelectPreparedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
             (hResult != NULL) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), hStmt->m_query, (int)ms);
+        log_debug(3, _T("DBSelectPreparedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1379,7 +1382,7 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
 #endif
 
     DB_HANDLE hConn = hStmt->m_connection;
-    hConn->m_mutexTransLock.Lock();
+    hConn->m_mutexTransLock->Lock();
 
     s_perfSelectQueries++;
     s_perfTotalQueries++;
@@ -1391,12 +1394,12 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("%s prepared sync query: \"%s\" [%d ms]"),
+        log_debug(9, _T("DBSelectPreparedUnbufferedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
             (hResult != NULL) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), hStmt->m_query, (int)ms);
+        log_debug(3, _T("DBSelectPreparedUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1414,7 +1417,7 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
 
     if (hResult == NULL)
     {
-        hConn->m_mutexTransLock.Unlock();
+        hConn->m_mutexTransLock->Unlock();
         s_perfFailedQueries++;
     }
 
@@ -1446,7 +1449,7 @@ bool DBBegin(DB_HANDLE hConn)
     DWORD dwResult;
     bool bRet = false;
 
-    hConn->m_mutexTransLock.Lock();
+    hConn->m_mutexTransLock->Lock();
     if (hConn->m_transactionLevel == 0)
     {
         dwResult = DrvBegin(hConn->m_connection);
@@ -1459,19 +1462,19 @@ bool DBBegin(DB_HANDLE hConn)
         {
             hConn->m_transactionLevel++;
             bRet = true;
-            log_debug(9, _T("BEGIN TRANSACTION successful (level %d)"), hConn->m_transactionLevel);
+            log_debug(9, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
         }
         else
         {
-            hConn->m_mutexTransLock.Unlock();
-            log_debug(9, _T("BEGIN TRANSACTION failed"), hConn->m_transactionLevel);
+            hConn->m_mutexTransLock->Unlock();
+            log_debug(9, _T("DBBegin: BEGIN TRANSACTION failed\n"), hConn->m_transactionLevel);
         }
     }
     else
     {
         hConn->m_transactionLevel++;
         bRet = true;
-        log_debug(9, _T("BEGIN TRANSACTION successful (level %d)"), hConn->m_transactionLevel);
+        log_debug(9, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
     }
     return bRet;
 }
@@ -1483,7 +1486,7 @@ bool DBCommit(DB_HANDLE hConn)
 {
     bool bRet = false;
 
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
     if (hConn->m_transactionLevel > 0)
     {
         hConn->m_transactionLevel--;
@@ -1491,7 +1494,7 @@ bool DBCommit(DB_HANDLE hConn)
             bRet = (DrvCommit(hConn->m_connection) == DBERR_SUCCESS);
         else
             bRet = true;
-        log_debug(9, _T("COMMIT TRANSACTION %s (level %d)"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
+        log_debug(9, _T("DBCommit: COMMIT TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
     }
     return bRet;
 }
@@ -1503,7 +1506,7 @@ bool DBRollback(DB_HANDLE hConn)
 {
     bool bRet = false;
 
-    MutexLocker locker(&hConn->m_mutexTransLock);
+    MutexLocker locker(hConn->m_mutexTransLock);
     if (hConn->m_transactionLevel > 0)
     {
         hConn->m_transactionLevel--;
@@ -1511,7 +1514,7 @@ bool DBRollback(DB_HANDLE hConn)
             bRet = (DrvRollback(hConn->m_connection) == DBERR_SUCCESS);
         else
             bRet = true;
-        log_debug(9, _T("ROLLBACK TRANSACTION %s (level %d)"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
+        log_debug(9, _T("DBRollback: ROLLBACK TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
     }
     return bRet;
 }

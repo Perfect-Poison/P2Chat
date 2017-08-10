@@ -86,7 +86,7 @@ enum
 typedef struct
 {
     MYSQL *pMySQL;
-    Mutex mutexQueryLock;
+    Mutex *mutexQueryLock;
 } MYSQL_CONN;
 
 /**

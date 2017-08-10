@@ -7,7 +7,7 @@ TCPSocket::TCPSocket(int inSocketID):
     Event(inSocketID),
     fConnClosed(false)
 {
-    SetEventName("TCPSocket");
+    SetEventName(_T("TCPSocket"));
 }
 
 TCPSocket::~TCPSocket()

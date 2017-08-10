@@ -15,7 +15,7 @@ Task::Task(Event *event):
     fDeleteEvent(false),
     fTaskQueueElem()
 {
-    SetTaskName("unknown");
+    SetTaskName(_T("unknown"));
 
     fTaskQueueElem.SetEnclosingObject(this);
 
@@ -80,7 +80,7 @@ void TaskThread::Entry()
             {
                 if (TASKTHREAD_DEBUG)
                     log_debug(0, _T("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName().c_str(), time(0));
-                theTask->SetTaskName(theTask->GetTaskName() + " deleted");
+                theTask->SetTaskName(theTask->GetTaskName() + _T(" deleted"));
                 theTask->SetDead();
                 safe_delete(theTask);
 

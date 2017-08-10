@@ -7,7 +7,7 @@ UDPSession::UDPSession(UDPSocket *udpSocket):
     Task(udpSocket),
     fUDPSocket(udpSocket)
 {
-    this->SetTaskName("UDPSession");
+    this->SetTaskName(_T("UDPSession"));
 }
 
 UDPSession::~UDPSession()

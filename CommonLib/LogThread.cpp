@@ -174,30 +174,33 @@ void LogThread::SetDayStart()
 
 void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
 {
-    TCHAR buffer[64];
-    TCHAR logLevel[64];
     log_type logType = logRecord->GetType();
 #ifdef UNICODE
     wstring msg = logRecord->GetMessage();
+    char *msgUTF8 = utf8_from_wstr(msg.c_str());
 #else
     string msg = logRecord->GetMessage();
+    char *msgUTF8 = memdup(msg.c_str(), msg.length() + 1);
+    msgUTF8[msg.length()] = '\0';
 #endif
+    char buffer[64];
+    char logLevel[64];
     switch (logType)
     {
     case LOG_DEBUG:
-        _sntprintf(logLevel, 16, _T("[%s]"), _T("DEBUG"));
+        _snprintf(logLevel, 16, "[%s]", "DEBUG");
         break;
     case LOG_INFO:
-        _sntprintf(logLevel, 16, _T("[%s]"), _T("INFO "));
+        _snprintf(logLevel, 16, "[%s]", "INFO ");
         break;
     case LOG_WARNING:
-        _sntprintf(logLevel, 16, _T("[%s]"), _T("WARN "));
+        _snprintf(logLevel, 16, "[%s]", "WARN ");
         break;
     case LOG_ERROR:
-        _sntprintf(logLevel, 16, _T("[%s]"), _T("ERROR"));
+        _snprintf(logLevel, 16, "[%s]", "ERROR");
         break;
     default:
-        _tcsncpy(logLevel, _T(""), 1);
+        strncpy(logLevel, "", 1);
         break;
     }
 
@@ -205,15 +208,17 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     if ((fRotationPolicy == LOG_ROTATION_DAILY) && (t >= fCurrentDayStart + 86400))
         RotateLog();
 
-    FormatLogCalendarTime(buffer);
+    FormatLogCalendarTimeA(buffer);
     if (fLogFileHandle != nullptr)
     {
-        _ftprintf(fLogFileHandle, _T("%s %s %s"), buffer, logLevel, msg.c_str());
+        fprintf(fLogFileHandle, "%s %s %s", buffer, logLevel, msgUTF8);
+        //fprintf(fLogFileHandle, "%s", msgUTF8);
         fflush(fLogFileHandle);
     }
     if (fFlags & LOG_PRINT_TO_CONSOLE)
-        _tprintf(_T("%s %s %s"), buffer, logLevel, msg.c_str());
+        printf("%s %s %s", buffer, logLevel, msgUTF8);
 
+    free(msgUTF8);
     if ((fLogFileHandle != nullptr) && (fRotationPolicy == LOG_ROTATION_BY_SIZE) && (fMaxLogSize != 0))
     {
         struct stat st;

@@ -6,7 +6,7 @@ P2_NAMESPACE_BEG
 UDPSocket::UDPSocket(int inSocketID):
     Event(inSocketID)
 {
-    SetEventName("UDPSocket");
+    SetEventName(_T("UDPSocket"));
 }
 
 

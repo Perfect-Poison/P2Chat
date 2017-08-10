@@ -285,7 +285,7 @@ retry:
         }
         else
         {
-            log_debug(5, _T("ConnectionPoolThread::__DBConnectionPoolAcquireConnection Database Connection Pool: cannot create additional DB connection (%s)\n"), errorText);
+            log_debug(5, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: cannot create additional DB connection (%s)\n"), errorText);
             delete conn;
         }
     }
@@ -294,13 +294,13 @@ retry:
 
     if (handle == NULL)
     {
-        log_debug(5, _T("ConnectionPoolThread::__DBConnectionPoolAcquireConnection Database Connection Pool exhausted (call from %hs:%d)\n"), srcFile, srcLine);
+        log_debug(5, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool exhausted (call from %hs:%d)\n"), srcFile, srcLine);
         m_condRelease.Wait(10000);
-        log_debug(5, _T("ConnectionPoolThread::__DBConnectionPoolAcquireConnection Database Connection Pool: retry acquire connection (call from %hs:%d)\n"), srcFile, srcLine);
+        log_debug(5, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: retry acquire connection (call from %hs:%d)\n"), srcFile, srcLine);
         goto retry;
     }
 
-    log_debug(1, _T("ConnectionPoolThread::__DBConnectionPoolAcquireConnection Database Connection Pool: handle %p acquired (call from %hs:%d)\n"), handle, srcFile, srcLine);
+    log_debug(1, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle %p acquired (call from %hs:%d)\n"), handle, srcFile, srcLine);
     return handle;
 }
 

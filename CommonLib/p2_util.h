@@ -58,8 +58,18 @@ int select_waitevent(struct eventreq *req);
 int64 GetCurrentTimeMicroS();   // Œ¢√Óº∂
 int64 GetCurrentTimeMilliS();   // ∫¡√Îº∂
 int64 GetCurrentTimeS();        // √Îº∂
-TCHAR* FormatCalendarTime(TCHAR *buffer);
-TCHAR* FormatLogCalendarTime(TCHAR *buffer);
+
+char* FormatCalendarTimeA(char *buffer);
+char* FormatLogCalendarTimeA(char *buffer);
+WCHAR* FormatCalendarTimeW(WCHAR *buffer);
+WCHAR* FormatLogCalendarTimeW(WCHAR *buffer);
+#ifdef UNICODE
+#define FormatCalendarTime      FormatCalendarTimeW
+#define FormatLogCalendarTime   FormatLogCalendarTimeW
+#else
+#define FormatCalendarTime      FormatCalendarTimeA
+#define FormatLogCalendarTime   FormatLogCalendarTimeA
+#endif
 
 
 /**

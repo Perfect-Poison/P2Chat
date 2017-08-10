@@ -235,6 +235,7 @@ MYSQL_CONN* DrvConnect(const char *szHost, const char *szLogin, const char *szPa
 
     pConn = (MYSQL_CONN *)malloc(sizeof(MYSQL_CONN));
     pConn->pMySQL = pMySQL;
+    pConn->mutexQueryLock = new Mutex;
 
     mysql_set_character_set(pMySQL, "utf8");
 
@@ -246,6 +247,7 @@ void DrvDisconnect(MYSQL_CONN *pConn)
     if (pConn != nullptr)
     {
         mysql_close(pConn->pMySQL);
+        safe_delete(pConn->mutexQueryLock);
         free(pConn);
     }
 }
@@ -254,7 +256,7 @@ MYSQL_STATEMENT* DrvPrepare(MYSQL_CONN *pConn, WCHAR *pwszQuery, DWORD *pdwError
 {
     MYSQL_STATEMENT *result = nullptr;
 
-    MutexLocker locker(&pConn->mutexQueryLock);
+    MutexLocker locker(pConn->mutexQueryLock);
     MYSQL_STMT *stmt = mysql_stmt_init(pConn->pMySQL);
     if (stmt != nullptr)
     {
@@ -360,7 +362,7 @@ DWORD DrvExecute(MYSQL_CONN *pConn, MYSQL_STATEMENT *hStmt, WCHAR *errorText)
 {
     DWORD dwResult;
 
-    MutexLocker locker(&pConn->mutexQueryLock);
+    MutexLocker locker(pConn->mutexQueryLock);
 
     if (mysql_stmt_bind_param(hStmt->statement, hStmt->bindings) == 0)
     {
@@ -396,9 +398,9 @@ void DrvFreeStatement(MYSQL_STATEMENT *hStmt)
     if (hStmt == NULL)
         return;
 
-    hStmt->connection->mutexQueryLock.Lock();
+    hStmt->connection->mutexQueryLock->Lock();
     mysql_stmt_close(hStmt->statement);
-    hStmt->connection->mutexQueryLock.Unlock();
+    hStmt->connection->mutexQueryLock->Unlock();
     if (hStmt->buffers)
     {
         for (auto it = hStmt->buffers->begin();
@@ -419,7 +421,7 @@ static DWORD DrvQueryInternal(MYSQL_CONN *pConn, const char *pszQuery, WCHAR *er
 {
     DWORD dwRet = DBERR_INVALID_HANDLE;
 
-    MutexLocker locker(&pConn->mutexQueryLock);
+    MutexLocker locker(pConn->mutexQueryLock);
     if (mysql_query(pConn->pMySQL, pszQuery) == 0)
     {
         dwRet = DBERR_SUCCESS;
@@ -472,7 +474,7 @@ MYSQL_RESULT* DrvSelect(MYSQL_CONN *pConn, WCHAR *pwszQuery, DWORD *pdwError, WC
     }
 
     pszQueryUTF8 = utf8_from_wstr(pwszQuery);
-    MutexLocker locker(&pConn->mutexQueryLock);
+    MutexLocker locker(pConn->mutexQueryLock);
     if (mysql_query(pConn->pMySQL, pszQueryUTF8) == 0)
     {
         result = (MYSQL_RESULT *)malloc(sizeof(MYSQL_RESULT));
@@ -514,7 +516,7 @@ MYSQL_RESULT* DrvSelectPrepared(MYSQL_CONN *pConn, MYSQL_STATEMENT *hStmt, DWORD
         return NULL;
     }
 
-    MutexLocker locker(&pConn->mutexQueryLock);
+    MutexLocker locker(pConn->mutexQueryLock);
 
     if (mysql_stmt_bind_param(hStmt->statement, hStmt->bindings) == 0)
     {
@@ -601,7 +603,7 @@ LONG DrvGetFieldLength(MYSQL_RESULT *hResult, int iRow, int iColumn)
 
         if (hResult->currentRow != iRow)
         {
-            MutexLocker locker(&hResult->connection->mutexQueryLock);
+            MutexLocker locker(hResult->connection->mutexQueryLock);
             mysql_stmt_data_seek(hResult->statement, iRow);
             mysql_stmt_fetch(hResult->statement);
             hResult->currentRow = iRow;
@@ -629,7 +631,7 @@ static void *GetFieldInternal(MYSQL_RESULT *hResult, int iRow, int iColumn, void
             (iColumn < 0) || (iColumn >= hResult->numColumns))
             return NULL;
 
-        MutexLocker locker(&hResult->connection->mutexQueryLock);
+        MutexLocker locker(hResult->connection->mutexQueryLock);
         if (hResult->currentRow != iRow)
         {
             mysql_stmt_data_seek(hResult->statement, iRow);
@@ -780,7 +782,7 @@ MYSQL_UNBUFFERED_RESULT* DrvSelectUnbuffered(MYSQL_CONN *pConn, WCHAR *pwszQuery
     }
 
     pszQueryUTF8 = utf8_from_wstr(pwszQuery);
-    pConn->mutexQueryLock.Lock();
+    pConn->mutexQueryLock->Lock();
     if (mysql_query(pConn->pMySQL, pszQueryUTF8) == 0)
     {
         pResult = (MYSQL_UNBUFFERED_RESULT *)malloc(sizeof(MYSQL_UNBUFFERED_RESULT));
@@ -827,7 +829,7 @@ MYSQL_UNBUFFERED_RESULT* DrvSelectUnbuffered(MYSQL_CONN *pConn, WCHAR *pwszQuery
 
     if (pResult == NULL)
     {
-        pConn->mutexQueryLock.Unlock();
+        pConn->mutexQueryLock->Unlock();
     }
     free(pszQueryUTF8);
 
@@ -841,7 +843,7 @@ MYSQL_UNBUFFERED_RESULT* DrvSelectPreparedUnbuffered(MYSQL_CONN *pConn, MYSQL_ST
 {
     MYSQL_UNBUFFERED_RESULT *result = NULL;
 
-    pConn->mutexQueryLock.Lock();
+    pConn->mutexQueryLock->Lock();
 
     if (mysql_stmt_bind_param(hStmt->statement, hStmt->bindings) == 0)
     {
@@ -902,7 +904,7 @@ MYSQL_UNBUFFERED_RESULT* DrvSelectPreparedUnbuffered(MYSQL_CONN *pConn, MYSQL_ST
 
     if (result == NULL)
     {
-        pConn->mutexQueryLock.Unlock();
+        pConn->mutexQueryLock->Unlock();
     }
     return result;
 }
@@ -924,7 +926,7 @@ bool DrvFetch(MYSQL_UNBUFFERED_RESULT *result)
         {
             result->noMoreRows = true;
             success = false;
-            result->connection->mutexQueryLock.Unlock();
+            result->connection->mutexQueryLock->Unlock();
         }
     }
     else
@@ -935,7 +937,7 @@ bool DrvFetch(MYSQL_UNBUFFERED_RESULT *result)
         {
             result->noMoreRows = true;
             success = false;
-            result->connection->mutexQueryLock.Unlock();
+            result->connection->mutexQueryLock->Unlock();
         }
         else
         {
@@ -1078,7 +1080,7 @@ void DrvFreeUnbufferedResult(MYSQL_UNBUFFERED_RESULT *hResult)
         }
 
         // Now we are ready for next query, so unlock query mutex
-        hResult->connection->mutexQueryLock.Unlock();
+        hResult->connection->mutexQueryLock->Unlock();
     }
 
     // Free allocated memory

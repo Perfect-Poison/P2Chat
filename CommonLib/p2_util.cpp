@@ -250,21 +250,39 @@ inline int64 GetCurrentTimeS()
     return GetCurrentTimeMilliS() / 1000;
 }
 
-TCHAR* FormatCalendarTime(TCHAR *buffer)
+char* FormatCalendarTimeA(char *buffer)
 {
     time_t now = GetCurrentTimeS();
     struct tm *loc = localtime(&now);
-    _tcsftime(buffer, 32, _T("%d-%b-%Y %H:%M:%S"), loc);
+    strftime(buffer, 32, "%d-%b-%Y %H:%M:%S", loc);
     return buffer;
 }
 
-TCHAR* FormatLogCalendarTime(TCHAR *buffer)
+char* FormatLogCalendarTimeA(char *buffer)
 {
     int64 now = GetCurrentTimeMilliS();
     time_t t = now / 1000;
     struct tm *loc = localtime(&t);
-    _tcsftime(buffer, 32, _T("[%d-%b-%Y %H:%M:%S"), loc);
-    _sntprintf(&buffer[21], 8, _T(".%03d]"), (int)(now % 1000));
+    strftime(buffer, 32, "[%d-%b-%Y %H:%M:%S", loc);
+    _snprintf(&buffer[21], 8, ".%03d]", (int)(now % 1000));
+    return buffer;
+}
+
+WCHAR* FormatCalendarTimeW(WCHAR *buffer)
+{
+    time_t now = GetCurrentTimeS();
+    struct tm *loc = localtime(&now);
+    wcsftime(buffer, 32, L"%d-%b-%Y %H:%M:%S", loc);
+    return buffer;
+}
+
+WCHAR* FormatLogCalendarTimeW(WCHAR *buffer)
+{
+    int64 now = GetCurrentTimeMilliS();
+    time_t t = now / 1000;
+    struct tm *loc = localtime(&t);
+    wcsftime(buffer, 32, L"[%d-%b-%Y %H:%M:%S", loc);
+    _snwprintf(&buffer[21], 8, L".%03d]", (int)(now % 1000));
     return buffer;
 }
 

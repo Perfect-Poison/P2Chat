@@ -5,8 +5,8 @@ P2_NAMESPACE_BEG
 TCPListenerSocket::TCPListenerSocket():
     Task(this)
 {
-    this->SetTaskName("TCPListenerSocket");
-    this->SetEventName("TCPListenerSocket");
+    this->SetTaskName(_T("TCPListenerSocket"));
+    this->SetEventName(_T("TCPListenerSocket"));
 }
 
 
