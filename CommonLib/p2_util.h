@@ -17,8 +17,8 @@ char *bin_to_strA(const BYTE* pData, size_t size, char *pStr);
 WCHAR *bin_to_strW(const BYTE* pData, size_t size, WCHAR *pStr);
 size_t str_to_binA(const char* pStr, BYTE *pData, size_t size);
 size_t str_to_binW(const WCHAR* pStr, BYTE *pData, size_t size);
-void str_stripA(char *pszStr);
-void str_stripW(WCHAR *pszStr);
+void str_stripA(char *str);
+void str_stripW(WCHAR *str);
 
 #ifdef UNICODE
 #define bin_to_str  bin_to_strW

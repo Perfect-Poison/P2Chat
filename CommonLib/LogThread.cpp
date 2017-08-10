@@ -6,13 +6,13 @@ LogThread* LogThread::sInstance = nullptr;
 LogThread::LogThread() : Thread()
 {
     if (LOGTHREAD_DEBUG)
-        printf("EventThread::EventThread 创建日志线程\n");
+        _tprintf(_T("EventThread::EventThread 创建日志线程\n"));
 
     memset(fLogFileName, 0, sizeof(fLogFileName));
     fLogFileHandle = nullptr;
     fFlags = 0;
     fRotationPolicy = LOG_ROTATION_DAILY;
-    strcpy(fDailyLogSuffix, "%Y%m%d");   // 只在LOG_ROTATION_DAILY下有效
+    _tcscpy(fDailyLogSuffix, _T("%Y%m%d"));   // 只在LOG_ROTATION_DAILY下有效
     fMaxLogSize = 4096 * 1024;    // 只在LOG_ROTATION_BY_SIZE下有效
     fCurrentDayStart = 0;
     fLogHistorySize = 4;
@@ -92,7 +92,7 @@ void LogThread::SetRotationPolicy(log_rotation_policy rotationPolicy, int maxLog
             fLogHistorySize = MAX_LOG_HISTORY_SIZE;
         break;
     default:
-        printf("[error]LogThread::LogOpen 未知的log rotation policy\n");
+        _tprintf(_T("[error]LogThread::LogOpen 未知的log rotation policy\n"));
         break;
     }
 }

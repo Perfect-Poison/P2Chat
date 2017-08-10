@@ -261,7 +261,7 @@ void P2Test::msgDataUpdate()
             fMessage->SetAttr(attrCode, attrDataStr.toStdWString().c_str(), attrDataStr.toStdWString().length());
             break;
         default:
-            printf("Message::Message no such data type!\n");
+            _tprintf(_T("Message::Message no such data type!\n"));
             break;
         }
     }

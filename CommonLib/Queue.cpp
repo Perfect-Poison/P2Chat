@@ -57,7 +57,7 @@ QueueElem* QueueBlocking::DeQueueBlocing(int32 inTimeoutMilSecs)
     MutexLocker locker(&fMutex);
     
     if (fLength == 0)
-        fCond.Wait(&fMutex, inTimeoutMilSecs);
+        fCond.Wait(inTimeoutMilSecs);
 
     QueueElem* elem = Queue::DeQueue();
     return elem;

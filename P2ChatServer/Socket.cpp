@@ -16,7 +16,7 @@ void Socket::Open(int32 inSocketType, int32 inProtocol)
     if ((this->fSocketID = ::socket(AF_INET, inSocketType, inProtocol)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::Open Create socket error!\n");
+            log_debug(7, _T("[error]Socket::Open Create socket error!\n"));
         return;
     }
 }
@@ -36,7 +36,7 @@ void Socket::_Bind(const USHORT& inPort)
     if (::bind(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::_Bind Binded socket error!\n");
+            log_debug(7, _T("[error]Socket::_Bind Binded socket error!\n"));
         return;
     }
 }
@@ -51,7 +51,7 @@ void Socket::SetIOType(IOType inIOType)
         if (::ioctlsocket(this->fSocketID, FIONBIO, &iMode) == SOCKET_ERROR)
         {
             if (SOCKET_DEBUG)
-                log_debug(7, "[error]Socket::SetIOType Blocking: ioctlsocket failed!\n");
+                log_debug(7, _T("[error]Socket::SetIOType Blocking: ioctlsocket failed!\n"));
         }
         break;
     case kNonBlocking:
@@ -59,12 +59,12 @@ void Socket::SetIOType(IOType inIOType)
         if (::ioctlsocket(this->fSocketID, FIONBIO, &iMode) == SOCKET_ERROR)
         {
             if (SOCKET_DEBUG)
-                log_debug(7, "[error]Socket::SetIOType Non-Blocking: ioctlsocket failed!\n");
+                log_debug(7, _T("[error]Socket::SetIOType Non-Blocking: ioctlsocket failed!\n"));
         }
         break;
     default:
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::SetIOType No such IO type!\n");
+            log_debug(7, _T("[error]Socket::SetIOType No such IO type!\n"));
         break;
     }
 }
@@ -75,7 +75,7 @@ void Socket::ReuseAddr()
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_REUSEADDR, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::ReuseAddr error!\n");
+            log_debug(7, _T("[error]Socket::ReuseAddr error!\n"));
         return;
     }
     return;
@@ -87,7 +87,7 @@ void Socket::NoDelay()
     if (::setsockopt(this->fSocketID, IPPROTO_TCP, TCP_NODELAY, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::NoDelay error!\n");
+            log_debug(7, _T("[error]Socket::NoDelay error!\n"));
         return;
     }
     return;
@@ -99,7 +99,7 @@ void Socket::KeepAlive()
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_KEEPALIVE, (char*)&one, sizeof(int)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::KeepAlive error!\n");
+            log_debug(7, _T("[error]Socket::KeepAlive error!\n"));
         return;
     }
     return;
@@ -111,7 +111,7 @@ void Socket::SetSocketSendBufferSize(uint32 inNewSize)
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_SNDBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::SetSocketSendBufferSize error!\n");
+            log_debug(7, _T("[error]Socket::SetSocketSendBufferSize error!\n"));
         return;
     }
     return;
@@ -123,7 +123,7 @@ void Socket::SetSocketRecvBufferSize(uint32 inNewSize)
     if (::setsockopt(this->fSocketID, SOL_SOCKET, SO_RCVBUF, (char*)&bufSize, sizeof(int)) == SOCKET_ERROR)
     {
         if (SOCKET_DEBUG)
-            log_debug(7, "[error]Socket::SetSocketRecvBufferSize error!\n");
+            log_debug(7, _T("[error]Socket::SetSocketRecvBufferSize error!\n"));
         return;
     }
     return;

@@ -73,7 +73,7 @@ size_t str_to_binW(const WCHAR* pStr, BYTE *pData, size_t size)
     return i;
 }
 
-void str_stripA(char *pszStr)
+void str_stripA(char *str)
 {
     int i;
 
@@ -84,7 +84,7 @@ void str_stripA(char *pszStr)
     str[i + 1] = 0;
 }
 
-void str_stripW(WCHAR *pszStr)
+void str_stripW(WCHAR *str)
 {
     int i;
 
@@ -274,7 +274,7 @@ bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotatio
     log_flags logFlags = logThread->GetFlags();
     if (logFlags & LOG_IS_OPEN)
     {
-        _tprintf("日志文件已经打开，请先关闭\n");
+        _tprintf(_T("日志文件已经打开，请先关闭\n"));
         return false;
     }
     if (logThread->LogOpen(logName, flags, rotationPolicy, maxLogSize, historySize, dailySuffix))
@@ -303,7 +303,7 @@ void log_write(log_type logType, const TCHAR *format, ...)
     TCHAR buffer[4096];
     va_list args;
     va_start(args, format);
-    _vstprintf_s(buffer, sizeof(buffer), format, args);
+    _vstprintf(buffer, sizeof(buffer), format, args);
     LogRecord *logRecord = new LogRecord(buffer, logType);
     logThread->EnQueueLogRecord(logRecord);
     va_end(args);
@@ -325,7 +325,7 @@ void log_debug(int level, const TCHAR *format, ...)
     TCHAR buffer[4096];
     va_list args;
     va_start(args, format);
-    _vstprintf_s(buffer, sizeof(buffer), format, args);
+    _vstprintf(buffer, sizeof(buffer), format, args);
     LogRecord *logRecord = new LogRecord(buffer, LOG_DEBUG);
     logThread->EnQueueLogRecord(logRecord);
     va_end(args);

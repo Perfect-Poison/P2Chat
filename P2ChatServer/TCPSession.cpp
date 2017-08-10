@@ -24,7 +24,7 @@ int64 TCPSession::Run()
     {
         fTCPSocket->SetConnectionClose();
         if (TCPSESSION_DEBUG)
-            log_debug(1, "TCPSession::Run 断开连接%s:%d\n", fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
+            log_debug(1, _T("TCPSession::Run 断开连接%s:%d\n"), fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
 
         SetDeleteEventWhenAllRefTasksFinished(TRUE);
 
@@ -43,7 +43,7 @@ int64 TCPSession::Run()
                 recvSize = fTCPSocket->Recv((BYTE *)buffer, sizeof(buffer));
                 if (recvSize != -1)
                 {
-                    //printf("收到来自%s:%u的数据: [%dB] %s\n", remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
+                    //_tprintf(_T("收到来自%s:%u的数据: [%dB] %s\n"), remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
                     //_stprintf(reply,  _T("Hello, received data: %s\n"), buffer);
                     //fTCPSocket->Send((BYTE *)reply, _tcslen(reply) * sizeof(TCHAR));
                 }

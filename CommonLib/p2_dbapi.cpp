@@ -31,8 +31,8 @@ P2_NAMESPACE_BEG
 /**
 * Log message codes
 */
-UINT32 g_logMsgCode = 0;
-UINT32 g_sqlErrorMsgCode = 0;
+//UINT32 g_logMsgCode = 0;
+//UINT32 g_sqlErrorMsgCode = 0;
 
 /**
 * Long-running query threshold
@@ -42,9 +42,9 @@ UINT32 g_sqlQueryExecTimeThreshold = 0xFFFFFFFF;
 /**
 * Options
 */
-static bool s_writeLog = false;
-static bool s_logSqlErrors = false;
-
+//static bool s_writeLog = false;
+//static bool s_logSqlErrors = false;
+static bool s_dumpSQL = false;
 /**
 * Performance counters
 */
@@ -57,9 +57,9 @@ static UINT64 s_perfFailedQueries = 0;
 /**
 * Invalidate all prepared statements on connection
 */
-static void InvalidatePreparedStatements(DB_HANDLE hConn)
+static void InvalidatePreparedStatements(db_handle_t* hConn)
 {
-    for (int i = 0; i < hConn->m_preparedStatements->size(); i++)
+    for (size_t i = 0; i < hConn->m_preparedStatements->size(); i++)
     {
         db_statement_t *stmt = hConn->m_preparedStatements->at(i);
         DrvFreeStatement(stmt->m_statement);
@@ -69,15 +69,16 @@ static void InvalidatePreparedStatements(DB_HANDLE hConn)
     hConn->m_preparedStatements->clear();
 }
 
-bool DBInit(DWORD logMsgCode, DWORD sqlErrorMsgCode)
-{
-    g_logMsgCode = logMsgCode;
-    s_writeLog = (logMsgCode > 0);
-    g_sqlErrorMsgCode = sqlErrorMsgCode;
-    s_logSqlErrors = (sqlErrorMsgCode > 0) && s_writeLog;
-
-    return true;
-}
+// bool DBInit(DWORD logMsgCode, DWORD sqlErrorMsgCode, bool dumpSQL)
+// {
+//    // g_logMsgCode = logMsgCode;
+//    // s_writeLog = (logMsgCode > 0);
+//     //g_sqlErrorMsgCode = sqlErrorMsgCode;
+//     //s_logSqlErrors = (sqlErrorMsgCode > 0) && s_writeLog;
+//     s_dumpSQL = dumpSQL;
+// 
+//     return true;
+// }
 
 // DB_DRIVER DBLoadDriver(bool dumpSQL)
 // {
@@ -106,8 +107,9 @@ bool DBInit(DWORD logMsgCode, DWORD sqlErrorMsgCode)
 // 
 //     DrvUnload();
 // }
-bool DBLoad()
+bool DBLoad(bool dumpSQL)
 {
+    s_dumpSQL = dumpSQL;
     return DrvInit();
 }
 
@@ -116,12 +118,12 @@ void DBUnload()
     DrvUnload();
 }
 
-DB_HANDLE DBConnect(const TCHAR *server, const TCHAR *dbName, const TCHAR *login, const TCHAR *password, bool dumpSql, TCHAR *errorText)
+DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password, TCHAR *errorText)
 {
     MYSQL_CONN *hDrvConn;
     DB_HANDLE hConn = NULL;
 
-    log_debug(8, "DBConnect: server=%s db=%s login=%s", server, dbName, login);
+    log_debug(8, _T("DBConnect: server=%s db=%s login=%s"), server, dbName, login);
 #ifdef UNICODE
     char *mbServer = (server == NULL) ? NULL : mb_from_wstr(server);
     char *mbDatabase = (dbName == NULL) ? NULL : mb_from_wstr(dbName);
@@ -140,7 +142,7 @@ DB_HANDLE DBConnect(const TCHAR *server, const TCHAR *dbName, const TCHAR *login
         hConn = (DB_HANDLE)malloc(sizeof(struct db_handle_t));
         if (hConn != NULL)
         {
-            hConn->m_dumpSql = dumpSql;
+            hConn->m_dumpSql = s_dumpSQL;
             hConn->m_reconnectEnabled = true;
             hConn->m_connection = hDrvConn;
             hConn->m_transactionLevel = 0;
@@ -156,7 +158,7 @@ DB_HANDLE DBConnect(const TCHAR *server, const TCHAR *dbName, const TCHAR *login
             hConn->m_password = (password == NULL) ? NULL : _tcsdup(password);
             hConn->m_server = (server == NULL) ? NULL : _tcsdup(server);
 #endif
-            log_debug(4, "New DB connection opened: handle=%p", hConn);
+            log_debug(4, _T("New DB connection opened: handle=%p"), hConn);
 
         }
         else
@@ -181,7 +183,7 @@ void DBDisconnect(DB_HANDLE hConn)
     if (hConn == NULL)
         return;
 
-    log_debug(4, "DB connection %p closed", hConn);
+    log_debug(4, _T("DB connection %p closed"), hConn);
 
     InvalidatePreparedStatements(hConn);
 
@@ -210,7 +212,7 @@ static void DBReconnect(DB_HANDLE hConn)
     int nCount;
     WCHAR errorText[DBDRV_MAX_ERROR_TEXT];
 
-    log_debug(4, "DB reconnect: handle=%p", hConn);
+    log_debug(4, _T("DB reconnect: handle=%p"), hConn);
 
     InvalidatePreparedStatements(hConn);
     DrvDisconnect(hConn->m_connection);
@@ -256,11 +258,11 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, "%s sync query: \"%s\" [%d ms]", (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
+        log_debug(9, _T("%s sync query: \"%s\" [%d ms]"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
     }
     if ((dwResult == DBERR_SUCCESS) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, "Long running query: \"%s\" [%d ms]", szQuery, (int)ms);
+        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -288,7 +290,7 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
 #undef wcErrorText
 }
 
-bool DBQuery(DB_HANDLE hConn, const TCHAR *query)
+bool DBQuery(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
     return DBQueryEx(hConn, query, errorText);
@@ -326,11 +328,11 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, "%s sync query: \"%s\" [%d ms]", (hResult != NULL) ? "Successful" : "Failed", szQuery, (int)ms);
+        log_debug(9, _T("%s sync query: \"%s\" [%d ms]"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, "Long running query: \"%s\" [%d ms]", szQuery, (int)ms);
+        log_debug(3, _T("Long running query: \"%s\" [%d ms]"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -355,7 +357,7 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
 #undef wcErrorText
 }
 
-DB_RESULT DBSelect(DB_HANDLE hConn, const TCHAR *query)
+DB_RESULT DBSelect(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
 
@@ -776,7 +778,7 @@ DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR
 #undef wcErrorText
 }
 
-DB_UNBUFFERED_RESULT DBSelectUnbuffered(DB_HANDLE hConn, const TCHAR *query)
+DB_UNBUFFERED_RESULT DBSelectUnbuffered(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
 
@@ -970,7 +972,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
     WCHAR wcErrorText[DBDRV_MAX_ERROR_TEXT] = L"";
 #endif
 
-    hConn->m_mutexTransLock.Lock()
+    hConn->m_mutexTransLock.Lock();
 
     if (hConn->m_dumpSql)
         ms = GetCurrentTimeMilliS();
@@ -1025,7 +1027,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
 /**
 * Prepare statement
 */
-DB_STATEMENT DBPrepare(DB_HANDLE hConn, const TCHAR *query)
+DB_STATEMENT DBPrepare(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
     return DBPrepareEx(hConn, query, errorText);
@@ -1124,7 +1126,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, i
 /**
 * Bind string parameter
 */
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const TCHAR *value, int allocType)
+void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, TCHAR *value, int allocType)
 {
     if (value != NULL)
         DBBind(hStmt, pos, sqlType, DB_CTYPE_STRING, (void *)value, allocType);
@@ -1135,7 +1137,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const TCHAR *value, int al
 /**
 * Bind string parameter with length validation
 */
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const TCHAR *value, int allocType, int maxLen)
+void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, TCHAR *value, int allocType, int maxLen)
 {
     if (value != NULL)
     {
@@ -1207,14 +1209,14 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, double value)
     DBBind(hStmt, pos, sqlType, DB_CTYPE_DOUBLE, &value, DB_BIND_TRANSIENT);
 }
 
-/**
-* Bind UUID parameter
-*/
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const uuid& value)
-{
-    TCHAR buffer[64];
-    DBBind(hStmt, pos, sqlType, DB_CTYPE_STRING, value.toString(buffer), DB_BIND_TRANSIENT);
-}
+// /**
+// * Bind UUID parameter
+// */
+// void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, uuid& value)
+// {
+//     TCHAR buffer[64];
+//     DBBind(hStmt, pos, sqlType, DB_CTYPE_STRING, value.toString(buffer), DB_BIND_TRANSIENT);
+// }
 
 /**
 * Execute prepared statement (non-SELECT)
@@ -1240,7 +1242,7 @@ bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText)
     s_perfNonSelectQueries++;
     s_perfTotalQueries++;
 
-    DWORD dwResult = hConn->DrvExecute(hConn->m_connection, hStmt->m_statement, wcErrorText);
+    DWORD dwResult = DrvExecute(hConn->m_connection, hStmt->m_statement, wcErrorText);
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
@@ -1384,7 +1386,7 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
 
     INT64 ms = GetCurrentTimeMilliS();
     DWORD dwError = DBERR_OTHER_ERROR;
-    MYSQL_UNBUFFERED_RESULT *hResult = hConn->DrvSelectPreparedUnbuffered(hConn->m_connection, hStmt->m_statement, &dwError, wcErrorText);
+    MYSQL_UNBUFFERED_RESULT *hResult = DrvSelectPreparedUnbuffered(hConn->m_connection, hStmt->m_statement, &dwError, wcErrorText);
 
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
@@ -1517,7 +1519,7 @@ bool DBRollback(DB_HANDLE hConn)
 /**
 * Prepare string for using in SQL statement
 */
-wstring DBPrepareStringW(const WCHAR *str, int maxSize)
+wstring DBPrepareStringW(WCHAR *str, int maxSize)
 {
     wstring out;
     if ((maxSize > 0) && (str != NULL) && (maxSize < (int)wcslen(str)))
@@ -1537,7 +1539,7 @@ wstring DBPrepareStringW(const WCHAR *str, int maxSize)
 /**
 * Prepare string for using in SQL statement
 */
-string DBPrepareStringA(const CHAR *str, int maxSize)
+string DBPrepareStringA(CHAR *str, int maxSize)
 {
     string out;
     if ((maxSize > 0) && (str != NULL) && (maxSize < (int)strlen(str)))
@@ -1557,7 +1559,7 @@ string DBPrepareStringA(const CHAR *str, int maxSize)
 /**
 * Check if given table exist
 */
-int DBIsTableExist(DB_HANDLE conn, const TCHAR *table)
+int DBIsTableExist(DB_HANDLE conn, TCHAR *table)
 {
 #ifdef UNICODE
     return DrvIsTableExist(conn->m_connection, table);
@@ -1578,6 +1580,50 @@ void DBGetPerfCounters(LIBNXDB_PERF_COUNTERS *counters)
     counters->nonSelectQueries = s_perfNonSelectQueries;
     counters->selectQueries = s_perfSelectQueries;
     counters->totalQueries = s_perfTotalQueries;
+}
+
+bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, UINT32 id)
+{
+    bool exist = false;
+
+    TCHAR query[256];
+    _sntprintf(query, 256, _T("SELECT %s FROM %s WHERE %s=?"), idColumn, table, idColumn);
+
+    DB_STATEMENT hStmt = DBPrepare(hdb, query);
+    if (hStmt != NULL)
+    {
+        DBBind(hStmt, 1, DB_SQLTYPE_INTEGER, id);
+        DB_RESULT hResult = DBSelectPrepared(hStmt);
+        if (hResult != NULL)
+        {
+            exist = (DBGetNumRows(hResult) > 0);
+            DBFreeResult(hResult);
+        }
+        DBFreeStatement(hStmt);
+    }
+    return exist;
+}
+
+bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, TCHAR *id)
+{
+    bool exist = false;
+
+    TCHAR query[1256];
+    _sntprintf(query, sizeof(query), _T("SELECT %s FROM %s WHERE %s='?'"), idColumn, table, idColumn);
+
+    DB_STATEMENT hStmt = DBPrepare(hdb, query);
+    if (hStmt != NULL)
+    {
+        DBBind(hStmt, 1, DB_SQLTYPE_VARCHAR, id, DB_BIND_STATIC);
+        DB_RESULT hResult = DBSelectPrepared(hStmt);
+        if (hResult != NULL)
+        {
+            exist = (DBGetNumRows(hResult) > 0);
+            DBFreeResult(hResult);
+        }
+        DBFreeStatement(hStmt);
+    }
+    return exist;
 }
 
 P2_NAMESPACE_END

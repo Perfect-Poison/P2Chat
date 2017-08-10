@@ -71,8 +71,8 @@ P2_NAMESPACE_BEG
 /**
 * Global variables
 */
-extern UINT32 g_logMsgCode;
-extern UINT32 g_sqlErrorMsgCode;
+// extern UINT32 g_logMsgCode;
+// extern UINT32 g_sqlErrorMsgCode;
 
 /**
 * Database connection structures
@@ -139,11 +139,6 @@ struct db_unbuffered_result_t
 };
 
 /**
-* Internal functions
-*/
-void __DBWriteLog(WORD level, const TCHAR *format, ...);
-
-/**
 * Pool connection information
 */
 struct PoolConnectionInfo
@@ -172,29 +167,28 @@ struct LIBNXDB_PERF_COUNTERS
 /**
 * Functions
 */
-bool DBInit(DWORD logMsgCode, DWORD sqlErrorMsgCode);
-bool DBLoad();
+bool DBLoad(bool dumpSQL);
 void DBUnload();
 
-DB_HANDLE DBConnect(const TCHAR *server, const TCHAR *dbName, const TCHAR *login, const TCHAR *password, bool dumpSql, TCHAR *errorText);
+DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password, TCHAR *errorText);
 void DBDisconnect(DB_HANDLE hConn);
 void DBEnableReconnect(DB_HANDLE hConn, bool enabled);
 
-DB_STATEMENT DBPrepare(DB_HANDLE hConn, const TCHAR *szQuery);
-DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, const TCHAR *szQuery, TCHAR *errorText);
+DB_STATEMENT DBPrepare(DB_HANDLE hConn, TCHAR *szQuery);
+DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText);
 void DBFreeStatement(DB_STATEMENT hStmt);
 const TCHAR *DBGetStatementSource(DB_STATEMENT hStmt);
-bool DBOpenBatch(DB_STATEMENT hStmt);
-void DBNextBatchRow(DB_STATEMENT hStmt);
+//bool DBOpenBatch(DB_STATEMENT hStmt);
+//void DBNextBatchRow(DB_STATEMENT hStmt);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, int allocType);
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const TCHAR *value, int allocType);
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const TCHAR *value, int allocType, int maxLen);
+void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, TCHAR *value, int allocType);
+void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, TCHAR *value, int allocType, int maxLen);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, INT32 value);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, UINT32 value);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, INT64 value);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, UINT64 value);
 void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, double value);
-void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, const uuid& value);
+//void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, uuid& value);
 bool DBExecute(DB_STATEMENT hStmt);
 bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText);
 DB_RESULT DBSelectPrepared(DB_STATEMENT hStmt);
@@ -202,11 +196,11 @@ DB_RESULT DBSelectPreparedEx(DB_STATEMENT hStmt, TCHAR *errorText);
 DB_UNBUFFERED_RESULT DBSelectPreparedUnbuffered(DB_STATEMENT hStmt);
 DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *errorText);
 
-bool DBQuery(DB_HANDLE hConn, const TCHAR *szQuery);
-bool DBQueryEx(DB_HANDLE hConn, const TCHAR *szQuery, TCHAR *errorText);
+bool DBQuery(DB_HANDLE hConn, TCHAR *szQuery);
+bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText);
 
-DB_RESULT DBSelect(DB_HANDLE hConn, const TCHAR *szQuery);
-DB_RESULT DBSelectEx(DB_HANDLE hConn, const TCHAR *szQuery, TCHAR *errorText);
+DB_RESULT DBSelect(DB_HANDLE hConn, TCHAR *szQuery);
+DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText);
 int DBGetColumnCount(DB_RESULT hResult);
 bool DBGetColumnName(DB_RESULT hResult, int column, TCHAR *buffer, int bufSize);
 int DBGetNumRows(DB_RESULT hResult);
@@ -220,16 +214,16 @@ UINT32 DBGetFieldULong(DB_RESULT hResult, int iRow, int iColumn);
 INT64 DBGetFieldInt64(DB_RESULT hResult, int iRow, int iColumn);
 UINT64 DBGetFieldUInt64(DB_RESULT hResult, int iRow, int iColumn);
 double DBGetFieldDouble(DB_RESULT hResult, int iRow, int iColumn);
-UINT32 DBGetFieldIPAddr(DB_RESULT hResult, int iRow, int iColumn);
-InetAddress DBGetFieldInetAddr(DB_RESULT hResult, int iRow, int iColumn);
+// UINT32 DBGetFieldIPAddr(DB_RESULT hResult, int iRow, int iColumn);
+// InetAddress DBGetFieldInetAddr(DB_RESULT hResult, int iRow, int iColumn);
 bool DBGetFieldByteArray(DB_RESULT hResult, int iRow, int iColumn,
     int *pnArray, int nSize, int nDefault);
 bool DBGetFieldByteArray2(DB_RESULT hResult, int iRow, int iColumn,
     BYTE *data, int nSize, int nDefault);
-uuid DBGetFieldGUID(DB_RESULT hResult, int iRow, int iColumn);
+//uuid DBGetFieldGUID(DB_RESULT hResult, int iRow, int iColumn);
 
-DB_UNBUFFERED_RESULT DBSelectUnbuffered(DB_HANDLE hConn, const TCHAR *szQuery);
-DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, const TCHAR *szQuery, TCHAR *errorText);
+DB_UNBUFFERED_RESULT DBSelectUnbuffered(DB_HANDLE hConn, TCHAR *szQuery);
+DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText);
 bool DBFetch(DB_UNBUFFERED_RESULT hResult);
 int DBGetColumnCount(DB_UNBUFFERED_RESULT hResult);
 bool DBGetColumnName(DB_UNBUFFERED_RESULT hResult, int column, TCHAR *buffer, int bufSize);
@@ -241,15 +235,15 @@ UINT32 DBGetFieldULong(DB_UNBUFFERED_RESULT hResult, int iColumn);
 INT64 DBGetFieldInt64(DB_UNBUFFERED_RESULT hResult, int iColumn);
 UINT64 DBGetFieldUInt64(DB_UNBUFFERED_RESULT hResult, int iColumn);
 double DBGetFieldDouble(DB_UNBUFFERED_RESULT hResult, int iColumn);
-UINT32 DBGetFieldIPAddr(DB_UNBUFFERED_RESULT hResult, int iColumn);
-InetAddress DBGetFieldInetAddr(DB_UNBUFFERED_RESULT hResult, int iColumn);
-uuid DBGetFieldGUID(DB_UNBUFFERED_RESULT hResult, int iColumn);
+// UINT32 DBGetFieldIPAddr(DB_UNBUFFERED_RESULT hResult, int iColumn);
+// InetAddress DBGetFieldInetAddr(DB_UNBUFFERED_RESULT hResult, int iColumn);
+//uuid DBGetFieldGUID(DB_UNBUFFERED_RESULT hResult, int iColumn);
 
 bool DBBegin(DB_HANDLE hConn);
 bool DBCommit(DB_HANDLE hConn);
 bool DBRollback(DB_HANDLE hConn);
 
-int DBIsTableExist(DB_HANDLE conn, const TCHAR *table);
+int DBIsTableExist(DB_HANDLE conn, TCHAR *table);
 
 // int DBGetSchemaVersion(DB_HANDLE conn);
 // int DBGetSyntax(DB_HANDLE conn);
@@ -262,8 +256,8 @@ int DBIsTableExist(DB_HANDLE conn, const TCHAR *table);
 // #else
 // #define DBPrepareStringA DBPrepareString
 // #endif
-wstring DBPrepareStringW(const WCHAR *str, int maxSize = -1);
-string DBPrepareStringA(const CHAR *str, int maxSize = -1);
+wstring DBPrepareStringW(WCHAR *str, int maxSize = -1);
+string DBPrepareStringA(CHAR *str, int maxSize = -1);
 #ifdef UNICODE
 #define DBPrepareString DBPrepareStringW
 #else 
@@ -273,23 +267,23 @@ string DBPrepareStringA(const CHAR *str, int maxSize = -1);
 // TCHAR *EncodeSQLString(const TCHAR *pszIn);
 // void DecodeSQLString(TCHAR *pszStr);
 
-bool DBConnectionPoolStartup(DB_DRIVER driver, const TCHAR *server, const TCHAR *dbName,
-    const TCHAR *login, const TCHAR *password, const TCHAR *schema,
-    int basePoolSize, int maxPoolSize, int cooldownTime,
-    int connTTL);
-void DBConnectionPoolShutdown();
-DB_HANDLE __DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine);
-#define DBConnectionPoolAcquireConnection() __DBConnectionPoolAcquireConnection(__FILE__, __LINE__)
-void DBConnectionPoolReleaseConnection(DB_HANDLE connection);
-int DBConnectionPoolGetSize();
-int DBConnectionPoolGetAcquiredCount();
-
-void DBSetLongRunningThreshold(UINT32 threshold);
-ObjectArray<PoolConnectionInfo> *DBConnectionPoolGetConnectionList();
+// bool DBConnectionPoolStartup(DB_DRIVER driver, const TCHAR *server, const TCHAR *dbName,
+//     const TCHAR *login, const TCHAR *password, const TCHAR *schema,
+//     int basePoolSize, int maxPoolSize, int cooldownTime,
+//     int connTTL);
+// void DBConnectionPoolShutdown();
+// DB_HANDLE __DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine);
+// #define DBConnectionPoolAcquireConnection() __DBConnectionPoolAcquireConnection(__FILE__, __LINE__)
+// void DBConnectionPoolReleaseConnection(DB_HANDLE connection);
+// int DBConnectionPoolGetSize();
+// int DBConnectionPoolGetAcquiredCount();
+// 
+// void DBSetLongRunningThreshold(UINT32 threshold);
+// ObjectArray<PoolConnectionInfo> *DBConnectionPoolGetConnectionList();
 void DBGetPerfCounters(LIBNXDB_PERF_COUNTERS *counters);
 
-bool IsDatabaseRecordExist(DB_HANDLE hdb, const TCHAR *table, const TCHAR *idColumn, UINT32 id);
-bool IsDatabaseRecordExist(DB_HANDLE hdb, const TCHAR *table, const TCHAR *idColumn, const uuid& id);
-bool IsDatabaseRecordExist(DB_HANDLE hdb, const TCHAR *table, const TCHAR *idColumn, const TCHAR *id);
+bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, UINT32 id);
+//bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, uuid& id);
+bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, TCHAR *id);
 
 P2_NAMESPACE_END

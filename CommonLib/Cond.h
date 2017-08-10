@@ -19,9 +19,8 @@ public:
     ~Cond();
 
     void Signal();
-    void Wait(Mutex* inMutex, int32 inTimeoutInMilSecs = 0);
+    bool Wait(int32 inTimeoutInMilSecs = 0);
     void Broadcast();
-
 private:
     HANDLE fCondition;
     uint32 fWaitCount;

@@ -37,7 +37,7 @@ void Address::SetIP(const string& inIP)
     ULONG address = ::inet_addr(inIP.c_str());
     if (address == INADDR_NONE)
     {
-        printf("Invalid ip address!\n");
+        _tprintf(_T("Invalid ip address!\n"));
     }
     else
     {

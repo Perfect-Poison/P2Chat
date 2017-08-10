@@ -20,7 +20,7 @@ void TCPSocket::Open()
     if (TCPSOCKET_DEBUG)
     {
         if (fSocketID != kInvalidSocketID)
-            log_debug(7, "TCPSocket::Open 已经有socket %u\n", fSocketID);
+            log_debug(7, _T("TCPSocket::Open 已经有socket %u\n"), fSocketID);
     }
 
     Socket::Open(SOCK_STREAM, IPPROTO_TCP);
@@ -34,7 +34,7 @@ void TCPSocket::Listen(const USHORT& inPort)
     if (::listen(this->fSocketID, kListenQueueLength) != 0)
     {
         if (TCPSOCKET_DEBUG)
-            log_debug(7, "TCPSocket::Listen listen_on_port error!\n");
+            log_debug(7, _T("TCPSocket::Listen listen_on_port error!\n"));
         return;
     }
 }

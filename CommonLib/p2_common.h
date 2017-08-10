@@ -46,8 +46,8 @@ P2_NAMESPACE_BEG
         if (!(condition))                                       \
         {                                                       \
             TCHAR s[512];                            \
-            s[511] = _T(0);                          \
-            _sntprintf (s,sizeof(s), _T("_Assert: %s, %d",__FILE__, __LINE__ )); \
+            s[511] = 0;                          \
+            _sntprintf (s,sizeof(s), _T("_Assert: %s, %d"),_T(__FILE__), __LINE__ ); \
             _tprintf(_T("%s\n"), s); \
         }   }
 
@@ -55,8 +55,8 @@ P2_NAMESPACE_BEG
         if (!(condition))                                                   \
         {                                                                   \
             TCHAR s[512];                                        \
-            s[511] = _T(0);                                      \
-            _sntprintf ( s,sizeof(s), _T("_AssertV: %s, %d (%d)",__FILE__, __LINE__, errNo ));    \
+            s[511] = 0;                                      \
+            _sntprintf ( s,sizeof(s), _T("_AssertV: %s, %d (%d)"),_T(__FILE__), __LINE__, errNo );    \
             _tprintf(_T("%s\n"), s); \
         }   }
 
