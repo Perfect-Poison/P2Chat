@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : localhost
 Source Server Version : 50716
 Source Host           : localhost:3306
-Source Database       : p2chatserver
+Source Database       : p2chatdb
 
 Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2017-07-10 15:27:34
+Date: 2017-08-11 17:04:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,7 +41,7 @@ CREATE TABLE `group_info` (
   `assistant_user_info_id_list` varchar(1024) DEFAULT NULL COMMENT '群管id列表',
   `file_zone_list` varchar(4096) DEFAULT NULL COMMENT '文件列表',
   `setting_xml` varchar(4096) DEFAULT NULL COMMENT '配置信息xml',
-  `created_date` datetime NOT NULL COMMENT '群组创建时间',
+  `created_date` bigint(8) NOT NULL COMMENT '群组创建时间',
   `encrypt_repo_id` int(4) unsigned NOT NULL COMMENT '加密库id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `group_msg_data`;
 CREATE TABLE `group_msg_data` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id号',
   `group_info_id` int(4) NOT NULL COMMENT '群组信息id',
-  `post_date` datetime NOT NULL COMMENT '发送时间',
+  `post_date` bigint(8) NOT NULL COMMENT '发送时间',
   `user_info_id` int(4) unsigned NOT NULL COMMENT '用户信息id',
   `msg_data` blob COMMENT '消息数据',
   PRIMARY KEY (`id`)
@@ -89,10 +89,10 @@ DROP TABLE IF EXISTS `log_data`;
 CREATE TABLE `log_data` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id号',
   `log_type_id` int(4) unsigned NOT NULL COMMENT '日志类型id',
-  `record_date` datetime NOT NULL COMMENT '记录时间',
+  `record_date` bigint(8) NOT NULL COMMENT '记录时间',
   `log_data` varchar(4096) DEFAULT NULL COMMENT '日志数据',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=gbk;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=gbk;
 
 -- ----------------------------
 -- Table structure for log_type
@@ -120,8 +120,8 @@ CREATE TABLE `user_info` (
   `profile` varchar(512) DEFAULT NULL COMMENT '个人简介',
   `qq` varchar(32) NOT NULL COMMENT 'QQ',
   `email` varchar(64) NOT NULL COMMENT '邮箱',
-  `last_login` datetime NOT NULL COMMENT '最近一次登录时间',
-  `date_joined` datetime NOT NULL COMMENT '创建时间',
+  `last_login` bigint(8) NOT NULL COMMENT '最近一次登录时间',
+  `date_joined` bigint(8) NOT NULL COMMENT '创建时间',
   `is_locked` tinyint(1) unsigned zerofill DEFAULT NULL COMMENT '是否已锁',
   `try_times` tinyint(1) unsigned zerofill DEFAULT NULL COMMENT '尝试登录次数',
   `user_status_id` int(4) unsigned NOT NULL COMMENT '用户状态id',
@@ -141,7 +141,7 @@ DROP TABLE IF EXISTS `user_msg_data`;
 CREATE TABLE `user_msg_data` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id号',
   `user_info_id` int(4) unsigned NOT NULL COMMENT '用户信息id',
-  `post_date` datetime NOT NULL COMMENT '发送时间',
+  `post_date` bigint(8) NOT NULL COMMENT '发送时间',
   `msg_data` blob COMMENT '消息数据',
   `is_lost` tinyint(1) unsigned zerofill NOT NULL COMMENT '是否未收到',
   PRIMARY KEY (`id`)
