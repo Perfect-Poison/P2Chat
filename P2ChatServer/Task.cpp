@@ -44,12 +44,12 @@ void Task::Signal(EventFlags eventFlags)
         TaskThread *taskThread = TaskThreadPool::GetThread(theThreadIndex);
         taskThread->GetQueue()->EnQueue(&this->fTaskQueueElem);
         if (TASK_DEBUG)
-            log_debug(0, _T("Task::Signal 被激活(alive)的任务TaskName=%s, 已加入任务线程(Thread ID:%u)的任务队列\n"), fTaskName.c_str(), taskThread->GetThreadID());
+            log_debug(0, _T("Task::Signal 被激活(alive)的任务TaskName=%s, 已加入任务线程(Thread ID:%u)的任务队列\n"), fTaskName, taskThread->GetThreadID());
     }
     else 
     {
         if (TASK_DEBUG)
-            log_debug(5, _T("Task::Signal sent to dead TaskName=%s\n"), fTaskName.c_str());
+            log_debug(5, _T("Task::Signal sent to dead TaskName=%s\n"), fTaskName);
     }
 }
 
@@ -75,14 +75,14 @@ void TaskThread::Entry()
             int64 theTimeout = 0;
             MutexLocker locker(&TaskThreadPool::GetMutex());
             if (TASKTHREAD_DEBUG)
-                log_debug(0, _T("[任务线程%u]TaskThread::Entry 使用全局锁，当前TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName().c_str(), time(0));
+                log_debug(0, _T("[任务线程%u]TaskThread::Entry 使用全局锁，当前TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName(), time(0));
             
             theTimeout = theTask->Run();
             if (theTimeout < 0) 
             {
                 if (TASKTHREAD_DEBUG)
-                    log_debug(0, _T("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName().c_str(), time(0));
-                theTask->SetTaskName(theTask->GetTaskName() + _T(" deleted"));
+                    log_debug(0, _T("[任务线程%u]TaskThread::Entry 删除任务 TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName(), time(0));
+                theTask->SetTaskName(_tcscat(theTask->GetTaskName(), _T(" deleted")));
                 theTask->SetDead();
                 safe_delete(theTask);
 
@@ -92,7 +92,7 @@ void TaskThread::Entry()
             {
                 //theTask->SetTaskName(theTask->GetTaskName() + " reagain");
                 if (TASKTHREAD_DEBUG)
-                    log_debug(0, _T("[任务线程%u]TaskThread::Entry 重复任务 TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName().c_str(), time(0));
+                    log_debug(0, _T("[任务线程%u]TaskThread::Entry 重复任务 TaskName=%s CurTime=%I64d\n"), GetThreadID(), theTask->GetTaskName(), time(0));
                 fTaskQueueB.EnQueue(theTask->GetQueueElem());
                 doneProcessingEvent = TRUE;
             }
@@ -115,13 +115,13 @@ Task* TaskThread::WaitForTask()
             if (theTask->IsAlive())
             {
                 if (TASKTHREAD_DEBUG)
-                    log_debug(0, _T("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n"), GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetLength());
+                    log_debug(0, _T("[任务线程%u]TaskThread::WaitForTask 发现alive的TaskName=%s, 当前任务队列长度为%d\n"), GetThreadID(), theTask->GetTaskName(), fTaskQueueB.GetLength());
                 return theTask;
             }
             else
             {
                 if (TASKTHREAD_DEBUG)
-                    log_debug(0, _T("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n"), GetThreadID(), theTask->GetTaskName().c_str(), fTaskQueueB.GetLength());
+                    log_debug(0, _T("[任务线程%u]TaskThread::WaitForTask 发现dead的TaskName=%s, 当前任务队列长度为%d\n"), GetThreadID(), theTask->GetTaskName(), fTaskQueueB.GetLength());
                 safe_delete(theTask);
             }
         }
@@ -140,6 +140,7 @@ Task* TaskThread::WaitForTask()
 
 bool TaskThreadPool::Initialize(uint32 inNumTaskThreads)
 {
+    Assert(sTaskThreadArray.empty());
     return AddThreads(inNumTaskThreads);
 }
 
@@ -154,16 +155,15 @@ bool TaskThreadPool::Initialize(uint32 inNumTaskThreads)
 //     fTaskQueueB.EnQueue(elem);
 // }
 
-BOOL TaskThreadPool::AddThreads(uint32 numToAdd)
+bool TaskThreadPool::AddThreads(uint32 numToAdd)
 {
-    Assert(sTaskThreadArray.empty());
     for (uint32 x = 0; x < numToAdd; x++) 
     {
         sTaskThreadArray.push_back(new TaskThread);
         sTaskThreadArray.at(x)->Start();
     }
     sNumTaskThreads += numToAdd;
-    return TRUE;
+    return true;
 }
 
 void TaskThreadPool::RemoveThreads()

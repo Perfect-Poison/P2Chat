@@ -256,8 +256,8 @@ int DBIsTableExist(DB_HANDLE conn, TCHAR *table);
 // #else
 // #define DBPrepareStringA DBPrepareString
 // #endif
-wstring DBPrepareStringW(WCHAR *str, int maxSize = -1);
-string DBPrepareStringA(CHAR *str, int maxSize = -1);
+WCHAR* DBPrepareStringW(WCHAR *str, int maxSize = -1);
+CHAR* DBPrepareStringA(CHAR *str, int maxSize = -1);
 #ifdef UNICODE
 #define DBPrepareString DBPrepareStringW
 #else 

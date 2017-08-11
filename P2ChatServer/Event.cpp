@@ -22,7 +22,7 @@ Event::~Event()
 void Event::RequestEvent(int theMask)
 {
     if (EVENT_DEBUG)
-        log_debug(1, _T("Event::RequestEvent 请求事件%s, EventName=%s CurTime=%I64d\n"), theMask == EV_RE ? _T("EV_RE") : _T("EV_WR"), GetEventName().c_str(), time(0));
+        log_debug(1, _T("Event::RequestEvent 请求事件%s, EventName=%s CurTime=%I64d\n"), theMask == EV_RE ? _T("EV_RE") : _T("EV_WR"), GetEventName(), time(0));
     MutexLocker locker(&fEventMutex);
     if (fWatchEventCalled)
     {
@@ -115,7 +115,7 @@ void EventThread::Entry()
             if (theEvent != nullptr)
             {
                 if (EVENTTHREAD_DEBUG)
-                    log_debug(1, _T("[事件线程%u]EventThread::Entry 触发事件，EventName=%s EventID=%u CurTime=%I64d\n"), GetThreadID(), theEvent->GetEventName().c_str(), theCurrentEvent.er_eventid, time(0));
+                    log_debug(1, _T("[事件线程%u]EventThread::Entry 触发事件，EventName=%s EventID=%u CurTime=%I64d\n"), GetThreadID(), theEvent->GetEventName(), theCurrentEvent.er_eventid, time(0));
                 theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
             }
         }
@@ -134,14 +134,14 @@ BOOL EventThread::RegisterEvent(uint32 eventID, Event *event)
     if (fEventTable.count(eventID))
     {
         if (EVENTTHREAD_DEBUG)
-            log_debug(5, _T("[error][事件线程%u]EventThread::RegisterEvent 注册事件失败，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName().c_str(), eventID);
+            log_debug(5, _T("[error][事件线程%u]EventThread::RegisterEvent 注册事件失败，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName(), eventID);
         return FALSE;
     }
     else
     {
         fEventTable[eventID] = event;
         if (EVENTTHREAD_DEBUG)
-            log_debug(1, _T("[事件线程%u]EventThread::RegisterEvent 注册事件，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName().c_str(), eventID);
+            log_debug(1, _T("[事件线程%u]EventThread::RegisterEvent 注册事件，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName(), eventID);
         return TRUE;
     }
 }
@@ -154,7 +154,9 @@ BOOL EventThread::UnRegisterEvent(uint32 eventID)
         Event *event = fEventTable[eventID];
         fEventTable.erase(eventID);
         if (EVENTTHREAD_DEBUG)
-            log_debug(1, _T("[事件线程%u]EventThread::UnRegisterEvent 注销事件，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName().c_str(), eventID);
+        {
+            log_debug(1, _T("[事件线程%u]EventThread::UnRegisterEvent 注销事件，EventName=%s EventID=%u\n"), GetThreadID(), event->GetEventName(), eventID);
+        }
         //delete event;
         return TRUE;
     }

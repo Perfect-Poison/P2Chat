@@ -23,6 +23,16 @@ int64 UDPSession::Run()
     {
         Message *message = ReadMessage();
         Message *responseMsg = new Message;
+        if (message == nullptr)
+        {
+            UnSuccessfulRespondMsg(responseMsg, message);
+            if (UDPSESSION_DEBUG)
+                log_debug(7, _T("UDPSession::Run 非法请求！\n"));
+            safe_free(responseMsg);
+            fUDPSocket->RequestEvent(EV_RE);
+            return -1;
+        }
+
         switch (message->GetCode())
         {
         case MSG_SERVER_GET_INFO:                              // 获取服务端信息（0）
@@ -117,6 +127,12 @@ Message* UDPSession::ReadMessage()
     if (recvSize != -1)
     {
         MESSAGE *rawMsg = (MESSAGE *)buffer;
+        
+        //-------------------------------
+        // TODO: 判断消息格式是否正确，暂时只是简单判断一下
+        if (ntohs(*(msg_code *)rawMsg) > 20)
+            return nullptr;
+
         if (UDPSESSION_DEBUG)
         {
             TCHAR hexStr[UDPSocket::kMaxUDPPacket * 2 + 1];

@@ -47,13 +47,8 @@ public:
     virtual ~Task();
     virtual int64 Run() = 0;
     void Signal(EventFlags eventFlags);
-#ifdef UNICODE
-    void SetTaskName(const wstring& name) { fTaskName = name; }
-    wstring GetTaskName() const { return fTaskName; }
-#else 
-    void SetTaskName(const string& name) { fTaskName = name; }
-    string GetTaskName() const { return fTaskName; }
-#endif
+    void SetTaskName(const TCHAR* name) { _tcscpy(fTaskName, name); }
+    TCHAR* GetTaskName() { return fTaskName; }
     BOOL IsAlive() const { return fEventFlags & kAlive; }
     void SetAlive() { fEventFlags |= kAlive; }
     void SetDead() { fEventFlags &= kAliveOff; }
@@ -62,11 +57,7 @@ public:
     BOOL IsDeleteEventWhenAllRefTasksFinished() { return fDeleteEvent; }
     QueueElem* GetQueueElem() { return &fTaskQueueElem; }
 private:
-#ifdef UNICODE
-    wstring fTaskName;
-#else 
-    string fTaskName;
-#endif
+    TCHAR fTaskName[64];
     EventFlags fEventFlags;
     static unsigned int sTaskThreadPicker;
     BOOL fDeleteEvent;
@@ -95,7 +86,7 @@ class TaskThreadPool
 {
 public:
     static bool Initialize(uint32 inNumTaskThreads);
-    static BOOL AddThreads(uint32 numToAdd);
+    static bool AddThreads(uint32 numToAdd);
     static void RemoveThreads();
     static TaskThread* GetThread(uint32 index);
     static uint32 GetNumThreads() { return sNumTaskThreads; }

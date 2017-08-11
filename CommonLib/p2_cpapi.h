@@ -5,7 +5,7 @@
  * \author	BrianYi
  * \date	2017/07/17
  *
- * \brief	传输协议相关的API和定义
+ * \brief	传输协议相关的API和定义(cpapi: Communication Protocol API)
  */
 
 #include "p2_util.h"

@@ -33,13 +33,8 @@ public:
     void AddRefTask(Task *task);
     void RemoveRefTask(Task *task);
     uint32 RefTaskCount();
-#ifdef UNICODE
-    void SetEventName(const wstring& eventName) { fEventName = eventName; }
-    wstring GetEventName() const { return fEventName; }
-#else 
-    void SetEventName(const string& eventName) { fEventName = eventName; }
-    string GetEventName() const { return fEventName; }
-#endif
+    void SetEventName(const TCHAR* eventName) { _tcscpy(fEventName, eventName); }
+    TCHAR* GetEventName() { return fEventName; }
 protected:
     //Task *fTask;
     unsigned int fEventID;
@@ -47,11 +42,7 @@ protected:
     struct eventreq fEventReq;
     static unsigned int sEventID;
 private:
-#ifdef UNICODE
-    wstring fEventName;
-#else 
-    string fEventName;
-#endif
+    TCHAR fEventName[64];
     Mutex fEventMutex;
     Mutex fTaskSetMutex;
     set<Task*> fTaskSet;

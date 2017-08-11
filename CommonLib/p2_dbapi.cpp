@@ -1523,9 +1523,9 @@ bool DBRollback(DB_HANDLE hConn)
 /**
 * Prepare string for using in SQL statement
 */
-wstring DBPrepareStringW(WCHAR *str, int maxSize)
+WCHAR* DBPrepareStringW(WCHAR *str, int maxSize)
 {
-    wstring out;
+    WCHAR* out = nullptr;
     if ((maxSize > 0) && (str != NULL) && (maxSize < (int)wcslen(str)))
     {
         WCHAR *temp = (WCHAR *)malloc((maxSize + 1) * sizeof(WCHAR));
@@ -1543,9 +1543,9 @@ wstring DBPrepareStringW(WCHAR *str, int maxSize)
 /**
 * Prepare string for using in SQL statement
 */
-string DBPrepareStringA(CHAR *str, int maxSize)
+CHAR* DBPrepareStringA(CHAR *str, int maxSize)
 {
-    string out;
+    CHAR* out = nullptr;
     if ((maxSize > 0) && (str != NULL) && (maxSize < (int)strlen(str)))
     {
         CHAR *temp = (CHAR *)malloc((maxSize + 1) * sizeof(CHAR));

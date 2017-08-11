@@ -221,12 +221,11 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
 {
     log_type logType = logRecord->GetType();
 #ifdef UNICODE
-    wstring msg = logRecord->GetMessage();
-    char *msgUTF8 = utf8_from_wstr(msg.c_str());
+    WCHAR *msg = logRecord->GetMessage();
+    char *msgUTF8 = utf8_from_wstr(msg);
 #else
-    string msg = logRecord->GetMessage();
-    char *msgUTF8 = memdup(msg.c_str(), msg.length() + 1);
-    msgUTF8[msg.length()] = '\0';
+    CHAR *msg = logRecord->GetMessage();
+    char *msgUTF8 = memdup(msg, strlen(msg) + 1);
 #endif
     char buffer[64];
     char logLevel[64];
