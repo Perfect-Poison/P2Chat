@@ -59,9 +59,9 @@ int64 GetCurrentTimeMicroS();   // 微妙级
 int64 GetCurrentTimeMilliS();   // 毫秒级
 int64 GetCurrentTimeS();        // 秒级
 
-char* FormatCalendarTimeA(char *buffer);
+char* FormatCalendarTimeA(char *buffer, time_t inTimeS = time(0));
 char* FormatLogCalendarTimeA(char *buffer);
-WCHAR* FormatCalendarTimeW(WCHAR *buffer);
+WCHAR* FormatCalendarTimeW(WCHAR *buffer, time_t inTimeS = time(0));
 WCHAR* FormatLogCalendarTimeW(WCHAR *buffer);
 #ifdef UNICODE
 #define FormatCalendarTime      FormatCalendarTimeW
@@ -79,12 +79,12 @@ WCHAR* FormatLogCalendarTimeW(WCHAR *buffer);
  *  5~6 一般错误
  *  7~9 严重错误会导致系统运行不正常或崩溃
  */
-bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix);
-void log_close();
+// bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix);
+// void log_close();
 void log_write(log_type logType, const TCHAR *format, ...);
 void log_debug(int level, const TCHAR *format, ...);
-void log_set_debug_level(int level);
-int log_get_debug_level();
+// void log_set_debug_level(int level);
+// int log_get_debug_level();
 
 /**
  *	字符集相关
@@ -98,8 +98,17 @@ char *mb_from_wstr(const WCHAR *pwszString);
 char *utf8_from_wstr(const WCHAR *pwszString);
 
 /**
- *	数据库相关
+ *	网络相关函数
  */
-
-
+ULONG inet_addr_W(const WCHAR *pszAddr);
+ULONG inet_addr_A(const CHAR *pszAddr);
+WCHAR* inet_ntoa_W(in_addr in);
+CHAR* inet_ntoa_A(in_addr in);
+#ifdef UNICODE
+#define _t_inet_addr    inet_addr_W
+#define _t_inet_ntoa    inet_ntoa_W
+#else
+#define _t_inet_addr    inet_addr_A
+#define _t_inet_ntoa    inet_ntoa_A
+#endif
 P2_NAMESPACE_END

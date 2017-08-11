@@ -85,6 +85,8 @@ void EventThread::Entry()
     struct eventreq theCurrentEvent;
     ::memset(&theCurrentEvent, 0, sizeof(theCurrentEvent));
 
+    log_debug(1, _T("EventThread::Entry 启动事件线程\n"));
+
     while (true) 
     {
         int theErrno = EINTR;
@@ -117,7 +119,13 @@ void EventThread::Entry()
                 theEvent->ProcessEvent(theCurrentEvent.er_eventbits);
             }
         }
+
+        // 是否请求停止线程运行
+        if (IsStopRequested())
+            break;
     }
+
+    log_debug(1, _T("EventThread::Entry 停止事件线程\n"));
 }
 
 BOOL EventThread::RegisterEvent(uint32 eventID, Event *event)

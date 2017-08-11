@@ -37,19 +37,23 @@ int32 UDPSocket::SendTo(const Address& inAddress, const BYTE* inContent, const s
     if (sentBytes == SOCKET_ERROR)
     {
         if (UDPSOCKET_DEBUG)
-            log_debug(7, _T("UDPSocket::SendTo send to %s:%u cannot finish!\n"), inAddress.GetIP().c_str(), inAddress.GetPort());
+        {
+            TCHAR *buffer = inAddress.GetIP();
+            log_debug(7, _T("UDPSocket::SendTo send to %s:%u cannot finish!\n"), buffer, inAddress.GetPort());
+            safe_free(buffer);
+        }
     }
     return sentBytes;
 }
 
-int32 UDPSocket::SendTo(const string& inIP, const USHORT& inPort, const BYTE* inContent, const size_t& inSize)
+int32 UDPSocket::SendTo(const TCHAR* inIP, const USHORT& inPort, const BYTE* inContent, const size_t& inSize)
 {
     Address address(inIP, inPort);
     int32 sentBytes = ::sendto(this->fSocketID, (char *)inContent, inSize, 0, (const sockaddr*)&address, sizeof(struct sockaddr));
     if (sentBytes == SOCKET_ERROR)
     {
         if (UDPSOCKET_DEBUG)
-            log_debug(7, _T("UDPSocket::SendTo send to %s:%u cannot finish!\n"), inIP.c_str(), inPort);
+            log_debug(7, _T("UDPSocket::SendTo send to %s:%u cannot finish!\n"), inIP, inPort);
     }
     return sentBytes;
 }
@@ -68,12 +72,12 @@ int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize, Address& outAd
     return receivedBytes;
 }
 
-int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize, string& outIP, USHORT& outPort)
+int32 UDPSocket::RecvFrom(BYTE* outContent, const size_t& inSize, TCHAR* outIP, USHORT& outPort)
 {
     Address address;
     int size = sizeof(struct sockaddr);
     int32 receivedBytes = ::recvfrom(this->fSocketID, (char *)outContent, inSize, 0, (struct sockaddr*)&address, &size);
-    outIP = address.GetIP();
+    address.GetIP();
     outPort = address.GetPort();
     return receivedBytes;
 }

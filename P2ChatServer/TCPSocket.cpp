@@ -47,7 +47,7 @@ int32 TCPSocket::Connect(const Address& inAddress)
     return ret;
 }
 
-int32 TCPSocket::Connect(const string& inIP, const USHORT& inPort)
+int32 TCPSocket::Connect(const TCHAR* inIP, const USHORT& inPort)
 {
     Address address(inIP, inPort);
     int32 ret = ::connect(this->fSocketID, (const sockaddr*)&address, sizeof(struct sockaddr));
@@ -72,7 +72,11 @@ int32 TCPSocket::Send(const BYTE* inData, const size_t inSize)
     if (sentBytes == SOCKET_ERROR)
     {
         if (TCPSOCKET_DEBUG)
-            log_debug(7, _T("TCPSocket::Send send to %s:%u cannot finish!\n"), this->fRemoteAddress.GetIP().c_str(), this->fRemoteAddress.GetPort());
+        {
+            TCHAR *buffer = fRemoteAddress.GetIP();
+            log_debug(7, _T("TCPSocket::Send send to %s:%u cannot finish!\n"), buffer, fRemoteAddress.GetPort());
+            safe_free(buffer);
+        }
     }
     return sentBytes;
 }

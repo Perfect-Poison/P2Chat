@@ -250,10 +250,10 @@ inline int64 GetCurrentTimeS()
     return GetCurrentTimeMilliS() / 1000;
 }
 
-char* FormatCalendarTimeA(char *buffer)
+char* FormatCalendarTimeA(char *buffer, time_t inTimeS/* = time(0)*/)
 {
-    time_t now = GetCurrentTimeS();
-    struct tm *loc = localtime(&now);
+    //time_t now = GetCurrentTimeS();
+    struct tm *loc = localtime(&inTimeS);
     strftime(buffer, 32, "%d-%b-%Y %H:%M:%S", loc);
     return buffer;
 }
@@ -268,10 +268,10 @@ char* FormatLogCalendarTimeA(char *buffer)
     return buffer;
 }
 
-WCHAR* FormatCalendarTimeW(WCHAR *buffer)
+WCHAR* FormatCalendarTimeW(WCHAR *buffer, time_t inTimeS/* = time(0)*/)
 {
-    time_t now = GetCurrentTimeS();
-    struct tm *loc = localtime(&now);
+    //time_t now = GetCurrentTimeS();
+    struct tm *loc = localtime(&inTimeS);
     wcsftime(buffer, 32, L"%d-%b-%Y %H:%M:%S", loc);
     return buffer;
 }
@@ -286,27 +286,27 @@ WCHAR* FormatLogCalendarTimeW(WCHAR *buffer)
     return buffer;
 }
 
-bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix)
-{
-    LogThread *logThread = LogThread::GetInstance();
-    log_flags logFlags = logThread->GetFlags();
-    if (logFlags & LOG_IS_OPEN)
-    {
-        _tprintf(_T("日志文件已经打开，请先关闭\n"));
-        return false;
-    }
-    if (logThread->LogOpen(logName, flags, rotationPolicy, maxLogSize, historySize, dailySuffix))
-        logThread->Start();
-    else
-        return false;
-    return true;
-}
-
-void log_close()
-{
-    LogThread *logThread = LogThread::GetInstance();
-    logThread->LogClose();
-}
+// bool log_open(const TCHAR *logName, log_flags flags, log_rotation_policy rotationPolicy, int maxLogSize, int historySize, const TCHAR *dailySuffix)
+// {
+//     LogThread *logThread = LogThread::GetInstance();
+//     log_flags logFlags = logThread->GetFlags();
+//     if (logFlags & LOG_IS_OPEN)
+//     {
+//         _tprintf(_T("日志文件已经打开，请先关闭\n"));
+//         return false;
+//     }
+//     if (logThread->LogOpen(logName, flags, rotationPolicy, maxLogSize, historySize, dailySuffix))
+//         logThread->Start();
+//     else
+//         return false;
+//     return true;
+// }
+// 
+// void log_close()
+// {
+//     LogThread *logThread = LogThread::GetInstance();
+//     logThread->LogClose();
+// }
 
 void log_write(log_type logType, const TCHAR *format, ...)
 {
@@ -349,16 +349,16 @@ void log_debug(int level, const TCHAR *format, ...)
     va_end(args);
 }
 
-void log_set_debug_level(int level)
-{
-    if ((level >= 0) && (level <= 9))
-        LogThread::GetInstance()->SetDebugLevel(level);
-}
-
-int log_get_debug_level()
-{
-    return LogThread::GetInstance()->GetDebugLevel();
-}
+// void log_set_debug_level(int level)
+// {
+//     if ((level >= 0) && (level <= 9))
+//         LogThread::GetInstance()->SetDebugLevel(level);
+// }
+// 
+// int log_get_debug_level()
+// {
+//     return LogThread::GetInstance()->GetDebugLevel();
+// }
 
 size_t utf8_to_mb(const char *src, int srcLen, char *dst, int dstLen)
 {
@@ -414,5 +414,29 @@ char *utf8_from_wstr(const WCHAR *pwszString)
     return pszOut;
 }
 
+ULONG inet_addr_W(const WCHAR *pszAddr)
+{
+    char szBuffer[256];
+    WideCharToMultiByte(CP_ACP, WC_COMPOSITECHECK | WC_DEFAULTCHAR, pszAddr, -1, szBuffer, 256, NULL, NULL);
+    return inet_addr(szBuffer);
+}
+
+ULONG inet_addr_A(const CHAR *pszAddr)
+{
+    return inet_addr(pszAddr);
+}
+
+WCHAR* inet_ntoa_W(in_addr in)
+{
+    WCHAR *buffer = wstr_from_utf8(inet_ntoa(in));
+    return buffer;
+}
+
+CHAR* inet_ntoa_A(in_addr in)
+{
+    CHAR *buffer = inet_ntoa(in);
+    buffer = (CHAR *)memdup(buffer, strlen(buffer) + 1);
+    return buffer;
+}
 
 P2_NAMESPACE_END

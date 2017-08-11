@@ -12,16 +12,15 @@
 //-------------------------------
 // 标准头文件 区
 //-------------------------------
-#include <iostream>
 #include <intsafe.h>
 #include <winsock2.h>
 #include <process.h>
-#include <string>
 #include <functional>
 #include <time.h>
 #include <stdio.h>
 #include <tchar.h>
 #include <algorithm>
+#include <iostream>
 using namespace std;
 
 #pragma comment(lib,"ws2_32.lib")
@@ -130,5 +129,6 @@ typedef WORD log_rotation_policy;
 
 
 #define MAX_LOG_HISTORY_SIZE 128
+#define MAX_LOG_RECORD_MESSAGE_SIZE 512
 
 P2_NAMESPACE_END

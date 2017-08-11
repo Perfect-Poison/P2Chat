@@ -4,37 +4,39 @@ P2_NAMESPACE_BEG
 
 Address::Address()
 {
-    _Address("0.0.0.0", 0);
+    _Address(_T("0.0.0.0"), 0);
 }
 
 
 Address::Address(const USHORT& inPort)
 {
-    _Address("0.0.0.0", inPort);
+    _Address(_T("0.0.0.0"), inPort);
 }
 
-Address::Address(const string& inIP, const USHORT& inPort)
+Address::Address(const TCHAR* inIP, const USHORT& inPort)
 {
     _Address(inIP, inPort);
 }
 
 Address::Address(struct sockaddr_in inSockAddr)
 {
-    _Address(::inet_ntoa(inSockAddr.sin_addr), inSockAddr.sin_port);
+    TCHAR *buffer = _t_inet_ntoa(inSockAddr.sin_addr);
+    _Address(buffer, inSockAddr.sin_port);
+    safe_free(buffer);
 }
 
 Address::~Address()
 {
 }
 
-string Address::GetIP() const
+TCHAR* Address::GetIP() const
 {
-    return ::inet_ntoa(this->sin_addr);
+    return _t_inet_ntoa(this->sin_addr);
 }
 
-void Address::SetIP(const string& inIP)
+void Address::SetIP(const TCHAR* inIP)
 {
-    ULONG address = ::inet_addr(inIP.c_str());
+    ULONG address = _t_inet_addr(inIP);
     if (address == INADDR_NONE)
     {
         _tprintf(_T("Invalid ip address!\n"));
@@ -55,7 +57,7 @@ void Address::SetPort(const USHORT& inPort)
     this->sin_port = htons(inPort);
 }
 
-void Address::_Address(const string& inIP, const USHORT& inPort)
+void Address::_Address(const TCHAR* inIP, const USHORT& inPort)
 {
     this->sin_family = AF_INET;
     this->SetIP(inIP);

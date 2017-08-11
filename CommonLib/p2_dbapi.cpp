@@ -21,6 +21,7 @@
 **/
 
 #include "p2_dbapi.h"
+#include "ConnectionPoolThread.h"
 P2_NAMESPACE_BEG
 
 /**
@@ -123,7 +124,7 @@ DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password,
     MYSQL_CONN *hDrvConn;
     DB_HANDLE hConn = NULL;
 
-    log_debug(8, _T("DBConnect: server=%s db=%s login=%s\n"), server, dbName, login);
+    log_debug(0, _T("DBConnect: server=%s db=%s login=%s\n"), server, dbName, login);
 #ifdef UNICODE
     char *mbServer = (server == NULL) ? NULL : mb_from_wstr(server);
     char *mbDatabase = (dbName == NULL) ? NULL : mb_from_wstr(dbName);
@@ -160,7 +161,7 @@ DB_HANDLE DBConnect(TCHAR *server, TCHAR *dbName, TCHAR *login, TCHAR *password,
             hConn->m_password = (password == NULL) ? NULL : _tcsdup(password);
             hConn->m_server = (server == NULL) ? NULL : _tcsdup(server);
 #endif
-            log_debug(4, _T("DBConnect: New DB connection opened: handle=%p\n"), hConn);
+            log_debug(0, _T("DBConnect: New DB connection opened: handle=%p\n"), hConn);
 
         }
         else
@@ -185,7 +186,7 @@ void DBDisconnect(DB_HANDLE hConn)
     if (hConn == NULL)
         return;
 
-    log_debug(4, _T("DBDisconnect: DB connection %p closed\n"), hConn);
+    log_debug(0, _T("DBDisconnect: DB connection %p closed\n"), hConn);
 
     InvalidatePreparedStatements(hConn);
 
@@ -215,7 +216,7 @@ static void DBReconnect(DB_HANDLE hConn)
     int nCount;
     WCHAR errorText[DBDRV_MAX_ERROR_TEXT];
 
-    log_debug(4, _T("DBDisconnect: handle=%p\n"), hConn);
+    log_debug(0, _T("DBDisconnect: handle=%p\n"), hConn);
 
     InvalidatePreparedStatements(hConn);
     DrvDisconnect(hConn->m_connection);
@@ -261,11 +262,11 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBQueryEx: %s sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
+        log_debug(1, _T("DBQueryEx: %s sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), szQuery, ms);
     }
     if ((dwResult == DBERR_SUCCESS) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBQueryEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
+        log_debug(1, _T("DBQueryEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -331,11 +332,11 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBSelectEx: %s sync query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
+        log_debug(1, _T("DBSelectEx: %s sync query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBSelectEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
+        log_debug(1, _T("DBSelectEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -746,11 +747,11 @@ DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBSelectUnbufferedEx: %s unbuffered query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
+        log_debug(1, _T("DBSelectUnbufferedEx: %s unbuffered query: \"%s\" [%d ms]\n"), (hResult != NULL) ? _T("Successful") : _T("Failed"), szQuery, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBSelectUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
+        log_debug(1, _T("DBSelectUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), szQuery, (int)ms);
         s_perfLongRunningQueries++;
     }
     if (hResult == NULL)
@@ -1010,7 +1011,7 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
     if (hConn->m_dumpSql)
     {
         ms = GetCurrentTimeMilliS() - ms;
-        log_debug(9, _T("DBPrepareEx: {%p} %s prepare: \"%s\" [%d ms]\n"), result, (result != NULL) ? _T("Successful") : _T("Failed"), query, ms);
+        log_debug(1, _T("DBPrepareEx: {%p} %s prepare: \"%s\" [%d ms]\n"), result, (result != NULL) ? _T("Successful") : _T("Failed"), query, ms);
     }
 
 #ifndef UNICODE
@@ -1076,7 +1077,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, i
     {
         if (cType == DB_CTYPE_STRING)
         {
-            log_debug(9, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, buffer);
+            log_debug(1, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, buffer);
         }
         else
         {
@@ -1099,7 +1100,7 @@ void DBBind(DB_STATEMENT hStmt, int pos, int sqlType, int cType, void *buffer, i
                 _sntprintf(text, 64, _T("%f"), *((double *)buffer));
                 break;
             }
-            log_debug(9, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, text);
+            log_debug(1, _T("DBBind: {%p} bind at pos %d: \"%s\"\n"), hStmt, pos, text);
         }
     }
 
@@ -1249,11 +1250,11 @@ bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBExecuteEx: %s prepared sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
+        log_debug(1, _T("DBExecuteEx: %s prepared sync query: \"%s\" [%d ms]\n"), (dwResult == DBERR_SUCCESS) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((dwResult == DBERR_SUCCESS) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBExecuteEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
+        log_debug(1, _T("DBExecuteEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1317,12 +1318,12 @@ DB_RESULT DBSelectPreparedEx(DB_STATEMENT hStmt, TCHAR *errorText)
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBSelectPreparedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
+        log_debug(1, _T("DBSelectPreparedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
             (hResult != NULL) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBSelectPreparedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
+        log_debug(1, _T("DBSelectPreparedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1394,12 +1395,12 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
     ms = GetCurrentTimeMilliS() - ms;
     if (hConn->m_dumpSql)
     {
-        log_debug(9, _T("DBSelectPreparedUnbufferedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
+        log_debug(1, _T("DBSelectPreparedUnbufferedEx: %s prepared sync query: \"%s\" [%d ms]\n"),
             (hResult != NULL) ? _T("Successful") : _T("Failed"), hStmt->m_query, (int)ms);
     }
     if ((hResult != NULL) && ((UINT32)ms > g_sqlQueryExecTimeThreshold))
     {
-        log_debug(3, _T("DBSelectPreparedUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
+        log_debug(1, _T("DBSelectPreparedUnbufferedEx: Long running query: \"%s\" [%d ms]\n"), hStmt->m_query, (int)ms);
         s_perfLongRunningQueries++;
     }
 
@@ -1462,19 +1463,19 @@ bool DBBegin(DB_HANDLE hConn)
         {
             hConn->m_transactionLevel++;
             bRet = true;
-            log_debug(9, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
+            log_debug(0, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
         }
         else
         {
             hConn->m_mutexTransLock->Unlock();
-            log_debug(9, _T("DBBegin: BEGIN TRANSACTION failed\n"), hConn->m_transactionLevel);
+            log_debug(0, _T("DBBegin: BEGIN TRANSACTION failed\n"), hConn->m_transactionLevel);
         }
     }
     else
     {
         hConn->m_transactionLevel++;
         bRet = true;
-        log_debug(9, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
+        log_debug(0, _T("DBBegin: BEGIN TRANSACTION successful (level %d)\n"), hConn->m_transactionLevel);
     }
     return bRet;
 }
@@ -1494,7 +1495,7 @@ bool DBCommit(DB_HANDLE hConn)
             bRet = (DrvCommit(hConn->m_connection) == DBERR_SUCCESS);
         else
             bRet = true;
-        log_debug(9, _T("DBCommit: COMMIT TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
+        log_debug(0, _T("DBCommit: COMMIT TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
     }
     return bRet;
 }
@@ -1514,7 +1515,7 @@ bool DBRollback(DB_HANDLE hConn)
             bRet = (DrvRollback(hConn->m_connection) == DBERR_SUCCESS);
         else
             bRet = true;
-        log_debug(9, _T("DBRollback: ROLLBACK TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
+        log_debug(0, _T("DBRollback: ROLLBACK TRANSACTION %s (level %d)\n"), bRet ? _T("successful") : _T("failed"), hConn->m_transactionLevel);
     }
     return bRet;
 }
@@ -1558,6 +1559,88 @@ string DBPrepareStringA(CHAR *str, int maxSize)
     }
     return out;
 }
+
+
+bool DBConnectionPoolPopulate()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return false;
+    return connPoolThread->DBConnectionPoolPopulate();
+}
+
+void DBConnectionPoolShrink()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return ;
+    connPoolThread->DBConnectionPoolShrink();
+}
+
+bool ResetConnection(PoolConnectionInfo *conn)
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return false;
+    return connPoolThread->ResetConnection(conn);
+}
+
+void ResetExpiredConnections()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return ;
+    connPoolThread->ResetExpiredConnections();
+}
+
+void DBConnectionPoolShutdown()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return ;
+    connPoolThread->DBConnectionPoolShutdown();
+}
+
+DB_HANDLE __DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine)
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return nullptr;
+    return connPoolThread->__DBConnectionPoolAcquireConnection(srcFile, srcLine);
+}
+
+void DBConnectionPoolReleaseConnection(DB_HANDLE handle)
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return ;
+    connPoolThread->DBConnectionPoolReleaseConnection(handle);
+}
+
+int DBConnectionPoolGetSize()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return 0;
+    return connPoolThread->DBConnectionPoolGetSize();
+}
+
+int DBConnectionPoolGetAcquiredCount()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return 0;
+    return connPoolThread->DBConnectionPoolGetAcquiredCount();
+}
+
+vector<PoolConnectionInfo *> *DBConnectionPoolGetConnectionList()
+{
+    ConnectionPoolThread *connPoolThread = ConnectionPoolThread::GetInstance();
+    if (connPoolThread == nullptr)
+        return nullptr;
+    return connPoolThread->DBConnectionPoolGetConnectionList();
+}
+
 
 /**
 * Check if given table exist

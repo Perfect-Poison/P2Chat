@@ -57,6 +57,8 @@ void TaskThread::Entry()
 {
     Task* theTask = nullptr;
 
+    log_debug(1, _T("TaskThread::Entry 启动任务线程\n"));
+
     while (true) 
     {
         /**
@@ -65,7 +67,7 @@ void TaskThread::Entry()
         theTask = WaitForTask();
 
         if (theTask == nullptr)
-            return;
+            break;
 
         BOOL doneProcessingEvent = false;
         while (!doneProcessingEvent) 
@@ -96,6 +98,9 @@ void TaskThread::Entry()
             }
         }
     }
+
+    log_debug(1, _T("TaskThread::Entry 停止任务线程\n"));
+
 }
 
 Task* TaskThread::WaitForTask()
@@ -122,7 +127,7 @@ Task* TaskThread::WaitForTask()
         }
 
         // 是否请求停止线程运行
-        if (Thread::GetCurrent()->IsStopRequested())
+        if (IsStopRequested())
             return nullptr;
     }
 }
@@ -132,6 +137,11 @@ Task* TaskThread::WaitForTask()
 //     MutexLocker locker(&fQueueMutex);
 //     return fTaskQueue.size();
 // }
+
+bool TaskThreadPool::Initialize(uint32 inNumTaskThreads)
+{
+    return AddThreads(inNumTaskThreads);
+}
 
 // void TaskThread::EnQueue(Task *task)
 // {
@@ -152,7 +162,7 @@ BOOL TaskThreadPool::AddThreads(uint32 numToAdd)
         sTaskThreadArray.push_back(new TaskThread);
         sTaskThreadArray.at(x)->Start();
     }
-    sNumTaskThreads = numToAdd;
+    sNumTaskThreads += numToAdd;
     return TRUE;
 }
 

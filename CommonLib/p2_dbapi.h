@@ -280,6 +280,22 @@ string DBPrepareStringA(CHAR *str, int maxSize = -1);
 // 
 // void DBSetLongRunningThreshold(UINT32 threshold);
 // ObjectArray<PoolConnectionInfo> *DBConnectionPoolGetConnectionList();
+
+/**
+ *	数据库连接池操作
+ */
+bool DBConnectionPoolPopulate();
+void DBConnectionPoolShrink();
+bool ResetConnection(PoolConnectionInfo *conn);
+void ResetExpiredConnections();
+void DBConnectionPoolShutdown();
+DB_HANDLE __DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine);
+#define DBConnectionPoolAcquireConnection()   __DBConnectionPoolAcquireConnection(__FILE__, __LINE__)
+void DBConnectionPoolReleaseConnection(DB_HANDLE handle);
+int DBConnectionPoolGetSize();
+int DBConnectionPoolGetAcquiredCount();
+vector<PoolConnectionInfo *> *DBConnectionPoolGetConnectionList();
+
 void DBGetPerfCounters(LIBNXDB_PERF_COUNTERS *counters);
 
 bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, UINT32 id);

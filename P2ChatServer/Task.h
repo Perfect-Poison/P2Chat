@@ -79,8 +79,8 @@ class TaskThread : public Thread
 public:
     TaskThread() : Thread() 
     {
-        if (TASKTHREAD_DEBUG)
-            log_debug(1, _T("EventThread::EventThread 创建任务线程\n"));
+//         if (TASKTHREAD_DEBUG)
+//             log_debug(1, _T("EventThread::EventThread 创建任务线程\n"));
     };
     virtual ~TaskThread() { this->StopAndWaitForThread(); };
     QueueBlocking* GetQueue() { return &fTaskQueueB; }
@@ -94,6 +94,7 @@ private:
 class TaskThreadPool
 {
 public:
+    static bool Initialize(uint32 inNumTaskThreads);
     static BOOL AddThreads(uint32 numToAdd);
     static void RemoveThreads();
     static TaskThread* GetThread(uint32 index);

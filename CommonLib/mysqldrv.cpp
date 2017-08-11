@@ -1121,7 +1121,7 @@ int DrvIsTableExist(MYSQL_CONN *pConn, const WCHAR *name)
 {
     WCHAR query[256], lname[256];
     wcsncpy(lname, name, 256);
-    wcslwr(lname);
+    _wcslwr(lname);
     swprintf(query, 256, L"SHOW TABLES LIKE '%ls'", lname);
     DWORD error;
     WCHAR errorText[DBDRV_MAX_ERROR_TEXT];

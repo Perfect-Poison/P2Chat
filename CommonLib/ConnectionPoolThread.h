@@ -34,7 +34,7 @@ public:
     
     virtual void Entry();
     static void DBConnectionPoolShutdown();
-    static DB_HANDLE DBConnectionPoolAcquireConnection(const char *srcFile = __FILE__, int srcLine = __LINE__);
+    static DB_HANDLE __DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine);
     static void DBConnectionPoolReleaseConnection(DB_HANDLE handle);
     static int DBConnectionPoolGetSize();
     static int DBConnectionPoolGetAcquiredCount();
@@ -46,8 +46,8 @@ private:
         if (!s_initialized)
             log_debug(5, _T("[error] ConnectionPoolThread::ConnectionPoolThread 未进行初始化\n"));
         
-        if (CONNECTIONPOOLTHREAD_DEBUG)
-            log_debug(1, _T("ConnectionPoolThread::ConnectionPoolThread 创建数据库连接池线程\n"));
+//         if (CONNECTIONPOOLTHREAD_DEBUG)
+//             log_debug(1, _T("ConnectionPoolThread::ConnectionPoolThread 创建数据库连接池线程\n"));
     }
     virtual ~ConnectionPoolThread() {};
     static ConnectionPoolThread *sInstance;

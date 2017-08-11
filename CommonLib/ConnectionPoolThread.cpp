@@ -34,7 +34,7 @@ bool ConnectionPoolThread::Initialize(const TCHAR *server, const TCHAR *dbName, 
         return true;   // already initialized
     if (!DBLoad(dumpSQL))
     {
-        log_debug(1, _T("ConnectionPoolThread::Initialize Database Load failed\n"));
+        log_debug(5, _T("ConnectionPoolThread::Initialize Database Load failed\n"));
         return false;
     }
     _tcsncpy(m_server, server, 256);
@@ -58,7 +58,7 @@ bool ConnectionPoolThread::Initialize(const TCHAR *server, const TCHAR *dbName, 
     }
 
     s_initialized = true;
-    log_debug(1, _T("ConnectionPoolThread::Initialize Database Connection Pool initialized\n"));
+    log_debug(0, _T("ConnectionPoolThread::Initialize Database Connection Pool initialized\n"));
 
     return true;
 }
@@ -191,7 +191,7 @@ void ConnectionPoolThread::ResetExpiredConnections()
 
 void ConnectionPoolThread::Entry()
 {
-    log_debug(1, _T("ConnectionPoolThread::Entry Database Connection Pool maintenance thread started\n"));
+    log_debug(1, _T("ConnectionPoolThread::Entry 启动数据库连接池线程\n"));
     while (!m_condShutdown.Wait((m_connectionTTL > 0) ? m_connectionTTL * 750 : 300000))
     {
         DBConnectionPoolShrink();
@@ -201,7 +201,7 @@ void ConnectionPoolThread::Entry()
         }
     }
 
-    log_debug(1, _T("ConnectionPoolThread::Entry Database Connection Pool maintenance thread stopped\n"));
+    log_debug(1, _T("ConnectionPoolThread::Entry 停止数据库连接池线程\n"));
 }
 
 /**
@@ -237,7 +237,7 @@ void ConnectionPoolThread::DBConnectionPoolShutdown()
 * Acquire connection from pool. This function never fails - if it's impossible to acquire
 * pooled connection, calling thread will be suspended until there will be connection available.
 */
-DB_HANDLE ConnectionPoolThread::DBConnectionPoolAcquireConnection(const char *srcFile/* = __FILE__*/, int srcLine/* = __LINE__*/)
+DB_HANDLE ConnectionPoolThread::__DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine)
 {
 retry:
     m_poolAccessMutex.Lock();
@@ -300,7 +300,7 @@ retry:
         goto retry;
     }
 
-    log_debug(1, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle %p acquired (call from %hs:%d)\n"), handle, srcFile, srcLine);
+    log_debug(0, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle %p acquired (call from %hs:%d)\n"), handle, srcFile, srcLine);
     return handle;
 }
 
@@ -326,7 +326,7 @@ void ConnectionPoolThread::DBConnectionPoolReleaseConnection(DB_HANDLE handle)
 
     m_poolAccessMutex.Unlock();
 
-    log_debug(1, _T("ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle %p released\n"), handle);
+    log_debug(0, _T("ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle %p released\n"), handle);
     m_condRelease.Signal();
 }
 

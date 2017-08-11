@@ -24,7 +24,11 @@ int64 TCPSession::Run()
     {
         fTCPSocket->SetConnectionClose();
         if (TCPSESSION_DEBUG)
-            log_debug(1, _T("TCPSession::Run 断开连接%s:%d\n"), fTCPSocket->GetRemoteIP().c_str(), fTCPSocket->GetRemotePort());
+        {
+            TCHAR *buffer = fTCPSocket->GetRemoteIP();
+            log_debug(1, _T("TCPSession::Run 断开连接%s:%d\n"), buffer, fTCPSocket->GetRemotePort());
+            safe_free(buffer);
+        }
 
         SetDeleteEventWhenAllRefTasksFinished(TRUE);
 

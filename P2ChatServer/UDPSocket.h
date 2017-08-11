@@ -23,10 +23,10 @@ public:
     void Open();
     void Bind(const USHORT& inPort);
     int32 SendTo(const Address& inAddress, const BYTE* inContent, const size_t& inSize);
-    int32 SendTo(const string& inIP, const USHORT& inPort, const BYTE* inContent, const size_t& inSize);
+    int32 SendTo(const TCHAR* inIP, const USHORT& inPort, const BYTE* inContent, const size_t& inSize);
+    int32 RecvFrom(BYTE* outContent, const size_t& inSize, TCHAR* outIP, USHORT& outPort);
     int32 RecvFrom(BYTE* outContent, const size_t& inSize);
     int32 RecvFrom(BYTE* outContent, const size_t& inSize, Address& outAddress);
-    int32 RecvFrom(BYTE* outContent, const size_t& inSize, string& outIP, USHORT& outPort);
 private:
     virtual void ProcessEvent(int eventBits);
     UDPSocket(const UDPSocket& inUDP);
