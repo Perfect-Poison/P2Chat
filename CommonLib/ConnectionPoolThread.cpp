@@ -1,3 +1,25 @@
+/*
+** NetXMS - Network Management System
+** DB Library
+** Copyright (C) 2003-2011 Victor Kirhenshtein
+**
+** This program is free software; you can redistribute it and/or modify
+** it under the terms of the GNU Lesser General Public License as published by
+** the Free Software Foundation; either version 3 of the License, or
+** (at your option) any later version.
+**
+** This program is distributed in the hope that it will be useful,
+** but WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+** GNU General Public License for more details.
+**
+** You should have received a copy of the GNU Lesser General Public License
+** along with this program; if not, write to the Free Software
+** Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+**
+** File: nxdbapi.h
+**
+**/
 #include "ConnectionPoolThread.h"
 P2_NAMESPACE_BEG
 
@@ -191,8 +213,9 @@ void ConnectionPoolThread::ResetExpiredConnections()
 
 void ConnectionPoolThread::Entry()
 {
+    MutexLocker locker(&m_poolAccessMutex);
     log_debug(1, _T("ConnectionPoolThread::Entry 启动数据库连接池线程\n"));
-    while (!m_condShutdown.Wait((m_connectionTTL > 0) ? m_connectionTTL * 750 : 300000))
+    while (!m_condShutdown.Wait(&m_poolAccessMutex, (m_connectionTTL > 0) ? m_connectionTTL * 750 : 300000))
     {
         DBConnectionPoolShrink();
         if (m_connectionTTL > 0)
@@ -240,7 +263,7 @@ void ConnectionPoolThread::DBConnectionPoolShutdown()
 DB_HANDLE ConnectionPoolThread::__DBConnectionPoolAcquireConnection(const char *srcFile, int srcLine)
 {
 retry:
-    m_poolAccessMutex.Lock();
+    MutexLocker locker(&m_poolAccessMutex);
 
     DB_HANDLE handle = NULL;
 
@@ -290,12 +313,12 @@ retry:
         }
     }
 
-    m_poolAccessMutex.Unlock();
+    //m_poolAccessMutex.Unlock();
 
     if (handle == NULL)
     {
         log_debug(5, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool exhausted (call from %hs:%d)\n"), srcFile, srcLine);
-        m_condRelease.Wait(10000);
+        m_condRelease.Wait(&m_poolAccessMutex, 10000);
         log_debug(5, _T("ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: retry acquire connection (call from %hs:%d)\n"), srcFile, srcLine);
         goto retry;
     }

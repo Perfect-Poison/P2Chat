@@ -19,7 +19,7 @@ public:
     ~Cond();
 
     void Signal();
-    bool Wait(int32 inTimeoutInMilSecs = 0);
+    bool Wait(Mutex *inMutex, int32 inTimeoutInMilSecs = 0);
     void Broadcast();
 private:
     HANDLE fCondition;

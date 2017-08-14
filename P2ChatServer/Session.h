@@ -14,6 +14,7 @@ private:
     int64   fSessionId;
     time_t  fCreationTime;
     time_t  fLastAccessTime;
+    uint32  fState;
 };
 
 P2_NAMESPACE_END

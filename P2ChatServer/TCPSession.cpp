@@ -39,6 +39,8 @@ int64 TCPSession::Run()
         if (!fTCPSocket->IsConnectionClosed())
         {
             BYTE buffer[TCPSocket::kMaxTCPPacket];
+            TCHAR reply[TCPSocket::kMaxTCPPacket];
+            TCHAR hexStr[TCPSocket::kMaxTCPPacket];
             int32 recvSize = 0;
             Address remoteAddress = fTCPSocket->GetRemoteAddress();
             while (recvSize != -1)
@@ -47,9 +49,12 @@ int64 TCPSession::Run()
                 recvSize = fTCPSocket->Recv((BYTE *)buffer, sizeof(buffer));
                 if (recvSize != -1)
                 {
-                    //_tprintf(_T("收到来自%s:%u的数据: [%dB] %s\n"), remoteAddress.GetIP().c_str(), remoteAddress.GetPort(), recvSize, buffer);
-                    //_stprintf(reply,  _T("Hello, received data: %s\n"), buffer);
-                    //fTCPSocket->Send((BYTE *)reply, _tcslen(reply) * sizeof(TCHAR));
+                    bin_to_str(buffer, recvSize, hexStr);
+                    TCHAR *buf = remoteAddress.GetIP();
+                    _tprintf(_T("收到来自%s:%u的数据: [%dB] %s\n"), buf, remoteAddress.GetPort(), recvSize, hexStr);
+                    _stprintf(reply,  _T("Hello, received data: %s\n"), hexStr);
+                    fTCPSocket->Send((BYTE *)reply, _tcslen(reply) * sizeof(TCHAR));
+                    safe_free(buf);
                 }
             }
             fTCPSocket->RequestEvent(EV_RE);

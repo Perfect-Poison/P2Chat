@@ -1,7 +1,7 @@
 #pragma once
 #pragma execution_character_set("utf-8")
 
-#include "p2cpapi.h"
+#include "p2_cpapi.h"
 #include <assert.h>
 P2_NAMESPACE_USE
 
@@ -33,12 +33,12 @@ constexpr int ATTR_FLAGS_NUM = 3;
 
 
 msg_code_param find_msg_code_param_by_enum(int enumVal);
-msg_code_param find_msg_code_param_by_str(TCHAR *strVal);
+msg_code_param find_msg_code_param_by_str(const TCHAR *strVal);
 attr_code_param find_attr_code_param_by_enum(int enumVal);
-attr_code_param find_attr_code_param_by_str(TCHAR *strVal);
+attr_code_param find_attr_code_param_by_str(const TCHAR *strVal);
 attr_datatype_param find_attr_datatype_param_by_enum(int enumVal);
-attr_datatype_param find_attr_datatype_param_by_str(TCHAR *strVal);
+attr_datatype_param find_attr_datatype_param_by_str(const TCHAR *strVal);
 msg_flags_param find_msg_flags_param_by_enum(int enumVal);
-msg_flags_param find_msg_flags_param_by_str(TCHAR *strVal);
+msg_flags_param find_msg_flags_param_by_str(const TCHAR *strVal);
 attr_flags_param find_attr_flags_param_by_enum(int enumVal); 
-attr_flags_param find_attr_flags_param_by_str(TCHAR *strVal);
+attr_flags_param find_attr_flags_param_by_str(const TCHAR *strVal);

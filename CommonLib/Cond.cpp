@@ -38,17 +38,17 @@ void Cond::Signal()
  *
  * \retval 
  **/
-bool Cond::Wait(int32 inTimeoutInMilSecs /*= 0*/)
+bool Cond::Wait(Mutex *inMutex, int32 inTimeoutInMilSecs /*= 0*/)
 {
     DWORD theTimeout = INFINITE;
     if (inTimeoutInMilSecs > 0)
         theTimeout = inTimeoutInMilSecs;
-    //inMutex->Unlock();
+    inMutex->Unlock();
     fWaitCount++;
     DWORD retVal = ::WaitForSingleObject(fCondition, theTimeout);
     fWaitCount--;
     Assert((retVal == WAIT_OBJECT_0) || (retVal == WAIT_TIMEOUT));
-    //inMutex->Lock();
+    inMutex->Lock();
     return retVal == WAIT_OBJECT_0;
 }
 

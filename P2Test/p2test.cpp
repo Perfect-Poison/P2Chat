@@ -12,11 +12,11 @@ void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         int enumVal = index.model()->data(index, Qt::DisplayRole).toInt();
         QString text = "";
         if (index.column() == 0)
-            text = find_attr_code_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_code_param_by_enum(enumVal).strVal);
         else if (index.column() == 1)
-            text = find_attr_flags_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_flags_param_by_enum(enumVal).strVal);
         else if (index.column() == 2)
-            text = find_attr_datatype_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_datatype_param_by_enum(enumVal).strVal);
         text += "(" + QString::number(enumVal) + ")";
         QStyleOptionViewItem myOption = option;
         myOption.displayAlignment = Qt::AlignHCenter | Qt::AlignVCenter;
@@ -37,7 +37,7 @@ QWidget * AttrsTableDelegate::createEditor(QWidget *parent, const QStyleOptionVi
     {
         for (size_t i = 0; i < ATTR_CODE_NUM; i++)
         {
-            QString text = sAttrCodeParam[i].strVal;
+            QString text = QString::fromWCharArray(sAttrCodeParam[i].strVal);
             text += "(" + QString::number(sAttrCodeParam[i].enumVal) + ")";
             editor->addItem(text, sAttrCodeParam[i].enumVal);
         }
@@ -46,7 +46,7 @@ QWidget * AttrsTableDelegate::createEditor(QWidget *parent, const QStyleOptionVi
     {
         for (size_t i = 0; i < ATTR_FLAGS_NUM; i++)
         {
-            QString text = sAttrFlagsParam[i].strVal;
+            QString text = QString::fromWCharArray(sAttrFlagsParam[i].strVal);
             text += "(" + QString::number(sAttrFlagsParam[i].enumVal) + ")";
             editor->addItem(text, sAttrFlagsParam[i].enumVal);
         }
@@ -55,7 +55,7 @@ QWidget * AttrsTableDelegate::createEditor(QWidget *parent, const QStyleOptionVi
     {
         for (size_t i = 0; i < ATTR_DATA_TYPE_NUM; i++)
         {
-            QString text = sAttrDataTypeParam[i].strVal;
+            QString text = QString::fromWCharArray(sAttrDataTypeParam[i].strVal);
             text += "(" + QString::number(sAttrDataTypeParam[i].enumVal) + ")";
             editor->addItem(text, sAttrDataTypeParam[i].enumVal);
         }
@@ -72,11 +72,11 @@ void AttrsTableDelegate::setEditorData(QWidget *editor, const QModelIndex &index
         int enumVal = index.model()->data(index, Qt::DisplayRole).toInt();
         QString text = "";
         if (index.column() == 0)
-            text = find_attr_code_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_code_param_by_enum(enumVal).strVal);
         else if (index.column() == 1)
-            text = find_attr_flags_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_flags_param_by_enum(enumVal).strVal);
         else if (index.column() == 2)
-            text = find_attr_datatype_param_by_enum(enumVal).strVal;
+            text = QString::fromWCharArray(find_attr_datatype_param_by_enum(enumVal).strVal);
         text += "(" + QString::number(enumVal) + ")";
         QComboBox *comboBox = qobject_cast<QComboBox*>(editor);
         comboBox->setCurrentIndex(comboBox->findText(text));
@@ -96,11 +96,11 @@ void AttrsTableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model
         text = text.left(text.lastIndexOf(QChar('(')));
         int enumVal = 0;
         if (index.column() == 0)
-            enumVal = find_attr_code_param_by_str(text.toLatin1().data()).enumVal;
+            enumVal = find_attr_code_param_by_str(text.toStdWString().c_str()).enumVal;
         else if (index.column() == 1)
-            enumVal = find_attr_flags_param_by_str(text.toLatin1().data()).enumVal;
+            enumVal = find_attr_flags_param_by_str(text.toStdWString().c_str()).enumVal;
         else if (index.column() == 2)
-            enumVal = find_attr_datatype_param_by_str(text.toLatin1().data()).enumVal;
+            enumVal = find_attr_datatype_param_by_str(text.toStdWString().c_str()).enumVal;
         model->setData(index, enumVal, Qt::DisplayRole);
     }
     else
@@ -128,14 +128,14 @@ void P2Test::init()
      */
     for (size_t i = 0; i < MSG_CODE_NUM; i++)
     {
-        QString text = sMsgCodeParam[i].strVal;
+        QString text = QString::fromWCharArray(sMsgCodeParam[i].strVal);
         text += "(" + QString::number(sMsgCodeParam[i].enumVal) + ")";
         ui.msgCodeCombo->addItem(text, sMsgCodeParam[i].enumVal);
     }
 
     for (size_t i = 0; i < MSG_FLAGS_NUM; i++)
     {
-        QString text = sMsgFlagsParam[i].strVal;
+        QString text = QString::fromWCharArray(sMsgFlagsParam[i].strVal);
         text += "(" + QString::number(sMsgFlagsParam[i].enumVal) + ")";
         ui.msgFlagsCombo->addItem(text, sMsgFlagsParam[i].enumVal);
     }
@@ -301,12 +301,12 @@ void P2Test::readPendingDatagrams()
         QString remoteHost = datagram.senderAddress().toString();
         quint16 remotePort = datagram.senderPort();
         
-        char hexStr[1500 * 2 + 1];
+        TCHAR hexStr[1500 * 2 + 1];
         ::memset(hexStr, 0, sizeof(hexStr));
         bin_to_str((BYTE *)datagram.data().data(), datagram.data().size(), hexStr);
-        QString hexData = hexStr;
-
+        QString hexData = QString::fromWCharArray(hexStr);
         ui.logTextEdit->append(QString("[RecvFr(%1:%2):%3B]S->C:%4").arg(remoteHost).arg(remotePort).arg(recvSize).arg(hexData));
+
     }
 
 }
@@ -323,11 +323,10 @@ void P2Test::sendDatagrams()
     int ret = fUdpSocket->writeDatagram(data, msgSize, remoteHost, remotePort);
     assert(ret != -1);
 
-    char hexStr[1500 * 2 + 1];
+    TCHAR hexStr[1500 * 2 + 1];
     ::memset(hexStr, 0, sizeof(hexStr));
     bin_to_str((BYTE *)msg, msgSize, hexStr);
-    QString hexData = hexStr;
-
+    QString hexData = QString::fromWCharArray(hexStr);
     ui.logTextEdit->append(QString("[SendTo(%1:%2):%3B]C->S:%4").arg(remoteHost.toString()).arg(remotePort).arg(msgSize).arg(hexData));
     safe_delete(msg);
 }
