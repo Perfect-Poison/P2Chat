@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2ChatServer", "P2ChatServer\P2ChatServer.vcxproj", "{C38AEB7F-D50A-42E4-A011-2B54BD7364FB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2ChatClient", "P2ChatClient\P2ChatClient.vcxproj", "{7628C813-B7AC-4DA4-8F47-16001D1F5015}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2Test", "P2Test\P2Test.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CommonLib", "CommonLib\CommonLib.vcxproj", "{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2ChatClient", "P2ChatClient\P2ChatClient.vcxproj", "{24B1A99A-3A71-40F1-81F8-070C48E04D76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,14 +27,6 @@ Global
 		{C38AEB7F-D50A-42E4-A011-2B54BD7364FB}.Release|x64.Build.0 = Release|x64
 		{C38AEB7F-D50A-42E4-A011-2B54BD7364FB}.Release|x86.ActiveCfg = Release|Win32
 		{C38AEB7F-D50A-42E4-A011-2B54BD7364FB}.Release|x86.Build.0 = Release|Win32
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Debug|x64.ActiveCfg = Debug|x64
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Debug|x64.Build.0 = Debug|x64
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Debug|x86.ActiveCfg = Debug|Win32
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Debug|x86.Build.0 = Debug|Win32
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Release|x64.ActiveCfg = Release|x64
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Release|x64.Build.0 = Release|x64
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Release|x86.ActiveCfg = Release|Win32
-		{7628C813-B7AC-4DA4-8F47-16001D1F5015}.Release|x86.Build.0 = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.ActiveCfg = Debug|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x64.Build.0 = Debug|x64
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|x86.ActiveCfg = Debug|Win32
@@ -51,6 +43,12 @@ Global
 		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x64.Build.0 = Release|x64
 		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x86.ActiveCfg = Release|Win32
 		{389F1D3D-0BDD-447C-A28A-F6D1E5417F4A}.Release|x86.Build.0 = Release|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Debug|x64.ActiveCfg = Debug|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Debug|x86.ActiveCfg = Debug|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Debug|x86.Build.0 = Debug|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Release|x64.ActiveCfg = Release|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Release|x86.ActiveCfg = Release|Win32
+		{24B1A99A-3A71-40F1-81F8-070C48E04D76}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
