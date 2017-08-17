@@ -7,6 +7,8 @@
 #include "ConnectionPoolThread.h"
 P2_NAMESPACE_USE
 
+
+
 int main()
 {
     WSADATA wsaData;
@@ -64,5 +66,6 @@ int main()
 
     WSACleanup();
     _tprintf(_T("clean up all sockets!\n"));
+    _CrtDumpMemoryLeaks();
     return 0;
 }

@@ -36,6 +36,14 @@ using namespace std;
 #define P2_NAMESPACE_USE    using namespace p2;
 #endif
 
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#define _CHECK_MEMORY_LEAKS_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new _CHECK_MEMORY_LEAKS_NEW
+#endif
+
 P2_NAMESPACE_BEG
 
 #define P2CHAT_DEBUG 1
