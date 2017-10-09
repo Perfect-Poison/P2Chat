@@ -57,6 +57,13 @@ void Address::SetPort(const USHORT& inPort)
     this->sin_port = htons(inPort);
 }
 
+bool operator==(const Address& a1, const Address& a2)
+{
+    if ((sizeof(a1) == sizeof(a2)) && (memcmp((const void *)&a1, (const void *)&a2, sizeof(a1)) == 0))
+        return true;
+    return false;
+}
+
 void Address::_Address(const TCHAR* inIP, const USHORT& inPort)
 {
     this->sin_family = AF_INET;

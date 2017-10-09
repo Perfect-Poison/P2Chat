@@ -111,4 +111,19 @@ CHAR* inet_ntoa_A(in_addr in);
 #define _t_inet_addr    inet_addr_A
 #define _t_inet_ntoa    inet_ntoa_A
 #endif
+
+/**
+ *	引用计数
+ */
+class RefCountObject
+{
+    volatile long fRefCount;
+public:
+    RefCountObject() :fRefCount(1) {}
+protected:
+    virtual ~RefCountObject();
+    void Inc() { InterlockedIncrement(&fRefCount); }
+    void Dec() { if (InterlockedDecrement(&fRefCount) == 0) delete this; }
+};
+
 P2_NAMESPACE_END

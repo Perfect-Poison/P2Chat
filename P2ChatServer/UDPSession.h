@@ -21,8 +21,6 @@ public:
     virtual int64 Run();
     Message* ReadMessage();
     void SendMessage(Message *rawMsg);
-	void SuccessfulRespondMsg(Message *,Message *);
-	void UnSuccessfulRespondMsg(Message *,Message *);
 private:
     UDPSocket *fUDPSocket;
     Address fRemoteAddress;

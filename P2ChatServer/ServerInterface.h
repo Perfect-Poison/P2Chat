@@ -3,6 +3,7 @@
 
 P2_NAMESPACE_BEG
 
+class Session;
 class ServerInterface
 {
 public:
@@ -15,8 +16,6 @@ private:
     {
         kMaxServerHeaderLen = 1000
     };
-
-
 };
 
 P2_NAMESPACE_END

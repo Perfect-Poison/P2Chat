@@ -17,7 +17,7 @@ int main()
 
     //-------------------------------
     // 日志线程
-    LogThread::Initialize(_T("p2log"), 1, 0, LOG_ROTATION_DAILY, 1024 * 1024, 4, _T(""));
+    LogThread::Initialize(_T("p2log"), 1, LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, _T(""));
     LogThread* logThread = LogThread::GetInstance();
     logThread->Start();
     Sleep(10);

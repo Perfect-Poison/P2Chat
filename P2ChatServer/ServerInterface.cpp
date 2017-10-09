@@ -1,9 +1,11 @@
 #include "ServerInterface.h"
-P2_NAMESPACE_USE
+#include "Session.h"
+P2_NAMESPACE_BEG
 
 
 ServerInterface::ServerInterface()
 {
+    
 }
 
 
@@ -17,3 +19,5 @@ uint32 ServerInterface::GetNumProcessors()
     ::GetSystemInfo(&theSystemInfo);
     return theSystemInfo.dwNumberOfProcessors;
 }
+
+P2_NAMESPACE_END

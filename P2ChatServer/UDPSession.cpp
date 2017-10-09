@@ -1,5 +1,7 @@
 #include "UDPSession.h"
 #include "UDPSocket.h"
+#include "Session.h"
+#include "p2server_version.h"
 
 P2_NAMESPACE_BEG
 
@@ -22,13 +24,15 @@ int64 UDPSession::Run()
     else if (eventbits & kReadEvent)
     {
         Message *message = ReadMessage();
-        Message *responseMsg = new Message;
         if (message == nullptr)
         {
-            UnSuccessfulRespondMsg(responseMsg, message);
+            Message *responseMsg = new Message;
+            responseMsg->SetCode(MSG_REQUEST_FAILED);
+            SendMessage(responseMsg);
+            safe_free(responseMsg);
+
             if (UDPSESSION_DEBUG)
                 log_debug(7, _T("UDPSession::Run 非法请求！\n"));
-            safe_free(responseMsg);
             fUDPSocket->RequestEvent(EV_RE);
             return -1;
         }
@@ -37,73 +41,106 @@ int64 UDPSession::Run()
         {
         case MSG_SERVER_GET_INFO:                              // 获取服务端信息（0）
         {
-			this->SuccessfulRespondMsg(responseMsg, message);
+            Session *session = new Session;
+            session->SetState(MSG_SERVER_GET_INFO);
+            session->SetSessionID(chrono::system_clock::now().time_since_epoch().count());
+            if (!SessionTable::AddSession(session))
+            {
+                log_debug(6, _T("已经有该会话ID %I64d"), session->GetSessionID());
+                break;
+            }
+            
+            // response message
+            Message *responseMsg = new Message;
+            // 消息头部
+            responseMsg->SetCode(MSG_REQUEST_SUCCEED);
+            responseMsg->SetFlags(mf_none);
+            responseMsg->SetID(message->GetID());
+            // 消息属性
+            responseMsg->SetAttr(ATTR_SESSION_ID, session->GetSessionID());
+            responseMsg->SetAttr(ATTR_SERVER_INFO, P2CHAT_SERVER_VERSION_STRING, lstrlen(P2CHAT_SERVER_VERSION_STRING));
+            SendMessage(responseMsg);
+            safe_free(responseMsg);
             break;
         }
 		case MSG_SERVER_SET_INFO:                              // 设置服务端信息（1）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_USER_GET_INFO:                                 // 获取用户信息（2）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_USER_SET_INFO:                                 // 设置用户信息（3）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_GROUP_GET_INFO:                                // 获取群组信息（4）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_GROUP_SET_INFO:                                // 设置群组信息（5）
 		{ 
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_LOGIN:                                         // 用户登录消息（6）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
+
+            Session *session = SessionTable::GetSession(message->GetAttrAsInt64(ATTR_SESSION_ID));
+            if (!session)
+            {
+                log_debug(6, _T("非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
+                break;
+            }
+            session->SetState(MSG_LOGIN);
+
+            // 登录
+            uint32 userID = 0;
+
+            // response message
+            Message *responseMsg = new Message;
+            // 消息头部
+            responseMsg->SetCode(MSG_REQUEST_SUCCEED);
+            responseMsg->SetFlags(mf_none);
+            responseMsg->SetID(message->GetID());
+            // 消息属性
+            responseMsg->SetAttr(ATTR_SESSION_ID, session->GetSessionID());
+            responseMsg->SetAttr(ATTR_USER_ID, userID);
+            SendMessage(responseMsg);
+            safe_free(responseMsg);
 			break;
 		}
 		case MSG_LOGOUT:                                        // 用户退出消息（7）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_USER_MSG_PACKET:                               // 用户消息包（8）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_GROUP_MSG_PACKET:                               // 群组消息包（9）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_USER_ONLINE :                                    // 用户在线消息（10）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
 		case MSG_USER_OFFLINE:                                    // 用户离线消息（11）
 		{
-			this->SuccessfulRespondMsg(responseMsg, message);
 			break;
 		}
         default:
 		{
-			UnSuccessfulRespondMsg(responseMsg, message);
+            Message *responseMsg = new Message;
+            responseMsg->SetCode(MSG_REQUEST_FAILED);
+            SendMessage(responseMsg);
+            safe_free(responseMsg);
             if (UDPSESSION_DEBUG)
 			    log_debug(7, _T("UDPSession::Run 非法请求！\n"));
-			break;
+            break;
 		}
        }
-        safe_free(responseMsg);
         safe_free(message);
         //fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
@@ -172,18 +209,7 @@ void UDPSession::SendMessage(Message *message)
 
     safe_free(rawMsg);
 }
-void  UDPSession::SuccessfulRespondMsg(Message *responseMsg, Message *message)
-{
-	responseMsg->SetCode(MSG_REQUEST_SUCCEED);
-	responseMsg->SetFlags(mf_none);
-	responseMsg->SetID(message->GetID());
-	SendMessage(responseMsg);
-}
-void UDPSession::UnSuccessfulRespondMsg(Message *responseMsg, Message *message)
-{
-	responseMsg->SetCode(MSG_REQUEST_FAILED);
-	SendMessage(responseMsg);
-}
+
 P2_NAMESPACE_END
 
 

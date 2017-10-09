@@ -14,6 +14,7 @@ public:
     void SetIP(const TCHAR* inIP);
     USHORT GetPort() const;
     void SetPort(const USHORT& inPort);
+    friend bool operator==(const Address& a1, const Address& a2);
 private:
     void _Address(const TCHAR* inIP, const USHORT& inPort);
 };
