@@ -4,6 +4,7 @@
 #include <QtCore/QByteArray>
 #include <QtGui/QTextBlock>
 #include "../P2ChatServer/p2server_common.h"
+#include "uthash.h"
 
 void AttrsTableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
@@ -181,6 +182,27 @@ void P2Test::msgUpdate(const QByteArray& rawMsg)
     if (fMessage)
         safe_delete(fMessage);
     fMessage = new Message((MESSAGE *)rawMsg.data());
+
+    ui.msgCodeCombo->setCurrentIndex(fMessage->GetCode());
+    ui.msgFlagsCombo->setCurrentIndex(fMessage->GetFlags());
+    ui.msgSizeLabel->setText(QString::number(fMessage->GetSize()));
+    ui.msgIDLineEdit->setText(QString::number(fMessage->GetID()));
+    ui.attrNumLabel->setText(QString::number(fMessage->GetAttrNum()));
+    /////////////// to do : 属性表未进行设置
+    clearRows();
+    int rowCount = fMessage->GetAttrNum();
+    ui.attrsTable->setRowCount(rowCount);
+    ui.attrsTable->update();
+    MessageAttr *entry, *tmp;
+    uint32 totalAttrSize = 0;
+    int rowNumber = 0;
+    HASH_ITER(hh, fMessage->GetAttrs(), entry, tmp)
+    {
+        MESSAGE_ATTR *rawMsgAttr = &tmp->data;
+        QComboBox* combox = (QComboBox *)ui.attrsTable->cellWidget(rowNumber, 0);
+        combox->setCurrentIndex(rawMsgAttr->code);
+        ++rowNumber;
+    }
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
@@ -207,6 +229,11 @@ void P2Test::delOneRow()
     int curRow = ui.attrsTable->currentRow();
     ui.attrsTable->removeRow(curRow);
     ui.attrNumLabel->setText(QString::number(totalRow - 1));
+}
+
+void P2Test::clearRows()
+{
+    ui.attrsTable->clearContents();
 }
 
 void P2Test::msgDataUpdate()

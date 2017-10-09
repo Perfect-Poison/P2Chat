@@ -174,6 +174,8 @@ public:
     bool IsEndOfFile() const { return (fFlags & mf_end_of_file) ? true : false; }
     const BYTE *GetBinaryData() const { return IsBinary() ? fData : nullptr; }
     msg_size GetBinaryDataSize() const { return IsBinary() ? fAttrNum : 0; }
+    msg_size GetAttrNum() const { return fAttrNum; }
+    MessageAttr* GetAttrs() { return fAttrs; }
     
     bool IsAttrExist(attr_code attrCode) { return findAttr(attrCode) ? true : false; }
     attr_datatype GetAttrDataType(attr_code attrCode) { return findAttr(attrCode)->data.dataType; }

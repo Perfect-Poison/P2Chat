@@ -36,6 +36,7 @@ public:
     void showContextMenu(const QPoint&);
     void addOneRow();
     void delOneRow();
+    void clearRows();
     void msgDataUpdate();
     void readPendingDatagrams();
     void sendDatagrams();

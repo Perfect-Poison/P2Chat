@@ -41,7 +41,7 @@ Message::Message(MESSAGE *msg)
 //         uint32 totalAttrSize = CalculateTotalAttrSize(msg);
 //         fMessage.attrs = malloc(totalAttrSize);
         BYTE *pDest = nullptr/*(BYTE *)fMessage.attrs*/;
-        BYTE *pSour = (BYTE *)msg->attrs;
+        BYTE *pSour = (BYTE *)&msg->attrs;
         uint32 attrSize = 0;
         for (uint32 attr_i = 0; attr_i < fAttrNum; attr_i++)
         {
