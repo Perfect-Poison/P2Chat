@@ -13,6 +13,7 @@ class QLineEdit;
 class QPushButton;
 class QCheckBox;
 class QComboBox;
+class RegisterForm;
 class LoginDiaglog : public QDialog
 {
     Q_OBJECT
@@ -29,6 +30,7 @@ private:
     QPushButton *fFindPasswordBt;
     QCheckBox   *fRemPassword;
     QCheckBox   *fAutoLogin;
+    RegisterForm *fRegisterForm;
 };
 
 #endif // LOGINDIAGLOG_H

@@ -46,7 +46,7 @@ int64 UDPSession::Run()
             session->SetSessionID(chrono::system_clock::now().time_since_epoch().count());
             if (!SessionTable::AddSession(session))
             {
-                log_debug(6, _T("已经有该会话ID %I64d"), session->GetSessionID());
+                log_debug(6, _T("UDPSession::Run 已经有该会话ID %I64d"), session->GetSessionID());
                 break;
             }
             
@@ -89,7 +89,7 @@ int64 UDPSession::Run()
             Session *session = SessionTable::GetSession(message->GetAttrAsInt64(ATTR_SESSION_ID));
             if (!session)
             {
-                log_debug(6, _T("非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
+                log_debug(6, _T("UDPSession::Run 非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
                 break;
             }
             session->SetState(MSG_LOGIN);

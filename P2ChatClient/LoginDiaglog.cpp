@@ -1,4 +1,5 @@
 #include "LoginDiaglog.h"
+#include "RegisterForm.h"
 
 LoginDiaglog::LoginDiaglog(QWidget *parent)
     : QDialog(parent)
@@ -54,4 +55,8 @@ void LoginDiaglog::Init()
     v1->addLayout(h4);
 
     this->setLayout(v1);
+
+    fRegisterForm = new RegisterForm;
+    fRegisterForm->setWindowModality(Qt::ApplicationModal);
+    connect(fRegisterBt, SIGNAL(clicked()), fRegisterForm, SLOT(show()));
 }
