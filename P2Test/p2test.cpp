@@ -188,21 +188,61 @@ void P2Test::msgUpdate(const QByteArray& rawMsg)
     ui.msgSizeLabel->setText(QString::number(fMessage->GetSize()));
     ui.msgIDLineEdit->setText(QString::number(fMessage->GetID()));
     ui.attrNumLabel->setText(QString::number(fMessage->GetAttrNum()));
-    /////////////// to do : 属性表未进行设置
     clearRows();
     int rowCount = fMessage->GetAttrNum();
     ui.attrsTable->setRowCount(rowCount);
-    ui.attrsTable->update();
+    QAbstractItemModel* model = ui.attrsTable->model();
     MessageAttr *entry, *tmp;
     uint32 totalAttrSize = 0;
     int rowNumber = 0;
     HASH_ITER(hh, fMessage->GetAttrs(), entry, tmp)
     {
-        MESSAGE_ATTR *rawMsgAttr = &tmp->data;
-        QComboBox* combox = (QComboBox *)ui.attrsTable->cellWidget(rowNumber, 0);
-        combox->setCurrentIndex(rawMsgAttr->code);
+        MESSAGE_ATTR *rawMsgAttr = &entry->data;
+        model->setData(model->index(rowNumber, 0), (int)rawMsgAttr->code, Qt::DisplayRole);
+        model->setData(model->index(rowNumber, 1), (int)rawMsgAttr->flags, Qt::DisplayRole);
+        model->setData(model->index(rowNumber, 2), (int)rawMsgAttr->dataType, Qt::DisplayRole);
+        switch (rawMsgAttr->dataType) 
+        {
+        case dt_int16:       // 16位(signed/unsigned)整型
+            if (rawMsgAttr->flags & af_unsigned)
+                model->setData(model->index(rowNumber, 3), (uint16)rawMsgAttr->i16, Qt::DisplayRole);
+            else
+                model->setData(model->index(rowNumber, 3), rawMsgAttr->i16, Qt::DisplayRole);
+            break;
+        case dt_int32:       // 32位(signed/unsigned)整型
+            if (rawMsgAttr->flags & af_unsigned)
+                model->setData(model->index(rowNumber, 3), (uint)rawMsgAttr->i32, Qt::DisplayRole);
+            else
+                model->setData(model->index(rowNumber, 3), rawMsgAttr->i32, Qt::DisplayRole);
+            break;
+        case dt_int64:       // 64位(signed/unsigned)整型
+            if (rawMsgAttr->flags & af_unsigned)
+                model->setData(model->index(rowNumber, 3), (uint64)rawMsgAttr->i64, Qt::DisplayRole);
+            else
+                model->setData(model->index(rowNumber, 3), rawMsgAttr->i64, Qt::DisplayRole);
+            break;
+        case dt_float32:     // 32位浮点型
+            model->setData(model->index(rowNumber, 3), rawMsgAttr->f32, Qt::DisplayRole);
+            break;
+        case dt_float64:     // 64位浮点型
+            model->setData(model->index(rowNumber, 3), rawMsgAttr->f64, Qt::DisplayRole);
+            break;
+        case dt_binary:      // 二进制类型
+        {
+            TCHAR hexStr[1500];
+            ::memset(hexStr, 0, sizeof(hexStr));
+            bin_to_str(rawMsgAttr->bin.data, rawMsgAttr->bin.size, hexStr);
+            model->setData(model->index(rowNumber, 3), QString::fromWCharArray(hexStr), Qt::DisplayRole);
+            break;
+        }
+        case dt_string:       // 宽字符串类型
+            model->setData(model->index(rowNumber, 3), QString::fromWCharArray((TCHAR*)&rawMsgAttr->str.data[0], rawMsgAttr->str.size / 2), Qt::DisplayRole);
+            break;
+        }
         ++rowNumber;
     }
+    ui.attrsTable->reset();
+    msgDataUpdate();
 }
 
 void P2Test::showContextMenu(const QPoint& pos)
@@ -220,7 +260,7 @@ void P2Test::addOneRow()
 {
     int totalRow = ui.attrsTable->rowCount();
     ui.attrsTable->insertRow(totalRow);
-    ui.attrNumLabel->setText(QString::number(totalRow + 1));    
+    ui.attrNumLabel->setText(QString::number(totalRow + 1));
 }
 
 void P2Test::delOneRow()
