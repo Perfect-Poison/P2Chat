@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "ui_RegisterForm.h"
+#include "p2client_common.h"
 
 class RegisterForm : public QWidget
 {

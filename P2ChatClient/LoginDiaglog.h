@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #ifndef LOGINDIAGLOG_H
 #define LOGINDIAGLOG_H
 
@@ -8,6 +7,7 @@
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QComboBox>
+#include "p2client_common.h"
 
 class QLineEdit;
 class QPushButton;

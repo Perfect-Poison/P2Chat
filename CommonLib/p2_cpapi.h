@@ -28,10 +28,14 @@ enum
 {
     MSG_SERVER_GET_INFO,    // 获取服务端信息
     MSG_SERVER_SET_INFO,    // 设置服务端信息
+    MSG_USER_REGISTRATION_INFO,     // 注册用户信息
+    MSG_USER_UNREGISTRATION_INFO,   // 注销用户信息
     MSG_USER_GET_INFO,      // 获取用户信息
     MSG_USER_SET_INFO,      // 设置用户信息
     MSG_GROUP_GET_INFO,     // 获取群组信息
     MSG_GROUP_SET_INFO,     // 设置群组信息
+    MSG_GROUP_REGISTRATION_INFO,     // 注册群组信息
+    MSG_GROUP_UNREGISTRATION_INFO,   // 注销群组信息
     MSG_LOGIN,              // 用户登录消息
     MSG_LOGOUT,             // 用户退出消息
     MSG_USER_MSG_PACKET,    // 用户消息包
@@ -53,8 +57,16 @@ enum
     ATTR_SESSION_ID,        // 会话ID
 
     ATTR_USER_ID,           // 用户ID
-    ATTR_USER_NAME,         // 用户名
-    ATTR_USER_PASSWORD,     // 用户密码
+    ATTR_USER_PP,           // PP号
+    ATTR_USER_PASSWORD,     // 密码
+    ATTR_USER_NICKNAME,     // 昵称
+    ATTR_USER_BIRTHDAY,     // 生日
+    ATTR_USER_SEX,          // 性别
+    ATTR_USER_ICON,         // 用户头像
+    ATTR_USER_PROFILE,      // 用户简介
+    ATTR_USER_QQ,           // QQ
+    ATTR_USER_EMAIL,        // email
+    ATTR_USER_PHONE,        // 电话
 
     ATTR_GROUP_ID,          // 群组ID
     ATTR_GROUP_NAME,        // 群组名

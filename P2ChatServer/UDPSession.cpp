@@ -67,6 +67,14 @@ int64 UDPSession::Run()
 		{
 			break;
 		}
+        case MSG_USER_REGISTRATION_INFO:                        // 注册用户信息
+        {
+            break;
+        }
+        case MSG_USER_UNREGISTRATION_INFO:                      // 注销用户信息
+        {
+            break;
+        }
 		case MSG_USER_GET_INFO:                                 // 获取用户信息（2）
 		{
 			break;
@@ -83,6 +91,14 @@ int64 UDPSession::Run()
 		{ 
 			break;
 		}
+        case MSG_GROUP_REGISTRATION_INFO:                       // 注册群组信息
+        {
+            break;
+        }
+        case MSG_GROUP_UNREGISTRATION_INFO:                     // 注销群组信息
+        {
+            break;
+        }
 		case MSG_LOGIN:                                         // 用户登录消息（6）
 		{
 
@@ -132,6 +148,7 @@ int64 UDPSession::Run()
 		}
         default:
 		{
+            
             Message *responseMsg = new Message;
             responseMsg->SetCode(MSG_REQUEST_FAILED);
             SendMessage(responseMsg);
