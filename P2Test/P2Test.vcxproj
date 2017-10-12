@@ -217,6 +217,7 @@
     <ClInclude Include="p2test_common.h" />
     <ClInclude Include="GeneratedFiles\ui_LogTextEdit.h" />
     <ClInclude Include="GeneratedFiles\ui_p2test.h" />
+    <ClInclude Include="p2test_version.h" />
     <CustomBuild Include="LogTextEdit.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing LogTextEdit.h...</Message>

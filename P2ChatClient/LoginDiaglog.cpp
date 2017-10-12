@@ -1,19 +1,12 @@
 #include "LoginDiaglog.h"
+#include "ChatClient.h"
 #include "RegisterForm.h"
 
 LoginDiaglog::LoginDiaglog(QWidget *parent)
     : QDialog(parent)
 {
-    Init();
-}
+    fChatClient = reinterpret_cast<ChatClient*>(parent);
 
-LoginDiaglog::~LoginDiaglog()
-{
-
-}
-
-void LoginDiaglog::Init()
-{
     this->setFixedSize(300, 150);
 
     fUserNameLCombo = new QComboBox(this);
@@ -56,7 +49,11 @@ void LoginDiaglog::Init()
 
     this->setLayout(v1);
 
-    fRegisterForm = new RegisterForm;
-    fRegisterForm->setWindowModality(Qt::ApplicationModal);
-    connect(fRegisterBt, SIGNAL(clicked()), fRegisterForm, SLOT(show()));
+    connect(fRegisterBt, SIGNAL(clicked()), fChatClient->fRegisterForm, SLOT(show()));
 }
+
+LoginDiaglog::~LoginDiaglog()
+{
+
+}
+

@@ -38,9 +38,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_p2chatclient.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="LoginDiaglog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,6 +56,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_RegisterForm.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="ChatClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ChatClient.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ChatClient.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="p2chatclient.qrc">
@@ -72,6 +78,9 @@
     </CustomBuild>
     <CustomBuild Include="RegisterForm.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ChatClient.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

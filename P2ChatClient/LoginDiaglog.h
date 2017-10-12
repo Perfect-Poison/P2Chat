@@ -7,6 +7,7 @@
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QComboBox>
+#include <QtNetwork/QUdpSocket>
 #include "p2client_common.h"
 
 class QLineEdit;
@@ -14,15 +15,16 @@ class QPushButton;
 class QCheckBox;
 class QComboBox;
 class RegisterForm;
+class ChatClient;
 class LoginDiaglog : public QDialog
 {
     Q_OBJECT
 
 public:
-    LoginDiaglog(QWidget *parent = nullptr);
+    LoginDiaglog(QWidget *parent);
     ~LoginDiaglog();
-    void Init();
 private:
+    ChatClient  *fChatClient;
     QComboBox   *fUserNameLCombo;
     QLineEdit   *fPassWordLEdit;
     QPushButton *fLoginBt;
@@ -30,7 +32,6 @@ private:
     QPushButton *fFindPasswordBt;
     QCheckBox   *fRemPassword;
     QCheckBox   *fAutoLogin;
-    RegisterForm *fRegisterForm;
 };
 
 #endif // LOGINDIAGLOG_H

@@ -1,10 +1,10 @@
 #include <QtWidgets/QApplication>
-#include "LoginDiaglog.h"
+#include "ChatClient.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    LoginDiaglog w;
-    w.show();
+    ChatClient chatClient;
+    chatClient.show();
     return a.exec();
 }

@@ -12,7 +12,18 @@
 
 #include "p2_common.h"
 #include "p2_util.h"
+P2_NAMESPACE_USE
 
-P2_NAMESPACE_BEG
+const uint16 CLIENT_PORT_FOR_TCP = 5001;    // 客户端TCP端口
+const uint16 CLIENT_PORT_FOR_UDP = 5051;    // 客户端UDP端口
 
-P2_NAMESPACE_END
+enum
+{
+    p2UserStatusOnline,         // 在线
+    p2UserStatusAFK,            // 离开
+    p2UserStatusBusy,           // 忙碌
+    p2UserStatusInvisible,      // 隐身
+    p2UserStatusNoDisturbing,   // 请勿打扰
+    p2UserStatusOffline         // 离线
+};
+typedef uint16 user_status;

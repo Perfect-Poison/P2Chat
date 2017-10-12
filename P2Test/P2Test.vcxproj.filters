@@ -90,5 +90,8 @@
     <ClInclude Include="p2test_common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="p2test_version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
