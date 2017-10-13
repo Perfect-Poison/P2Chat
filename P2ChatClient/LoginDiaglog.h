@@ -14,7 +14,7 @@ class QLineEdit;
 class QPushButton;
 class QCheckBox;
 class QComboBox;
-class RegisterForm;
+class RegisterDialog;
 class ChatClient;
 class LoginDiaglog : public QDialog
 {

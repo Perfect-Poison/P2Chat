@@ -3,19 +3,19 @@
 
 #include <QWidget>
 #include <QtNetwork/QUdpSocket>
-#include "ui_RegisterForm.h"
+#include "ui_RegisterDialog.h"
 #include "p2client_common.h"
 
 class ChatClient;
-class RegisterForm : public QWidget
+class RegisterDialog : public QWidget
 {
     Q_OBJECT
 
 public:
-    RegisterForm(QWidget *parent);
-    ~RegisterForm();
+    RegisterDialog(QWidget *parent);
+    ~RegisterDialog();
 private:
-    Ui::RegisterForm ui;
+    Ui::RegisterDialog ui;
     ChatClient *fChatClient;
 };
 

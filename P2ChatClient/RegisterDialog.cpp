@@ -1,15 +1,15 @@
-#include "RegisterForm.h"
+#include "RegisterDialog.h"
 #include "ChatClient.h"
 
-RegisterForm::RegisterForm(QWidget *parent)
-    : QWidget(parent)
+RegisterDialog::RegisterDialog(QWidget *parent)
+    : QWidget(nullptr)
 {
     setWindowModality(Qt::ApplicationModal);
     fChatClient = reinterpret_cast<ChatClient*>(parent);
     ui.setupUi(this);
 }
 
-RegisterForm::~RegisterForm()
+RegisterDialog::~RegisterDialog()
 {
 
 }

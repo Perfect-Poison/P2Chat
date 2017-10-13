@@ -2,15 +2,17 @@
 #define CHATCLIENT_H
 
 #include <QWidget>
-
 class LoginDiaglog;
-class RegisterForm;
+class RegisterDialog;
+class UserInfoDialog;
+class UserSettingDialog;
 class QUdpSocket;
 class QToolButton;
 class QComboBox;
 class QLineEdit;
 class QTabWidget;
 class QToolBar;
+class QSplitter;
 class ChatClient : public QWidget
 {
     Q_OBJECT
@@ -19,18 +21,24 @@ public:
     ~ChatClient();
 private:
     friend LoginDiaglog;
-    friend RegisterForm;
+    friend RegisterDialog;
+    friend UserInfoDialog;
+    friend UserSettingDialog;
     QUdpSocket      *fUdpSocket;
     LoginDiaglog    *fLoginDialog;
-    RegisterForm    *fRegisterForm;
+    RegisterDialog  *fRegisterDialog;
+    UserInfoDialog  *fUserInfoDialog;
+    UserSettingDialog *fUserSettingDialog;
 private:
     QToolButton     *fIconToolBt;
-    QComboBox       *fStatusCBox;
+    QComboBox       *fUserStatusCBox;
     QLineEdit       *fNickNameLEdit;
     QLineEdit       *fSignatureLEdit;
     QLineEdit       *fSearchLEdit;
     QTabWidget      *fTabWidget;
     QToolBar        *fToolBar;
+    QAction         *fSettingAct;
+    QAction         *fAddAct;
 };
 
 #endif // CHATCLIENT_H

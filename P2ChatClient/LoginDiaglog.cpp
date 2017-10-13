@@ -1,9 +1,9 @@
 #include "LoginDiaglog.h"
 #include "ChatClient.h"
-#include "RegisterForm.h"
+#include "RegisterDialog.h"
 
 LoginDiaglog::LoginDiaglog(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(nullptr)
 {
     fChatClient = reinterpret_cast<ChatClient*>(parent);
 
@@ -49,7 +49,7 @@ LoginDiaglog::LoginDiaglog(QWidget *parent)
 
     this->setLayout(v1);
 
-    connect(fRegisterBt, SIGNAL(clicked()), fChatClient->fRegisterForm, SLOT(show()));
+    connect(fRegisterBt, SIGNAL(clicked()), fChatClient->fRegisterDialog, SLOT(show()));
 }
 
 LoginDiaglog::~LoginDiaglog()

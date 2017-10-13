@@ -28,7 +28,7 @@ extern attr_code_param sAttrCodeParam[] =
     ATTR_SESSION_ID,    _T("ATTR_SESSION_ID"),
 
     ATTR_USER_ID,       _T("ATTR_USER_ID"),
-    ATTR_USER_NAME,     _T("ATTR_USER_NAME"),
+    ATTR_USER_PP,     _T("ATTR_USER_PP"),
     ATTR_USER_PASSWORD, _T("ATTR_USER_PASSWORD"),
 
     ATTR_GROUP_ID,      _T("ATTR_GROUP_ID"),

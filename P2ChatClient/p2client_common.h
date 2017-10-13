@@ -24,6 +24,7 @@ enum
     p2UserStatusBusy,           // Ã¦Âµ
     p2UserStatusInvisible,      // ÒşÉí
     p2UserStatusNoDisturbing,   // ÇëÎğ´òÈÅ
-    p2UserStatusOffline         // ÀëÏß
+    p2UserStatusOffline,        // ÀëÏß
+    p2UserStatusNum
 };
 typedef uint16 user_status;
