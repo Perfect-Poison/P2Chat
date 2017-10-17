@@ -11,5 +11,5 @@ RegisterDialog::RegisterDialog(QWidget *parent)
 
 RegisterDialog::~RegisterDialog()
 {
-
+    
 }

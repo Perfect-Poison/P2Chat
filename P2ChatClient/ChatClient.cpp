@@ -7,6 +7,7 @@
 #include <QtWidgets/QSplitter>
 #include <QtNetwork/QUdpSocket>
 #include <QtGui/QList>
+#include <QtNetwork/QNetworkDatagram>
 
 ChatClient::ChatClient(QWidget *parent)
     : QWidget(parent)
@@ -67,12 +68,52 @@ ChatClient::ChatClient(QWidget *parent)
 
     setLayout(v2);
     setFixedSize(250, 600);
+    
     // 槽函数
-
     connect(fIconToolBt, SIGNAL(clicked()), fUserInfoDialog, SLOT(show()));
+    connect(fUdpSocket, SIGNAL(clicked()), this, SLOT(readPendingDatagrams()));
 }
 
 ChatClient::~ChatClient()
 {
 
+}
+
+void ChatClient::readPendingDatagrams()
+{
+    BYTE buffer[1500];
+    while (fUdpSocket->hasPendingDatagrams() && fUdpSocket->pendingDatagramSize())
+    {
+        // 解析包数据
+        qint64 recvSize = fUdpSocket->pendingDatagramSize();
+        QNetworkDatagram datagram = fUdpSocket->receiveDatagram();
+        QString remoteHost = datagram.senderAddress().toString();
+        quint16 remotePort = datagram.senderPort();
+        memcpy(buffer, datagram.data().data(), datagram.data().size());
+        if (recvSize != -1)
+        {
+            MESSAGE *rawMsg = (MESSAGE *)buffer;
+
+            //-------------------------------
+            // TODO: 判断消息格式是否正确，暂时只是简单判断一下
+            if (ntohs(*(msg_code *)rawMsg) > 20)
+                continue;
+
+            if (CHAT_CLIENT_DEBUG)
+            {
+                TCHAR hexStr[1500 * 2 + 1];
+                ::memset(hexStr, 0, sizeof(hexStr));
+                bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
+                remoteHost.toWCharArray((TCHAR*)buffer);
+                log_debug(0, _T("ChatClient::readPendingDatagrams 收到%s:%u发送的%uB消息[raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
+            }
+            Message *message = new Message(rawMsg);
+
+            switch (message->GetCode())
+            {
+                
+            }
+        }
+        // 
+    }
 }

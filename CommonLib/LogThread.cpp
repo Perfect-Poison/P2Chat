@@ -240,8 +240,8 @@ void LogThread::WriteLogRecordToFile(LogRecord *logRecord)
     case LOG_WARNING:
         _snprintf(logLevel, 16, "[%s]", "WARN ");
         break;
-    case LOG_ERROR:
-        _snprintf(logLevel, 16, "[%s]", "ERROR");
+    case LOG_FATAL:
+        _snprintf(logLevel, 16, "[%s]", "FATAL");
         break;
     default:
         strncpy(logLevel, "", 1);

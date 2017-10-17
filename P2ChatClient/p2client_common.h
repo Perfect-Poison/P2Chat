@@ -12,10 +12,13 @@
 
 #include "p2_common.h"
 #include "p2_util.h"
+#include "p2_cpapi.h"
 P2_NAMESPACE_USE
 
 const uint16 CLIENT_PORT_FOR_TCP = 5001;    // 客户端TCP端口
 const uint16 CLIENT_PORT_FOR_UDP = 5051;    // 客户端UDP端口
+const uint16 SERVER_PORT_FOR_TCP = 6001;
+const uint16 SERVER_PORT_FOR_UDP = 6051;
 
 enum
 {

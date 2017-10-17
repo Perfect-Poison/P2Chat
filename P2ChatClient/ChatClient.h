@@ -1,7 +1,12 @@
 #ifndef CHATCLIENT_H
 #define CHATCLIENT_H
 
+#define CHAT_CLIENT_DEBUG   1
+
 #include <QWidget>
+#include <QMap>
+#include "p2client_common.h"
+
 class LoginDiaglog;
 class RegisterDialog;
 class UserInfoDialog;
@@ -19,6 +24,8 @@ class ChatClient : public QWidget
 public:
     ChatClient(QWidget *parent = 0);
     ~ChatClient();
+public slots:
+void readPendingDatagrams();
 private:
     friend LoginDiaglog;
     friend RegisterDialog;
@@ -39,6 +46,7 @@ private:
     QToolBar        *fToolBar;
     QAction         *fSettingAct;
     QAction         *fAddAct;
+    QMap<quint32, p2::Message*>  fMessageTable;
 };
 
 #endif // CHATCLIENT_H

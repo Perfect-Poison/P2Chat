@@ -122,7 +122,7 @@ enum
     LOG_DEBUG   = (WORD)0x0001,
     LOG_INFO    = (WORD)0x0002,
     LOG_WARNING = (WORD)0x0003,
-    LOG_ERROR   = (WORD)0x0004
+    LOG_FATAL   = (WORD)0x0004
 };
 typedef WORD log_type;
 
