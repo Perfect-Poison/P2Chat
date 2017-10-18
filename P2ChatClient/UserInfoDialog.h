@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include "ui_UserInfoDialog.h"
+#include "p2client_common.h"
 
+P2_NAMESPACE_BEG
 class ChatClient;
 class UserSettingDialog;
 class UserInfoDialog : public QDialog
@@ -18,5 +20,6 @@ private:
     Ui::UserInfoDialog ui;
     ChatClient  *fChatClient;
 };
+P2_NAMESPACE_END
 
 #endif // USERINFODIALOG_H

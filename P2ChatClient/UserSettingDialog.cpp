@@ -1,4 +1,5 @@
 #include "UserSettingDialog.h"
+P2_NAMESPACE_BEG
 
 UserSettingDialog::UserSettingDialog(QWidget *parent)
     : QDialog(nullptr)
@@ -12,3 +13,4 @@ UserSettingDialog::~UserSettingDialog()
 {
 
 }
+P2_NAMESPACE_END

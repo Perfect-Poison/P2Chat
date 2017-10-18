@@ -1,6 +1,7 @@
 #include "UserInfoDialog.h"
 #include "ChatClient.h"
 #include "UserSettingDialog.h"
+P2_NAMESPACE_BEG
 
 UserInfoDialog::UserInfoDialog(QWidget *parent)
     : QDialog(nullptr)
@@ -18,3 +19,4 @@ UserInfoDialog::~UserInfoDialog()
 {
 
 }
+P2_NAMESPACE_END

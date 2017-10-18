@@ -8,6 +8,7 @@
 #include <QtNetwork/QUdpSocket>
 #include <QtGui/QList>
 #include <QtNetwork/QNetworkDatagram>
+P2_NAMESPACE_BEG
 
 ChatClient::ChatClient(QWidget *parent)
     : QWidget(parent)
@@ -65,7 +66,10 @@ ChatClient::ChatClient(QWidget *parent)
     fUserStatusCBox->addItem(QIcon(""), tr("请勿打扰"), p2UserStatusNoDisturbing);
     fUserStatusCBox->addItem(QIcon(""), tr("离线"), p2UserStatusOffline);
     fUserStatusCBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-
+    fState = MSG_SERVER_GET_INFO;
+    fSessionID = 0;
+    fUserID = 0;
+    fUserPP = 0;
     setLayout(v2);
     setFixedSize(250, 600);
     
@@ -77,6 +81,41 @@ ChatClient::ChatClient(QWidget *parent)
 ChatClient::~ChatClient()
 {
 
+}
+
+void ChatClient::SendMessage(Message *inMessage, const TCHAR* inIP, uint16 inPort)
+{
+    size_t sendSize = inMessage->GetSize();
+    MESSAGE *rawMsg = inMessage->CreateMessage();
+    Assert(sendSize == ntohl(rawMsg->size));
+    sendSize = fUdpSocket->writeDatagram((char *)rawMsg, sendSize, QHostAddress(QString::fromWCharArray(inIP)), inPort);
+
+    if (CHAT_CLIENT_DEBUG)
+    {
+        if (sendSize != -1)
+        {
+            TCHAR hexStr[MAX_UDP_PACKET * 2 + 1];
+            ::memset(hexStr, 0, sizeof(hexStr));
+            bin_to_str((BYTE *)rawMsg, sendSize, hexStr);
+            log_debug(0, _T("ChatClient::SendMessage 已向%s:%u发送%uB消息[raw:%s]\n"), inIP, inPort, sendSize, hexStr);
+        }
+        else
+            log_debug(7, _T("[error]ChatClient::SendMessage 发送消息失败\n"));
+    }
+
+    safe_free(rawMsg);
+}
+
+void ChatClient::SendMessageWithKeepTrac(Message *inMessage, const TCHAR* inIP, uint16 inPort)
+{
+    if (fMessageTable.count(inMessage->GetID()))
+    {
+        log_debug(6, _T("[error]ChatClient::SendMessageWithKeepTrac 发送消息失败, 消息已经在消息表中\n"));
+        return;
+    }
+    
+    fMessageTable[inMessage->GetID()] = inMessage;
+    SendMessage(inMessage, inIP, inPort);
 }
 
 void ChatClient::readPendingDatagrams()
@@ -105,15 +144,114 @@ void ChatClient::readPendingDatagrams()
                 ::memset(hexStr, 0, sizeof(hexStr));
                 bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
                 remoteHost.toWCharArray((TCHAR*)buffer);
-                log_debug(0, _T("ChatClient::readPendingDatagrams 收到%s:%u发送的%uB消息[raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
+                log_debug(0, _T("ChatClient::readPendingDatagrams 收到消息[%s:%u(%uB) raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
             }
             Message *message = new Message(rawMsg);
-
-            switch (message->GetCode())
+            if (message->GetCode() == MSG_REQUEST_FAILED)
             {
-                
+                TCHAR hexStr[1500 * 2 + 1];
+                ::memset(hexStr, 0, sizeof(hexStr));
+                bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
+                remoteHost.toWCharArray((TCHAR*)buffer);
+                log_debug(6, _T("ChatClient::readPendingDatagrams 消息请求失败![%s:%u(%uB) raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
+                continue;
             }
+
+            if (fMessageTable.count(message->GetID()))
+            {
+                Message *sendedMsg = fMessageTable[message->GetID()];
+                switch (sendedMsg->GetCode())
+                {
+                case MSG_SERVER_GET_INFO:
+                {
+                    // 成功获取了服务端信息
+                    fSessionID = message->GetAttrAsInt64(ATTR_SESSION_ID);
+                    fServerInfo = QString::fromWCharArray(message->GetAttrAsString(ATTR_SERVER_INFO));
+                    break;
+                }
+                case MSG_SERVER_SET_INFO:                              // 设置服务端信息（1）
+                {
+                    break;
+                }
+                case MSG_USER_REGISTRATION_INFO:                        // 注册用户信息
+                {
+                    /**
+                     *	
+                     */
+                    fUserID = message->GetAttrAsInt32(ATTR_USER_ID);
+                    fUserPP = message->GetAttrAsInt64(ATTR_USER_PP);
+                    fRegisterDialog->SucceedRegister(fUserPP);
+                    break;
+                }
+                case MSG_USER_UNREGISTRATION_INFO:                      // 注销用户信息
+                {
+                    break;
+                }
+                case MSG_USER_GET_INFO:                                 // 获取用户信息（2）
+                {
+                    break;
+                }
+                case MSG_USER_SET_INFO:                                 // 设置用户信息（3）
+                {
+                    break;
+                }
+                case MSG_GROUP_GET_INFO:                                // 获取群组信息（4）
+                {
+                    break;
+                }
+                case MSG_GROUP_SET_INFO:                                // 设置群组信息（5）
+                {
+                    break;
+                }
+                case MSG_GROUP_REGISTRATION_INFO:                       // 注册群组信息
+                {
+                    break;
+                }
+                case MSG_GROUP_UNREGISTRATION_INFO:                     // 注销群组信息
+                {
+                    break;
+                }
+                case MSG_LOGIN:                                         // 用户登录消息（6）
+                {
+                    break;
+                }
+                case MSG_LOGOUT:                                        // 用户退出消息（7）
+                {
+                    break;
+                }
+                case MSG_USER_MSG_PACKET:                               // 用户消息包（8）
+                {
+                    break;
+                }
+                case MSG_GROUP_MSG_PACKET:                               // 群组消息包（9）
+                {
+                    break;
+                }
+                case MSG_USER_ONLINE:                                    // 用户在线消息（10）
+                {
+                    break;
+                }
+                case MSG_USER_OFFLINE:                                    // 用户离线消息（11）
+                {
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+                }
+            }
+            else
+            {
+                if (CHAT_CLIENT_DEBUG)
+                {    
+                    log_debug(6, _T("ChatClient::readPendingDatagrams 非法消息!"));
+                }
+            }
+            safe_delete(message);
         }
         // 
     }
 }
+
+P2_NAMESPACE_END

@@ -6,11 +6,7 @@
 #include <QWidget>
 #include <QMap>
 #include "p2client_common.h"
-
-class LoginDiaglog;
-class RegisterDialog;
-class UserInfoDialog;
-class UserSettingDialog;
+#include "p2_cpapi.h"
 class QUdpSocket;
 class QToolButton;
 class QComboBox;
@@ -18,12 +14,20 @@ class QLineEdit;
 class QTabWidget;
 class QToolBar;
 class QSplitter;
+
+P2_NAMESPACE_BEG
+class LoginDiaglog;
+class RegisterDialog;
+class UserInfoDialog;
+class UserSettingDialog;
 class ChatClient : public QWidget
 {
     Q_OBJECT
 public:
     ChatClient(QWidget *parent = 0);
     ~ChatClient();
+    void SendMessage(Message *inMessage, const TCHAR* inIP, uint16 inPort);
+    void SendMessageWithKeepTrac(Message *inMessage, const TCHAR* inIP, uint16 inPort);
 public slots:
 void readPendingDatagrams();
 private:
@@ -46,7 +50,13 @@ private:
     QToolBar        *fToolBar;
     QAction         *fSettingAct;
     QAction         *fAddAct;
-    QMap<quint32, p2::Message*>  fMessageTable;
+    QMap<msg_id, Message*>  fMessageTable;
+    uint16  fState;
+    int64   fSessionID;
+    QString fServerInfo;
+    int32   fUserID;
+    int64   fUserPP;
 };
 
+P2_NAMESPACE_END
 #endif // CHATCLIENT_H

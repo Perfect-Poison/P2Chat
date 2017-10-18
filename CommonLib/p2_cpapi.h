@@ -67,6 +67,7 @@ enum
     ATTR_USER_QQ,           // QQ
     ATTR_USER_EMAIL,        // email
     ATTR_USER_PHONE,        // 电话
+    ATTR_USER_WALLPAPER,    // 封面
 
     ATTR_GROUP_ID,          // 群组ID
     ATTR_GROUP_NAME,        // 群组名

@@ -2,7 +2,7 @@
 #include "UDPSocket.h"
 #include "Session.h"
 #include "p2server_version.h"
-
+#include "p2_dbapi.h"
 P2_NAMESPACE_BEG
 
 UDPSession::UDPSession(UDPSocket *udpSocket):
@@ -29,7 +29,7 @@ int64 UDPSession::Run()
             Message *responseMsg = new Message;
             responseMsg->SetCode(MSG_REQUEST_FAILED);
             SendMessage(responseMsg);
-            safe_free(responseMsg);
+            safe_delete(responseMsg);
 
             if (UDPSESSION_DEBUG)
                 log_debug(7, _T("UDPSession::Run 非法请求！\n"));
@@ -41,15 +41,6 @@ int64 UDPSession::Run()
         {
         case MSG_SERVER_GET_INFO:                              // 获取服务端信息（0）
         {
-            Session *session = new Session;
-            session->SetState(MSG_SERVER_GET_INFO);
-            session->SetSessionID(chrono::system_clock::now().time_since_epoch().count());
-            if (!SessionTable::AddSession(session))
-            {
-                log_debug(6, _T("UDPSession::Run 已经有该会话ID %I64d"), session->GetSessionID());
-                break;
-            }
-            
             // response message
             Message *responseMsg = new Message;
             // 消息头部
@@ -57,10 +48,9 @@ int64 UDPSession::Run()
             responseMsg->SetFlags(mf_none);
             responseMsg->SetID(message->GetID());
             // 消息属性
-            responseMsg->SetAttr(ATTR_SESSION_ID, session->GetSessionID());
             responseMsg->SetAttr(ATTR_SERVER_INFO, P2CHAT_SERVER_VERSION_STRING, lstrlen(P2CHAT_SERVER_VERSION_STRING));
             SendMessage(responseMsg);
-            safe_free(responseMsg);
+            safe_delete(responseMsg);
             break;
         }
 		case MSG_SERVER_SET_INFO:                              // 设置服务端信息（1）
@@ -69,6 +59,37 @@ int64 UDPSession::Run()
 		}
         case MSG_USER_REGISTRATION_INFO:                        // 注册用户信息
         {
+            // 注册用户信息
+            int32 userID;
+            int64 userPP;
+            TCHAR buffer[256];
+            memset(buffer, 0, sizeof(buffer));
+            user_registration_info(
+                message->GetAttrAsString(ATTR_USER_PASSWORD, buffer, 256),
+                message->GetAttrAsString(ATTR_USER_NICKNAME, buffer, 256),
+                message->GetAttrAsUInt64(ATTR_USER_BIRTHDAY),
+                message->GetAttrAsString(ATTR_USER_SEX, buffer, 256),
+                message->GetAttrAsString(ATTR_USER_ICON, buffer, 256),
+                message->GetAttrAsString(ATTR_USER_PROFILE, buffer, 256),
+                message->GetAttrAsInt64(ATTR_USER_QQ),
+                message->GetAttrAsString(ATTR_USER_EMAIL, buffer, 256),
+                message->GetAttrAsInt64(ATTR_USER_PHONE),
+                _T("default"),
+                &userID,
+                &userPP);
+
+
+            // response message
+            Message *responseMsg = new Message;
+            // 消息头部
+            responseMsg->SetCode(MSG_REQUEST_SUCCEED);
+            responseMsg->SetFlags(mf_none);
+            responseMsg->SetID(message->GetID());
+            // 消息属性
+            responseMsg->SetAttr(ATTR_USER_ID, userID);
+            responseMsg->SetAttr(ATTR_USER_PP, userPP);
+            SendMessage(responseMsg);
+            safe_delete(responseMsg);
             break;
         }
         case MSG_USER_UNREGISTRATION_INFO:                      // 注销用户信息
@@ -101,17 +122,27 @@ int64 UDPSession::Run()
         }
 		case MSG_LOGIN:                                         // 用户登录消息（6）
 		{
-
-            Session *session = SessionTable::GetSession(message->GetAttrAsInt64(ATTR_SESSION_ID));
-            if (!session)
-            {
-                log_debug(6, _T("UDPSession::Run 非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
-                break;
-            }
-            session->SetState(MSG_LOGIN);
+// 
+//             Session *session = SessionTable::GetSession(message->GetAttrAsInt64(ATTR_SESSION_ID));
+//             if (!session)
+//             {
+//                 log_debug(6, _T("UDPSession::Run 非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
+//                 break;
+//             }
+//             session->SetState(MSG_LOGIN);
 
             // 登录
             uint32 userID = 0;
+
+            // 成功
+            Session *session = new Session;
+            session->SetState(MSG_LOGIN);
+            session->SetSessionID(chrono::system_clock::now().time_since_epoch().count());
+            if (!SessionTable::AddSession(session))
+            {
+                log_debug(6, _T("UDPSession::Run 已经有该会话ID %I64d"), session->GetSessionID());
+                break;
+            }
 
             // response message
             Message *responseMsg = new Message;
@@ -123,7 +154,7 @@ int64 UDPSession::Run()
             responseMsg->SetAttr(ATTR_SESSION_ID, session->GetSessionID());
             responseMsg->SetAttr(ATTR_USER_ID, userID);
             SendMessage(responseMsg);
-            safe_free(responseMsg);
+            safe_delete(responseMsg);
 			break;
 		}
 		case MSG_LOGOUT:                                        // 用户退出消息（7）
@@ -152,13 +183,13 @@ int64 UDPSession::Run()
             Message *responseMsg = new Message;
             responseMsg->SetCode(MSG_REQUEST_FAILED);
             SendMessage(responseMsg);
-            safe_free(responseMsg);
+            safe_delete(responseMsg);
             if (UDPSESSION_DEBUG)
 			    log_debug(7, _T("UDPSession::Run 非法请求！\n"));
             break;
 		}
        }
-        safe_free(message);
+       safe_delete(message);
         //fUDPSocket->SetTask(nullptr);
         fUDPSocket->RequestEvent(EV_RE);
         return -1;

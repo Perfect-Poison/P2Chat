@@ -302,4 +302,10 @@ bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, UINT32 
 //bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, uuid& id);
 bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, TCHAR *id);
 
+
+/**
+ *	业务层处理
+ */
+bool user_registration_info(TCHAR* inUserPasswd, TCHAR* inNickName, int64 inBirthday, TCHAR* inSex, TCHAR* inICON, TCHAR* inProfile, int64 inQQ, TCHAR* inEmail, int64 inPhone, TCHAR* inWallpaper, int32* outID, int64* outPP);
+
 P2_NAMESPACE_END

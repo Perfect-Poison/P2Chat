@@ -1712,4 +1712,44 @@ bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, TCHAR *
     return exist;
 }
 
+bool user_registration_info(TCHAR* inUserPasswd, TCHAR* inNickName, int64 inBirthday, TCHAR* inSex, TCHAR* inICON, TCHAR* inProfile, int64 inQQ, TCHAR* inEmail, int64 inPhone, TCHAR* inWallpaper, int32* outID, int64* outPP)
+{
+    static int32 id = 1;
+    int64 pp = chrono::system_clock::now().time_since_epoch().count();
+    DB_HANDLE hConn = DBConnectionPoolAcquireConnection();
+    DB_STATEMENT hStmt = DBPrepare(hConn, _T("INSERT INTO user_info (id,pp,password,nickname,birthday,sex,icon,profile,qq,email,phone,wallpaper,last_login,date_joined,user_status_id,encrypt_repo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"));
+    int64 lastLogin = chrono::system_clock::now().time_since_epoch().count();
+    int64 dateJoined = lastLogin;
+    int32 userStatusID = 0;
+    int32 encrytRepoID = 0;
+    if (hStmt != nullptr)
+    {
+        DBBind(hStmt, 1, DB_SQLTYPE_INTEGER, id);
+        DBBind(hStmt, 2, DB_SQLTYPE_BIGINT, pp);
+        DBBind(hStmt, 3, DB_SQLTYPE_VARCHAR, inUserPasswd, DB_BIND_STATIC);
+        DBBind(hStmt, 4, DB_SQLTYPE_VARCHAR, inNickName, DB_BIND_STATIC);
+        DBBind(hStmt, 5, DB_SQLTYPE_BIGINT, inBirthday);
+        DBBind(hStmt, 6, DB_SQLTYPE_VARCHAR, inSex, DB_BIND_STATIC);
+        DBBind(hStmt, 7, DB_SQLTYPE_VARCHAR, inICON, DB_BIND_STATIC);
+        DBBind(hStmt, 8, DB_SQLTYPE_VARCHAR, inProfile, DB_BIND_STATIC);
+        DBBind(hStmt, 9, DB_SQLTYPE_BIGINT, inQQ);
+        DBBind(hStmt, 10, DB_SQLTYPE_VARCHAR, inEmail, DB_BIND_STATIC);
+        DBBind(hStmt, 11, DB_SQLTYPE_BIGINT, inPhone);
+        DBBind(hStmt, 12, DB_SQLTYPE_VARCHAR, inWallpaper, DB_BIND_STATIC);
+        DBBind(hStmt, 13, DB_SQLTYPE_BIGINT, lastLogin);
+        DBBind(hStmt, 14, DB_SQLTYPE_BIGINT, dateJoined);
+        DBBind(hStmt, 15, DB_SQLTYPE_INTEGER, userStatusID);
+        DBBind(hStmt, 16, DB_SQLTYPE_INTEGER, encrytRepoID);
+        UINT32 rcc = DBExecute(hStmt);
+        DBConnectionPoolReleaseConnection(hConn);
+        DBFreeStatement(hStmt);
+    }
+    *outID = id;
+    *outPP = pp;
+    id++;
+
+    return true;
+}
+
 P2_NAMESPACE_END
+

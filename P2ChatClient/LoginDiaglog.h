@@ -14,8 +14,11 @@ class QLineEdit;
 class QPushButton;
 class QCheckBox;
 class QComboBox;
+
+P2_NAMESPACE_BEG
 class RegisterDialog;
 class ChatClient;
+
 class LoginDiaglog : public QDialog
 {
     Q_OBJECT
@@ -33,5 +36,6 @@ private:
     QCheckBox   *fRemPassword;
     QCheckBox   *fAutoLogin;
 };
+P2_NAMESPACE_END
 
 #endif // LOGINDIAGLOG_H

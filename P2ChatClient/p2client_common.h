@@ -12,14 +12,16 @@
 
 #include "p2_common.h"
 #include "p2_util.h"
-#include "p2_cpapi.h"
-P2_NAMESPACE_USE
+P2_NAMESPACE_BEG
 
 const uint16 CLIENT_PORT_FOR_TCP = 5001;    // 客户端TCP端口
 const uint16 CLIENT_PORT_FOR_UDP = 5051;    // 客户端UDP端口
 const uint16 SERVER_PORT_FOR_TCP = 6001;
 const uint16 SERVER_PORT_FOR_UDP = 6051;
 
+const TCHAR SERVER_IP[] = _T("127.0.0.1");
+
+const int32 MAX_UDP_PACKET = 1500;
 enum
 {
     p2UserStatusOnline,         // 在线
@@ -31,3 +33,7 @@ enum
     p2UserStatusNum
 };
 typedef uint16 user_status;
+
+static uint32 g_messageCounter = 0;
+
+P2_NAMESPACE_END

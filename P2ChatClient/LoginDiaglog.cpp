@@ -1,6 +1,7 @@
 #include "LoginDiaglog.h"
 #include "ChatClient.h"
 #include "RegisterDialog.h"
+P2_NAMESPACE_BEG
 
 LoginDiaglog::LoginDiaglog(QWidget *parent)
     : QDialog(nullptr)
@@ -57,3 +58,4 @@ LoginDiaglog::~LoginDiaglog()
 
 }
 
+P2_NAMESPACE_END
