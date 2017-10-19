@@ -2,7 +2,7 @@
 #include "Task.h"
 #include "Address.h"
 #include "p2_cpapi.h"
-
+#include "Mutex.h"
 P2_NAMESPACE_BEG
 
 #if P2CHAT_DEBUG
@@ -24,6 +24,7 @@ public:
 private:
     UDPSocket *fUDPSocket;
     Address fRemoteAddress;
+    static Mutex sRegMutex;
 };
 
 P2_NAMESPACE_END

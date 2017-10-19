@@ -53,7 +53,7 @@ private:
     QMap<msg_id, Message*>  fMessageTable;
     uint16  fState;
     int64   fSessionID;
-    QString fServerInfo;
+    QString fServerVersion;
     int32   fUserID;
     int64   fUserPP;
 };

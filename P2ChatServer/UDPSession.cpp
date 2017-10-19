@@ -5,6 +5,8 @@
 #include "p2_dbapi.h"
 P2_NAMESPACE_BEG
 
+Mutex UDPSession::sRegMutex;
+
 UDPSession::UDPSession(UDPSocket *udpSocket):
     Task(udpSocket),
     fUDPSocket(udpSocket)
@@ -48,7 +50,7 @@ int64 UDPSession::Run()
             responseMsg->SetFlags(mf_none);
             responseMsg->SetID(message->GetID());
             // ÏûÏ¢ÊôÐÔ
-            responseMsg->SetAttr(ATTR_SERVER_INFO, P2CHAT_SERVER_VERSION_STRING, lstrlen(P2CHAT_SERVER_VERSION_STRING));
+            responseMsg->SetAttr(ATTR_SERVER_VERSION, P2CHAT_SERVER_VERSION_STRING, lstrlen(P2CHAT_SERVER_VERSION_STRING));
             SendMessage(responseMsg);
             safe_delete(responseMsg);
             break;
@@ -64,19 +66,22 @@ int64 UDPSession::Run()
             int64 userPP;
             TCHAR buffer[256];
             memset(buffer, 0, sizeof(buffer));
-            user_registration_info(
-                message->GetAttrAsString(ATTR_USER_PASSWORD, buffer, 256),
-                message->GetAttrAsString(ATTR_USER_NICKNAME, buffer, 256),
-                message->GetAttrAsUInt64(ATTR_USER_BIRTHDAY),
-                message->GetAttrAsString(ATTR_USER_SEX, buffer, 256),
-                message->GetAttrAsString(ATTR_USER_ICON, buffer, 256),
-                message->GetAttrAsString(ATTR_USER_PROFILE, buffer, 256),
-                message->GetAttrAsInt64(ATTR_USER_QQ),
-                message->GetAttrAsString(ATTR_USER_EMAIL, buffer, 256),
-                message->GetAttrAsInt64(ATTR_USER_PHONE),
-                _T("default"),
-                &userID,
-                &userPP);
+            {
+                MutexLocker locker(&sRegMutex);
+                bool ret = user_registration_info(
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_PASSWORD)),
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_NICKNAME)),
+                    message->GetAttrAsUInt64(ATTR_USER_BIRTHDAY),
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_SEX)),
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_ICON)),
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_PROFILE)),
+                    message->GetAttrAsInt64(ATTR_USER_QQ),
+                    TCharArrayDeleter(message->GetAttrAsString(ATTR_USER_EMAIL)),
+                    message->GetAttrAsInt64(ATTR_USER_PHONE),
+                    _T("default"),
+                    &userID,
+                    &userPP);
+            }
 
 
             // response message

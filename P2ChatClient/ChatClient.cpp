@@ -8,6 +8,7 @@
 #include <QtNetwork/QUdpSocket>
 #include <QtGui/QList>
 #include <QtNetwork/QNetworkDatagram>
+#include <QMessageBox>
 P2_NAMESPACE_BEG
 
 ChatClient::ChatClient(QWidget *parent)
@@ -75,7 +76,19 @@ ChatClient::ChatClient(QWidget *parent)
     
     // 槽函数
     connect(fIconToolBt, SIGNAL(clicked()), fUserInfoDialog, SLOT(show()));
-    connect(fUdpSocket, SIGNAL(clicked()), this, SLOT(readPendingDatagrams()));
+    connect(fUdpSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+
+    //
+    close();
+    fLoginDialog->show();
+
+    // 
+    Message *message = new Message;
+    message->SetCode(MSG_SERVER_GET_INFO);
+    message->SetFlags(mf_none);
+    message->SetID(g_messageCounter++);
+    message->SetAttr(ATTR_SERVER_VERSION, _T(""), 0);
+    SendMessageWithKeepTrac(message, SERVER_IP, SERVER_PORT_FOR_UDP);
 }
 
 ChatClient::~ChatClient()
@@ -120,7 +133,7 @@ void ChatClient::SendMessageWithKeepTrac(Message *inMessage, const TCHAR* inIP, 
 
 void ChatClient::readPendingDatagrams()
 {
-    BYTE buffer[1500];
+    BYTE recvBuffer[1500];
     while (fUdpSocket->hasPendingDatagrams() && fUdpSocket->pendingDatagramSize())
     {
         // 解析包数据
@@ -128,10 +141,10 @@ void ChatClient::readPendingDatagrams()
         QNetworkDatagram datagram = fUdpSocket->receiveDatagram();
         QString remoteHost = datagram.senderAddress().toString();
         quint16 remotePort = datagram.senderPort();
-        memcpy(buffer, datagram.data().data(), datagram.data().size());
+        memcpy(recvBuffer, datagram.data().data(), datagram.data().size());
         if (recvSize != -1)
         {
-            MESSAGE *rawMsg = (MESSAGE *)buffer;
+            MESSAGE *rawMsg = (MESSAGE *)recvBuffer;
 
             //-------------------------------
             // TODO: 判断消息格式是否正确，暂时只是简单判断一下
@@ -143,8 +156,7 @@ void ChatClient::readPendingDatagrams()
                 TCHAR hexStr[1500 * 2 + 1];
                 ::memset(hexStr, 0, sizeof(hexStr));
                 bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
-                remoteHost.toWCharArray((TCHAR*)buffer);
-                log_debug(0, _T("ChatClient::readPendingDatagrams 收到消息[%s:%u(%uB) raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
+                log_debug(0, _T("ChatClient::readPendingDatagrams 收到消息[%s:%u(%uB) raw:%s]\n"), remoteHost.toStdWString().c_str(), remotePort, recvSize, hexStr);
             }
             Message *message = new Message(rawMsg);
             if (message->GetCode() == MSG_REQUEST_FAILED)
@@ -152,8 +164,7 @@ void ChatClient::readPendingDatagrams()
                 TCHAR hexStr[1500 * 2 + 1];
                 ::memset(hexStr, 0, sizeof(hexStr));
                 bin_to_str((BYTE *)rawMsg, recvSize, hexStr);
-                remoteHost.toWCharArray((TCHAR*)buffer);
-                log_debug(6, _T("ChatClient::readPendingDatagrams 消息请求失败![%s:%u(%uB) raw:%s]\n"), buffer, remotePort, recvSize, hexStr);
+                log_debug(6, _T("ChatClient::readPendingDatagrams 消息请求失败![%s:%u(%uB) raw:%s]\n"), remoteHost.toStdWString().c_str(), remotePort, recvSize, hexStr);
                 continue;
             }
 
@@ -165,8 +176,9 @@ void ChatClient::readPendingDatagrams()
                 case MSG_SERVER_GET_INFO:
                 {
                     // 成功获取了服务端信息
-                    fSessionID = message->GetAttrAsInt64(ATTR_SESSION_ID);
-                    fServerInfo = QString::fromWCharArray(message->GetAttrAsString(ATTR_SERVER_INFO));
+                    /*fSessionID = message->GetAttrAsInt64(ATTR_SESSION_ID);*/
+                    fServerVersion = QString::fromWCharArray(message->GetAttrAsString(ATTR_SERVER_VERSION));
+                    QMessageBox::information(nullptr, tr("服务端版本信息"), tr("成功获取服务端版本信息:%1").arg(fServerVersion));
                     break;
                 }
                 case MSG_SERVER_SET_INFO:                              // 设置服务端信息（1）

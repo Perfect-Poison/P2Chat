@@ -112,4 +112,19 @@ CHAR* inet_ntoa_A(in_addr in);
 #define _t_inet_ntoa    inet_ntoa_A
 #endif
 
+template <typename T>
+class ObjectDeleter
+{
+public:
+    ObjectDeleter(T* inObject) { fObject = inObject; }
+    ~ObjectDeleter() { safe_delete(fObject); }
+    operator T*() { return fObject; }
+private:
+    T* fObject;
+};
+
+typedef ObjectDeleter<TCHAR>    TCharArrayDeleter;
+typedef ObjectDeleter<WCHAR>    WCharArrayDeleter;
+typedef ObjectDeleter<CHAR>     CharArrayDeleter;
+
 P2_NAMESPACE_END

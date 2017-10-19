@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
     Sleep(10);
 
     ChatClient chatClient;
-    chatClient.show();
+    /*chatClient.show();*/
     return a.exec();
 }

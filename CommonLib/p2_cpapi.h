@@ -52,7 +52,7 @@ typedef uint16 msg_code;
  */
 enum
 {
-    ATTR_SERVER_INFO,       // 服务端信息属性
+    ATTR_SERVER_VERSION,       // 服务端版本
 
     ATTR_SESSION_ID,        // 会话ID
 

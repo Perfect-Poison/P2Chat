@@ -224,6 +224,8 @@ static void DBReconnect(DB_HANDLE hConn)
     {
         hConn->m_connection = DrvConnect(hConn->m_server, hConn->m_login,
             hConn->m_password, hConn->m_dbName, errorText);
+        if (!hConn->m_connection)
+            log_debug(6, _T("DBReconnect %s"), errorText);
         if (hConn->m_connection != NULL)
         {
             break;
@@ -297,7 +299,10 @@ bool DBQueryEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
 bool DBQuery(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-    return DBQueryEx(hConn, query, errorText);
+    bool ret = DBQueryEx(hConn, query, errorText);
+    if (!ret)
+        log_debug(6, _T("DBQuery %s"), errorText);
+    return ret;
 }
 
 /**
@@ -364,8 +369,10 @@ DB_RESULT DBSelectEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR *errorText)
 DB_RESULT DBSelect(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-
-    return DBSelectEx(hConn, query, errorText);
+    DB_RESULT result = DBSelectEx(hConn, query, errorText);
+    if (!result)
+        log_debug(6, _T("DBSelect %s"), errorText);
+    return result;
 }
 
 /**
@@ -785,8 +792,10 @@ DB_UNBUFFERED_RESULT DBSelectUnbufferedEx(DB_HANDLE hConn, TCHAR *szQuery, TCHAR
 DB_UNBUFFERED_RESULT DBSelectUnbuffered(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-
-    return DBSelectUnbufferedEx(hConn, query, errorText);
+    DB_UNBUFFERED_RESULT result = DBSelectUnbufferedEx(hConn, query, errorText);
+    if (!result)
+        log_debug(6, _T("DBSelectUnbuffered %s"), errorText);
+    return result;
 }
 
 /**
@@ -1034,7 +1043,10 @@ DB_STATEMENT DBPrepareEx(DB_HANDLE hConn, TCHAR *query, TCHAR *errorText)
 DB_STATEMENT DBPrepare(DB_HANDLE hConn, TCHAR *query)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-    return DBPrepareEx(hConn, query, errorText);
+    DB_STATEMENT result = DBPrepareEx(hConn, query, errorText);
+    if (!result)
+        log_debug(6, _T("DBPrepare %s"), errorText);
+    return result;
 }
 
 /**
@@ -1284,7 +1296,10 @@ bool DBExecuteEx(DB_STATEMENT hStmt, TCHAR *errorText)
 bool DBExecute(DB_STATEMENT hStmt)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-    return DBExecuteEx(hStmt, errorText);
+    bool ret = DBExecuteEx(hStmt, errorText);
+    if (!ret)
+        log_debug(6, _T("DBExecute %s"), errorText);
+    return ret;
 }
 
 /**
@@ -1361,7 +1376,10 @@ DB_RESULT DBSelectPreparedEx(DB_STATEMENT hStmt, TCHAR *errorText)
 DB_RESULT DBSelectPrepared(DB_STATEMENT hStmt)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-    return DBSelectPreparedEx(hStmt, errorText);
+    DB_RESULT result = DBSelectPreparedEx(hStmt, errorText);
+    if (!result)
+        log_debug(6, _T("DBSelectPrepared %s"), errorText);
+    return result;
 }
 
 /**
@@ -1439,7 +1457,10 @@ DB_UNBUFFERED_RESULT DBSelectPreparedUnbufferedEx(DB_STATEMENT hStmt, TCHAR *err
 DB_UNBUFFERED_RESULT DBSelectPreparedUnbuffered(DB_STATEMENT hStmt)
 {
     TCHAR errorText[DBDRV_MAX_ERROR_TEXT];
-    return DBSelectPreparedUnbufferedEx(hStmt, errorText);
+    DB_UNBUFFERED_RESULT result = DBSelectPreparedUnbufferedEx(hStmt, errorText);
+    if (!result)
+        log_debug(6, _T("DBSelectPreparedUnbuffered %s"), errorText);
+    return result;
 }
 
 /**
@@ -1714,40 +1735,62 @@ bool IsDatabaseRecordExist(DB_HANDLE hdb, TCHAR *table, TCHAR *idColumn, TCHAR *
 
 bool user_registration_info(TCHAR* inUserPasswd, TCHAR* inNickName, int64 inBirthday, TCHAR* inSex, TCHAR* inICON, TCHAR* inProfile, int64 inQQ, TCHAR* inEmail, int64 inPhone, TCHAR* inWallpaper, int32* outID, int64* outPP)
 {
-    static int32 id = 1;
-    int64 pp = chrono::system_clock::now().time_since_epoch().count();
+    int32 id = 0;
+    int64 pp = time(0)/* pp∫≈…˙≥…À„∑® */;
     DB_HANDLE hConn = DBConnectionPoolAcquireConnection();
-    DB_STATEMENT hStmt = DBPrepare(hConn, _T("INSERT INTO user_info (id,pp,password,nickname,birthday,sex,icon,profile,qq,email,phone,wallpaper,last_login,date_joined,user_status_id,encrypt_repo_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"));
+    DB_STATEMENT hStmt = DBPrepare(hConn, _T("INSERT INTO user_info (pp,password,nickname,birthday,sex,icon,profile,qq,email,phone,wallpaper,last_login,date_joined,is_locked,try_times,user_status_id,encrypt_repo_id,is_deleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"));
     int64 lastLogin = chrono::system_clock::now().time_since_epoch().count();
     int64 dateJoined = lastLogin;
     int32 userStatusID = 0;
-    int32 encrytRepoID = 0;
-    if (hStmt != nullptr)
+    int32 encryptRepoID = 0;
+    if (!hStmt)
     {
-        DBBind(hStmt, 1, DB_SQLTYPE_INTEGER, id);
-        DBBind(hStmt, 2, DB_SQLTYPE_BIGINT, pp);
-        DBBind(hStmt, 3, DB_SQLTYPE_VARCHAR, inUserPasswd, DB_BIND_STATIC);
-        DBBind(hStmt, 4, DB_SQLTYPE_VARCHAR, inNickName, DB_BIND_STATIC);
-        DBBind(hStmt, 5, DB_SQLTYPE_BIGINT, inBirthday);
-        DBBind(hStmt, 6, DB_SQLTYPE_VARCHAR, inSex, DB_BIND_STATIC);
-        DBBind(hStmt, 7, DB_SQLTYPE_VARCHAR, inICON, DB_BIND_STATIC);
-        DBBind(hStmt, 8, DB_SQLTYPE_VARCHAR, inProfile, DB_BIND_STATIC);
-        DBBind(hStmt, 9, DB_SQLTYPE_BIGINT, inQQ);
-        DBBind(hStmt, 10, DB_SQLTYPE_VARCHAR, inEmail, DB_BIND_STATIC);
-        DBBind(hStmt, 11, DB_SQLTYPE_BIGINT, inPhone);
-        DBBind(hStmt, 12, DB_SQLTYPE_VARCHAR, inWallpaper, DB_BIND_STATIC);
-        DBBind(hStmt, 13, DB_SQLTYPE_BIGINT, lastLogin);
-        DBBind(hStmt, 14, DB_SQLTYPE_BIGINT, dateJoined);
-        DBBind(hStmt, 15, DB_SQLTYPE_INTEGER, userStatusID);
-        DBBind(hStmt, 16, DB_SQLTYPE_INTEGER, encrytRepoID);
-        UINT32 rcc = DBExecute(hStmt);
         DBConnectionPoolReleaseConnection(hConn);
         DBFreeStatement(hStmt);
+        return false;
     }
+
+    DBBind(hStmt, 1, DB_SQLTYPE_BIGINT, pp);
+    DBBind(hStmt, 2, DB_SQLTYPE_VARCHAR, inUserPasswd, DB_BIND_STATIC);
+    DBBind(hStmt, 3, DB_SQLTYPE_VARCHAR, inNickName, DB_BIND_STATIC);
+    DBBind(hStmt, 4, DB_SQLTYPE_BIGINT, inBirthday);
+    DBBind(hStmt, 5, DB_SQLTYPE_VARCHAR, inSex, DB_BIND_STATIC);
+    DBBind(hStmt, 6, DB_SQLTYPE_VARCHAR, inICON, DB_BIND_STATIC);
+    DBBind(hStmt, 7, DB_SQLTYPE_VARCHAR, inProfile, DB_BIND_STATIC);
+    DBBind(hStmt, 8, DB_SQLTYPE_BIGINT, inQQ);
+    DBBind(hStmt, 9, DB_SQLTYPE_VARCHAR, inEmail, DB_BIND_STATIC);
+    DBBind(hStmt, 10, DB_SQLTYPE_BIGINT, inPhone);
+    DBBind(hStmt, 11, DB_SQLTYPE_VARCHAR, inWallpaper, DB_BIND_STATIC);
+    DBBind(hStmt, 12, DB_SQLTYPE_BIGINT, lastLogin);
+    DBBind(hStmt, 13, DB_SQLTYPE_BIGINT, dateJoined);
+    DBBind(hStmt, 14, DB_SQLTYPE_INTEGER, 0);
+    DBBind(hStmt, 15, DB_SQLTYPE_INTEGER, 0);
+    DBBind(hStmt, 16, DB_SQLTYPE_INTEGER, userStatusID);
+    DBBind(hStmt, 17, DB_SQLTYPE_INTEGER, encryptRepoID);
+    DBBind(hStmt, 18, DB_SQLTYPE_INTEGER, 0);
+    UINT32 rcc = DBExecute(hStmt);
+    //DBConnectionPoolReleaseConnection(hConn);
+    //DBFreeStatement(hStmt);
+
+    if (rcc)
+    {
+        TCHAR query[256];
+        _sntprintf(query, 256, _T("SELECT id FROM user_info WHERE pp=%I64d"), pp);
+        DB_RESULT hResult = DBSelect(hConn, query);
+        if (!hResult)
+        {
+            DBConnectionPoolReleaseConnection(hConn);
+            DBFreeStatement(hStmt);
+            return false;
+        }
+        id = DBGetFieldLong(hResult, 0, 0);
+    }
+
     *outID = id;
     *outPP = pp;
     id++;
-
+    DBConnectionPoolReleaseConnection(hConn);
+    DBFreeStatement(hStmt);
     return true;
 }
 

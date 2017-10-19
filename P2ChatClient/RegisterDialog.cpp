@@ -1,6 +1,7 @@
 #include "RegisterDialog.h"
 #include "ChatClient.h"
 #include <QMessageBox>
+
 P2_NAMESPACE_BEG
 
 RegisterDialog::RegisterDialog(QWidget *parent)
@@ -32,7 +33,7 @@ void RegisterDialog::dealRegister()
 {
     QString passwd = ui.fPasswordLEdit->text();
     QString nickName = ui.fNickNameLEdit->text();
-    int64 birthday = ui.fBirthdayDateEdit->dateTime().currentSecsSinceEpoch();
+    int64 birthday = ui.fBirthdayDateEdit->dateTime().toSecsSinceEpoch();
     QString icon = "default";
     QString profile = ui.fProfileTextEdit->toPlainText();
     int64 qq = atoll(ui.fQQLEdit->text().toLocal8Bit());
