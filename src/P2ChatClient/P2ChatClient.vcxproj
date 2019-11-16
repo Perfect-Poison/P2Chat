@@ -62,7 +62,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile>..\..\bin\$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>..\LibServer\CommonLib;$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>CommonLib_d.lib;Qt5Widgetsd.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Networkd.lib;qtmaind.lib;%(AdditionalDependencies)</AdditionalDependencies>

@@ -1,0 +1,1170 @@
+[18-Sep-2019 20:11:52.283] ======================================================================================
+[18-Sep-2019 20:11:52.283] | log date:            18-Sep-2019 20:11:52
+[18-Sep-2019 20:11:52.283] | log file name:       p2slog
+[18-Sep-2019 20:11:52.283] | log rotation policy: LOG_ROTATION_DAILY
+[18-Sep-2019 20:11:52.283] | log debug level:     0
+[18-Sep-2019 20:11:52.283] ======================================================================================
+[18-Sep-2019 20:11:52.283] [DEBUG] LogThread::Entry 启动日志线程
+[18-Sep-2019 20:11:52.313] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.490] [DEBUG] DBConnect: New DB connection opened: handle=01036A10
+[18-Sep-2019 20:11:52.490] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.503] [DEBUG] DBConnect: New DB connection opened: handle=01036830
+[18-Sep-2019 20:11:52.503] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.515] [DEBUG] DBConnect: New DB connection opened: handle=010366F0
+[18-Sep-2019 20:11:52.515] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.528] [DEBUG] DBConnect: New DB connection opened: handle=010362E0
+[18-Sep-2019 20:11:52.528] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.541] [DEBUG] DBConnect: New DB connection opened: handle=01036510
+[18-Sep-2019 20:11:52.541] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.553] [DEBUG] DBConnect: New DB connection opened: handle=010363D0
+[18-Sep-2019 20:11:52.553] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.566] [DEBUG] DBConnect: New DB connection opened: handle=010361F0
+[18-Sep-2019 20:11:52.566] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.578] [DEBUG] DBConnect: New DB connection opened: handle=010364C0
+[18-Sep-2019 20:11:52.578] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.591] [DEBUG] DBConnect: New DB connection opened: handle=010365B0
+[18-Sep-2019 20:11:52.591] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[18-Sep-2019 20:11:52.603] [DEBUG] DBConnect: New DB connection opened: handle=01036790
+[18-Sep-2019 20:11:52.603] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[18-Sep-2019 20:11:52.603] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[18-Sep-2019 20:11:52.603] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1568808712
+[18-Sep-2019 20:11:52.603] [DEBUG] TaskThread::Entry 启动任务线程
+[18-Sep-2019 20:11:52.603] [DEBUG] [事件线程692]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[18-Sep-2019 20:11:52.603] [DEBUG] EventThread::Entry 启动事件线程
+[18-Sep-2019 20:11:52.604] [DEBUG] TaskThread::Entry 启动任务线程
+[18-Sep-2019 20:11:52.604] [DEBUG] TaskThread::Entry 启动任务线程
+[18-Sep-2019 20:11:52.604] [DEBUG] TaskThread::Entry 启动任务线程
+[18-Sep-2019 20:11:52.614] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1568808712
+[18-Sep-2019 20:11:52.614] [DEBUG] [事件线程692]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[18-Sep-2019 20:12:04.274] [DEBUG] [事件线程692]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1568808724
+[18-Sep-2019 20:12:04.274] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:712)的任务队列
+[18-Sep-2019 20:12:04.274] [DEBUG] [任务线程712]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[18-Sep-2019 20:12:04.274] [DEBUG] [任务线程712]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1568808724
+[18-Sep-2019 20:12:04.274] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000000000600000000]
+[18-Sep-2019 20:12:04.274] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000000000060000000A0031002E0030002E0031]
+[18-Sep-2019 20:12:04.274] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1568808724
+[18-Sep-2019 20:12:04.274] [DEBUG] [任务线程712]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1568808724
+[18-Sep-2019 20:12:59.625] [DEBUG] [事件线程692]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1568808779
+[18-Sep-2019 20:12:59.625] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:720)的任务队列
+[18-Sep-2019 20:12:59.625] [DEBUG] [任务线程720]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[18-Sep-2019 20:12:59.625] [DEBUG] [任务线程720]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1568808779
+[18-Sep-2019 20:12:59.625] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的216B消息[raw:00020000000000D80000000100000009000000050006000000120031003200330031003200330031003200330000000600060000000A0042007200690061006E000000070102000000003872190000000008000600000002006D0000000900060000000E00640065006600610075006C00740000000A00060000000A006100640061007300640000000B010200000000F2737BFE0000000C00060000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D0000000D010200000000004A5C53]
+[18-Sep-2019 20:12:59.625] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 01036A10 acquired (call from p2_dbapi.cpp:1740)
+[18-Sep-2019 20:12:59.793] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 01036A10 released
+[18-Sep-2019 20:12:59.793] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000000301010000000D000000040102000000005D821F4B]
+[18-Sep-2019 20:12:59.794] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1568808779
+[18-Sep-2019 20:12:59.794] [DEBUG] [任务线程720]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1568808779
+[14-Nov-2019 19:03:34.619] ======================================================================================
+[14-Nov-2019 19:03:34.619] | log date:            14-Nov-2019 19:03:34
+[14-Nov-2019 19:03:34.619] | log file name:       p2slog
+[14-Nov-2019 19:03:34.619] | log rotation policy: LOG_ROTATION_DAILY
+[14-Nov-2019 19:03:34.619] | log debug level:     0
+[14-Nov-2019 19:03:34.619] ======================================================================================
+[14-Nov-2019 19:03:34.620] [DEBUG] LogThread::Entry 启动日志线程
+[14-Nov-2019 19:03:34.660] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.725] [DEBUG] DBConnect: New DB connection opened: handle=00D42360
+[14-Nov-2019 19:03:34.725] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.754] [DEBUG] DBConnect: New DB connection opened: handle=00D42720
+[14-Nov-2019 19:03:34.754] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.780] [DEBUG] DBConnect: New DB connection opened: handle=00D789F8
+[14-Nov-2019 19:03:34.780] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.806] [DEBUG] DBConnect: New DB connection opened: handle=00D78FE8
+[14-Nov-2019 19:03:34.806] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.834] [DEBUG] DBConnect: New DB connection opened: handle=00D79128
+[14-Nov-2019 19:03:34.834] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.858] [DEBUG] DBConnect: New DB connection opened: handle=00D78A48
+[14-Nov-2019 19:03:34.858] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.886] [DEBUG] DBConnect: New DB connection opened: handle=00D78A98
+[14-Nov-2019 19:03:34.886] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.916] [DEBUG] DBConnect: New DB connection opened: handle=00D79178
+[14-Nov-2019 19:03:34.916] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.945] [DEBUG] DBConnect: New DB connection opened: handle=00D78DB8
+[14-Nov-2019 19:03:34.946] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[14-Nov-2019 19:03:34.975] [DEBUG] DBConnect: New DB connection opened: handle=00D788B8
+[14-Nov-2019 19:03:34.975] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[14-Nov-2019 19:03:34.975] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[14-Nov-2019 19:03:34.975] [DEBUG] TaskThread::Entry 启动任务线程
+[14-Nov-2019 19:03:34.975] [DEBUG] TaskThread::Entry 启动任务线程
+[14-Nov-2019 19:03:34.976] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573729414
+[14-Nov-2019 19:03:34.977] [DEBUG] EventThread::Entry 启动事件线程
+[14-Nov-2019 19:03:34.977] [DEBUG] [事件线程692]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[14-Nov-2019 19:03:34.977] [DEBUG] TaskThread::Entry 启动任务线程
+[14-Nov-2019 19:03:34.977] [DEBUG] TaskThread::Entry 启动任务线程
+[14-Nov-2019 19:03:35.019] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573729415
+[14-Nov-2019 19:03:35.020] [DEBUG] [事件线程692]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[14-Nov-2019 19:03:50.008] [DEBUG] [事件线程692]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573729430
+[14-Nov-2019 19:03:50.008] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[14-Nov-2019 19:03:50.008] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[14-Nov-2019 19:03:50.008] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573729430
+[14-Nov-2019 19:03:50.009] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000000000600000000]
+[14-Nov-2019 19:03:50.009] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000000000060000000A0031002E0030002E0031]
+[14-Nov-2019 19:03:50.009] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573729430
+[14-Nov-2019 19:03:50.009] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573729430
+[15-Nov-2019 08:43:56.928] ======================================================================================
+[15-Nov-2019 08:43:56.928] | log date:            15-Nov-2019 08:43:56
+[15-Nov-2019 08:43:56.928] | log file name:       p2slog
+[15-Nov-2019 08:43:56.928] | log rotation policy: LOG_ROTATION_DAILY
+[15-Nov-2019 08:43:56.928] | log debug level:     0
+[15-Nov-2019 08:43:56.928] ======================================================================================
+[15-Nov-2019 08:43:56.946] [DEBUG] LogThread::Entry 启动日志线程
+[15-Nov-2019 08:43:56.948] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:56.965] [DEBUG] DBConnect: New DB connection opened: handle=00FBF918
+[15-Nov-2019 08:43:56.965] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:56.977] [DEBUG] DBConnect: New DB connection opened: handle=00FBF738
+[15-Nov-2019 08:43:56.977] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:56.990] [DEBUG] DBConnect: New DB connection opened: handle=00FF8770
+[15-Nov-2019 08:43:56.990] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.003] [DEBUG] DBConnect: New DB connection opened: handle=00FF84A0
+[15-Nov-2019 08:43:57.003] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.016] [DEBUG] DBConnect: New DB connection opened: handle=00FF8590
+[15-Nov-2019 08:43:57.016] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.029] [DEBUG] DBConnect: New DB connection opened: handle=00FF8630
+[15-Nov-2019 08:43:57.029] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.042] [DEBUG] DBConnect: New DB connection opened: handle=00FF8720
+[15-Nov-2019 08:43:57.042] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.054] [DEBUG] DBConnect: New DB connection opened: handle=00FF8450
+[15-Nov-2019 08:43:57.054] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.067] [DEBUG] DBConnect: New DB connection opened: handle=00FF8090
+[15-Nov-2019 08:43:57.067] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 08:43:57.080] [DEBUG] DBConnect: New DB connection opened: handle=00FF8040
+[15-Nov-2019 08:43:57.080] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[15-Nov-2019 08:43:57.080] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[15-Nov-2019 08:43:57.080] [DEBUG] EventThread::Entry 启动事件线程
+[15-Nov-2019 08:43:57.080] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 08:43:57.080] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 08:43:57.080] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573778637
+[15-Nov-2019 08:43:57.080] [DEBUG] [事件线程700]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[15-Nov-2019 08:43:57.080] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 08:43:57.080] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 08:43:57.101] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778637
+[15-Nov-2019 08:43:57.101] [DEBUG] [事件线程700]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[15-Nov-2019 08:44:19.871] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778659
+[15-Nov-2019 08:44:19.871] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 08:44:19.871] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:44:19.871] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778659
+[15-Nov-2019 08:44:19.871] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:44:19.872] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:44:19.872] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778659
+[15-Nov-2019 08:44:19.872] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778659
+[15-Nov-2019 08:44:28.172] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778668
+[15-Nov-2019 08:44:28.172] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 08:44:28.172] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:44:28.172] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778668
+[15-Nov-2019 08:44:28.172] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 08:44:28.172] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FBF918 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 08:44:28.172] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FBF918 released
+[15-Nov-2019 08:44:28.173] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 08:44:28.173] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778668
+[15-Nov-2019 08:44:28.173] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778668
+[15-Nov-2019 08:45:12.458] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778712
+[15-Nov-2019 08:45:12.458] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 08:45:12.458] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:45:12.458] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778712
+[15-Nov-2019 08:45:12.458] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:45:12.458] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:45:12.458] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778712
+[15-Nov-2019 08:45:12.459] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778712
+[15-Nov-2019 08:45:23.271] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778723
+[15-Nov-2019 08:45:23.271] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[15-Nov-2019 08:45:23.271] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:45:23.272] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778723
+[15-Nov-2019 08:45:23.272] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 08:45:23.272] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FBF738 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 08:45:23.272] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FBF738 released
+[15-Nov-2019 08:45:23.272] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 08:45:23.272] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778723
+[15-Nov-2019 08:45:23.273] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778723
+[15-Nov-2019 08:49:20.124] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778960
+[15-Nov-2019 08:49:20.124] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 08:49:20.124] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:49:20.124] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778960
+[15-Nov-2019 08:49:20.124] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:49:20.124] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:49:20.124] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778960
+[15-Nov-2019 08:49:20.124] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778960
+[15-Nov-2019 08:49:26.866] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778966
+[15-Nov-2019 08:49:26.866] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 08:49:26.866] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:49:26.867] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778966
+[15-Nov-2019 08:49:26.867] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 08:49:26.867] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8770 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 08:49:26.867] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8770 released
+[15-Nov-2019 08:49:26.867] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 08:49:26.867] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778966
+[15-Nov-2019 08:49:26.867] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778966
+[15-Nov-2019 08:49:44.201] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778984
+[15-Nov-2019 08:49:44.201] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 08:49:44.202] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:49:44.202] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778984
+[15-Nov-2019 08:49:44.202] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:49:44.202] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:49:44.202] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778984
+[15-Nov-2019 08:49:44.202] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778984
+[15-Nov-2019 08:49:50.634] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573778990
+[15-Nov-2019 08:49:50.634] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[15-Nov-2019 08:49:50.634] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:49:50.634] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573778990
+[15-Nov-2019 08:49:50.634] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 08:49:50.634] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF84A0 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 08:49:50.635] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF84A0 released
+[15-Nov-2019 08:49:50.635] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 08:49:50.635] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573778990
+[15-Nov-2019 08:49:50.636] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573778990
+[15-Nov-2019 08:50:26.870] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779026
+[15-Nov-2019 08:50:26.870] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 08:50:26.870] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:50:26.871] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779026
+[15-Nov-2019 08:50:26.871] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:50:26.871] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:50:26.871] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779026
+[15-Nov-2019 08:50:26.871] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779026
+[15-Nov-2019 08:51:10.029] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779070
+[15-Nov-2019 08:51:10.029] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 08:51:10.029] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:51:10.029] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779070
+[15-Nov-2019 08:51:10.029] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:51:10.029] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:51:10.029] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779070
+[15-Nov-2019 08:51:10.029] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779070
+[15-Nov-2019 08:52:44.789] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779164
+[15-Nov-2019 08:52:44.789] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 08:52:44.789] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:52:44.789] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779164
+[15-Nov-2019 08:52:44.789] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:52:44.789] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:52:44.789] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779164
+[15-Nov-2019 08:52:44.789] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779164
+[15-Nov-2019 08:53:27.273] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779207
+[15-Nov-2019 08:53:27.273] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[15-Nov-2019 08:53:27.274] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:53:27.274] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779207
+[15-Nov-2019 08:53:27.274] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:53:27.274] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:53:27.274] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779207
+[15-Nov-2019 08:53:27.274] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779207
+[15-Nov-2019 08:54:16.254] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779256
+[15-Nov-2019 08:54:16.254] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 08:54:16.255] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:54:16.256] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779256
+[15-Nov-2019 08:54:16.256] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:54:16.256] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:54:16.256] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779256
+[15-Nov-2019 08:54:16.256] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779256
+[15-Nov-2019 08:55:47.582] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779347
+[15-Nov-2019 08:55:47.582] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 08:55:47.583] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 08:55:47.583] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779347
+[15-Nov-2019 08:55:47.583] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 08:55:47.583] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 08:55:47.583] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779347
+[15-Nov-2019 08:55:47.583] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779347
+[15-Nov-2019 09:00:32.835] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779632
+[15-Nov-2019 09:00:32.835] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 09:00:32.835] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:00:32.835] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779632
+[15-Nov-2019 09:00:32.835] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 09:00:32.835] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 09:00:32.835] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779632
+[15-Nov-2019 09:00:32.835] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779632
+[15-Nov-2019 09:00:51.677] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779651
+[15-Nov-2019 09:00:51.677] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[15-Nov-2019 09:00:51.677] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:00:51.678] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779651
+[15-Nov-2019 09:00:51.678] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 09:00:51.678] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8590 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 09:00:51.678] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8590 released
+[15-Nov-2019 09:00:51.678] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 09:00:51.678] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779651
+[15-Nov-2019 09:00:51.678] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779651
+[15-Nov-2019 09:01:44.107] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779704
+[15-Nov-2019 09:01:44.107] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 09:01:44.107] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:01:44.107] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779704
+[15-Nov-2019 09:01:44.107] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000200000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 09:01:44.107] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8630 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 09:01:44.108] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8630 released
+[15-Nov-2019 09:01:44.108] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000200000001000000770101000003E9]
+[15-Nov-2019 09:01:44.108] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779704
+[15-Nov-2019 09:01:44.108] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779704
+[15-Nov-2019 09:05:09.938] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779909
+[15-Nov-2019 09:05:09.938] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 09:05:09.938] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:05:09.938] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779909
+[15-Nov-2019 09:05:09.939] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 09:05:09.939] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 09:05:09.939] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779909
+[15-Nov-2019 09:05:09.939] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779909
+[15-Nov-2019 09:06:04.144] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573779964
+[15-Nov-2019 09:06:04.144] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 09:06:04.144] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:06:04.144] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573779964
+[15-Nov-2019 09:06:04.144] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 09:06:04.144] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 09:06:04.144] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573779964
+[15-Nov-2019 09:06:04.144] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573779964
+[15-Nov-2019 09:07:09.285] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573780029
+[15-Nov-2019 09:07:09.285] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[15-Nov-2019 09:07:09.285] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:07:09.285] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573780029
+[15-Nov-2019 09:07:09.285] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000600000000]
+[15-Nov-2019 09:07:09.285] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500060000000A0031002E0030002E0031]
+[15-Nov-2019 09:07:09.285] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573780029
+[15-Nov-2019 09:07:09.285] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573780029
+[15-Nov-2019 09:07:18.766] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573780038
+[15-Nov-2019 09:07:18.766] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[15-Nov-2019 09:07:18.766] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:07:18.766] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573780038
+[15-Nov-2019 09:07:18.766] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的40B消息[raw:000A0000000000280000000100000002000000690102000000000000007B0000006A000600000000]
+[15-Nov-2019 09:07:18.766] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8720 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 09:07:18.766] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8720 released
+[15-Nov-2019 09:07:18.766] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000100000001000000770101000003E9]
+[15-Nov-2019 09:07:18.766] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573780038
+[15-Nov-2019 09:07:18.766] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573780038
+[15-Nov-2019 09:07:57.340] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573780077
+[15-Nov-2019 09:07:57.340] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:724)的任务队列
+[15-Nov-2019 09:07:57.340] [DEBUG] [任务线程724]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:07:57.340] [DEBUG] [任务线程724]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573780077
+[15-Nov-2019 09:07:57.340] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的46B消息[raw:000A00000000002E0000000200000002000000690102000000005D821F4B0000006A000600000006003100320033]
+[15-Nov-2019 09:07:57.340] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8450 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 09:07:57.341] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8450 released
+[15-Nov-2019 09:07:57.341] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A0000000200000001000000770101000003EA]
+[15-Nov-2019 09:07:57.341] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573780077
+[15-Nov-2019 09:07:57.342] [DEBUG] [任务线程724]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573780077
+[15-Nov-2019 09:08:11.973] [DEBUG] [事件线程700]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573780091
+[15-Nov-2019 09:08:11.973] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:732)的任务队列
+[15-Nov-2019 09:08:11.973] [DEBUG] [任务线程732]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 09:08:11.973] [DEBUG] [任务线程732]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573780091
+[15-Nov-2019 09:08:11.973] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000300000002000000690102000000005D821F4B0000006A000600000012003100320033003100320033003100320033]
+[15-Nov-2019 09:08:11.973] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00FF8090 acquired (call from p2_dbapi.cpp:1800)
+[15-Nov-2019 09:08:11.973] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00FF8090 released
+[15-Nov-2019 09:08:11.973] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000003000000020000006701020037E972515DF0D50000006801010000000D]
+[15-Nov-2019 09:08:11.973] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573780091
+[15-Nov-2019 09:08:11.973] [DEBUG] [任务线程732]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573780091
+[15-Nov-2019 21:51:36.851] ======================================================================================
+[15-Nov-2019 21:51:36.851] | log date:            15-Nov-2019 21:51:36
+[15-Nov-2019 21:51:36.851] | log file name:       p2slog
+[15-Nov-2019 21:51:36.851] | log rotation policy: LOG_ROTATION_DAILY
+[15-Nov-2019 21:51:36.851] | log debug level:     0
+[15-Nov-2019 21:51:36.851] ======================================================================================
+[15-Nov-2019 21:51:36.851] [DEBUG] LogThread::Entry 启动日志线程
+[15-Nov-2019 21:51:36.870] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.901] [DEBUG] DBConnect: New DB connection opened: handle=00C19118
+[15-Nov-2019 21:51:36.901] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.914] [DEBUG] DBConnect: New DB connection opened: handle=00C19398
+[15-Nov-2019 21:51:36.914] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.928] [DEBUG] DBConnect: New DB connection opened: handle=00C19528
+[15-Nov-2019 21:51:36.928] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.941] [DEBUG] DBConnect: New DB connection opened: handle=00C548C8
+[15-Nov-2019 21:51:36.941] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.953] [DEBUG] DBConnect: New DB connection opened: handle=00C54B98
+[15-Nov-2019 21:51:36.953] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.966] [DEBUG] DBConnect: New DB connection opened: handle=00C541E8
+[15-Nov-2019 21:51:36.966] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.979] [DEBUG] DBConnect: New DB connection opened: handle=00C546E8
+[15-Nov-2019 21:51:36.979] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:36.992] [DEBUG] DBConnect: New DB connection opened: handle=00C54878
+[15-Nov-2019 21:51:36.992] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:37.005] [DEBUG] DBConnect: New DB connection opened: handle=00C54648
+[15-Nov-2019 21:51:37.005] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[15-Nov-2019 21:51:37.017] [DEBUG] DBConnect: New DB connection opened: handle=00C54328
+[15-Nov-2019 21:51:37.018] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[15-Nov-2019 21:51:37.018] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[15-Nov-2019 21:51:37.018] [DEBUG] EventThread::Entry 启动事件线程
+[15-Nov-2019 21:51:37.018] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573825897
+[15-Nov-2019 21:51:37.018] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 21:51:37.018] [DEBUG] [事件线程656]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[15-Nov-2019 21:51:37.018] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 21:51:37.018] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 21:51:37.018] [DEBUG] TaskThread::Entry 启动任务线程
+[15-Nov-2019 21:51:37.040] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825897
+[15-Nov-2019 21:51:37.040] [DEBUG] [事件线程656]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[15-Nov-2019 21:51:55.446] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825915
+[15-Nov-2019 21:51:55.446] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:676)的任务队列
+[15-Nov-2019 21:51:55.446] [DEBUG] [任务线程676]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:51:55.447] [DEBUG] [任务线程676]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825915
+[15-Nov-2019 21:51:55.447] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[15-Nov-2019 21:51:55.447] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[15-Nov-2019 21:51:55.447] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825915
+[15-Nov-2019 21:51:55.447] [DEBUG] [任务线程676]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573825915
+[15-Nov-2019 21:52:40.241] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825960
+[15-Nov-2019 21:52:40.241] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:684)的任务队列
+[15-Nov-2019 21:52:40.241] [DEBUG] [任务线程684]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:52:40.241] [DEBUG] [任务线程684]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825960
+[15-Nov-2019 21:52:40.241] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的46B消息[raw:000A00000000002E0000000100000002000000690103000000005D821F4B0000006A000700000006003100320033]
+[15-Nov-2019 21:52:40.241] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00C19118 acquired (call from p2_dbapi.cpp:1801)
+[15-Nov-2019 21:52:40.242] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00C19118 released
+[15-Nov-2019 21:52:40.242] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A00000001000000010000007F0102000003EA]
+[15-Nov-2019 21:52:40.242] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825960
+[15-Nov-2019 21:52:40.242] [DEBUG] [任务线程684]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573825960
+[15-Nov-2019 21:52:44.091] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825964
+[15-Nov-2019 21:52:44.091] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:692)的任务队列
+[15-Nov-2019 21:52:44.091] [DEBUG] [任务线程692]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:52:44.091] [DEBUG] [任务线程692]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825964
+[15-Nov-2019 21:52:44.091] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的46B消息[raw:000A00000000002E0000000200000002000000690103000000000959CFED0000006A000700000006003100320033]
+[15-Nov-2019 21:52:44.091] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00C19398 acquired (call from p2_dbapi.cpp:1801)
+[15-Nov-2019 21:52:44.092] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00C19398 released
+[15-Nov-2019 21:52:44.092] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A00000002000000010000007F0102000003E9]
+[15-Nov-2019 21:52:44.092] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825964
+[15-Nov-2019 21:52:44.093] [DEBUG] [任务线程692]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573825964
+[15-Nov-2019 21:52:47.100] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825967
+[15-Nov-2019 21:52:47.100] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:668)的任务队列
+[15-Nov-2019 21:52:47.100] [DEBUG] [任务线程668]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:52:47.100] [DEBUG] [任务线程668]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825967
+[15-Nov-2019 21:52:47.100] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的46B消息[raw:000A00000000002E0000000300000002000000690103000000005D821F4B0000006A000700000006003100320033]
+[15-Nov-2019 21:52:47.100] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00C19528 acquired (call from p2_dbapi.cpp:1801)
+[15-Nov-2019 21:52:47.101] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00C19528 released
+[15-Nov-2019 21:52:47.101] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A00000003000000010000007F0102000003EA]
+[15-Nov-2019 21:52:47.101] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825967
+[15-Nov-2019 21:52:47.101] [DEBUG] [任务线程668]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573825967
+[15-Nov-2019 21:52:50.236] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825970
+[15-Nov-2019 21:52:50.236] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:676)的任务队列
+[15-Nov-2019 21:52:50.236] [DEBUG] [任务线程676]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:52:50.236] [DEBUG] [任务线程676]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825970
+[15-Nov-2019 21:52:50.236] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000400000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[15-Nov-2019 21:52:50.236] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00C548C8 acquired (call from p2_dbapi.cpp:1801)
+[15-Nov-2019 21:52:50.237] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00C548C8 released
+[15-Nov-2019 21:52:50.237] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000004000000020000006701030037E9DD22F166260000006801020000000D]
+[15-Nov-2019 21:52:50.237] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573825970
+[15-Nov-2019 21:52:50.237] [DEBUG] [任务线程676]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573825970
+[15-Nov-2019 21:52:50.237] [DEBUG] [事件线程656]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573825970
+[15-Nov-2019 21:52:50.237] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:684)的任务队列
+[15-Nov-2019 21:52:50.237] [DEBUG] [任务线程684]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[15-Nov-2019 21:52:50.237] [DEBUG] [任务线程684]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573825970
+[15-Nov-2019 21:52:50.237] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000005000000010000006701030037E9DD22F16626]
+[16-Nov-2019 11:36:20.376] ======================================================================================
+[16-Nov-2019 11:36:20.376] | log date:            16-Nov-2019 11:36:20
+[16-Nov-2019 11:36:20.376] | log file name:       p2slog
+[16-Nov-2019 11:36:20.376] | log rotation policy: LOG_ROTATION_DAILY
+[16-Nov-2019 11:36:20.376] | log debug level:     0
+[16-Nov-2019 11:36:20.376] ======================================================================================
+[16-Nov-2019 11:36:20.377] [DEBUG] LogThread::Entry 启动日志线程
+[16-Nov-2019 11:36:20.396] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.414] [DEBUG] DBConnect: New DB connection opened: handle=012AD538
+[16-Nov-2019 11:36:20.414] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.427] [DEBUG] DBConnect: New DB connection opened: handle=012AD678
+[16-Nov-2019 11:36:20.427] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.440] [DEBUG] DBConnect: New DB connection opened: handle=012EA050
+[16-Nov-2019 11:36:20.440] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.454] [DEBUG] DBConnect: New DB connection opened: handle=012E9D80
+[16-Nov-2019 11:36:20.454] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.476] [DEBUG] DBConnect: New DB connection opened: handle=012EA0F0
+[16-Nov-2019 11:36:20.476] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.489] [DEBUG] DBConnect: New DB connection opened: handle=012E9C90
+[16-Nov-2019 11:36:20.489] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.502] [DEBUG] DBConnect: New DB connection opened: handle=012E9E70
+[16-Nov-2019 11:36:20.502] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.514] [DEBUG] DBConnect: New DB connection opened: handle=012E9C40
+[16-Nov-2019 11:36:20.514] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.528] [DEBUG] DBConnect: New DB connection opened: handle=012E96F0
+[16-Nov-2019 11:36:20.528] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:36:20.546] [DEBUG] DBConnect: New DB connection opened: handle=012E9A10
+[16-Nov-2019 11:36:20.546] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[16-Nov-2019 11:36:20.546] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[16-Nov-2019 11:36:20.546] [DEBUG] EventThread::Entry 启动事件线程
+[16-Nov-2019 11:36:20.546] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:36:20.547] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:36:20.547] [DEBUG] [error]Socket::_Bind Binded socket error!
+[16-Nov-2019 11:36:20.547] [DEBUG] TCPSocket::Listen listen_on_port error!
+[16-Nov-2019 11:36:20.547] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:36:20.547] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573875380
+[16-Nov-2019 11:36:20.547] [DEBUG] [事件线程696]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[16-Nov-2019 11:36:20.547] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:36:20.570] [DEBUG] [error]Socket::_Bind Binded socket error!
+[16-Nov-2019 11:36:20.570] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875380
+[16-Nov-2019 11:36:20.570] [DEBUG] [事件线程696]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[16-Nov-2019 11:37:30.167] ======================================================================================
+[16-Nov-2019 11:37:30.167] | log date:            16-Nov-2019 11:37:30
+[16-Nov-2019 11:37:30.167] | log file name:       p2slog
+[16-Nov-2019 11:37:30.167] | log rotation policy: LOG_ROTATION_DAILY
+[16-Nov-2019 11:37:30.167] | log debug level:     0
+[16-Nov-2019 11:37:30.167] ======================================================================================
+[16-Nov-2019 11:37:30.167] [DEBUG] LogThread::Entry 启动日志线程
+[16-Nov-2019 11:37:30.187] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.214] [DEBUG] DBConnect: New DB connection opened: handle=00CBA770
+[16-Nov-2019 11:37:30.214] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.227] [DEBUG] DBConnect: New DB connection opened: handle=00CBA8B0
+[16-Nov-2019 11:37:30.227] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.240] [DEBUG] DBConnect: New DB connection opened: handle=00CB9FA0
+[16-Nov-2019 11:37:30.240] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.253] [DEBUG] DBConnect: New DB connection opened: handle=00CBA810
+[16-Nov-2019 11:37:30.253] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.266] [DEBUG] DBConnect: New DB connection opened: handle=00CBA590
+[16-Nov-2019 11:37:30.266] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.279] [DEBUG] DBConnect: New DB connection opened: handle=00CBA090
+[16-Nov-2019 11:37:30.279] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.292] [DEBUG] DBConnect: New DB connection opened: handle=00CBA180
+[16-Nov-2019 11:37:30.292] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.305] [DEBUG] DBConnect: New DB connection opened: handle=00CBA310
+[16-Nov-2019 11:37:30.305] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.317] [DEBUG] DBConnect: New DB connection opened: handle=00CBA540
+[16-Nov-2019 11:37:30.317] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 11:37:30.330] [DEBUG] DBConnect: New DB connection opened: handle=00CBA4F0
+[16-Nov-2019 11:37:30.330] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[16-Nov-2019 11:37:30.330] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[16-Nov-2019 11:37:30.330] [DEBUG] EventThread::Entry 启动事件线程
+[16-Nov-2019 11:37:30.330] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:37:30.330] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:37:30.330] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:37:30.330] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 11:37:30.330] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573875450
+[16-Nov-2019 11:37:30.330] [DEBUG] [事件线程688]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[16-Nov-2019 11:37:30.351] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875450
+[16-Nov-2019 11:37:30.351] [DEBUG] [事件线程688]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[16-Nov-2019 11:40:23.474] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875623
+[16-Nov-2019 11:40:23.474] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 11:40:23.474] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:40:23.474] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875623
+[16-Nov-2019 11:40:23.474] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 11:40:23.474] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 11:40:23.474] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875623
+[16-Nov-2019 11:40:23.475] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875623
+[16-Nov-2019 11:40:34.584] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875634
+[16-Nov-2019 11:40:34.585] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 11:40:34.585] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:40:34.585] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875634
+[16-Nov-2019 11:40:34.585] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 11:40:34.585] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA770 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:40:34.585] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA770 released
+[16-Nov-2019 11:40:34.586] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA50C533A6DC0000006801020000000D]
+[16-Nov-2019 11:40:34.586] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875634
+[16-Nov-2019 11:40:34.586] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875634
+[16-Nov-2019 11:40:34.586] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875634
+[16-Nov-2019 11:40:34.587] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:40:34.587] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875634
+[16-Nov-2019 11:40:34.587] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 11:40:34.587] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA50C533A6DC]
+[16-Nov-2019 11:40:34.587] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 11:40:34.587] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875634
+[16-Nov-2019 11:40:34.587] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875634
+[16-Nov-2019 11:43:12.854] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875792
+[16-Nov-2019 11:43:12.854] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 11:43:12.854] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:43:12.854] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875792
+[16-Nov-2019 11:43:12.854] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 11:43:12.854] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 11:43:12.854] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875792
+[16-Nov-2019 11:43:12.854] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875792
+[16-Nov-2019 11:43:17.261] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875797
+[16-Nov-2019 11:43:17.261] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 11:43:17.261] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:43:17.261] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875797
+[16-Nov-2019 11:43:17.261] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 11:43:17.261] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA8B0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:43:17.262] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA8B0 released
+[16-Nov-2019 11:43:17.262] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA51262A2D3E0000006801020000000D]
+[16-Nov-2019 11:43:17.262] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875797
+[16-Nov-2019 11:43:17.262] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875797
+[16-Nov-2019 11:43:17.262] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573875797
+[16-Nov-2019 11:43:17.262] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 11:43:17.262] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:43:17.262] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573875797
+[16-Nov-2019 11:43:17.262] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA51262A2D3E]
+[16-Nov-2019 11:43:17.263] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 11:43:17.263] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573875797
+[16-Nov-2019 11:43:17.263] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573875797
+[16-Nov-2019 11:48:17.406] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876097
+[16-Nov-2019 11:48:17.406] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 11:48:17.406] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:48:17.406] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876097
+[16-Nov-2019 11:48:17.406] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 11:48:17.406] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 11:48:17.406] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876097
+[16-Nov-2019 11:48:17.406] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876097
+[16-Nov-2019 11:48:21.784] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876101
+[16-Nov-2019 11:48:21.785] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 11:48:21.785] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:48:21.785] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876101
+[16-Nov-2019 11:48:21.785] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 11:48:21.785] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CB9FA0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:48:21.786] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CB9FA0 released
+[16-Nov-2019 11:48:21.786] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA51DBACD7AC0000006801020000000D]
+[16-Nov-2019 11:48:21.786] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876101
+[16-Nov-2019 11:48:21.786] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876101
+[16-Nov-2019 11:48:21.788] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876101
+[16-Nov-2019 11:48:21.788] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 11:48:21.788] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:48:21.788] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876101
+[16-Nov-2019 11:48:21.788] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA51DBACD7AC]
+[16-Nov-2019 11:48:21.788] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 11:48:21.788] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876101
+[16-Nov-2019 11:48:21.788] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876101
+[16-Nov-2019 11:48:51.503] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876131
+[16-Nov-2019 11:48:51.503] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 11:48:51.503] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:48:51.503] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876131
+[16-Nov-2019 11:48:51.503] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 11:48:51.503] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 11:48:51.503] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876131
+[16-Nov-2019 11:48:51.503] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876131
+[16-Nov-2019 11:49:00.846] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 11:49:00.846] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:49:00.846] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 11:49:00.846] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA810 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:49:00.846] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA810 released
+[16-Nov-2019 11:49:00.846] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA51F2F4E08C0000006801020000000D]
+[16-Nov-2019 11:49:00.846] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 11:49:00.846] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:49:00.846] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876140
+[16-Nov-2019 11:49:00.846] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA51F2F4E08C]
+[16-Nov-2019 11:49:00.846] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 11:49:00.847] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876140
+[16-Nov-2019 11:49:00.847] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876140
+[16-Nov-2019 11:52:54.335] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876374
+[16-Nov-2019 11:52:54.335] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 11:52:54.335] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:52:54.335] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876374
+[16-Nov-2019 11:52:54.335] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 11:52:54.335] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 11:52:54.335] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876374
+[16-Nov-2019 11:52:54.335] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876374
+[16-Nov-2019 11:52:57.449] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876377
+[16-Nov-2019 11:52:57.449] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 11:52:57.449] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:52:57.449] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876377
+[16-Nov-2019 11:52:57.449] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的46B消息[raw:000A00000000002E0000000100000002000000690103000000005D821F4B0000006A000700000006003100320033]
+[16-Nov-2019 11:52:57.449] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA590 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:52:57.450] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA590 released
+[16-Nov-2019 11:52:57.450] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送26B消息[raw:001100000000001A00000001000000010000007F0102000003EA]
+[16-Nov-2019 11:52:57.450] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876377
+[16-Nov-2019 11:52:57.450] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876377
+[16-Nov-2019 11:52:59.700] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876379
+[16-Nov-2019 11:52:59.701] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 11:52:59.701] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:52:59.701] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876379
+[16-Nov-2019 11:52:59.701] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000200000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 11:52:59.701] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA090 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 11:52:59.702] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA090 released
+[16-Nov-2019 11:52:59.702] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000002000000020000006701030037EA5281535DAE0000006801020000000D]
+[16-Nov-2019 11:52:59.702] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876379
+[16-Nov-2019 11:52:59.702] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876379
+[16-Nov-2019 11:52:59.702] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876379
+[16-Nov-2019 11:52:59.702] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 11:52:59.702] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 11:52:59.702] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876379
+[16-Nov-2019 11:52:59.702] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000003000000010000006701030037EA5281535DAE]
+[16-Nov-2019 11:52:59.702] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000003000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 11:52:59.703] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876379
+[16-Nov-2019 11:52:59.703] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876379
+[16-Nov-2019 12:01:41.573] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876901
+[16-Nov-2019 12:01:41.573] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:01:41.573] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:01:41.573] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876901
+[16-Nov-2019 12:01:41.573] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:01:41.573] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:01:41.573] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876901
+[16-Nov-2019 12:01:41.573] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876901
+[16-Nov-2019 12:01:52.463] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876912
+[16-Nov-2019 12:01:52.463] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:01:52.463] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:01:52.463] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876912
+[16-Nov-2019 12:01:52.463] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5B5C0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:01:52.463] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA180 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:01:52.463] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA180 released
+[16-Nov-2019 12:01:52.464] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA53BEE0459800000068010200000017]
+[16-Nov-2019 12:01:52.464] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876912
+[16-Nov-2019 12:01:52.464] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876912
+[16-Nov-2019 12:01:52.464] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876912
+[16-Nov-2019 12:01:52.464] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:01:52.464] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:01:52.464] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876912
+[16-Nov-2019 12:01:52.464] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA53BEE04598]
+[16-Nov-2019 12:01:52.464] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送600B消息[raw:0010000000000258000000020000001400000068010200000017000000690103000000005DCF5B5C0000006A0007000000120031003200330031003200330031003200330000006B000700000008004800650063006B0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D0103000000003860F5800000006E00070000000200660000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A00700067000000700007000000100066007300640066007300660073006400000071010300000000146AA98600000072000700000020003200330034003200330034003200330040003100360033002E0063006F006D000000730103000000000023BDC60000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA44A7859FE10000007601030037EA44A7859FE10000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:01:52.464] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876912
+[16-Nov-2019 12:01:52.464] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876912
+[16-Nov-2019 12:02:55.556] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876975
+[16-Nov-2019 12:02:55.556] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:02:55.556] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:02:55.556] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876975
+[16-Nov-2019 12:02:55.556] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:02:55.556] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:02:55.556] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876975
+[16-Nov-2019 12:02:55.556] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876975
+[16-Nov-2019 12:03:05.403] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876985
+[16-Nov-2019 12:03:05.403] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:03:05.403] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:03:05.403] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876985
+[16-Nov-2019 12:03:05.403] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:03:05.403] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA310 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:03:05.404] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA310 released
+[16-Nov-2019 12:03:05.404] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA53EA5A1C370000006801020000000D]
+[16-Nov-2019 12:03:05.404] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876985
+[16-Nov-2019 12:03:05.404] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876985
+[16-Nov-2019 12:03:05.404] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573876985
+[16-Nov-2019 12:03:05.404] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:03:05.404] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:03:05.404] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573876985
+[16-Nov-2019 12:03:05.404] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA53EA5A1C37]
+[16-Nov-2019 12:03:05.404] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:03:05.404] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573876985
+[16-Nov-2019 12:03:05.404] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573876985
+[16-Nov-2019 12:03:50.655] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877030
+[16-Nov-2019 12:03:50.655] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:03:50.655] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:03:50.655] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877030
+[16-Nov-2019 12:03:50.655] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:03:50.655] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:03:50.655] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877030
+[16-Nov-2019 12:03:50.655] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877030
+[16-Nov-2019 12:04:01.626] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877041
+[16-Nov-2019 12:04:01.626] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:04:01.626] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:04:01.626] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877041
+[16-Nov-2019 12:04:01.626] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:04:01.626] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA540 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:04:01.627] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA540 released
+[16-Nov-2019 12:04:01.627] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA540BDD0B6E0000006801020000000D]
+[16-Nov-2019 12:04:01.627] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877041
+[16-Nov-2019 12:04:01.627] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877041
+[16-Nov-2019 12:04:01.627] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877041
+[16-Nov-2019 12:04:01.627] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:04:01.627] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:04:01.627] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877041
+[16-Nov-2019 12:04:01.627] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA540BDD0B6E]
+[16-Nov-2019 12:04:01.627] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:04:01.627] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877041
+[16-Nov-2019 12:04:01.627] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877041
+[16-Nov-2019 12:04:33.669] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877073
+[16-Nov-2019 12:04:33.669] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:04:33.669] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:04:33.669] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877073
+[16-Nov-2019 12:04:33.669] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:04:33.669] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:04:33.669] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877073
+[16-Nov-2019 12:04:33.669] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877073
+[16-Nov-2019 12:04:37.663] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:04:37.664] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA4F0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:04:37.664] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA4F0 released
+[16-Nov-2019 12:04:37.664] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA542157FDC60000006801020000000D]
+[16-Nov-2019 12:04:37.664] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA542157FDC6]
+[16-Nov-2019 12:04:37.664] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送418B消息[raw:00100000000001A200000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F00070000002000690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:04:37.664] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877077
+[16-Nov-2019 12:04:37.664] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877077
+[16-Nov-2019 12:07:31.872] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877251
+[16-Nov-2019 12:07:31.873] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:07:31.873] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:07:31.873] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877251
+[16-Nov-2019 12:07:31.873] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:07:31.873] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:07:31.873] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877251
+[16-Nov-2019 12:07:31.873] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877251
+[16-Nov-2019 12:07:43.020] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:07:43.020] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:07:43.020] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:07:43.020] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA770 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:07:43.020] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA770 released
+[16-Nov-2019 12:07:43.020] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA548FD310100000006801020000000D]
+[16-Nov-2019 12:07:43.020] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:07:43.020] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:07:43.020] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877263
+[16-Nov-2019 12:07:43.020] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA548FD31010]
+[16-Nov-2019 12:07:43.020] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送608B消息[raw:001000000000026000000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:07:43.021] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877263
+[16-Nov-2019 12:07:43.021] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877263
+[16-Nov-2019 12:08:16.248] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877296
+[16-Nov-2019 12:08:16.248] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:08:16.248] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:08:16.248] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877296
+[16-Nov-2019 12:08:16.248] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:08:16.248] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:08:16.248] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877296
+[16-Nov-2019 12:08:16.248] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877296
+[16-Nov-2019 12:08:20.916] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877300
+[16-Nov-2019 12:08:20.916] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:08:20.916] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:08:20.916] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877300
+[16-Nov-2019 12:08:20.916] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:08:20.916] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA8B0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:08:20.916] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA8B0 released
+[16-Nov-2019 12:08:20.916] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA54A66980500000006801020000000D]
+[16-Nov-2019 12:08:20.916] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877300
+[16-Nov-2019 12:08:20.916] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877300
+[16-Nov-2019 12:08:20.917] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877300
+[16-Nov-2019 12:08:20.917] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:08:20.917] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:08:20.917] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877300
+[16-Nov-2019 12:08:20.917] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA54A6698050]
+[16-Nov-2019 12:08:20.917] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送608B消息[raw:001000000000026000000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C530000007400070000002A00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:08:20.917] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877300
+[16-Nov-2019 12:08:20.917] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877300
+[16-Nov-2019 12:09:43.202] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877383
+[16-Nov-2019 12:09:43.203] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:09:43.203] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:09:43.203] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877383
+[16-Nov-2019 12:09:43.203] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:09:43.203] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:09:43.203] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877383
+[16-Nov-2019 12:09:43.203] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877383
+[16-Nov-2019 12:09:53.431] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877393
+[16-Nov-2019 12:09:53.431] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:09:53.431] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:09:53.431] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877393
+[16-Nov-2019 12:09:53.431] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:09:53.431] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CB9FA0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:09:53.431] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CB9FA0 released
+[16-Nov-2019 12:09:53.431] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA54DD8E45010000006801020000000D]
+[16-Nov-2019 12:09:53.431] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877393
+[16-Nov-2019 12:09:53.431] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877393
+[16-Nov-2019 12:09:53.432] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877393
+[16-Nov-2019 12:09:53.432] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:09:53.432] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:09:53.432] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877393
+[16-Nov-2019 12:09:53.432] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA54DD8E4501]
+[16-Nov-2019 12:09:53.432] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:09:53.432] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877393
+[16-Nov-2019 12:09:53.432] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877393
+[16-Nov-2019 12:10:24.340] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877424
+[16-Nov-2019 12:10:24.340] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:10:24.340] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:10:24.340] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877424
+[16-Nov-2019 12:10:24.340] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:10:24.340] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:10:24.340] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877424
+[16-Nov-2019 12:10:24.340] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877424
+[16-Nov-2019 12:10:28.201] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877428
+[16-Nov-2019 12:10:28.201] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:10:28.201] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:10:28.201] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877428
+[16-Nov-2019 12:10:28.201] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:10:28.201] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA810 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:10:28.201] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA810 released
+[16-Nov-2019 12:10:28.201] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA54F247A2EA0000006801020000000D]
+[16-Nov-2019 12:10:28.201] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877428
+[16-Nov-2019 12:10:28.201] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877428
+[16-Nov-2019 12:10:28.201] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877428
+[16-Nov-2019 12:10:28.201] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:10:28.201] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:10:28.201] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877428
+[16-Nov-2019 12:10:28.202] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA54F247A2EA]
+[16-Nov-2019 12:10:28.202] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:10:28.202] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877428
+[16-Nov-2019 12:10:28.202] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877428
+[16-Nov-2019 12:12:02.987] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877522
+[16-Nov-2019 12:12:02.987] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:12:02.987] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:12:02.987] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877522
+[16-Nov-2019 12:12:02.987] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:12:02.987] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:12:02.987] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877522
+[16-Nov-2019 12:12:02.987] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877522
+[16-Nov-2019 12:12:08.196] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877528
+[16-Nov-2019 12:12:08.196] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:12:08.196] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:12:08.196] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877528
+[16-Nov-2019 12:12:08.196] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:12:08.196] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA590 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:12:08.197] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA590 released
+[16-Nov-2019 12:12:08.197] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA552DE1C1D60000006801020000000D]
+[16-Nov-2019 12:12:08.197] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877528
+[16-Nov-2019 12:12:08.197] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877528
+[16-Nov-2019 12:12:08.197] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877528
+[16-Nov-2019 12:12:08.197] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:12:08.197] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:12:08.197] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877528
+[16-Nov-2019 12:12:08.197] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA552DE1C1D6]
+[16-Nov-2019 12:12:08.197] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:12:08.197] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877528
+[16-Nov-2019 12:12:08.197] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877528
+[16-Nov-2019 12:13:32.623] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877612
+[16-Nov-2019 12:13:32.623] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:13:32.623] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:13:32.623] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877612
+[16-Nov-2019 12:13:32.623] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:13:32.623] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:13:32.623] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877612
+[16-Nov-2019 12:13:32.623] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877612
+[16-Nov-2019 12:13:40.081] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877620
+[16-Nov-2019 12:13:40.081] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:13:40.082] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA090 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:13:40.082] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA090 released
+[16-Nov-2019 12:13:40.082] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA5564A651EF0000006801020000000D]
+[16-Nov-2019 12:13:40.082] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA5564A651EF]
+[16-Nov-2019 12:13:40.082] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:13:40.082] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877620
+[16-Nov-2019 12:13:40.082] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877620
+[16-Nov-2019 12:14:23.310] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877663
+[16-Nov-2019 12:14:23.310] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:14:23.310] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:14:23.310] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877663
+[16-Nov-2019 12:14:23.310] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:14:23.310] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:14:23.310] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877663
+[16-Nov-2019 12:14:23.310] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877663
+[16-Nov-2019 12:14:27.084] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877667
+[16-Nov-2019 12:14:27.084] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:14:27.084] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:14:27.084] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877667
+[16-Nov-2019 12:14:27.084] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:14:27.084] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA180 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:14:27.084] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA180 released
+[16-Nov-2019 12:14:27.085] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA5580AA4A040000006801020000000D]
+[16-Nov-2019 12:14:27.085] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877667
+[16-Nov-2019 12:14:27.085] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877667
+[16-Nov-2019 12:14:27.086] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877667
+[16-Nov-2019 12:14:27.086] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:14:27.086] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:14:27.086] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877667
+[16-Nov-2019 12:14:27.086] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA5580AA4A04]
+[16-Nov-2019 12:14:27.086] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:14:27.086] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877667
+[16-Nov-2019 12:14:27.086] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877667
+[16-Nov-2019 12:15:54.887] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877754
+[16-Nov-2019 12:15:54.887] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:15:54.887] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:15:54.887] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877754
+[16-Nov-2019 12:15:54.887] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:15:54.887] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:15:54.887] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877754
+[16-Nov-2019 12:15:54.887] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877754
+[16-Nov-2019 12:15:58.439] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877758
+[16-Nov-2019 12:15:58.439] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:15:58.439] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:15:58.439] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877758
+[16-Nov-2019 12:15:58.439] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:15:58.439] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA310 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:15:58.440] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA310 released
+[16-Nov-2019 12:15:58.440] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA55B71E21FD0000006801020000000D]
+[16-Nov-2019 12:15:58.440] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877758
+[16-Nov-2019 12:15:58.440] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877758
+[16-Nov-2019 12:15:58.440] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877758
+[16-Nov-2019 12:15:58.440] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:15:58.440] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:15:58.440] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877758
+[16-Nov-2019 12:15:58.440] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA55B71E21FD]
+[16-Nov-2019 12:15:58.440] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:15:58.440] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877758
+[16-Nov-2019 12:15:58.440] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877758
+[16-Nov-2019 12:16:15.382] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877775
+[16-Nov-2019 12:16:15.382] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:16:15.382] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:15.382] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877775
+[16-Nov-2019 12:16:15.382] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:16:15.382] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:16:15.382] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877775
+[16-Nov-2019 12:16:15.382] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877775
+[16-Nov-2019 12:16:18.462] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877778
+[16-Nov-2019 12:16:18.462] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:16:18.462] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:18.462] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877778
+[16-Nov-2019 12:16:18.462] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:16:18.462] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA540 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:16:18.462] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA540 released
+[16-Nov-2019 12:16:18.462] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA55C30D505E0000006801020000000D]
+[16-Nov-2019 12:16:18.462] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877778
+[16-Nov-2019 12:16:18.462] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877778
+[16-Nov-2019 12:16:18.463] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877778
+[16-Nov-2019 12:16:18.463] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:16:18.463] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:18.463] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877778
+[16-Nov-2019 12:16:18.463] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA55C30D505E]
+[16-Nov-2019 12:16:18.463] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB0000007601030037BC3B945B11FB0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:16:18.463] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877778
+[16-Nov-2019 12:16:18.463] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877778
+[16-Nov-2019 12:16:40.087] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877800
+[16-Nov-2019 12:16:40.087] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:16:40.087] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:40.087] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877800
+[16-Nov-2019 12:16:40.087] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:16:40.087] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:16:40.087] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877800
+[16-Nov-2019 12:16:40.087] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877800
+[16-Nov-2019 12:16:43.372] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877803
+[16-Nov-2019 12:16:43.372] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:16:43.372] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:43.372] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877803
+[16-Nov-2019 12:16:43.372] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5D8E0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:16:43.372] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA4F0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:16:43.372] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA4F0 released
+[16-Nov-2019 12:16:43.372] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA55D1E62D2D00000068010200000018]
+[16-Nov-2019 12:16:43.372] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877803
+[16-Nov-2019 12:16:43.373] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877803
+[16-Nov-2019 12:16:43.373] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877803
+[16-Nov-2019 12:16:43.373] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:16:43.373] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:16:43.373] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877803
+[16-Nov-2019 12:16:43.373] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA55D1E62D2D]
+[16-Nov-2019 12:16:43.373] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送794B消息[raw:001000000000031A000000020000001400000068010200000018000000690103000000005DCF5D8E0000006A0007000000120031003200330031003200330031003200330000006B00070000000A004800650063006B00310000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000386CD3000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000001A0066007300640066007300640066007300730064006600730064000000710103000000000765F91F0000007200070000001800320033003400320033003400400031003200330031003200000073010300000000000392FA000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA45F67E58840000007601030037EA45F67E58840000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:16:43.373] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877803
+[16-Nov-2019 12:16:43.373] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877803
+[16-Nov-2019 12:19:49.438] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877989
+[16-Nov-2019 12:19:49.438] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:19:49.438] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:19:49.438] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877989
+[16-Nov-2019 12:19:49.438] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:19:49.438] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:19:49.438] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877989
+[16-Nov-2019 12:19:49.438] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877989
+[16-Nov-2019 12:19:59.803] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:19:59.803] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:19:59.803] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5D8E0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:19:59.803] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA770 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:19:59.803] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA770 released
+[16-Nov-2019 12:19:59.803] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA5646FB298400000068010200000018]
+[16-Nov-2019 12:19:59.803] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:19:59.803] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:19:59.803] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573877999
+[16-Nov-2019 12:19:59.803] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA5646FB2984]
+[16-Nov-2019 12:19:59.803] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送794B消息[raw:001000000000031A000000020000001400000068010200000018000000690103000000005DCF5D8E0000006A0007000000120031003200330031003200330031003200330000006B00070000000A004800650063006B00310000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000386CD3000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000001A0066007300640066007300640066007300730064006600730064000000710103000000000765F91F0000007200070000001800320033003400320033003400400031003200330031003200000073010300000000000392FA000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA45F67E58840000007601030037EA45F67E58840000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:19:59.804] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573877999
+[16-Nov-2019 12:19:59.804] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573877999
+[16-Nov-2019 12:22:41.778] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878161
+[16-Nov-2019 12:22:41.779] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:22:41.779] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:22:41.779] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878161
+[16-Nov-2019 12:22:41.779] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:22:41.779] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:22:41.779] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878161
+[16-Nov-2019 12:22:41.779] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878161
+[16-Nov-2019 12:22:47.079] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878167
+[16-Nov-2019 12:22:47.079] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:22:47.079] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:22:47.079] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878167
+[16-Nov-2019 12:22:47.079] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5D8E0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:22:47.079] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA8B0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:22:47.079] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA8B0 released
+[16-Nov-2019 12:22:47.079] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA56AAAF889C00000068010200000018]
+[16-Nov-2019 12:22:47.080] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878167
+[16-Nov-2019 12:22:47.080] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878167
+[16-Nov-2019 12:22:47.080] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878167
+[16-Nov-2019 12:22:47.080] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:22:47.080] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:22:47.080] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878167
+[16-Nov-2019 12:22:47.080] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA56AAAF889C]
+[16-Nov-2019 12:22:47.080] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送794B消息[raw:001000000000031A000000020000001400000068010200000018000000690103000000005DCF5D8E0000006A0007000000120031003200330031003200330031003200330000006B00070000000A004800650063006B00310000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000386CD3000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000001A0066007300640066007300640066007300730064006600730064000000710103000000000765F91F0000007200070000001800320033003400320033003400400031003200330031003200000073010300000000000392FA000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA45F67E58840000007601030037EA45F67E58840000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:22:47.080] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878167
+[16-Nov-2019 12:22:47.080] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878167
+[16-Nov-2019 12:23:45.713] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878225
+[16-Nov-2019 12:23:45.713] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:23:45.713] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:23:45.713] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878225
+[16-Nov-2019 12:23:45.713] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:23:45.713] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:23:45.713] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878225
+[16-Nov-2019 12:23:45.713] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878225
+[16-Nov-2019 12:23:48.989] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878228
+[16-Nov-2019 12:23:48.989] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:23:48.989] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:23:48.989] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878228
+[16-Nov-2019 12:23:48.989] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5D8E0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:23:48.989] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CB9FA0 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:23:48.989] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CB9FA0 released
+[16-Nov-2019 12:23:48.989] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA56CF96343100000068010200000018]
+[16-Nov-2019 12:23:48.989] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878228
+[16-Nov-2019 12:23:48.989] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878228
+[16-Nov-2019 12:23:48.989] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878228
+[16-Nov-2019 12:23:48.989] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:23:48.989] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:23:48.990] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878228
+[16-Nov-2019 12:23:48.990] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA56CF963431]
+[16-Nov-2019 12:23:48.990] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送794B消息[raw:001000000000031A000000020000001400000068010200000018000000690103000000005DCF5D8E0000006A0007000000120031003200330031003200330031003200330000006B00070000000A004800650063006B00310000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000386CD3000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000001A0066007300640066007300640066007300730064006600730064000000710103000000000765F91F0000007200070000001800320033003400320033003400400031003200330031003200000073010300000000000392FA000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA45F67E5884000000760103000000005DCF5D900000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:23:48.990] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878228
+[16-Nov-2019 12:23:48.990] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878228
+[16-Nov-2019 12:24:10.226] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878250
+[16-Nov-2019 12:24:10.226] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:24:10.226] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:10.226] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878250
+[16-Nov-2019 12:24:10.227] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:24:10.227] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:24:10.227] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878250
+[16-Nov-2019 12:24:10.227] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878250
+[16-Nov-2019 12:24:18.885] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878258
+[16-Nov-2019 12:24:18.886] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:24:18.886] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:18.886] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878258
+[16-Nov-2019 12:24:18.886] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005D821F4B0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:24:18.886] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA810 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:24:18.886] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA810 released
+[16-Nov-2019 12:24:18.887] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA56E168372A0000006801020000000D]
+[16-Nov-2019 12:24:18.887] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878258
+[16-Nov-2019 12:24:18.887] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878258
+[16-Nov-2019 12:24:18.887] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878258
+[16-Nov-2019 12:24:18.887] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:24:18.887] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:18.887] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878258
+[16-Nov-2019 12:24:18.887] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA56E168372A]
+[16-Nov-2019 12:24:18.887] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送798B消息[raw:001000000000031E00000002000000140000006801020000000D000000690103000000005D821F4B0000006A0007000000120031003200330031003200330031003200330000006B00070000000A0042007200690061006E0000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000387219000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000000A0061006400610073006400000071010300000000F2737BFE0000007200070000002C00790069006A00690061007A00680065006E00310032003300400067006D00610069006C002E0063006F006D00000073010300000000004A5C53000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037BC3B945B11FB000000760103000000005D821F4B0000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:24:18.887] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878258
+[16-Nov-2019 12:24:18.887] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878258
+[16-Nov-2019 12:24:48.304] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878288
+[16-Nov-2019 12:24:48.304] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:24:48.304] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:48.305] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878288
+[16-Nov-2019 12:24:48.305] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:24:48.305] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:24:48.305] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878288
+[16-Nov-2019 12:24:48.305] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878288
+[16-Nov-2019 12:24:58.470] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878298
+[16-Nov-2019 12:24:58.470] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:24:58.470] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:58.470] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878298
+[16-Nov-2019 12:24:58.470] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的58B消息[raw:000A00000000003A0000000100000002000000690103000000005DCF5D8E0000006A000700000012003100320033003100320033003100320033]
+[16-Nov-2019 12:24:58.470] [DEBUG] ConnectionPoolThread::DBConnectionPoolAcquireConnection Database Connection Pool: handle 00CBA590 acquired (call from p2_dbapi.cpp:1801)
+[16-Nov-2019 12:24:58.471] [DEBUG] ConnectionPoolThread::DBConnectionPoolReleaseConnection Database Connection Pool: handle 00CBA590 released
+[16-Nov-2019 12:24:58.471] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送40B消息[raw:001000000000002800000001000000020000006701030037EA56F900413200000068010200000018]
+[16-Nov-2019 12:24:58.471] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878298
+[16-Nov-2019 12:24:58.471] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878298
+[16-Nov-2019 12:24:58.471] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878298
+[16-Nov-2019 12:24:58.471] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:680)的任务队列
+[16-Nov-2019 12:24:58.471] [DEBUG] [任务线程680]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:24:58.471] [DEBUG] [任务线程680]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878298
+[16-Nov-2019 12:24:58.471] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的30B消息[raw:000400000000001E00000002000000010000006701030037EA56F9004132]
+[16-Nov-2019 12:24:58.471] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送794B消息[raw:001000000000031A000000020000001400000068010200000018000000690103000000005DCF5D8E0000006A0007000000120031003200330031003200330031003200330000006B00070000000A004800650063006B00310000006C00070000001A8FD94E2A4EBA5F8861D2FF0C4EC04E484E5F6CA1755954E6007E0000006D010300000000386CD3000000006E000700000002006D0000006F0007000000DE0044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00690063006F006E002F00640065006600610075006C0074002E006A007000670000007000070000001A0066007300640066007300640066007300730064006600730064000000710103000000000765F91F0000007200070000001800320033003400320033003400400031003200330031003200000073010300000000000392FA000000740007000000E80044003A002F0056005300200044006F00630075006D0065006E00740073002F00560069007300750061006C002000530074007500640069006F00200032003000310030002F00500072006F006A0065006300740073002F0032003000310039002D00640073002D00660069006E0061006C002D00700072006F006A006500630074002D00790069006A00690061007A00680065006E002D00780069006F006E0067006C0069006E002F007300720063002F00440065006200750067002F00770061006C006C00700061007000650072002F00640065006600610075006C0074002E006A007000670000007501030037EA45F67E5884000000760103000000005DCF5D900000007701000000000078010200000000000000790102000000000000007A0102000000000000007B010000]
+[16-Nov-2019 12:24:58.471] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878298
+[16-Nov-2019 12:24:58.471] [DEBUG] [任务线程680]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878298
+[16-Nov-2019 12:27:02.543] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878422
+[16-Nov-2019 12:27:02.543] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:708)的任务队列
+[16-Nov-2019 12:27:02.543] [DEBUG] [任务线程708]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:27:02.543] [DEBUG] [任务线程708]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878422
+[16-Nov-2019 12:27:02.543] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:27:02.543] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:27:02.543] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878422
+[16-Nov-2019 12:27:02.543] [DEBUG] [任务线程708]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878422
+[16-Nov-2019 12:30:38.504] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878638
+[16-Nov-2019 12:30:38.504] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:716)的任务队列
+[16-Nov-2019 12:30:38.504] [DEBUG] [任务线程716]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:30:38.504] [DEBUG] [任务线程716]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878638
+[16-Nov-2019 12:30:38.504] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:30:38.504] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:30:38.504] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878638
+[16-Nov-2019 12:30:38.504] [DEBUG] [任务线程716]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878638
+[16-Nov-2019 12:31:11.478] [DEBUG] [事件线程688]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573878671
+[16-Nov-2019 12:31:11.478] [DEBUG] Task::Signal 被激活(alive)的任务TaskName=UDPSession, 已加入任务线程(Thread ID:696)的任务队列
+[16-Nov-2019 12:31:11.478] [DEBUG] [任务线程696]TaskThread::WaitForTask 发现alive的TaskName=UDPSession, 当前任务队列长度为0
+[16-Nov-2019 12:31:11.478] [DEBUG] [任务线程696]TaskThread::Entry 使用全局锁，当前TaskName=UDPSession CurTime=1573878671
+[16-Nov-2019 12:31:11.478] [DEBUG] UDPSession::ReadMessage 收到127.0.0.1:5051发送的26B消息[raw:000000000000001A000000000000000100000065000700000000]
+[16-Nov-2019 12:31:11.478] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
+[16-Nov-2019 12:31:11.478] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878671
+[16-Nov-2019 12:31:11.478] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878671
