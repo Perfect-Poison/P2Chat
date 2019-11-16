@@ -17,7 +17,7 @@ int main()
 
     //-------------------------------
     // 日志线程
-    LogThread::Initialize(_T("p2slog"), 0, 0, LOG_ROTATION_DAILY, 1024 * 1024, 4, _T(""));
+    LogThread::Initialize(_T("p2slog"), LOG_DEBUG, LOG_IS_OPEN | LOG_PRINT_TO_CONSOLE, LOG_ROTATION_DAILY, 1024 * 1024, 4, _T(""));
     LogThread* logThread = LogThread::GetInstance();
     logThread->Start();
     Sleep(10);
@@ -27,18 +27,6 @@ int main()
     ConnectionPoolThread::Initialize(_T("localhost"), _T("p2chatdb"), _T("root"), _T("123123"), 10, 30, 300, 14400, false);
     ConnectionPoolThread *connectionPoolThread = ConnectionPoolThread::GetInstance();
     connectionPoolThread->Start();
-
-//     DB_HANDLE hConn = DBConnectionPoolAcquireConnection();
-//     DB_STATEMENT hStmt = DBPrepare(hConn, _T("INSERT INTO log_data (log_type_id,record_date,log_data) VALUES (?,?,?)"));
-//     if (hStmt != nullptr)
-//     {
-//         DBBind(hStmt, 1, DB_SQLTYPE_INTEGER, 5);
-//         DBBind(hStmt, 2, DB_SQLTYPE_BIGINT, time(0));
-//         DBBind(hStmt, 3, DB_SQLTYPE_VARCHAR, _T("this is my first log"), DB_BIND_STATIC);
-//         UINT32 rcc = DBExecute(hStmt);
-//         DBConnectionPoolReleaseConnection(hConn);
-//         DBFreeStatement(hStmt);
-//     }
     
     //-------------------------------
     // 事件监听线程

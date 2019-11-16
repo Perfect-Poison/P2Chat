@@ -1168,3 +1168,101 @@
 [16-Nov-2019 12:31:11.478] [DEBUG] UDPSession::SendMessage 已向127.0.0.1:5051发送36B消息[raw:001000000000002400000000000000010000006500070000000A0031002E0030002E0031]
 [16-Nov-2019 12:31:11.478] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573878671
 [16-Nov-2019 12:31:11.478] [DEBUG] [任务线程696]TaskThread::Entry 删除任务 TaskName=UDPSession CurTime=1573878671
+[16-Nov-2019 12:48:36.802] ======================================================================================
+[16-Nov-2019 12:48:36.802] | log date:            16-Nov-2019 12:48:36
+[16-Nov-2019 12:48:36.802] | log file name:       p2slog
+[16-Nov-2019 12:48:36.802] | log rotation policy: LOG_ROTATION_DAILY
+[16-Nov-2019 12:48:36.802] | log debug level:     0
+[16-Nov-2019 12:48:36.802] ======================================================================================
+[16-Nov-2019 12:48:36.803] [DEBUG] LogThread::Entry 启动日志线程
+[16-Nov-2019 12:48:36.822] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.841] [DEBUG] DBConnect: New DB connection opened: handle=01002AC0
+[16-Nov-2019 12:48:36.841] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.853] [DEBUG] DBConnect: New DB connection opened: handle=01002B10
+[16-Nov-2019 12:48:36.853] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.866] [DEBUG] DBConnect: New DB connection opened: handle=01002930
+[16-Nov-2019 12:48:36.866] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.878] [DEBUG] DBConnect: New DB connection opened: handle=010027F0
+[16-Nov-2019 12:48:36.878] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.890] [DEBUG] DBConnect: New DB connection opened: handle=010026B0
+[16-Nov-2019 12:48:36.891] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.904] [DEBUG] DBConnect: New DB connection opened: handle=01002570
+[16-Nov-2019 12:48:36.904] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.916] [DEBUG] DBConnect: New DB connection opened: handle=010020C0
+[16-Nov-2019 12:48:36.916] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.929] [DEBUG] DBConnect: New DB connection opened: handle=01002340
+[16-Nov-2019 12:48:36.929] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.941] [DEBUG] DBConnect: New DB connection opened: handle=01001D50
+[16-Nov-2019 12:48:36.942] [DEBUG] DBConnect: server=localhost db=p2chatdb login=root
+[16-Nov-2019 12:48:36.954] [DEBUG] DBConnect: New DB connection opened: handle=01001DA0
+[16-Nov-2019 12:48:36.954] [DEBUG] ConnectionPoolThread::Initialize Database Connection Pool initialized
+[16-Nov-2019 12:48:36.955] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[16-Nov-2019 12:48:36.955] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:48:36.955] [DEBUG] EventThread::Entry 启动事件线程
+[16-Nov-2019 12:48:36.955] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:48:36.955] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573879716
+[16-Nov-2019 12:48:36.955] [DEBUG] [事件线程676]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[16-Nov-2019 12:48:36.955] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:48:36.955] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:48:36.976] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879716
+[16-Nov-2019 12:48:36.976] [DEBUG] [事件线程676]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[16-Nov-2019 12:51:11.123] ======================================================================================
+[16-Nov-2019 12:51:11.124] | log date:            16-Nov-2019 12:51:11
+[16-Nov-2019 12:51:11.124] | log file name:       p2slog
+[16-Nov-2019 12:51:11.124] | log rotation policy: LOG_ROTATION_DAILY
+[16-Nov-2019 12:51:11.124] | log debug level:     1
+[16-Nov-2019 12:51:11.124] ======================================================================================
+[16-Nov-2019 12:51:11.124] [DEBUG] LogThread::Entry 启动日志线程
+[16-Nov-2019 12:51:11.277] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[16-Nov-2019 12:51:11.277] [DEBUG] EventThread::Entry 启动事件线程
+[16-Nov-2019 12:51:11.277] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:51:11.277] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:51:11.277] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:51:11.277] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:51:11.277] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573879871
+[16-Nov-2019 12:51:11.277] [DEBUG] [事件线程688]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[16-Nov-2019 12:51:11.299] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879871
+[16-Nov-2019 12:51:11.299] [DEBUG] [事件线程688]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[16-Nov-2019 12:51:59.853] ======================================================================================
+[16-Nov-2019 12:51:59.853] | log date:            16-Nov-2019 12:51:59
+[16-Nov-2019 12:51:59.853] | log file name:       p2slog
+[16-Nov-2019 12:51:59.853] | log rotation policy: LOG_ROTATION_DAILY
+[16-Nov-2019 12:51:59.853] | log debug level:     1
+[16-Nov-2019 12:51:59.853] ======================================================================================
+[16-Nov-2019 12:51:59.853] [DEBUG] LogThread::Entry 启动日志线程
+[16-Nov-2019 12:52:00.007] [DEBUG] ConnectionPoolThread::Entry 启动数据库连接池线程
+[16-Nov-2019 12:52:00.008] [DEBUG] EventThread::Entry 启动事件线程
+[16-Nov-2019 12:52:00.010] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:52:00.010] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=TCPListenerSocket CurTime=1573879920
+[16-Nov-2019 12:52:00.010] [DEBUG] [事件线程680]EventThread::RegisterEvent 注册事件，EventName=TCPListenerSocket EventID=1025
+[16-Nov-2019 12:52:00.010] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:52:00.010] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:52:00.010] [DEBUG] TaskThread::Entry 启动任务线程
+[16-Nov-2019 12:52:00.030] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879920
+[16-Nov-2019 12:52:00.030] [DEBUG] [事件线程680]EventThread::RegisterEvent 注册事件，EventName=UDPSocket EventID=1026
+[16-Nov-2019 12:52:11.121] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879931
+[16-Nov-2019 12:52:11.121] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879931
+[16-Nov-2019 12:52:45.430] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879965
+[16-Nov-2019 12:52:45.431] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879965
+[16-Nov-2019 12:52:45.432] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879965
+[16-Nov-2019 12:52:45.432] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879965
+[16-Nov-2019 12:53:13.351] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879993
+[16-Nov-2019 12:53:13.352] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879993
+[16-Nov-2019 12:53:18.164] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879998
+[16-Nov-2019 12:53:18.165] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879998
+[16-Nov-2019 12:53:18.165] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573879998
+[16-Nov-2019 12:53:18.165] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573879998
+[16-Nov-2019 12:53:21.784] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880001
+[16-Nov-2019 12:53:21.785] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880001
+[16-Nov-2019 12:53:28.075] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880008
+[16-Nov-2019 12:53:28.075] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880008
+[16-Nov-2019 12:53:28.077] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880008
+[16-Nov-2019 12:53:28.080] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880008
+[16-Nov-2019 12:53:35.943] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880015
+[16-Nov-2019 12:53:35.944] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880015
+[16-Nov-2019 12:53:39.325] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880019
+[16-Nov-2019 12:53:39.325] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880019
+[16-Nov-2019 12:53:41.631] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880021
+[16-Nov-2019 12:53:41.631] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880021
+[16-Nov-2019 12:53:41.636] [DEBUG] [事件线程680]EventThread::Entry 触发事件，EventName=UDPSocket EventID=1026 CurTime=1573880021
+[16-Nov-2019 12:53:41.644] [DEBUG] Event::RequestEvent 请求事件EV_RE, EventName=UDPSocket CurTime=1573880021

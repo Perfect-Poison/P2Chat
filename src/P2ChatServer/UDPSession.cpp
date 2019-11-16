@@ -164,14 +164,6 @@ int64 UDPSession::Run()
         }
 		case MSG_LOGIN:                                         // 用户登录消息（6）
 		{
-// 
-//             Session *session = SessionTable::GetSession(message->GetAttrAsInt64(ATTR_SESSION_ID));
-//             if (!session)
-//             {
-//                 log_debug(6, _T("UDPSession::Run 非法登录, 会话ID %I64d 不存在"), message->GetAttrAsInt64(ATTR_SESSION_ID));
-//                 break;
-//             }
-//             session->SetState(MSG_LOGIN);
 
             // 登录
 			int64 pp = message->GetAttrAsInt64(ATTR_USER_PP);
